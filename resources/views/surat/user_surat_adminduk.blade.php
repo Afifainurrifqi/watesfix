@@ -86,7 +86,7 @@
                             <p class="mb-0">Numpang KK</p>
                         </div>
                         <div class="service-img">
-                            <a class="btn m-1 btn-creative btn-light" href="adm2.html">Buat Surat</a>
+                            <a class="btn m-1 btn-creative btn-light" href="{{ route('surat.usernumpangkk') }}">Buat Surat</a>
                         </div>
                     </div>
                 </div>
