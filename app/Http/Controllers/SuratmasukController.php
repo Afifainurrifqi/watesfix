@@ -78,9 +78,15 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.numpangkk.create')->with(compact('kategori', 'jenis_form'));
         }
 
+        if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian') {
+        return redirect()->route('surat.suratpernyataantidakbisamelampirkanktpkematian')->with(compact('kategori', 'jenis_form'));
+    }
+
         if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_tidak_mampu') {
             return redirect()->route('surat.tidakmampu.create')->with(compact('kategori', 'jenis_form'));
         }
+
+
 
 
 

@@ -75,6 +75,8 @@ Route::prefix('surat')->group(function () {
     Route::get('keterangan', [UsersuratController::class, 'keterangan'])->name('surat.keterangan');
     Route::get('suratberhasil', [UsersuratController::class, 'suratberhasil'])->name('surat.suratberhasil');
     Route::post('usersuratpernyataannumpangkk', [SuratPernyataanNumpangKkController::class, 'userstore'])->name('surat.usernumpangkk.store');
+    Route::get('user_suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'userkematianktp'])->name('surat.userkematianktp');
+    Route::post('user_suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'userstore'])->name('user_suratpernyataantidakbisamelampirkanktpkematian.store');
 
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
@@ -87,6 +89,7 @@ Route::prefix('surat')->group(function () {
         Route::get('suratmasuk/{suratmasuk}/edit', [SuratmasukController::class, 'edit'])->name('suratmasuk.edit');
         Route::put('suratmasuk/{suratmasuk}', [SuratmasukController::class, 'update'])->name('suratmasuk.update');
         Route::get('suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'index'])->name('surat.suratpernyataantidakbisamelampirkanktpkematian');
+        Route::get('editsuratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'edit'])->name('surat.editsuratpernyataantidakbisamelampirkanktpkematian');
         Route::post('suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'store'])->name('suratpernyataantidakbisamelampirkanktpkematian.store');
         Route::get('export-ktp/{id}', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'exportPdf'])->name('surat.export_ktp');
         Route::get('formbertingkat', [SuratmasukController::class, 'formbertingkat'])->name('surat.formbertingkat');

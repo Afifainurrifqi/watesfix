@@ -43,7 +43,7 @@
                         @if (session('success'))
                             <div class="alert alert-success mb-2">{{ session('success') }}</div>
                         @endif
-                        <h5 class="card-title mb-0">ARSIP SURAT KELUAR</h5>
+                        <h5 class="card-title mb-0">SURAT KELUAR</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -100,6 +100,9 @@
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratPernyataanNumpangKk')
                                                     <a href="{{ route('surat.numpangkk.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanTidakBisaMelampirkanKtpKematian')
+                                                    <a href="{{ route('suratpernyataantidakbisamelampirkanktpkematian.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'surat_keterangan_tidakmampu')
                                                     <a href="{{ route('surat.tidakmampu.edit', $item->_id) }}"
