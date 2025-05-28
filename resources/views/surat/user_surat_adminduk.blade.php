@@ -72,7 +72,8 @@
                             <p class="mb-0">Tidak Bisa Melampirkan KTP Kematian</p>
                         </div>
                         <div class="service-img">
-                            <a class="btn m-1 btn-creative btn-light" href="{{ route('surat.userkematianktp ') }}">Buat Surat</a>
+                            <a class="btn m-1 btn-creative btn-light" href="{{ route('surat.userkematianktp') }}">Buat Surat</a>
+
                         </div>
                     </div>
                 </div>
