@@ -7,7 +7,7 @@
     "theme_color": "#0d5afd",
     "categories": ["mobile", "multipurpose", "blog", "ecommerce", "pwa"],
     "orientation": "portrait",
-    "description": "Sitakro -  App Pertanian",
+    "description": "Sitakro -  Pelayanan",
     "icons": [{
         "src": "assets4/dist/img/icons/icon-72x72.png",
         "type": "image/png",
