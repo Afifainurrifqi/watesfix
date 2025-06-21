@@ -12,7 +12,7 @@
     <title>SITAKRO</title>
 
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="assets2/img/logodesa2.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets2/img/wates.png" type="image/x-icon">
 
     <!-- ========== Start Stylesheet ========== -->
     <link href="assets2/css/bootstrap.min.css" rel="stylesheet" />
@@ -61,7 +61,7 @@
                         <img src="/assets3/img/logosi2.png" class="wow slideInLeft"  style="width: 30%">
                         <h2 class="wow slideInLeft">SITAKRO WATES </h2>
                         <p class="wow fadeInLeft">
-                            Sistem Informasi Data Mikro yang dimiliki oleh Desa WATES Kecamatan Kanigoro Kabupaten
+                            Sistem Informasi Data Mikro yang dimiliki oleh Desa WATES Kecamatan Wates Kabupaten
                             Blitar
                         </p>
                         <a class="wow fadeInDown btn btn-light border btn-md" href="{{ route('login') }}">LOGIN
