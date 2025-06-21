@@ -56,7 +56,7 @@
 	            <div class="container my-auto py-5">
 	                <div class="row">
 	                    <div class="col-lg-9 col-xl-7 mx-auto position-relative">
-							<h1 class="mb-3" style="text-align: center;"><img src="/assets3/img/logosi.png" alt="" width="" height="55"></h1>
+							<h1 class="mb-3" style="text-align: center;"><img src="/assets3/img/logosi2.png" alt="" width="" height="55"></h1>
 	                        <h2 class="mb-3" style="text-align: center;">MASUK</h2>
 							<h3 class="mb-3" style="text-align: center;">SITAKRO Wates</h3> </br>
 	                        <form class="input_style_1" method="POST">
