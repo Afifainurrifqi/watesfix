@@ -1,7 +1,7 @@
 {
     "name": "Sitakro",
     "short_name": "Sitakro",
-    "start_url": "https://sitakro.com/farmingstart",
+    "start_url": "https://wates.sitakro.com/surat/user_surat",
     "display": "standalone",
     "background_color": "#0d5afd",
     "theme_color": "#0d5afd",

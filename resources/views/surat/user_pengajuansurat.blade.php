@@ -173,7 +173,7 @@
                 <div class="footer-nav position-relative">
                     <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
                         <li class="active">
-                            <a href="home.html">
+                            <a href={{ route('surat.pengajuan_surat') }}>
                                 <i class="bi bi-house"></i>
                                 <span>Beranda</span>
                             </a>

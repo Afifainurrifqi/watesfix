@@ -156,20 +156,20 @@
         <div class="container px-0">
             <!-- Footer Content -->
             <div class="footer-nav position-relative">
-                <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
-                    <li class="active">
-                        <a href="home.html">
-                            <i class="bi bi-house"></i>
-                            <span>Beranda</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="settings.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
+             <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
+                        <li class="active">
+                             <a href={{ route('surat.pengajuan_surat') }}>
+                                <i class="bi bi-house"></i>
+                                <span>Beranda</span>
+                            </a>
+                        </li>
+
+
+
+
+
+
+                    </ul>
             </div>
         </div>
     </div>

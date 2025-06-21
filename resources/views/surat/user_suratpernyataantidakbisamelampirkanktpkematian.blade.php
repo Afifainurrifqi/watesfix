@@ -116,7 +116,7 @@
             <div class="header-content position-relative d-flex align-items-center justify-content-between">
                 <!-- Back Button -->
                 <div class="back-button">
-                    <a href="adm.html">
+                     <a href={{ route('surat.pengajuan_surat') }}>
                         <i class="bi bi-arrow-left-short"></i>
                     </a>
                 </div>
@@ -304,21 +304,16 @@
                             <div class="footer-nav position-relative">
                                 <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
                                     <li class="active">
-                                        <a href="home.html">
-                                            <i class="bi bi-house"></i>
-                                            <span>Beranda</span>
-                                        </a>
+                                         <a href={{ route('surat.pengajuan_surat') }}>
+                                <i class="bi bi-house"></i>
+                                <span>Beranda</span>
+                            </a>
                                     </li>
 
 
 
 
-                                    <li>
-                                        <a href="settings.html">
-                                            <i class="bi bi-gear"></i>
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
