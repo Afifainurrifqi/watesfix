@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets4/dist/style.css') }}">
 
     <!-- Web App Manifest -->
+    <link rel="manifest" href="/assets4/dist/manifest.json">
 
 </head>
 
