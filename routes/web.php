@@ -68,6 +68,8 @@ Route::get('/loginfarm', [SesiController::class, 'maintance'])->name('maintance'
 Route::prefix('surat')->group(function () {
 
     Route::get('usersuratpernyataannumpangkk', [SuratPernyataanNumpangKkController::class, 'usernumpangkk'])->name('surat.usernumpangkk');
+    Route::get('usersuratketerangankehilangan', [SuratKeteranganKehilanganController::class, 'userkehilangan'])->name('surat.userkehilangan');
+    Route::get('usersuratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'usertidakmampu'])->name('surat.usertidakmampu');
     Route::get('user_surat', [UsersuratController::class, 'index'])->name('surat.usersurat');
     Route::get('pengajuan_surat', [UsersuratController::class, 'pengajuan'])->name('surat.pengajuan_surat');
     Route::get('adminduk', [UsersuratController::class, 'adminduk'])->name('surat.adminduk');
@@ -77,6 +79,8 @@ Route::prefix('surat')->group(function () {
     Route::post('usersuratpernyataannumpangkk', [SuratPernyataanNumpangKkController::class, 'userstore'])->name('surat.usernumpangkk.store');
     Route::get('user_suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'userkematianktp'])->name('surat.userkematianktp');
     Route::post('user_suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'userstore'])->name('user_suratpernyataantidakbisamelampirkanktpkematian.store');
+    Route::post('user_suratketerangankehilangan', [SuratKeteranganKehilanganController::class, 'userstore'])->name('surat.userkehilangan.store');
+    Route::post('user_suratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'userstore'])->name('surat.usertidakmampu.store');
 
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {

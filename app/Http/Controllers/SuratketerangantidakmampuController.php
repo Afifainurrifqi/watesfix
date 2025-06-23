@@ -20,6 +20,11 @@ class SuratketerangantidakmampuController extends Controller
         return view('surat.surat_keterangan_tidakmampu', compact('data'));
     }
 
+    public function usertidakmampu()
+    {
+        return view('surat.user_surat_keterangan_tidakmampu'); // Buat view khusus form tambah baru jika perlu
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,6 +62,29 @@ class SuratketerangantidakmampuController extends Controller
         suratketerangantidakmampu::create($validated);
 
         return redirect()->route('surat.keluar')->with('success', 'Surat berhasil ditambahkan.');
+    }
+
+     public function userstore(Request $request)
+    {
+        $validated = $request->validate([
+            'nowa' => 'required|string',
+            'status_surat' => 'required|string',
+            'status_verif' => 'required|string',
+            'nama_lengkap' => 'required|string',
+            'nik' => 'required|string',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'kewarganegaraan' => 'required|string',
+            'agama' => 'required|string',
+            'status_perkawinan' => 'required|string',
+            'pekerjaan' => 'required|string',
+            'alamat_rumah' => 'required|string',
+            'keterangan_fungsi_surat' => 'required|string',
+        ]);
+
+        suratketerangantidakmampu::create($validated);
+
+        return redirect()->route('surat.suratberhasil')->with('success', 'Surat berhasil ditambahkan.');
     }
 
     public function edit(suratketerangantidakmampu $suratketerangantidakmampu)

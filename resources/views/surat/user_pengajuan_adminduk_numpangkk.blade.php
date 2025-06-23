@@ -142,7 +142,7 @@
         <!-- Element Heading -->
         <div class="container">
             <div class="element-heading">
-                <h6>Buat Pengajuan Surat</h6>
+                <h6>Buat Pengajuan Surat Pernyataan Numpang KK</h6>
             </div>
         </div>
 

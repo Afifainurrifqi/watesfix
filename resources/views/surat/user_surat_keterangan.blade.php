@@ -76,7 +76,7 @@
                             <p class="mb-0">Kehilangan</p>
                         </div>
                         <div class="service-img">
-                            <a class="btn m-1 btn-creative btn-light" href="ket1.html">Buat Surat</a>
+                            <a class="btn m-1 btn-creative btn-light" href="{{ route('surat.userkehilangan') }}">Buat Surat</a>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             <p class="mb-0 text-dark">Tidak Mampu</p>
                         </div>
                         <div class="service-img">
-                            <a class="btn m-1 btn-creative btn-light" href="#">Buat Surat</a>
+                            <a class="btn m-1 btn-creative btn-light" href="{{ route('surat.usertidakmampu') }}">Buat Surat</a>
                         </div>
                     </div>
                 </div>
