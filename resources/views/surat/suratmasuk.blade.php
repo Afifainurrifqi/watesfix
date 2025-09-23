@@ -43,18 +43,14 @@
                                             <td>{{ $item->keterangan }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->tanggal_masuk)->format('d-m-Y') }}</td>
                                             <td>
-                                                @php
-                                                    $publicUrl = $item->file
-                                                        ? Storage::disk('public')->url($item->file)
-                                                        : null;
-                                                @endphp
-
-                                                @if ($publicUrl)
-                                                    <a href="{{ $publicUrl }}" class="btn btn-sm btn-primary"
-                                                        target="_blank" download>Cek</a>
+                                                @if ($item->file)
+                                                    <a href="{{ asset('suratdesa/' . $item->file) }}"
+                                                        class="btn btn-sm btn-primary" target="_blank"
+                                                        rel="noopener">Cek</a>
                                                 @else
                                                     <span class="text-muted">Tidak Ada</span>
                                                 @endif
+
                                             </td>
                                             <td>
                                                 <a href="{{ route('suratmasuk.edit', $item->_id) }}"

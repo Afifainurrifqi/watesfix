@@ -287,7 +287,7 @@ class SuratmasukController extends Controller
         if ($jenis === 'suratpernyataandanjaminan') {
             $data = surat_pernyataan_dan_jaminan::findOrFail($id);
             $pdf  = Pdf::loadView('surat.pdf_surat_pernyataan_dan_jaminan', compact('data'))->setPaper('A4');
-             $filename = $data->nama_lengkap ?? 'dokumen';
+            $filename = $data->nama_lengkap ?? 'dokumen';
             return $pdf->download('pdf_surat_pernyataan_dan_jaminan_' . $filename . '.pdf');
         }
 
@@ -389,27 +389,39 @@ class SuratmasukController extends Controller
      * @param  \App\Http\Requests\StoresuratmasukRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoresuratmasukRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nama_instansi' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:255',
+            'keterangan'    => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'file'          => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
         ]);
 
-        $path = $request->file('file')->store('surat-masuk', 'public');
+        // pastikan folder ada (aman di Windows & Linux)
+        if (! is_dir(public_path('suratdesa'))) {
+            @mkdir(public_path('suratdesa'), 0755, true);
+        }
 
-        // Simpan ke database (contoh)
+        // simpan ke public/suratdesa pakai Storage disk 'suratdesa'
+        $original = $request->file('file')->getClientOriginalName();
+        $safeName = time() . '_' . Str::slug(pathinfo($original, PATHINFO_FILENAME), '_')
+            . '.' . $request->file('file')->getClientOriginalExtension();
+
+        // hasilnya: "1727154583_undangan_rapat.pdf"
+        $path = $request->file('file')->storeAs('', $safeName, 'suratdesa');
+
+        // simpan hanya nama file / path relatif ke 'suratdesa'
         SuratMasuk::create([
             'nama_instansi' => $request->nama_instansi,
-            'keterangan' => $request->keterangan,
+            'keterangan'    => $request->keterangan,
             'tanggal_masuk' => $request->tanggal_masuk,
-            'file' => $path,
+            'file'          => $path, // contoh: "1727..._undangan_rapat.pdf"
         ]);
 
-        return redirect('surat/suratmasuk')->with('msg', 'Surat masuk berhasil ditambahkan.');
+        return redirect()->route('surat.masuk')->with('msg', 'Surat masuk berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -434,6 +446,8 @@ class SuratmasukController extends Controller
     }
 
 
+
+
     // Update the specified Surat Masuk
     public function update(Request $request, SuratMasuk $suratmasuk)
     {
@@ -455,7 +469,7 @@ class SuratmasukController extends Controller
         if ($request->hasFile('file')) {
             // Delete the old file if it exists
             if ($suratmasuk->file) {
-                Storage::disk('public')->delete($suratmasuk->file);
+                Storage::delete('public/' . $suratmasuk->file);
             }
 
             // Store the new file
