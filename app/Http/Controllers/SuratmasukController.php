@@ -455,7 +455,7 @@ class SuratmasukController extends Controller
         if ($request->hasFile('file')) {
             // Delete the old file if it exists
             if ($suratmasuk->file) {
-                Storage::delete('public/' . $suratmasuk->file);
+                Storage::disk('public')->delete($suratmasuk->file);
             }
 
             // Store the new file
