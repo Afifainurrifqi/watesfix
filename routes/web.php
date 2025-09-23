@@ -19,6 +19,7 @@ use App\Http\Controllers\JenisdisabilitasController;
 use App\Http\Controllers\KkController;
 use App\Http\Controllers\LembagaMasyarakatController;
 use App\Http\Controllers\LokasipemukimanController;
+use App\Http\Controllers\NamaAliasOrtuController;
 use App\Http\Controllers\PenghasilanController;
 use App\Http\Controllers\RtAgamaController;
 use App\Http\Controllers\RtBencanaController;
@@ -40,11 +41,26 @@ use App\Http\Controllers\RtSaranapendidikanController;
 use App\Http\Controllers\RtTkejahatanController;
 use App\Http\Controllers\SdgspendidikanController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\SuratKeteranganAhliWarisController;
+use App\Http\Controllers\SuratKeteranganDesaPernahMenikahController;
+use App\Http\Controllers\SuratKeteranganHargaKepemilikanTanahController;
 use App\Http\Controllers\SuratKeteranganKehilanganController;
+use App\Http\Controllers\SuratKeteranganKematianDesaController;
 use App\Http\Controllers\SuratketerangantidakmampuController;
+use App\Http\Controllers\SuratKuasaController;
 use App\Http\Controllers\SuratmasukController;
+use App\Http\Controllers\SuratPengantarSkckController;
+use App\Http\Controllers\SuratPermohonanPembukaanRekeningController;
+use App\Http\Controllers\SuratPernyataanAktaBarcodeNomorSamaController;
+use App\Http\Controllers\SuratPernyataanAnakSeorangNamaIbuController;
+use App\Http\Controllers\SuratPernyataanBedaNamaBukuNikahController;
+use App\Http\Controllers\SuratPernyataanBelumAktaController;
+use App\Http\Controllers\SuratPernyataanDanJaminanController;
+use App\Http\Controllers\SuratPernyataanKesanggupanController;
+use App\Http\Controllers\SuratPernyataanMemilihNamaAliasController;
 use App\Http\Controllers\SuratPernyataanNumpangKkController;
 use App\Http\Controllers\SuratPernyataanTidakBisaMelampirkanKtpKematianController;
+use App\Http\Controllers\SuratSptjmKematianController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersuratController;
 use App\Models\akseskesehatan;
@@ -55,6 +71,7 @@ use App\Models\rtlembaga_ekonomi;
 use App\Models\rtlembaga_keagamaan;
 use App\Models\rtlokasi;
 use App\Models\rtpuengurus;
+use App\Models\SuratPengantarSkck;
 
 Route::get('/', [DashboardController::class, 'landingpage'])->name('landingpage');
 
@@ -70,6 +87,22 @@ Route::prefix('surat')->group(function () {
     Route::get('usersuratpernyataannumpangkk', [SuratPernyataanNumpangKkController::class, 'usernumpangkk'])->name('surat.usernumpangkk');
     Route::get('usersuratketerangankehilangan', [SuratKeteranganKehilanganController::class, 'userkehilangan'])->name('surat.userkehilangan');
     Route::get('usersuratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'usertidakmampu'])->name('surat.usertidakmampu');
+    Route::get('usersuratnamaalias', [SuratPernyataanMemilihNamaAliasController::class, 'usernamaalias'])->name('surat.usernamaalias');
+    Route::get('usersuratnamaaliasortu', [NamaAliasOrtuController::class, 'usernamaaliasortu'])->name('surat.usernamaaliasortu');
+    Route::get('usersuratkesanggupan', [SuratPernyataanKesanggupanController::class, 'userkesanggupan'])->name('surat.userkesanggupan');
+    Route::get('userrekening', [SuratPermohonanPembukaanRekeningController::class, 'userrekening'])->name('surat.userrekening');
+    Route::get('userkepemilikantanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'userkepemilikantanah'])->name('surat.userkepemilikantanah');
+    Route::get('userskck', [SuratPengantarSkckController::class, 'userskck'])->name('surat.userskck');
+    Route::get('user_userpernyataanjaminan', [SuratPernyataanDanJaminanController::class, 'user_pernyataanjaminan'])->name('surat.userpernyataanjaminan');
+    Route::get('user_pernahmenikah', [SuratKeteranganDesaPernahMenikahController::class, 'user_pernahmenikah'])->name('surat.userpernahmenikah');
+    Route::get('user_anakseorangibu', [SuratPernyataanAnakSeorangNamaIbuController::class, 'user_anakseorangibu'])->name('surat.useranakseorangibu');
+    Route::get('user_kematian', [SuratKeteranganKematianDesaController::class, 'user_kematian'])->name('surat.userkematian');
+    Route::get('user_ahliwaris', [SuratKeteranganAhliWarisController::class, 'user_ahliwaris'])->name('surat.userahliwaris');
+    Route::get('user_userpernyataanbelumakta', [SuratPernyataanBelumAktaController::class, 'user_form'])->name('surat.userpernyataanbelumakta');
+    Route::get('user_userbedanama', [SuratPernyataanBedaNamaBukuNikahController::class, 'user_form'])->name('surat.userbedanama');
+    Route::get('user_aktabarcode', [SuratPernyataanAktaBarcodeNomorSamaController::class, 'user'])->name('surat.useraktabarcode');
+    Route::get('user_sptjm', [SuratSptjmKematianController::class, 'user'])->name('surat.usersptjm');
+    Route::get('user_kuasa', [SuratKuasaController::class, 'user_kuasa'])->name('surat.userkuasa');
     Route::get('user_surat', [UsersuratController::class, 'index'])->name('surat.usersurat');
     Route::get('pengajuan_surat', [UsersuratController::class, 'pengajuan'])->name('surat.pengajuan_surat');
     Route::get('adminduk', [UsersuratController::class, 'adminduk'])->name('surat.adminduk');
@@ -81,6 +114,23 @@ Route::prefix('surat')->group(function () {
     Route::post('user_suratpernyataantidakbisamelampirkanktpkematian', [SuratPernyataanTidakBisaMelampirkanKtpKematianController::class, 'userstore'])->name('user_suratpernyataantidakbisamelampirkanktpkematian.store');
     Route::post('user_suratketerangankehilangan', [SuratKeteranganKehilanganController::class, 'userstore'])->name('surat.userkehilangan.store');
     Route::post('user_suratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'userstore'])->name('surat.usertidakmampu.store');
+    Route::post('user_kuasa', [SuratKuasaController::class, 'userstore'])->name('surat.userkuasa.store');
+    Route::post('user_suratnamaalias', [SuratPernyataanMemilihNamaAliasController::class, 'userstore'])->name('surat.usernamalias.store');
+    Route::post('user_suratnamaaliasortu', [NamaAliasOrtuController::class, 'userstore'])->name('surat.usernamaliasortu.store');
+    Route::post('user_userpernyataanjaminan', [SuratPernyataanDanJaminanController::class, 'userstore'])->name('surat.userpernyataanjaminan.store');
+    Route::post('userpernahmenikah', [SuratKeteranganDesaPernahMenikahController::class, 'userstore'])->name('surat.userpernahmenikah.store');
+    Route::post('userkematian', [SuratKeteranganKematianDesaController::class, 'userstore'])->name('surat.userkematian.store');
+    Route::post('userkesanggupan', [SuratPernyataanKesanggupanController::class, 'userstore'])->name('surat.userkesanggupan.store');
+    Route::post('userahliwaris', [SuratKeteranganAhliWarisController::class, 'userstore'])->name('surat.userahliwaris.store');
+    Route::post('userkuasa', [SuratKuasaController::class, 'userstore'])->name('surat.userkuasa.store');
+    Route::post('userrekening', [SuratPermohonanPembukaanRekeningController::class, 'userstore'])->name('surat.userrekening.store');
+    Route::post('userbelumakta', [SuratPernyataanBelumAktaController::class, 'userstore'])->name('surat.userbelumakta.store');
+    Route::post('userbedanama', [SuratPernyataanBedaNamaBukuNikahController::class, 'userstore'])->name('surat.userbedanama.store');
+    Route::post('useranakseorangibu', [SuratPernyataanAnakSeorangNamaIbuController::class, 'userstore'])->name('surat.useranakseorangibu.store');
+    Route::post('useraktabarcode', [SuratPernyataanAktaBarcodeNomorSamaController::class, 'userstore'])->name('surat.useraktabarcode.store');
+    Route::post('usersptjm', [SuratSptjmKematianController::class, 'userstore'])->name('surat.usersptjm.store');
+    Route::post('userkepemilikantanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'userstore'])->name('surat.userkepemilikantanah.store');
+    Route::post('userskck', [SuratPengantarSkckController::class, 'userstore'])->name('surat.userskck.store');
 
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
@@ -123,8 +173,102 @@ Route::prefix('surat')->group(function () {
         Route::post('suratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'store'])->name('surat.tidakmampu.store');
         Route::get('suratketerangantidakmampu/{suratketerangantidakmampu}/edit', [SuratketerangantidakmampuController::class, 'edit'])->name('surat.tidakmampu.edit');
         Route::put('suratketerangantidakmampu/{suratketerangantidakmampu}', [SuratketerangantidakmampuController::class, 'update'])->name('surat.tidakmampu.update');
+
+
+        Route::get('suratpernyataanmemilihnamaalias', [SuratPernyataanMemilihNamaAliasController::class, 'index'])->name('surat.namaalias.index');
+        Route::get('suratpernyataanmemilihnamaalias/create', [SuratPernyataanMemilihNamaAliasController::class, 'create'])->name('surat.namaalias.create');
+        Route::post('suratpernyataanmemilihnamaalias', [SuratPernyataanMemilihNamaAliasController::class, 'store'])->name('surat.namaalias.store');
+        Route::get('suratpernyataanmemilihnamaalias/{surat}/edit', [SuratPernyataanMemilihNamaAliasController::class, 'edit'])->name('surat.namaalias.edit');
+        Route::put('suratpernyataanmemilihnamaalias/{surat}', [SuratPernyataanMemilihNamaAliasController::class, 'update'])->name('surat.namaalias.update');
+
+        Route::get('suratpernyataanmemilihnamaaliasortu', [NamaAliasOrtuController::class, 'index'])->name('surat.namaaliasortu.index');
+        Route::get('suratpernyataanmemilihnamaaliasortu/create', [NamaAliasOrtuController::class, 'create'])->name('surat.namaaliasortu.create');
+        Route::post('suratpernyataanmemilihnamaaliasortu', [NamaAliasOrtuController::class, 'store'])->name('surat.namaaliasortu.store');
+        Route::get('suratpernyataanmemilihnamaaliasortu/{surat}/edit', [NamaAliasOrtuController::class, 'edit'])->name('surat.namaaliasortu.edit');
+        Route::put('suratpernyataanmemilihnamaaliasortu/{surat}', [NamaAliasOrtuController::class, 'update'])->name('surat.namaaliasortu.update');
+
+        Route::get('pernyataandanjaminan', [SuratPernyataanDanJaminanController::class, 'index'])->name('surat.pernyataandanjaminan.index');
+        Route::get('pernyataandanjaminan/create', [SuratPernyataanDanJaminanController::class, 'create'])->name('surat.pernyataandanjaminan.create');
+        Route::post('pernyataandanjaminan', [SuratPernyataanDanJaminanController::class, 'store'])->name('surat.pernyataandanjaminan.store');
+        Route::get('pernyataandanjaminan/{surat}/edit', [SuratPernyataanDanJaminanController::class, 'edit'])->name('surat.pernyataandanjaminan.edit');
+        Route::put('pernyataandanjaminan/{surat}', [SuratPernyataanDanJaminanController::class, 'update'])->name('surat.pernyataandanjaminan.update');
+
+
+
+        Route::get('pernah-menikah', [SuratKeteranganDesaPernahMenikahController::class, 'index'])->name('surat.pernahmenikah.index');
+        Route::get('pernah-menikah/create', [SuratKeteranganDesaPernahMenikahController::class, 'create'])->name('surat.pernahmenikah.create');
+        Route::post('pernah-menikah', [SuratKeteranganDesaPernahMenikahController::class, 'store'])->name('surat.pernahmenikah.store');
+        Route::get('pernah-menikah/{surat}/edit', [SuratKeteranganDesaPernahMenikahController::class, 'edit'])->name('surat.pernahmenikah.edit');
+        Route::put('pernah-menikah/{surat}', [SuratKeteranganDesaPernahMenikahController::class, 'update'])->name('surat.pernahmenikah.update');
+
+        Route::get('kematian-desa',                 [SuratKeteranganKematianDesaController::class, 'index'])->name('surat.kematian.index');
+        Route::get('kematian-desa/create',          [SuratKeteranganKematianDesaController::class, 'create'])->name('surat.kematian.create');
+        Route::post('kematian-desa',                [SuratKeteranganKematianDesaController::class, 'store'])->name('surat.kematian.store');
+        Route::get('kematian-desa/{surat}/edit',    [SuratKeteranganKematianDesaController::class, 'edit'])->name('surat.kematian.edit');
+        Route::put('kematian-desa/{surat}',         [SuratKeteranganKematianDesaController::class, 'update'])->name('surat.kematian.update');
+
+        Route::get('ahli-waris', [SuratKeteranganAhliWarisController::class, 'index'])->name('surat.ahliwaris.index');
+        Route::post('ahli-waris', [SuratKeteranganAhliWarisController::class, 'store'])->name('surat.ahliwaris.store');
+        Route::get('ahli-waris/{surat}/edit', [SuratKeteranganAhliWarisController::class, 'edit'])->name('surat.ahliwaris.edit');
+        Route::put('ahli-waris/{surat}', [SuratKeteranganAhliWarisController::class, 'update'])->name('surat.ahliwaris.update');
+
+        // SURAT PERNYATAAN KESANGGUPAN
+        Route::get('kesanggupan', [SuratPernyataanKesanggupanController::class, 'index'])->name('surat.kesanggupan.index');
+        Route::get('kesanggupan/create', [SuratPernyataanKesanggupanController::class, 'create'])->name('surat.kesanggupan.create');
+        Route::post('kesanggupan', [SuratPernyataanKesanggupanController::class, 'store'])->name('surat.kesanggupan.store');
+        Route::get('kesanggupan/{surat}/edit', [SuratPernyataanKesanggupanController::class, 'edit'])->name('surat.kesanggupan.edit');
+        Route::put('kesanggupan/{surat}', [SuratPernyataanKesanggupanController::class, 'update'])->name('surat.kesanggupan.update');
+
+        Route::get('kuasa', [SuratKuasaController::class, 'index'])->name('surat.kuasa.index');
+        Route::post('kuasa', [SuratKuasaController::class, 'store'])->name('surat.kuasa.store');
+        Route::get('kuasa/{surat}/edit', [SuratKuasaController::class, 'edit'])->name('surat.kuasa.edit');
+        Route::put('kuasa/{surat}', [SuratKuasaController::class, 'update'])->name('surat.kuasa.update');
+
+        Route::get('pembukaan-rekening', [SuratPermohonanPembukaanRekeningController::class, 'index'])->name('surat.bukaanrekening.index');
+        Route::post('pembukaan-rekening', [SuratPermohonanPembukaanRekeningController::class, 'store'])->name('surat.bukaanrekening.store');
+        Route::get('pembukaan-rekening/{surat}/edit', [SuratPermohonanPembukaanRekeningController::class, 'edit'])->name('surat.bukaanrekening.edit');
+        Route::put('pembukaan-rekening/{surat}', [SuratPermohonanPembukaanRekeningController::class, 'update'])->name('surat.bukaanrekening.update');
+
+        Route::get('pernyataan-belum-akta', [SuratPernyataanBelumAktaController::class, 'index'])->name('surat.belumakta.index');
+        Route::post('pernyataan-belum-akta', [SuratPernyataanBelumAktaController::class, 'store'])->name('surat.belumakta.store');
+        Route::get('pernyataan-belum-akta/{surat}/edit', [SuratPernyataanBelumAktaController::class, 'edit'])->name('surat.belumakta.edit');
+        Route::put('pernyataan-belum-akta/{surat}', [SuratPernyataanBelumAktaController::class, 'update'])->name('surat.belumakta.update');
+
+
+        Route::get('beda-nama-buku-nikah', [SuratPernyataanBedaNamaBukuNikahController::class, 'index'])->name('surat.bedanama.index');
+        Route::post('beda-nama-buku-nikah', [SuratPernyataanBedaNamaBukuNikahController::class, 'store'])->name('surat.bedanama.store');
+        Route::get('beda-nama-buku-nikah/{surat}/edit', [SuratPernyataanBedaNamaBukuNikahController::class, 'edit'])->name('surat.bedanama.edit');
+        Route::put('beda-nama-buku-nikah/{surat}', [SuratPernyataanBedaNamaBukuNikahController::class, 'update'])->name('surat.bedanama.update');
+
+        Route::get('surat/anak-seorang-ibu',                [SuratPernyataanAnakSeorangNamaIbuController::class, 'index'])->name('surat.anakseorangibu.index');
+        Route::post('surat/anak-seorang-ibu',               [SuratPernyataanAnakSeorangNamaIbuController::class, 'store'])->name('surat.anakseorangibu.store');
+        Route::get('surat/anak-seorang-ibu/{surat}/edit',   [SuratPernyataanAnakSeorangNamaIbuController::class, 'edit'])->name('surat.anakseorangibu.edit');
+        Route::put('surat/anak-seorang-ibu/{surat}',        [SuratPernyataanAnakSeorangNamaIbuController::class, 'update'])->name('surat.anakseorangibu.update');
+
+        Route::get('akta-barcode',                [SuratPernyataanAktaBarcodeNomorSamaController::class, 'index'])->name('surat.aktabarcode.index');
+        Route::post('akta-barcode',               [SuratPernyataanAktaBarcodeNomorSamaController::class, 'store'])->name('surat.aktabarcode.store');
+        Route::get('akta-barcode/{surat}/edit',   [SuratPernyataanAktaBarcodeNomorSamaController::class, 'edit'])->name('surat.aktabarcode.edit');
+        Route::put('akta-barcode/{surat}',        [SuratPernyataanAktaBarcodeNomorSamaController::class, 'update'])->name('surat.aktabarcode.update');
+
+
+        Route::get('/surat/sptjm-kematian',            [SuratSptjmKematianController::class, 'index'])->name('surat.sptjm.index');
+        Route::post('/surat/sptjm-kematian',           [SuratSptjmKematianController::class, 'store'])->name('surat.sptjm.store');
+        Route::get('/surat/sptjm-kematian/{surat}/edit', [SuratSptjmKematianController::class, 'edit'])->name('surat.sptjm.edit');
+        Route::put('/surat/sptjm-kematian/{surat}',    [SuratSptjmKematianController::class, 'update'])->name('surat.sptjm.update');
+
+        Route::get('harga-kepemilikan-tanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'index'])->name('surat.kepemilikantanah.index');
+        Route::get('harga-kepemilikan-tanah/create', [SuratKeteranganHargaKepemilikanTanahController::class, 'create'])->name('surat.kepemilikantanah.create');
+        Route::post('harga-kepemilikan-tanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'store'])->name('surat.kepemilikantanah.store');
+        Route::get('harga-kepemilikan-tanah/{surat}/edit', [SuratKeteranganHargaKepemilikanTanahController::class, 'edit'])->name('surat.kepemilikantanah.edit');
+        Route::put('harga-kepemilikan-tanah/{surat}', [SuratKeteranganHargaKepemilikanTanahController::class, 'update'])->name('surat.kepemilikantanah.update');
+
+        Route::get('skck',                 [SuratPengantarSkckController::class, 'index'])->name('surat.skck.index');
+        Route::post('skck',                [SuratPengantarSkckController::class, 'store'])->name('surat.skck.store');
+        Route::get('skck/{skck}/edit',     [SuratPengantarSkckController::class, 'edit'])->name('surat.skck.edit');
+        Route::put('skck/{skck}',          [SuratPengantarSkckController::class, 'update'])->name('surat.skck.update');
     });
 });
+
 
 
 

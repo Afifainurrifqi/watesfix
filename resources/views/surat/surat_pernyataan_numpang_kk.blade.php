@@ -37,62 +37,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="pekerjaan_pemilik_kk" class="form-label">Pekerjaan</label>
-                        <select name="pekerjaan_pemilik_kk" id="pekerjaan_pemilik_kk" class="form-control" required>
-                            <option value="">-- Pilih pekerjaan --</option>
-                            @php
-                                $jobs = [
-                                    'BELUM/TIDAK BEKERJA',
-                                    'PELAJAR/MAHASISWA',
-                                    'TIDAK/BELUM SEKOLAH',
-                                    'KARYAWAN SWASTA',
-                                    'IBU RUMAH TANGGA',
-                                    'WIRASWASTA',
-                                    'TENTARA NASIONAL INDONESIA (TNI)',
-                                    'KEPOLISIAN RI (POLRI)',
-                                    'DOSEN',
-                                    'GURU',
-                                    'Guru agama_penumpang_kk',
-                                    'KEPALA DESA',
-                                    'PERANGKAT DESA',
-                                    'Pegawai Kantor Desa',
-                                    'BIDAN',
-                                    'DOKTER',
-                                    'PERAWAT',
-                                    'PETANI/PEKEBUN PEMILIK LAHAN',
-                                    'BURUH TANI/PERKEBUNAN',
-                                    'PEDAGANG',
-                                    'PEGAWAI NEGERI SIPIL (PNS)',
-                                    'BURUH HARIAN LEPAS',
-                                    'SOPIR',
-                                    'KARYAWAN BUMN',
-                                    'PENSIUNAN',
-                                    'PEMBANTU RUMAH TANGGA',
-                                    'BURUH PETERNAKAN',
-                                    'KONSTRUKSI',
-                                    'PELAUT',
-                                    'NELAYAN/PERIKANAN',
-                                    'KARYAWAN HONORER',
-                                    'PETERNAK',
-                                    'MEKANIK',
-                                    'PENATA RIAS',
-                                    'TUKANG LAS/PANDAI BESI',
-                                    'INDUSTRI',
-                                    'USTADZ/MUBALIGH',
-                                    'TABIB',
-                                    'BURUH NELAYAN/PERIKANAN',
-                                    'JURU MASAK',
-                                    'SENIMAN',
-                                    'AKUNTAN',
-                                    'Petani/Pekebun penyewa',
-                                    'TKI',
-                                    'Lainnya',
-                                ];
-                            @endphp
-                            @foreach ($jobs as $job)
-                                <option value="{{ $job }}"
-                                    {{ old('pekerjaan_pemilik_kk') == $job ? 'selected' : '' }}>{{ $job }}</option>
-                            @endforeach
-                        </select>
+
                     </div>
                     <div class="mb-3">
                         <label for="alamat_pemilik_kk" class="form-label">Alamat</label>

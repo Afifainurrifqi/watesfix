@@ -56,15 +56,20 @@ class SuratketerangantidakmampuController extends Controller
             'status_perkawinan' => 'required|string',
             'pekerjaan' => 'required|string',
             'alamat_rumah' => 'required|string',
+            'peruntukan_sktm' => 'required|string|in:Biaya Pendidikan,Bantuan Sosial,Biaya Kesehatan', // ditambahkan
             'keterangan_fungsi_surat' => 'required|string',
+            'bantuan_sosial' => 'nullable|array', // checkbox array
+            'bantuan_sosial.*' => 'in:PKH,KIP,KIS,BPNT,ID. DTKS,BLT DD,BANSOS'
         ]);
 
-        suratketerangantidakmampu::create($validated);
+        suratketerangantidakmampu::create(array_merge($validated, [
+            'bantuan_sosial' => $request->input('bantuan_sosial', []), // pastikan tersimpan
+        ]));
 
         return redirect()->route('surat.keluar')->with('success', 'Surat berhasil ditambahkan.');
     }
 
-     public function userstore(Request $request)
+    public function userstore(Request $request)
     {
         $validated = $request->validate([
             'nowa' => 'required|string',
@@ -79,10 +84,15 @@ class SuratketerangantidakmampuController extends Controller
             'status_perkawinan' => 'required|string',
             'pekerjaan' => 'required|string',
             'alamat_rumah' => 'required|string',
+            'peruntukan_sktm' => 'required|string|in:Biaya Pendidikan,Bantuan Sosial,Biaya Kesehatan', // ditambahkan
             'keterangan_fungsi_surat' => 'required|string',
+            'bantuan_sosial' => 'nullable|array', // checkbox array
+            'bantuan_sosial.*' => 'in:PKH,KIP,KIS,BPNT,ID. DTKS,BLT DD,BANSOS'
         ]);
 
-        suratketerangantidakmampu::create($validated);
+        suratketerangantidakmampu::create(array_merge($validated, [
+            'bantuan_sosial' => $request->input('bantuan_sosial', []), // pastikan tersimpan
+        ]));
 
         return redirect()->route('surat.suratberhasil')->with('success', 'Surat berhasil ditambahkan.');
     }
@@ -107,10 +117,15 @@ class SuratketerangantidakmampuController extends Controller
             'status_perkawinan' => 'required|string',
             'pekerjaan' => 'required|string',
             'alamat_rumah' => 'required|string',
+            'peruntukan_sktm' => 'required|string|in:Biaya Pendidikan,Bantuan Sosial,Biaya Kesehatan', // ditambahkan
             'keterangan_fungsi_surat' => 'required|string',
+            'bantuan_sosial' => 'nullable|array', // checkbox array
+            'bantuan_sosial.*' => 'in:PKH,KIP,KIS,BPNT,ID. DTKS,BLT DD,BANSOS'
         ]);
 
-        $suratketerangantidakmampu->update($validated);
+        suratketerangantidakmampu::create(array_merge($validated, [
+            'bantuan_sosial' => $request->input('bantuan_sosial', []), // pastikan tersimpan
+        ]));
 
         return redirect()->route('surat.keluar')->with('success', 'Surat berhasil diperbarui.');
     }
