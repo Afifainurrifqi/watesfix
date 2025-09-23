@@ -32,7 +32,9 @@
         }
 
         .nomor {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .tulisan {

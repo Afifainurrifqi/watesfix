@@ -284,6 +284,14 @@ class SuratmasukController extends Controller
             return $pdf->download('pdf_surat_keterangan_desa_pernah_menikah_' . $filenameName . '.pdf');
         }
 
+        if ($jenis === 'suratpernyataandanjaminan') {
+            $data = surat_pernyataan_dan_jaminan::findOrFail($id);
+            $pdf  = Pdf::loadView('surat.pdf_surat_pernyataan_dan_jaminan', compact('data'))->setPaper('A4');
+             $filename = $data->nama_lengkap ?? 'dokumen';
+            return $pdf->download('pdf_surat_pernyataan_dan_jaminan_' . $filename . '.pdf');
+        }
+
+
         if ($jenis === 'suratketeranganahliwaris') {
             $data = surat_keterangan_ahli_waris::findOrFail($id);
             $pdf  = Pdf::loadView('surat.pdf_surat_keterangan_ahli_waris', compact('data'))->setPaper('A4');
