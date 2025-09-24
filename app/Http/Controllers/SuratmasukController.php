@@ -398,25 +398,31 @@ class SuratmasukController extends Controller
             'file'          => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png',
         ]);
 
-        if (! is_dir(public_path('suratdesa'))) {
-            @mkdir(public_path('suratdesa'), 0755, true);
-        }
-
+        // Nama file yang aman
         $original = $request->file('file')->getClientOriginalName();
         $safeName = time() . '_' . Str::slug(pathinfo($original, PATHINFO_FILENAME), '_')
             . '.' . $request->file('file')->getClientOriginalExtension();
 
+        // Pastikan direktori disk siap (opsional, biasanya otomatis)
+        if (! Storage::disk('suratdesa')->exists('')) {
+            Storage::disk('suratdesa')->makeDirectory('');
+        }
+
+        // Simpan file ke disk 'suratdesa'
+        // Hasil $path hanya nama file (tanpa folder), contoh: 1758682751_surat_pengantar.pdf
         $path = $request->file('file')->storeAs('', $safeName, 'suratdesa');
 
+        // Simpan data ke MongoDB
         SuratMasuk::create([
             'nama_instansi' => $request->nama_instansi,
             'keterangan'    => $request->keterangan,
             'tanggal_masuk' => $request->tanggal_masuk,
-            'file'          => $path,
+            'file'          => $path, // simpan nama file saja
         ]);
 
         return redirect()->route('surat.masuk')->with('msg', 'Surat masuk berhasil ditambahkan.');
     }
+
 
 
     /**
@@ -454,26 +460,32 @@ class SuratmasukController extends Controller
             'file'          => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png',
         ]);
 
+        // Update field non-file
         $suratmasuk->fill($request->only(['nama_instansi', 'keterangan', 'tanggal_masuk']));
 
+        // Jika ada file baru, hapus yang lama lalu simpan yang baru
         if ($request->hasFile('file')) {
+
+            // Hapus file lama jika ada
             if ($suratmasuk->file && Storage::disk('suratdesa')->exists($suratmasuk->file)) {
                 Storage::disk('suratdesa')->delete($suratmasuk->file);
-            }
-
-            if (! is_dir(public_path('suratdesa'))) {
-                @mkdir(public_path('suratdesa'), 0755, true);
             }
 
             $original = $request->file('file')->getClientOriginalName();
             $safeName = time() . '_' . Str::slug(pathinfo($original, PATHINFO_FILENAME), '_')
                 . '.' . $request->file('file')->getClientOriginalExtension();
 
+            if (! Storage::disk('suratdesa')->exists('')) {
+                Storage::disk('suratdesa')->makeDirectory('');
+            }
+
             $path = $request->file('file')->storeAs('', $safeName, 'suratdesa');
-            $suratmasuk->file = $path;
+
+            $suratmasuk->file = $path; // simpan nama file baru
         }
 
         $suratmasuk->save();
+
         return redirect()->route('surat.masuk')->with('msg', 'Surat masuk berhasil diperbarui.');
     }
 
