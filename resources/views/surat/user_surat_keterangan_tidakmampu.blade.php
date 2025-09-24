@@ -334,40 +334,8 @@
                         </div>
 
                         {{-- Status Surat --}}
-                        <div class="mb-3">
-                            <label for="status_surat" class="form-label">Status Surat <span
-                                    class="text-danger">*</span></label>
-                            <select name="status_surat" id="status_surat"
-                                class="form-control @error('status_surat') is-invalid @enderror" required>
-                                @foreach (['Pending', 'Di cek', 'Di terima', 'Ditolak'] as $statusSurat)
-                                    <option value="{{ $statusSurat }}"
-                                        {{ old('status_surat') == $statusSurat ? 'selected' : '' }}>
-                                        {{ $statusSurat }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('status_surat')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        {{-- Status Verifikasi --}}
-                        <div class="mb-3">
-                            <label for="status_verif" class="form-label">Status Verifikasi <span
-                                    class="text-danger">*</span></label>
-                            <select name="status_verif" id="status_verif"
-                                class="form-control @error('status_verif') is-invalid @enderror" required>
-                                @foreach (['Belum Verifikasi', 'Terverifikasi'] as $statusVerif)
-                                    <option value="{{ $statusVerif }}"
-                                        {{ old('status_verif') == $statusVerif ? 'selected' : '' }}>
-                                        {{ $statusVerif }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('status_verif')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <input type="hidden" name="status_surat" value="Pending">
+                        <input type="hidden" name="status_verif" value="Belum Verifikasi">
 
                         <div class="mt-4 text-end">
                             <button type="submit" class="btn btn-primary px-4">Kirim</button>
