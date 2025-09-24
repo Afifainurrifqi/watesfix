@@ -44,7 +44,7 @@
                                             <td>{{ \Carbon\Carbon::parse($item->tanggal_masuk)->format('d-m-Y') }}</td>
                                             <td>
                                                 @if ($item->file)
-                                                    <a href="{{ asset('suratdesa/' . $item->file) }}"
+                                                    <a href="{{ Storage::disk('suratdesa')->url($item->file) }}"
                                                         class="btn btn-sm btn-primary" target="_blank"
                                                         rel="noopener">Cek</a>
                                                 @else
