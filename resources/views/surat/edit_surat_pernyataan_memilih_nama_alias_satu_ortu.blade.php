@@ -162,7 +162,7 @@
 
                 <div class="d-flex gap-2">
 
-                    <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>

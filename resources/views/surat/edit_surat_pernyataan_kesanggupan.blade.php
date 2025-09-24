@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-primary px-4">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary px-4">Update</button>
                 </div>
             </form>
         </div>

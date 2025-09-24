@@ -3,10 +3,16 @@
 @section('content')
 <div class="container">
     @if ($errors->any())
-        <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-4">
         <div class="card-body">
             <h4 class="mb-4">Edit Surat Pernyataan Belum Pernah Mengurus Akta Kelahiran</h4>
 
@@ -17,11 +23,13 @@
                 <h5 class="mb-3">Yang Bertandatangan</h5>
                 <div class="mb-3">
                     <label class="form-label" for="ybt_nama">Nama</label>
-                    <input id="ybt_nama" name="ybt_nama" type="text" class="form-control" required value="{{ old('ybt_nama', $surat->ybt_nama) }}">
+                    <input id="ybt_nama" name="ybt_nama" type="text" class="form-control" required
+                           value="{{ old('ybt_nama', $surat->ybt_nama) }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="ybt_nik">NIK</label>
-                    <input id="ybt_nik" name="ybt_nik" type="text" class="form-control" required value="{{ old('ybt_nik', $surat->ybt_nik) }}">
+                    <input id="ybt_nik" name="ybt_nik" type="text" class="form-control" required
+                           value="{{ old('ybt_nik', $surat->ybt_nik) }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="ybt_alamat">Alamat</label>
@@ -33,27 +41,55 @@
                 <h5 class="mb-3">Menyatakan Bahwa</h5>
                 <div class="mb-3">
                     <label class="form-label" for="subjek_nama">Nama</label>
-                    <input id="subjek_nama" name="subjek_nama" type="text" class="form-control" required value="{{ old('subjek_nama', $surat->subjek_nama) }}">
+                    <input id="subjek_nama" name="subjek_nama" type="text" class="form-control" required
+                           value="{{ old('subjek_nama', $surat->subjek_nama) }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="subjek_tempat_lahir">Tempat Lahir</label>
-                    <input id="subjek_tempat_lahir" name="subjek_tempat_lahir" type="text" class="form-control" required value="{{ old('subjek_tempat_lahir', $surat->subjek_tempat_lahir) }}">
+                    <input id="subjek_tempat_lahir" name="subjek_tempat_lahir" type="text" class="form-control" required
+                           value="{{ old('subjek_tempat_lahir', $surat->subjek_tempat_lahir) }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="subjek_tanggal_lahir">Tanggal Lahir</label>
-                    <input id="subjek_tanggal_lahir" name="subjek_tanggal_lahir" type="date" class="form-control" required value="{{ old('subjek_tanggal_lahir', \Illuminate\Support\Str::of(optional($surat->subjek_tanggal_lahir)->format('Y-m-d'))) }}">
+                    <input id="subjek_tanggal_lahir" name="subjek_tanggal_lahir" type="date" class="form-control" required
+                           value="{{ old('subjek_tanggal_lahir', optional($surat->subjek_tanggal_lahir)->format('Y-m-d')) }}">
                 </div>
 
-                <input type="hidden" name="status_surat" value="{{ old('status_surat', $surat->status_surat ?? 'Pending') }}">
-                <input type="hidden" name="status_verif" value="{{ old('status_verif', $surat->status_verif ?? 'Belum Verifikasi') }}">
+                <div class="mb-3">
+                    <label for="status_surat" class="form-label">Status Surat</label>
+                    <select name="status_surat" id="status_surat" class="form-control" required>
+                        <option value="">-- Pilih Status --</option>
+                        @foreach (['Pending', 'Di cek', 'Di terima', 'Ditolak'] as $status)
+                            <option value="{{ $status }}"
+                              {{ old('status_surat', $surat->status_surat) == $status ? 'selected' : '' }}>
+                              {{ $status }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status_verif" class="form-label">Status Verifikasi</label>
+                    <select name="status_verif" id="status_verif" class="form-control" required>
+                        <option value="">-- Pilih Verifikasi --</option>
+                        @foreach (['Belum Verifikasi', 'Terverifikasi'] as $verif)
+                            <option value="{{ $verif }}"
+                              {{ old('status_verif', $surat->status_verif) == $verif ? 'selected' : '' }}>
+                              {{ $verif }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="nowa">No WhatsApp</label>
-                    <input id="nowa" name="nowa" type="text" class="form-control" required value="{{ old('nowa', $surat->nowa) }}">
+                    <input id="nowa" name="nowa" type="text" class="form-control" required
+                           value="{{ old('nowa', $surat->nowa) }}">
                 </div>
 
                 <div class="text-end">
                     <button class="btn btn-primary px-4" type="submit">Update</button>
+                    <a href="{{ route('surat.belumakta.index') }}" class="btn btn-danger px-4">Kembali</a>
                 </div>
             </form>
         </div>

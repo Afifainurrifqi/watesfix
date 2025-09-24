@@ -100,15 +100,60 @@ class SuratmasukController extends Controller
     {
         return view('surat.arsipsuratmasuk');
     }
+
     public function arsipsuratkeluar()
     {
-        // Ambil semua data dari collection surat_pernyataan_ktp
-        $data = surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian::where('status_verif', 'Terverifikasi')->get();
+        $ktp_kematian = surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian::where('status_verif', 'Terverifikasi')->get();
+        $numpang_kk   = surat_pernyataan_numpang_kk::where('status_verif', 'Terverifikasi')->get();
+
+        $pernyataan_tidak_bisa_ktp = surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian::where('status_verif', 'Terverifikasi')->get();
+        $keterangan_kehilangan = surat_keterangan_kehilangan::where('status_verif', 'Terverifikasi')->get();
+        $numpang_kk = surat_pernyataan_numpang_kk::where('status_verif', 'Terverifikasi')->get();
+        $tidakmampu = suratketerangantidakmampu::where('status_verif', 'Terverifikasi')->get();
+        $namaalias = surat_pernyataan_memilih_nama_alias::where('status_verif', 'Terverifikasi')->get();
+        $namaalias_satu_ortu = nama_alias_ortu::where('status_verif', 'Terverifikasi')->get();
+        $pernyataandanjaminan      = surat_pernyataan_dan_jaminan::where('status_verif', 'Terverifikasi')->get();
+        $pernah_menikah = surat_keterangan_desa_pernah_menikah::where('status_verif', 'Terverifikasi')->get();
+        $kematian_desa             = surat_keterangan_kematian_desa::where('status_verif', 'Terverifikasi')->get(); // ⬅️ baru
+        $ahliwaris = surat_keterangan_ahli_waris::where('status_verif', 'Terverifikasi')->get();
+        $kesanggupan               = surat_pernyataan_kesanggupan::where('status_verif', 'Terverifikasi')->get(); // ⬅️ TAMBAH INI
+        $kuasa = surat_kuasa::where('status_verif', 'Terverifikasi')->get();
+        $bukaanrekening = surat_permohonan_pembukaan_rekening::where('status_verif', 'Terverifikasi')->get();
+        $belumAkta = surat_pernyataan_belum_akta::where('status_verif', 'Terverifikasi')->get();
+        $bedaNamaBukuNikah = surat_pernyataan_beda_nama_buku_nikah::where('status_verif', 'Terverifikasi')->get();
+        $anakSeorangIbu = surat_pernyataan_anak_seorang_nama_ibu::where('status_verif', 'Terverifikasi')->get();
+        $aktaBarcode    = surat_pernyataan_akta_barcode_nomor_sama::where('status_verif', 'Terverifikasi')->get();
+        $sptjmKematian = surat_sptjm_kematian::where('status_verif', 'Terverifikasi')->get();
+        $kepemilikantanah = surat_keterangan_harga_kepemilikan_tanah::where('status_verif', 'Terverifikasi')->get();
+        $skck = SuratPengantarSkck::where('status_verif', 'Terverifikasi')->get();
 
 
-        // Kirim ke view
+
+        $data = collect()
+            ->merge($pernyataan_tidak_bisa_ktp)
+            ->merge($keterangan_kehilangan)
+            ->merge($numpang_kk)
+            ->merge($tidakmampu)
+            ->merge($namaalias)
+            ->merge($namaalias_satu_ortu)
+            ->merge($pernyataandanjaminan)
+            ->merge($pernah_menikah)
+            ->merge($kematian_desa)
+            ->merge($ahliwaris)
+            ->merge($kesanggupan)
+            ->merge($kuasa)
+            ->merge($bukaanrekening)
+            ->merge($belumAkta)
+            ->merge($bedaNamaBukuNikah)
+            ->merge($anakSeorangIbu)
+            ->merge($aktaBarcode)
+            ->merge($sptjmKematian)
+            ->merge($kepemilikantanah)
+            ->merge($skck);
+
         return view('surat.arsipsuratkeluar', compact('data'));
     }
+
 
     public function prosesForm(Request $request)
     {

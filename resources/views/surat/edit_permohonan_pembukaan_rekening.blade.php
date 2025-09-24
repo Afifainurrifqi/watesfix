@@ -2,18 +2,25 @@
 
 @section('content')
 <div class="container">
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
-                @foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
             </ul>
         </div>
     @endif
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <h4 class="mb-4">Edit Permohonan Pembukaan Rekening</h4>
+            <h4 class="mb-4">Edit Permohonan Pembukaan Rekening Tabungan</h4>
 
+            {{-- PENTING: arahkan ke route UPDATE + method PUT --}}
             <form action="{{ route('surat.bukaanrekening.update', $surat->_id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -51,7 +58,7 @@
 
                 <hr class="my-4">
 
-                {{-- KETENTUAN --}}
+                {{-- KETENTUAN REKENING --}}
                 <h5 class="mb-3">Ketentuan</h5>
                 <div class="mb-3">
                     <label class="form-label" for="rekening_atas_nama">Rekening Atas Nama</label>
@@ -65,19 +72,14 @@
 
                 <hr class="my-4">
 
-                {{-- YANG BERWENANG --}}
+                {{-- YANG BERWENANG (DINAMIS) --}}
                 <h5 class="mb-3">Yang Berwenang</h5>
-                @php
-                    $nama    = old('berwenang_nama', $surat->berwenang_nama ?? []);
-                    $jabatan = old('berwenang_jabatan', $surat->berwenang_jabatan ?? []);
-                    $jumlahAwal = old('berwenang_jumlah', max(count($nama), count($jabatan)));
-                @endphp
-
                 <div class="row g-2 align-items-end mb-2">
                     <div class="col-md-3">
                         <label class="form-label" for="berwenang_jumlah">Jumlah Baris</label>
-                        <input type="number" min="0" id="berwenang_jumlah" name="berwenang_jumlah" class="form-control"
-                               value="{{ $jumlahAwal }}">
+                        <input type="number" min="0" id="berwenang_jumlah" name="berwenang_jumlah"
+                               class="form-control"
+                               value="{{ old('berwenang_jumlah', $surat->berwenang_jumlah ?? (is_array($surat->berwenang_nama) ? count($surat->berwenang_nama) : 0)) }}">
                     </div>
                 </div>
 
@@ -93,8 +95,32 @@
                     </table>
                 </div>
 
-                <input type="hidden" name="status_surat" value="{{ old('status_surat', $surat->status_surat ?? 'Pending') }}">
-                <input type="hidden" name="status_verif" value="{{ old('status_verif', $surat->status_verif ?? 'Belum Verifikasi') }}">
+                {{-- STATUS & WA --}}
+                <div class="mb-3">
+                    <label for="status_surat" class="form-label">Status Surat</label>
+                    <select name="status_surat" id="status_surat" class="form-control" required>
+                        <option value="">-- Pilih Status --</option>
+                        @foreach (['Pending','Di cek','Di terima','Ditolak'] as $status)
+                            <option value="{{ $status }}"
+                                {{ old('status_surat', $surat->status_surat) == $status ? 'selected' : '' }}>
+                                {{ $status }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status_verif" class="form-label">Status Verifikasi</label>
+                    <select name="status_verif" id="status_verif" class="form-control" required>
+                        <option value="">-- Pilih Verifikasi --</option>
+                        @foreach (['Belum Verifikasi','Terverifikasi'] as $verif)
+                            <option value="{{ $verif }}"
+                                {{ old('status_verif', $surat->status_verif) == $verif ? 'selected' : '' }}>
+                                {{ $verif }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="nowa">No WhatsApp</label>
@@ -102,7 +128,8 @@
                            value="{{ old('nowa', $surat->nowa) }}">
                 </div>
 
-                <div class="text-end mt-4">
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a href="{{ route('surat.bukaanrekening.index') }}" class="btn btn-secondary px-4">Kembali</a>
                     <button type="submit" class="btn btn-primary px-4">Update</button>
                 </div>
             </form>
@@ -110,29 +137,36 @@
     </div>
 </div>
 
+{{-- JS Dinamis Yang Berwenang --}}
 <script>
-(function(){
+(function() {
     const tbody   = document.getElementById('berwenang-wrapper');
     const jumlah  = document.getElementById('berwenang_jumlah');
 
-    const oldNama    = @json(old('berwenang_nama', $surat->berwenang_nama ?? []));
+    // data awal dari old() atau dari $surat (array)
+    const oldNama    = @json(old('berwenang_nama',    $surat->berwenang_nama ?? []));
     const oldJabatan = @json(old('berwenang_jabatan', $surat->berwenang_jabatan ?? []));
 
-    function rowHTML(i, nama, jabatan){
+    function esc(v){ return String(v ?? '').replace(/"/g,'&quot;'); }
+
+    function rowHTML(i, nama, jabatan) {
         return `
-            <tr>
-                <td><input type="text" name="berwenang_nama[]" class="form-control"
-                           value="${nama ? String(nama).replace(/"/g,'&quot;'):''}" placeholder="Nama ${i+1}"></td>
-                <td><input type="text" name="berwenang_jabatan[]" class="form-control"
-                           value="${jabatan ? String(jabatan).replace(/"/g,'&quot;'):''}" placeholder="Jabatan ${i+1}"></td>
-            </tr>
-        `;
+        <tr>
+            <td>
+                <input type="text" name="berwenang_nama[]" class="form-control"
+                       value="${esc(nama)}" placeholder="Nama ${i+1}">
+            </td>
+            <td>
+                <input type="text" name="berwenang_jabatan[]" class="form-control"
+                       value="${esc(jabatan)}" placeholder="Jabatan ${i+1}">
+            </td>
+        </tr>`;
     }
 
-    function render(n){
+    function render(n) {
         tbody.innerHTML = '';
-        const total = parseInt(n || 0, 10);
-        for (let i=0; i<total; i++){
+        const total = Math.max(0, parseInt(n || 0, 10));
+        for (let i = 0; i < total; i++) {
             tbody.insertAdjacentHTML('beforeend', rowHTML(i, oldNama[i] || '', oldJabatan[i] || ''));
         }
     }
