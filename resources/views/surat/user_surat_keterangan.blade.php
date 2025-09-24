@@ -134,8 +134,7 @@
                                 @if ($href)
                                     <a class="btn m-1 btn-creative btn-light" href="{{ $href }}">Buat Surat</a>
                                 @else
-                                    <button class="btn m-1 btn-creative btn-light" type="button" disabled>Lunas Dulu
-                                        baru lanjut</button>
+                                    <button class="btn m-1 btn-creative btn-light" type="button" disabled>Maintance</button>
                                 @endif
                             </div>
                         </div>

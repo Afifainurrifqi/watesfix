@@ -142,7 +142,7 @@
                                     <a class="btn m-1 btn-creative btn-light" href="{{ $href }}">Buat Surat</a>
                                 @else
                                     <button class="btn m-1 btn-creative btn-light" type="button" disabled>
-                                        Nunggu update payment :v
+                                        Maintance
                                     </button>
                                 @endif
                             </div>
