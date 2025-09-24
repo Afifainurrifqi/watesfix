@@ -395,28 +395,24 @@ class SuratmasukController extends Controller
             'nama_instansi' => 'required|string|max:255',
             'keterangan'    => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
-            'file'          => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'file'          => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png',
         ]);
 
-        // pastikan folder ada (aman di Windows & Linux)
         if (! is_dir(public_path('suratdesa'))) {
             @mkdir(public_path('suratdesa'), 0755, true);
         }
 
-        // simpan ke public/suratdesa pakai Storage disk 'suratdesa'
         $original = $request->file('file')->getClientOriginalName();
         $safeName = time() . '_' . Str::slug(pathinfo($original, PATHINFO_FILENAME), '_')
             . '.' . $request->file('file')->getClientOriginalExtension();
 
-        // hasilnya: "1727154583_undangan_rapat.pdf"
         $path = $request->file('file')->storeAs('', $safeName, 'suratdesa');
 
-        // simpan hanya nama file / path relatif ke 'suratdesa'
         SuratMasuk::create([
             'nama_instansi' => $request->nama_instansi,
             'keterangan'    => $request->keterangan,
             'tanggal_masuk' => $request->tanggal_masuk,
-            'file'          => $path, // contoh: "1727..._undangan_rapat.pdf"
+            'file'          => $path,
         ]);
 
         return redirect()->route('surat.masuk')->with('msg', 'Surat masuk berhasil ditambahkan.');
@@ -451,38 +447,37 @@ class SuratmasukController extends Controller
     // Update the specified Surat Masuk
     public function update(Request $request, SuratMasuk $suratmasuk)
     {
-        // Validate the request
         $request->validate([
             'nama_instansi' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:255',
+            'keterangan'    => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'file'          => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png',
         ]);
 
-        // Update the fields
-        $suratmasuk->nama_instansi = $request->nama_instansi;
-        $suratmasuk->keterangan = $request->keterangan;
-        $suratmasuk->tanggal_masuk = $request->tanggal_masuk;
+        $suratmasuk->fill($request->only(['nama_instansi', 'keterangan', 'tanggal_masuk']));
 
-
-        // If a new file is uploaded, handle it
         if ($request->hasFile('file')) {
-            // Delete the old file if it exists
-            if ($suratmasuk->file) {
-                Storage::delete('public/' . $suratmasuk->file);
+            if ($suratmasuk->file && Storage::disk('suratdesa')->exists($suratmasuk->file)) {
+                Storage::disk('suratdesa')->delete($suratmasuk->file);
             }
 
-            // Store the new file
-            $path = $request->file('file')->store('surat-masuk', 'public');
+            if (! is_dir(public_path('suratdesa'))) {
+                @mkdir(public_path('suratdesa'), 0755, true);
+            }
+
+            $original = $request->file('file')->getClientOriginalName();
+            $safeName = time() . '_' . Str::slug(pathinfo($original, PATHINFO_FILENAME), '_')
+                . '.' . $request->file('file')->getClientOriginalExtension();
+
+            $path = $request->file('file')->storeAs('', $safeName, 'suratdesa');
             $suratmasuk->file = $path;
         }
 
-        // Save the updated data
         $suratmasuk->save();
-
-        // Redirect back with a success message
-        return redirect('surat/suratmasuk')->with('msg', 'Surat masuk berhasil diperbarui.');
+        return redirect()->route('surat.masuk')->with('msg', 'Surat masuk berhasil diperbarui.');
     }
+
+
 
 
 
