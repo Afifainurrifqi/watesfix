@@ -119,11 +119,19 @@
                     }
                 },
                 "buttons": [{
-                    "extend": 'excel',
-                    "text": '<button class="btn"><i class="fa fa-file-excel-o" style="color: green;"></i>  EXPORT EXCEL</button>',
-                    "titleAttr": 'Excel',
-                    "action": newexportaction
-                }, ],
+                    extend: 'excelHtml5',
+                    text: '<button class="btn"><i class="fa fa-file-excel-o" style="color: green;"></i>  EXPORT EXCEL</button>',
+                    titleAttr: 'Excel',
+                    action: newexportaction,
+                    customize: function(xlsx) {
+                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+                        // Set type sel kolom D (No KK) & E (NIK) menjadi string (t="str")
+                        // Perhatikan: selector ini butuh jQuery (sudah ada di halamanmu)
+                        $('row c[r^="D"]', sheet).attr('t', 'str');
+                        $('row c[r^="E"]', sheet).attr('t', 'str');
+                    }
+                }],
                 columns: [{
                         data: 'action',
                         name: 'action'
