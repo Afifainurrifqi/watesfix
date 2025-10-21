@@ -103,16 +103,16 @@
                 <td class="kop-header">
                     <strong>
                         PEMERINTAH KABUPATEN BLITAR<br>
-                        KECAMATAN Sawentar<br>
-                        KANTOR KEPALA DESA Sawentar
+                        KECAMATAN Wates<br>
+                        KANTOR KEPALA DESA Wates
                     </strong><br>
                     <small>
                         Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email: Sawentarberkelas@gmail.com | Website: Sawentar-blitarkab.desa.id
+                        Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
                     </small>
                 </td>
                 <td width="15%" align="center">
-                    <img src="{{ public_path('assets/images/Sawentar.png') }}" class="kop-logo" alt="Logo Sawentar">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" class="kop-logo" alt="Logo Wates">
                 </td>
             </tr>
         </table>
@@ -212,8 +212,8 @@
 
     <!-- TTD -->
     <div class="ttd-container">
-        <p>Sawentar, {{ \Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-        <p>Kepala Desa Sawentar</p>
+        <p>Wates, {{ \Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+        <p>Kepala Desa Wates</p>
         <br><br><br>
         <p><strong><u>MOH. HAMID ALMAULUDI S.Pd.I</u></strong></p>
     </div>
