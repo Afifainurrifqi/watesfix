@@ -59,9 +59,9 @@
                 <div class="double-items text-light">
                     <div class="info col-md-7">
                         <img src="/assets3/img/logosi2.png" class="wow slideInLeft" style="width: 30%">
-                        <h2 class="wow slideInLeft">SITAKRO Wates </h2>
+                        <h2 class="wow slideInLeft">SITAKRO Kemirigede </h2>
                         <p class="wow fadeInLeft">
-                            Sistem Informasi Data Mikro yang dimiliki oleh Desa Wates Kecamatan Wates Kabupaten
+                            Sistem Informasi Data Mikro yang dimiliki oleh Desa Kemirigede Kecamatan Kemirigede Kabupaten
                             Blitar
                         </p>
                         <a class="wow fadeInDown btn btn-light border btn-md" href="{{ route('login') }}">LOGIN
@@ -176,8 +176,8 @@
                                     <img src="assets2/img/illustrations/5.svg" alt="Thumb">
                                 </div>
                                 <div class="col-md-6 left-info wow fadeInLeft">
-                                    <h4>Desa Wates</h4>
-                                    <h2>Sistem Informasi Data Mikro Desa Wates</h2>
+                                    <h4>Desa Kemirigede</h4>
+                                    <h2>Sistem Informasi Data Mikro Desa Kemirigede</h2>
                                     <p>
                                         Merupakan Aplikasi layanan data mikro dan SDG’s Desa yang berfungsi untuk
                                         penguatan IPM & IDM, Perencanaan Pembangunan Desa Cerdas, serta Tata Niaga
@@ -223,7 +223,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="site-heading text-center">
                         <h4>Fitur</h4>
-                        <h2>SITAKRO<strong> DESA Wates</strong></h2>
+                        <h2>SITAKRO<strong> DESA Kemirigede</strong></h2>
                     </div>
                 </div>
             </div>
@@ -277,7 +277,7 @@
         <div class="row">
             <div class="google-maps">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26373.635146314475!2d112.2089291389598!3d-8.11435107478953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78eb5100ed161f%3A0x391127009ed5ff3d!2sWates%2C%20Kec.%20Kanigoro%2C%20Kabupaten%20Blitar%2C%20Jawa%20Timur!5e1!3m2!1sid!2sid!4v1764128204691!5m2!1sid!2sid"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26373.635146314475!2d112.2089291389598!3d-8.11435107478953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78eb5100ed161f%3A0x391127009ed5ff3d!2sKemirigede%2C%20Kec.%20Kanigoro%2C%20Kabupaten%20Blitar%2C%20Jawa%20Timur!5e1!3m2!1sid!2sid!4v1764128204691!5m2!1sid!2sid"
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -293,7 +293,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; Desa Wates 2023</p>
+                        <p>&copy; Desa Kemirigede 2023</p>
                     </div>
                     <div class="col-md-6 text-right link">
                         <ul>
