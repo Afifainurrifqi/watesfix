@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Surat Pernyataan Memilih Nama Alias Orang Tua</title>
+    <title>Surat Pernyataan Belum Pernah Mengurus Akta Kelahiran</title>
     <style>
         @page { margin: 1.2cm 1.5cm 1cm 1.5cm; }
         body {
@@ -24,17 +24,18 @@
         .kop-text small { font-size: 9.3pt; }
         .kop-garis { border: none; border-top: 2.5px solid #000; margin: 6px 0 10px 0; }
 
-        .judul-surat { margin: 8px 0; text-align: center; }
-        .judul-surat h3 { font-size: 12.3pt; margin: 0; text-decoration: underline; }
-        .nomor-surat { margin-bottom: 11px; font-weight: bold; text-align: center; }
+        .judul-surat { margin: 10px 0 6px 0; text-align: center; }
+        .judul-surat h3 { font-size: 13pt; margin: 0; text-decoration: underline; }
 
-        .tulisan { text-align: justify; margin-bottom: 4px; }
-        table.tulisan { width: 100%; border-collapse: collapse; margin: 3px 0 7px 0; }
-        table.tulisan td { padding: 1.3px 6px; vertical-align: top; }
-        table.tulisan td:first-child { width: 170px; font-weight: bold; }
+        .nomor-surat { margin-bottom: 14px; font-weight: bold; text-align: center; }
+
+        .tulisan { text-align: justify; margin-bottom: 6px; }
+        table.tulisan { width: 100%; border-collapse: collapse; margin: 6px 0 10px 0; }
+        table.tulisan td { padding: 2px 6px; vertical-align: top; }
+        table.tulisan td:first-child { width: 165px; font-weight: bold; }
 
         /* TTD */
-        .ttd-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+        .ttd-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .ttd-spacer { width: 54%; }
         .ttd-cell { width: 46%; text-align: center; vertical-align: top; }
         .ttd-img-wrapper { height: 68px; text-align: center; margin: -2px 0 -3px 0; }
@@ -45,11 +46,13 @@
 </head>
 <body>
 
-    <!-- KOP -->
+    <!-- KOP SURAT -->
     <div class="kop-container">
         <table class="kop-table">
             <tr>
-                <td class="kop-logo"><img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo"></td>
+                <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo">
+                </td>
                 <td class="kop-text">
                     <strong>PEMERINTAH KABUPATEN BLITAR<br>
                     KECAMATAN WATES<br>
@@ -57,7 +60,9 @@
                     <small>Jln. Merdeka No. 74 Telp. 082139324445<br>
                     Email: Watesberkelas@gmail.com</small>
                 </td>
-                <td class="kop-logo"><img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo"></td>
+                <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo">
+                </td>
             </tr>
         </table>
         <hr class="kop-garis">
@@ -65,63 +70,58 @@
 
     <br><br>
 
+    <!-- JUDUL -->
     <div class="judul-surat">
         <h3><u>SURAT PERNYATAAN</u></h3>
-        <strong>MEMILIH NAMA ALIAS ORANG TUA</strong>
     </div>
 
+    <!-- NOMOR SURAT -->
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '411 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ $data->nomor_surat ?? '430 / --- / 409.41.2 / ' . now()->year }}
     </div>
 
-    <p class="tulisan">Yang bertanda tangan di bawah ini:</p>
+    <p class="tulisan">Yang bertanda tangan di bawah ini, Saya:</p>
 
     <table class="tulisan">
-        <tr><td>Nama</td><td>: {{ $data->nama_menyatakan ?? $data->nama ?? '-' }}</td></tr>
-        <tr><td>NIK</td><td>: {{ $data->nik }}</td></tr>
-        <tr><td>Alamat</td><td>: {{ $data->alamat }}</td></tr>
+        <tr><td>Nama</td><td>: {{ $data->ybt_nama }}</td></tr>
+        <tr><td>NIK</td><td>: {{ $data->ybt_nik }}</td></tr>
+        <tr><td>Alamat</td><td>: {{ $data->ybt_alamat }}</td></tr>
+    </table>
+
+    <p class="tulisan">Dengan ini menyatakan dengan sesungguhnya, bahwa:</p>
+
+    <table class="tulisan">
+        <tr><td>Nama</td><td>: {{ $data->subjek_nama }}</td></tr>
+        <tr><td>Tempat Lahir</td><td>: {{ $data->subjek_tempat_lahir }}</td></tr>
+        <tr><td>Tanggal Lahir</td><td>: {{ \Carbon\Carbon::parse($data->subjek_tanggal_lahir)->translatedFormat('d F Y') }}</td></tr>
     </table>
 
     <p class="tulisan">
-        Menyatakan dengan sebenar-benarnya bahwa pada Akta Kelahiran anak saya tercatat nama orang tua sebagai berikut:
+        sampai saat ini <strong>belum pernah mengurus dan atau memiliki</strong> Kutipan Akta Kelahiran.
     </p>
 
-    <table class="tulisan">
-        <tr><td>Ayah</td><td>: {{ $data->nama_ortu_ayah_tercatat ?? '-' }}
-            @if($data->nama_alias_ayah) (alias {{ $data->nama_alias_ayah }}) @endif</td></tr>
-        <tr><td>Ibu</td><td>: {{ $data->nama_ortu_ibu_tercatat ?? '-' }}
-            @if($data->nama_alias_ibu) (alias {{ $data->nama_alias_ibu }}) @endif</td></tr>
-    </table>
-
     <p class="tulisan">
-        Selanjutnya saya mengajukan penghapusan nama alias menjadi:
-    </p>
-
-    <table class="tulisan">
-        <tr><td>Alias Dihapus</td><td>: {{ $data->nama_alias_dihapus_1 ?? '-' }} @if($data->nama_alias_dihapus_2), {{ $data->nama_alias_dihapus_2 }} @endif</td></tr>
-    </table>
-
-    <p class="tulisan">
-        Demikian surat pernyataan ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+        Demikian Surat Pernyataan ini saya buat dengan sebenar-benarnya dan apabila dikemudian hari ternyata pernyataan saya ini tidak benar, maka saya bersedia diproses secara hukum sesuai dengan peraturan perundang-undangan dan dokumen yang diterbitkan akibat dari pernyataan ini menjadi tidak sah.
     </p>
 
     <!-- TTD -->
-    <table class="ttd-table">
+     <table class="ttd-table">
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-                <p>Kepala Desa Wates</p>
+                <p class="ttd-tanggal">Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p class="ttd-jabatan">Kepala Desa Wates</p>
 
                 <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
                 </div>
 
                 <p class="nama-kades"><u>MOH. HAMID ALMAULUDI S.Pd.I</u></p>
+                <p class="jabatan-bawah">Kepala Desa Wates</p>
 
                 <div class="barcode">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                    <br><small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                    <br><small>Scan untuk verifikasi surat resmi</small>
                 </div>
             </td>
         </tr>

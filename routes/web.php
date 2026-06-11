@@ -462,6 +462,8 @@ Route::middleware(['checkrole:admin,operator,dasawisma,akundemo'])->group(
         Route::post('/rt_tkejahatan/jsonadmin', [RtTkejahatanController::class, 'jsonadmin'])->name('rt_tkejahatan.jsonadmin');
         Route::post('/rt_kegiatanwarga/json', [RtkegiatanWargaController::class, 'json'])->name('rt_kegiatanwarga.json');
         Route::post('/rt_kegiatanwarga/jsonadmin', [RtkegiatanWargaController::class, 'jsonadmin'])->name('rt_kegiatanwarga.jsonadmin');
+        Route::get('/datapenduduk/lookup/{nik}', [DatapendudukController::class, 'lookupByNik'])
+            ->name('datapenduduk.lookup');
 
 
         Route::get('/home', function () {

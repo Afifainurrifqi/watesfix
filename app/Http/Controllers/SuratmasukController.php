@@ -367,7 +367,7 @@ class SuratmasukController extends Controller
 
         if ($jenis === 'suratpernyataanbelumakta') {
             $data = surat_pernyataan_belum_akta::findOrFail($id);
-            $pdf  = Pdf::loadView('surat.pdf_pernyataan_belum_akta', compact('data'))->setPaper('A4');
+            $pdf  = Pdf::loadView('surat.pdf_surat_pernyataan_belum_akta', compact('data'))->setPaper('A4');
             $filename = Str::slug($data->ybt_nama ?? 'dokumen', '_');
             return $pdf->download('pdf_pernyataan_belum_akta_' . $filename . '.pdf');
         }
@@ -379,11 +379,11 @@ class SuratmasukController extends Controller
             return $pdf->download('pdf_pernyataan_beda_nama_buku_nikah_' . $filename . '.pdf');
         }
 
-        if ($jenis === 'suratpernyataananakseorangibu') {
+        if ($jenis === 'surat_pernyataan_anak_seorang_nama_ibu') {
             $data = surat_pernyataan_anak_seorang_nama_ibu::findOrFail($id);
-            $pdf  = Pdf::loadView('surat.pdf_pernyataan_anak_seorang_ibu', compact('data'))->setPaper('A4');
+            $pdf  = Pdf::loadView('surat.pdf_pernyataan_anak_seorang_nama_ibu', compact('data'))->setPaper('A4');
             $filename = Str::slug($data->nama ?? 'dokumen', '_');
-            return $pdf->download('pdf_pernyataan_anak_seorang_ibu_' . $filename . '.pdf');
+            return $pdf->download('pdf_pernyataan_anak_seorang_nama_ibu_' . $filename . '.pdf');
         }
 
         if ($jenis === 'suratpernyataanaktabarcodenomorsama') {
@@ -414,6 +414,8 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama ?? 'surat_pengantar_skck', '_');
             return $pdf->download('surat_pengantar_skck_' . $filename . '.pdf');
         }
+
+
 
 
 

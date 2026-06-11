@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Surat Pernyataan Memilih Nama Alias</title>
+    <title>Surat Pernyataan Anak Seorang Nama Ibu</title>
     <style>
         @page {
             margin: 1.2cm 1.5cm 1cm 1.5cm;
@@ -25,7 +25,6 @@
             text-align: center;
         }
 
-        /* KOP */
         .kop-table {
             width: 100%;
             border-collapse: collapse;
@@ -63,30 +62,35 @@
             margin: 6px 0 10px 0;
         }
 
+        .judul-surat {
+            margin: 10px 0 6px;
+            text-align: center;
+        }
+
         .judul-surat h3 {
-            font-size: 12.3pt;
-            margin: 0;
+            font-size: 13pt;
+            text-decoration: underline;
         }
 
         .nomor-surat {
-            margin-bottom: 11px;
+            margin-bottom: 14px;
             font-weight: bold;
             text-align: center;
         }
 
         .tulisan {
             text-align: justify;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         table.tulisan {
             width: 100%;
             border-collapse: collapse;
-            margin: 3px 0 7px 0;
+            margin: 6px 0 10px 0;
         }
 
         table.tulisan td {
-            padding: 1.3px 6px;
+            padding: 2px 6px;
             vertical-align: top;
         }
 
@@ -95,11 +99,10 @@
             font-weight: bold;
         }
 
-        /* TTD */
         .ttd-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 14px;
+            margin-top: 20px;
         }
 
         .ttd-spacer {
@@ -137,23 +140,19 @@
 
 <body>
 
-    <!-- KOP SURAT -->
+    <!-- KOP -->
     <div class="kop-container">
         <table class="kop-table">
             <tr>
-                <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo">
-                </td>
+                <td class="kop-logo"><img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo"></td>
                 <td class="kop-text">
                     <strong>PEMERINTAH KABUPATEN BLITAR<br>
                         KECAMATAN WATES<br>
                         KANTOR KEPALA DESA WATES</strong><br>
                     <small>Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email : watesberkelas@gmail.com Website : wates-blitarkab.desa.id</small>
+                        Email: Watesberkelas@gmail.com</small>
                 </td>
-                <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo">
-                </td>
+                <td class="kop-logo"><img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo"></td>
             </tr>
         </table>
         <hr class="kop-garis">
@@ -161,16 +160,15 @@
 
     <br><br>
 
-    <div class="text-center judul-surat">
+    <div class="judul-surat">
         <h3><u>SURAT PERNYATAAN</u></h3>
-        <strong>MEMILIH NAMA ALIAS</strong>
     </div>
 
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '410 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ $data->nomor_surat ?? '450 / --- / 409.41.2 / ' . now()->year }}
     </div>
 
-    <p class="tulisan">Yang bertanda tangan di bawah ini:</p>
+    <p class="tulisan">Yang bertanda tangan di bawah ini, Saya:</p>
 
     <table class="tulisan">
         <tr>
@@ -188,12 +186,33 @@
     </table>
 
     <p class="tulisan">
-        Dengan ini menyatakan memilih nama alias <strong>{{ $data->alias ?? '-' }}</strong>
-        sebagaimana tercantum dalam data kependudukan.
+        Berdasarkan Peraturan Menteri Dalam Negeri RI No. 9 Tahun 2016, dan berkaitan dengan permohonan penerbitan
+        Kutipan Akta Kelahiran anak kandung saya atas nama:
+    </p>
+
+    <table class="tulisan">
+        <tr>
+            <td>Nama Anak</td>
+            <td>: {{ $data->nama_anak }}</td>
+        </tr>
+        <tr>
+            <td>Tempat Lahir</td>
+            <td>: {{ $data->tempat_lahir }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir</td>
+            <td>: {{ \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+        </tr>
+    </table>
+
+    <p class="tulisan">
+        Dengan ini menyatakan bahwa saya tidak keberatan apabila dalam Kutipan Akta Kelahiran tersebut ditulis
+        <strong>“lahir dari seorang Ibu”</strong> dan tidak menyebutkan nama Ayah, dikarenakan saya belum melaksanakan
+        UU No. 1 Tahun 1974 tentang Perkawinan.
     </p>
 
     <p class="tulisan">
-        Demikian surat pernyataan ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+        Demikian Surat Pernyataan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
     </p>
 
     <!-- TTD -->
@@ -218,6 +237,7 @@
             </td>
         </tr>
     </table>
+
 
 </body>
 

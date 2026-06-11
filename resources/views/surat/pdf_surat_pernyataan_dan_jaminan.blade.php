@@ -4,242 +4,130 @@
     <meta charset="UTF-8">
     <title>Surat Pernyataan dan Jaminan</title>
     <style>
-        @page { margin: 2cm; }
-
+        @page { margin: 1.2cm 1.5cm 1cm 1.5cm; }
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
-            line-height: 1.5;
+            font-size: 11.3pt;
+            line-height: 1.28;
             color: #000;
-            background: #fff;
         }
-
-        h3, p { margin: 0; padding: 0; }
-
+        p { margin: 0; padding: 0; }
         .text-center { text-align: center; }
-        .text-right  { text-align: right; }
-        .text-justify{ text-align: justify; }
 
-        .kop-container { width: 100%; }
-        .kop-logo { width: 130px; }
-        .kop-header { text-align: center; line-height: 1.4; }
-        .kop-garis { border: 2px solid #000; margin-top: 5px; margin-bottom: 20px; }
+        /* KOP */
+        .kop-table { width: 100%; border-collapse: collapse; }
+        .kop-table td { vertical-align: middle; }
+        .kop-logo { width: 15%; text-align: center; }
+        .kop-logo img { width: 80px; height: auto; }
+        .kop-text { text-align: center; }
+        .kop-text strong { font-size: 12.3pt; }
+        .kop-text small { font-size: 9.3pt; }
+        .kop-garis { border: none; border-top: 2.5px solid #000; margin: 6px 0 10px 0; }
 
-        .judul-surat {
-            margin-top: 10px;
-            margin-bottom: 6px;
-            text-align: center;
-            text-decoration: underline;
-            font-weight: bold;
-            font-size: 16pt;
-            text-transform: uppercase;
-        }
+        .judul-surat h3 { font-size: 12.3pt; margin: 8px 0; text-decoration: underline; }
+        .nomor-surat { margin-bottom: 11px; font-weight: bold; text-align: center; }
 
-        .nomor {
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
+        .tulisan { text-align: justify; margin-bottom: 4px; }
+        table.tulisan { width: 100%; border-collapse: collapse; margin: 3px 0 7px 0; }
+        table.tulisan td { padding: 1.3px 6px; vertical-align: top; }
+        table.tulisan td:first-child { width: 170px; font-weight: bold; }
 
-        .isi { text-align: justify; margin-bottom: 16px; }
-
-        table.data-diri {
-            width: 100%;
-            margin: 8px 0 14px 0;
-            border-collapse: collapse;
-        }
-        table.data-diri td {
-            vertical-align: top;
-            padding: 4px 8px;
-        }
-        table.data-diri td.label  { width: 35%; }
-        table.data-diri td.colon  { width: 2%; }
-        table.data-diri td.value  { width: 63%; }
-
-        .row-ttd {
-            width: 100%;
-            margin-top: 32px;
-            table-layout: fixed;
-        }
-        .row-ttd td { vertical-align: top; padding: 0 10px; }
-
-        .blok-ttd { text-align: center; }
-        .materai {
-            border: 1px dashed #333;
-            width: 120px; height: 70px;
-            margin: 10px auto 0 auto;
-            font-size: 10pt;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .nama-ttd { margin-top: 70px; font-weight: bold; text-decoration: underline; }
-        .hint { font-size: 10pt; color: #333; }
+        /* TTD */
+        .ttd-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+        .ttd-spacer { width: 54%; }
+        .ttd-cell { width: 46%; text-align: center; vertical-align: top; }
+        .ttd-img-wrapper { height: 68px; text-align: center; margin: -2px 0 -3px 0; }
+        .ttd-img { width: 235px; height: auto; }
+        .nama-kades { font-weight: bold; font-size: 11pt; }
+        .barcode img { width: 72px; height: auto; }
     </style>
 </head>
 <body>
-@php
-    use Carbon\Carbon;
 
-    $fmt = function ($tgl) {
-        try {
-            return $tgl ? Carbon::parse($tgl)->locale('id')->translatedFormat('d F Y') : null;
-        } catch (\Throwable $e) {
-            return $tgl;
-        }
-    };
-
-    // Nomor surat otomatis dari DB
-    $nomor = data_get($data, 'nomor_surat');
-
-    // Lokasi & tanggal terbit
-    $kota   = data_get($data, 'kota_terbit', 'Wates');
-    $tglNow = Carbon::now('Asia/Jakarta')->translatedFormat('d F Y');
-
-    // Pejabat penandatangan
-    $namaPejabat = data_get($data, 'nama_pejabat', 'MOH. HAMID ALMAULUDI S.Pd.I');
-    $jabatan     = data_get($data, 'jabatan_pejabat', 'Kepala Desa Wates');
-
-    // Pembuat pernyataan (penjamin)
-    $pNama   = data_get($data, 'nama_pembuat', '................................................');
-    $pNik    = data_get($data, 'nik_pembuat', '................................................');
-    $pAlamat = data_get($data, 'alamat_pembuat', '................................................');
-
-    // Pihak yang dijamin
-    $tNama   = data_get($data, 'nama_terjamin', '................................................');
-    $tNik    = data_get($data, 'nik_terjamin', '................................................');
-    $tAlamat = data_get($data, 'alamat_terjamin', '................................................');
-
-    // Detail pernyataan/jaminan
-    $hubungan      = data_get($data, 'hubungan_dengan_terjamin', '................................................');
-    $uraian        = data_get($data, 'uraian_pernyataan');
-    $bentukJaminan = data_get($data, 'bentuk_jaminan');
-    $mulai         = $fmt(data_get($data, 'berlaku_mulai'));
-    $sampai        = $fmt(data_get($data, 'berlaku_sampai'));
-    $berdasarkan   = data_get($data, 'berdasarkan');
-@endphp
-
-    {{-- KOP SURAT --}}
+    <!-- KOP -->
     <div class="kop-container">
-        <table width="100%">
+        <table class="kop-table">
             <tr>
-                <td width="15%" align="center">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" class="kop-logo" alt="Logo Kiri">
-                </td>
-                <td class="kop-header">
+                <td class="kop-logo"><img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo"></td>
+                <td class="kop-text">
                     <strong>PEMERINTAH KABUPATEN BLITAR<br>
-                        KECAMATAN Wates<br>
-                        KANTOR KEPALA DESA Wates</strong><br>
-                    <small>
-                        Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
-                    </small>
+                    KECAMATAN WATES<br>
+                    KANTOR KEPALA DESA WATES</strong><br>
+                    <small>Jln. Merdeka No. 74 Telp. 082139324445<br>
+                    Email: Watesberkelas@gmail.com</small>
                 </td>
-                <td width="15%" align="center">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" class="kop-logo" alt="Logo Kanan">
-                </td>
+                <td class="kop-logo"><img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo"></td>
             </tr>
         </table>
         <hr class="kop-garis">
     </div>
 
-    {{-- JUDUL --}}
-  {{-- JUDUL + NOMOR --}}
-<div class="judul-surat text-center"><u>SURAT PERNYATAAN DAN JAMINAN</u></div>
+    <br><br>
 
-@php
-    // Kalau nomor_surat belum ada, rakit dari nomor_urut/tahun_nomor
-    $nomorCetak = $data->nomor_surat ?? null;
-
-    if (!$nomorCetak) {
-        $urut  = $data->nomor_urut ?? null;
-        $tahun = $data->tahun_nomor ?? now('Asia/Jakarta')->year;
-        $nnn   = $urut ? str_pad($urut, 3, '0', STR_PAD_LEFT) : '---';
-
-        // >>> Pastikan prefiks ini SAMA dengan NomorSuratService::prefixMap['jaminan']
-        // misal 'jaminan' => 420
-        $nomorCetak = "420 / {$nnn} / 409.41.2 / {$tahun}";
-    }
-@endphp
-
-<div class="nomor text-center"><strong>Nomor: {{ $nomorCetak }}</strong></div>
-
-    {{-- PEMBUKA --}}
-    <div class="isi">
-        <p>Yang bertanda tangan di bawah ini:</p>
+    <div class="judul-surat text-center">
+        <h3><u>SURAT PERNYATAAN DAN JAMINAN</u></h3>
     </div>
 
-    {{-- IDENTITAS PENJAMIN --}}
-    <table class="data-diri">
-        <tr><td class="label">Nama</td><td class="colon">:</td><td class="value">{{ $pNama }}</td></tr>
-        <tr><td class="label">NIK</td><td class="colon">:</td><td class="value">{{ $pNik }}</td></tr>
-        <tr><td class="label">Alamat</td><td class="colon">:</td><td class="value">{{ $pAlamat }}</td></tr>
-    </table>
-
-    <div class="isi"><p>Dengan ini menyatakan dan menjamin bahwa:</p></div>
-
-    {{-- IDENTITAS TERJAMIN --}}
-    <table class="data-diri">
-        <tr><td class="label">Nama</td><td class="colon">:</td><td class="value">{{ $tNama }}</td></tr>
-        <tr><td class="label">NIK</td><td class="colon">:</td><td class="value">{{ $tNik }}</td></tr>
-        <tr><td class="label">Alamat</td><td class="colon">:</td><td class="value">{{ $tAlamat }}</td></tr>
-        <tr><td class="label">Hubungan dengan Penjamin</td><td class="colon">:</td><td class="value">{{ $hubungan }}</td></tr>
-    </table>
-
-    {{-- URAIAN PERNYATAAN --}}
-    @if($uraian)
-        <div class="isi"><p><strong>Uraian Pernyataan:</strong><br>{!! nl2br(e($uraian)) !!}</p></div>
-    @endif
-
-    {{-- BENTUK JAMINAN --}}
-    @if($bentukJaminan)
-        <div class="isi"><p><strong>Bentuk Jaminan:</strong> {{ $bentukJaminan }}</p></div>
-    @endif
-
-    {{-- MASA BERLAKU --}}
-    @if($mulai || $sampai)
-        <div class="isi">
-            <p><strong>Masa Berlaku:</strong>
-                @if($mulai && $sampai)
-                    {{ $mulai }} s.d. {{ $sampai }}
-                @elseif($mulai && !$sampai)
-                    {{ $mulai }} s.d. selesai
-                @else
-                    s.d. {{ $sampai }}
-                @endif
-            </p>
-        </div>
-    @endif
-
-    {{-- BERDASARKAN --}}
-    @if($berdasarkan)
-        <div class="isi">
-            <p><em>Berdasarkan:</em> {{ $berdasarkan }}.</p>
-        </div>
-    @endif
-
-    {{-- PENUTUP --}}
-    <div class="isi">
-        <p>Demikian surat pernyataan dan jaminan ini saya buat dengan sebenar-benarnya. Apabila di kemudian hari ternyata
-           terdapat ketidakbenaran, saya bersedia mempertanggungjawabkan sesuai ketentuan peraturan perundang-undangan
-           yang berlaku.</p>
+    <div class="nomor-surat">
+        Nomor: {{ $data->nomor_surat ?? '420 / --- / 409.41.2 / ' . now()->year }}
     </div>
 
-    {{-- TANDA TANGAN --}}
-    <table class="row-ttd">
+    <p class="tulisan">Yang bertanda tangan di bawah ini:</p>
+
+    <table class="tulisan">
+        <tr><td>Nama</td><td>: {{ $data->nama_pembuat }}</td></tr>
+        <tr><td>NIK</td><td>: {{ $data->nik_pembuat }}</td></tr>
+        <tr><td>Alamat</td><td>: {{ $data->alamat_pembuat }}</td></tr>
+    </table>
+
+    <p class="tulisan">Dengan ini menyatakan dan menjamin atas nama:</p>
+
+    <table class="tulisan">
+        <tr><td>Nama</td><td>: {{ $data->nama_terjamin }}</td></tr>
+        <tr><td>NIK</td><td>: {{ $data->nik_terjamin }}</td></tr>
+        <tr><td>Alamat</td><td>: {{ $data->alamat_terjamin }}</td></tr>
+        <tr><td>Hubungan</td><td>: {{ $data->hubungan_dengan_terjamin }}</td></tr>
+    </table>
+
+    <p class="tulisan"><strong>Uraian:</strong> {!! nl2br(e($data->uraian_pernyataan)) !!}</p>
+
+    @if($data->bentuk_jaminan)
+        <p class="tulisan"><strong>Bentuk Jaminan:</strong> {{ $data->bentuk_jaminan }}</p>
+    @endif
+
+    @if($data->berlaku_mulai)
+        <p class="tulisan">
+            <strong>Masa Berlaku:</strong>
+            {{ \Carbon\Carbon::parse($data->berlaku_mulai)->translatedFormat('d F Y') }}
+            @if($data->berlaku_sampai) s.d. {{ \Carbon\Carbon::parse($data->berlaku_sampai)->translatedFormat('d F Y') }} @endif
+        </p>
+    @endif
+
+    <p class="tulisan">
+        Demikian surat pernyataan dan jaminan ini dibuat dengan sebenar-benarnya.
+    </p>
+
+    <!-- TTD -->
+    <table class="ttd-table">
         <tr>
-            <td class="blok-ttd" style="width:50%;">
-                <div>{{ $kota }}, {{ $tglNow }}</div>
-                <div><strong>Yang Membuat Pernyataan / Penjamin</strong></div>
-                <div class="materai">Materai Rp10.000</div>
-                <div class="nama-ttd">{{ $pNama }}</div>
-                <div class="hint">NIK: {{ $pNik }}</div>
-            </td>
-            <td class="blok-ttd" style="width:50%;">
-                <div>&nbsp;</div>
-                <div><strong>{{ $jabatan }}</strong></div>
-                <br><br><br>
-                <div class="nama-ttd">{{ $namaPejabat }}</div>
+            <td class="ttd-spacer"></td>
+            <td class="ttd-cell">
+                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Kepala Desa Wates</p>
+
+                <div class="ttd-img-wrapper">
+                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
+                </div>
+
+                <p class="nama-kades"><u>MOH. HAMID ALMAULUDI S.Pd.I</u></p>
+
+                <div class="barcode">
+                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
+                    <br><small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                </div>
             </td>
         </tr>
     </table>
+
 </body>
 </html>

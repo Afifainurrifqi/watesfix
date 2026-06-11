@@ -190,6 +190,38 @@ class DatapendudukController extends Controller
         ));
     }
 
+    public function lookupByNik($nik)
+    {
+        $penduduk = Datapenduduk::where('nik', $nik)
+            ->with(['pekerjaan', 'detailkk.kk'])   // ← Tambahkan ini
+            ->first();
+
+        if (!$penduduk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'NIK tidak ditemukan'
+            ], 404);
+        }
+
+        $nokk = optional(optional($penduduk->detailkk)->kk)->nokk ?? '';
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'nama'          => $penduduk->nama ?? '',
+                'tempat_lahir'  => $penduduk->tempat_lahir ?? '',
+                'tanggal_lahir' => $penduduk->tanggal_lahir ?? '',
+                'jenis_kelamin' => $penduduk->jenis_kelamin == '1' ? 'Laki-laki' : 'Perempuan',
+                'pekerjaan'     => optional($penduduk->pekerjaan)->nama ?? '',
+                'alamat'        => $penduduk->alamat ?? '',
+                'rt'            => $penduduk->RT ?? '',
+                'rw'            => $penduduk->RW ?? '',
+                'nokk'          => $nokk,                    // ← Tambahan No KK
+            ]
+        ]);
+    }
+
+
     public function addadmin()
     {
         $agama      = Agama::all();

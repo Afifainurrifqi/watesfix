@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Surat Pernyataan Tidak Bisa Melampirkan KTP</title>
+
     <style>
         @page {
-            margin: 2cm;
+            margin: 1.2cm 1.5cm 1cm 1.5cm;
         }
 
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
-            line-height: 1.5;
+            font-size: 11.3pt;
+            line-height: 1.28;
             color: #000;
+            margin: 0;
+            padding: 0;
         }
 
-        h3,
         p {
             margin: 0;
             padding: 0;
@@ -26,67 +27,169 @@
             text-align: center;
         }
 
-        .judul-surat {
-            margin-top: 20px;
-            margin-bottom: 10px;
+        .kop-container {
+            width: 100%;
         }
 
-        .nomor {
-            margin-bottom: 30px;
+        .kop-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .kop-table td {
+            vertical-align: middle;
+        }
+
+        .kop-logo {
+            width: 15%;
             text-align: center;
+        }
+
+        .kop-logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        .kop-text {
+            text-align: center;
+        }
+
+        .kop-text strong {
+            font-size: 12.3pt;
+            line-height: 1.15;
+        }
+
+        .kop-text small {
+            font-size: 9.3pt;
+            line-height: 1.1;
+        }
+
+        .kop-garis {
+            border: none;
+            border-top: 2.5px solid #000;
+            margin: 6px 0 10px 0;
+        }
+
+        .judul-surat {
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        .judul-surat h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 12.3pt;
+            line-height: 1.1;
+        }
+
+        .nomor-surat {
+            margin-bottom: 11px;
             font-weight: bold;
+            text-align: center;
+            line-height: 1.15;
         }
 
         .tulisan {
             text-align: justify;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
         }
 
         table.tulisan {
             width: 100%;
-            margin: 0 0 15px 0;
             border-collapse: collapse;
+            margin: 3px 0 7px 0;
         }
 
         table.tulisan td {
+            padding: 1.3px 6px;
             vertical-align: top;
-            padding: 2px 8px;
+            line-height: 1.2;
         }
 
         table.tulisan td:first-child {
-            width: 180px;
+            width: 170px;
             font-weight: bold;
         }
 
-        .ttd-container {
+        .ttd-table {
             width: 100%;
-            margin-top: 40px;
-            text-align: right;
+            border-collapse: collapse;
+            margin-top: 14px;
+            page-break-inside: avoid;
+            page-break-before: avoid;
         }
 
-        .ttd-container p {
-            margin: 0;
+        .ttd-spacer {
+            width: 54%;
         }
 
-        .kop-container {
-            width: 100%;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
-        }
-
-        .kop-logo {
-            width: 130px;
-        }
-
-        .kop-header {
+        .ttd-cell {
+            width: 46%;
             text-align: center;
-            line-height: 1.4;
+            vertical-align: top;
+            page-break-inside: avoid;
         }
 
-        .kop-garis {
-            border: 2px solid black;
-            margin-top: 5px;
-            margin-bottom: 20px;
+        .ttd-cell p {
+            margin: 0;
+            padding: 0;
+            line-height: 1.12;
+        }
+
+        .ttd-tanggal {
+            margin-bottom: 2px;
+        }
+
+        .ttd-jabatan {
+            margin-bottom: 0;
+        }
+
+        .ttd-img-wrapper {
+            width: 100%;
+            text-align: center;
+            height: 68px;
+            overflow: visible;
+            margin-top: -2px;
+            margin-bottom: -3px;
+        }
+
+        .ttd-img {
+            width: 235px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nama-kades {
+            font-weight: bold;
+            font-size: 11pt;
+            line-height: 1.1;
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .jabatan-bawah {
+            font-size: 10.3pt;
+            line-height: 1.05;
+            margin-top: 0;
+        }
+
+        .barcode {
+            margin-top: 6px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .barcode img {
+            width: 72px;
+            height: auto;
+        }
+
+        .barcode small {
+            font-size: 7.5pt;
+            line-height: 1;
         }
     </style>
 </head>
@@ -95,61 +198,49 @@
 
     <!-- KOP SURAT -->
     <div class="kop-container">
-        <table width="100%">
+        <table class="kop-table">
             <tr>
-                <td width="15%" align="center">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" class="kop-logo" alt="Logo Blitar">
+                <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten">
                 </td>
-                <td class="kop-header">
+
+                <td class="kop-text">
                     <strong>
                         PEMERINTAH KABUPATEN BLITAR<br>
-                        KECAMATAN Wates<br>
-                        KANTOR KEPALA DESA Wates
-                    </strong><br>
+                        KECAMATAN WATES<br>
+                        KANTOR KEPALA DESA WATES
+                    </strong>
+                    <br>
                     <small>
                         Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
+                        Email : watesberkelas@gmail.com Website : wates-blitarkab.desa.id
                     </small>
                 </td>
-                <td width="15%" align="center">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" class="kop-logo" alt="Logo Wates">
+
+                <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa">
                 </td>
             </tr>
         </table>
+
         <hr class="kop-garis">
     </div>
-
+<br><br>
     <!-- JUDUL SURAT -->
-    <div class="judul-surat text-center">
+    <div class="text-center judul-surat">
         <h3><u>SURAT PERNYATAAN</u></h3>
     </div>
 
-    <!-- NOMOR SURAT -->
-    <!-- NOMOR SURAT -->
-    <div class="nomor">
-        @php
-            // Jika nomor_surat sudah tersimpan (paling aman), gunakan itu.
-            $nomorTersimpan = $data->nomor_surat ?? null;
-
-            // Fallback: rakit dari nomor_urut & tahun_nomor (khusus surat ini prefix 300)
-            if (!$nomorTersimpan) {
-                $urut = $data->nomor_urut ?? null;
-                $tahun = $data->tahun_nomor ?? \Carbon\Carbon::now('Asia/Jakarta')->year;
-
-                // padding 3 digit untuk urut (001, 002, ...)
-                $nnn = $urut !== null ? str_pad((string) $urut, 3, '0', STR_PAD_LEFT) : '---';
-
-                // format khusus surat pernyataan KTP (prefix 300)
-                $nomorTersimpan = "300 / {$nnn} / 409.41.2 / {$tahun}";
-            }
-        @endphp
-
-        Nomor: {{ $nomorTersimpan }}
+    <div class="nomor-surat">
+        Nomor: {{ $data->nomor_surat ?? '300 / --- / 409.41.2 / ' . now()->year }}
     </div>
-
-
+<br><br>
     <!-- ISI SURAT -->
-    <div class="tulisan">Yang bertanda tangan di bawah ini, saya:</div>
+    <p class="tulisan">
+        Yang bertanda tangan di bawah ini, saya:
+    </p>
+
+    <br>
 
     <table class="tulisan">
         <tr>
@@ -162,8 +253,7 @@
         </tr>
         <tr>
             <td>Tempat, Tanggal Lahir</td>
-            <td>: {{ $data->tempat_lahir_pelapor }},
-                {{ \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y') }}</td>
+            <td>: {{ $data->tempat_lahir_pelapor }}, {{ \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y') }}</td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
@@ -180,19 +270,22 @@
     </table>
 
     <p class="tulisan">
-        Menyatakan dengan sebenarnya bahwa tidak bisa melampirkan KTP termohon yang akan digunakan untuk pengurusan Akta
-        Kematian dikarenakan <strong>{{ $data->alasan }}</strong> atas nama:
+        Menyatakan dengan sebenarnya bahwa tidak bisa melampirkan KTP termohon yang akan digunakan untuk
+        pengurusan Akta Kematian dikarenakan <strong>{{ $data->alasan }}</strong> atas nama:
     </p>
-
+<br>
     <table class="tulisan">
         <tr>
             <td>NIK</td>
             <td>: {{ $data->nik_jenazah }}</td>
         </tr>
         <tr>
-            <td>Nama / Tgl Lahir</td>
-            <td>: {{ $data->nama_jenazah }} /
-                {{ \Carbon\Carbon::parse($data->tanggal_lahir_jenazah)->translatedFormat('d F Y') }}</td>
+            <td>Nama</td>
+            <td>: {{ $data->nama_jenazah }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir</td>
+            <td>: {{ \Carbon\Carbon::parse($data->tanggal_lahir_jenazah)->translatedFormat('d F Y') }}</td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
@@ -205,19 +298,44 @@
     </table>
 
     <p class="tulisan">
-        Demikian surat pernyataan ini saya buat dengan sebenar-benarnya dan apabila dikemudian hari ternyata pernyataan
-        saya tidak benar, maka saya bersedia diproses secara hukum sesuai peraturan perundang-undangan yang berlaku, dan
-        dokumen yang diterbitkan dari pernyataan ini menjadi tidak sah.
+        Demikian surat pernyataan ini saya buat dengan sebenar-benarnya. Apabila dikemudian hari ternyata
+        pernyataan saya tidak benar, saya bersedia diproses secara hukum sesuai peraturan yang berlaku.
     </p>
+<br><br>
+    <!-- TANDA TANGAN DI KANAN -->
+    <table class="ttd-table">
+        <tr>
+            <td class="ttd-spacer"></td>
 
-    <!-- TTD -->
-    <div class="ttd-container">
-        <p>Wates, {{ \Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-        <p>Kepala Desa Wates</p>
-        <br><br><br>
-        <p><strong><u>MOH. HAMID ALMAULUDI S.Pd.I</u></strong></p>
-    </div>
+            <td class="ttd-cell">
+                <p class="ttd-tanggal">
+                    Wates, {{ \Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('d F Y') }}
+                </p>
+
+                <p class="ttd-jabatan">
+                    Kepala Desa Wates
+                </p>
+
+                <div class="ttd-img-wrapper">
+                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan Kades">
+                </div>
+
+                <p class="nama-kades">
+                    <u>MOH. HAMID ALMAULUDI S.Pd.I</u>
+                </p>
+
+                <p class="jabatan-bawah">
+                    Kepala Desa Wates
+                </p>
+
+                <div class="barcode">
+                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode Verifikasi">
+                    <br>
+                    <small> Dokumen ini resmi di TTD dikeluarkan oleh pemerintah desa wates</small>
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
-
 </html>

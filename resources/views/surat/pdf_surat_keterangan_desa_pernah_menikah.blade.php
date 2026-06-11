@@ -77,7 +77,7 @@
                         KANTOR KEPALA DESA Wates</strong><br>
                     <small>
                         Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
+                        Email : watesberkelas@gmail.com Website : wates-blitarkab.desa.id| Website: Wates-blitarkab.desa.id
                     </small>
                 </td>
                 <td width="15%" align="center">
