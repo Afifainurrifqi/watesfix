@@ -202,8 +202,11 @@
     </p>
 
     <p class="tulisan">
-        Demikian surat pernyataan ini saya buat dengan sebenar-benarnya dan saya bertanggung jawab
-        sepenuhnya atas segala bentuk pembetulan data yang saya lakukan.
+        Demikian surat pernyataan ini saya buat dengan sebenar-benarnya dan saya
+        bertanggung jawab sepenuhnya atas segala bentuk pembetulan data yang saya lakukan
+        apabila dikemudian hari ternyata pernyataan saya tidak benar, maka saya bersedia
+        diproses secara hukum dengan peraturan perundang-undangan dan dokumen yang
+        diterbitkan akibat dari pernyataan ini menjadi tidak sah.
     </p>
 
     <!-- TTD -->
@@ -211,19 +214,18 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p class="ttd-tanggal">Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-                <p class="ttd-jabatan">Kepala Desa Wates</p>
+                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Saya yang menyatakan,</p>
 
                 <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
                 </div>
 
-                <p class="nama-kades"><u>MOH. HAMID ALMAULUDI S.Pd.I</u></p>
-                <p class="jabatan-bawah">Kepala Desa Wates</p>
+                <p class="nama-kades"><u>{{ $data->nama }}</u></p>
 
                 <div class="barcode">
-                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                    <br><small>Scan untuk verifikasi surat resmi</small>
+                    <img src="{{ public_path('assets/images/barcode_surat.png') }}" alt="Barcode">
+                    <br><small>Scan untuk verifikasi surat resmi Desa Wates</small>
                 </div>
             </td>
         </tr>

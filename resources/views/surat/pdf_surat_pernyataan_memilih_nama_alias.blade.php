@@ -1,140 +1,84 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <title>Surat Pernyataan Memilih Nama Alias</title>
     <style>
         @page {
-            margin: 1.2cm 1.5cm 1cm 1.5cm;
+            margin: 1.2cm 1.8cm 1.2cm 1.8cm;
         }
-
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 11.3pt;
-            line-height: 1.28;
+            font-size: 11.5pt;
+            line-height: 1.35;
             color: #000;
         }
+        .kop-container { width: 100%; }
+        .kop-table { width: 100%; border-collapse: collapse; }
+        .kop-logo { width: 14%; text-align: center; }
+        .kop-logo img { width: 72px; height: auto; }
+        .kop-text { text-align: center; }
+        .kop-text strong { font-size: 12pt; }
+        .kop-text small { font-size: 9pt; }
+        .kop-garis { border: none; border-top: 2px solid #000; margin: 5px 0 10px 0; }
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
-        .text-center {
+        .judul-surat {
             text-align: center;
-        }
-
-        /* KOP */
-        .kop-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .kop-table td {
-            vertical-align: middle;
-        }
-
-        .kop-logo {
-            width: 15%;
-            text-align: center;
-        }
-
-        .kop-logo img {
-            width: 80px;
-            height: auto;
-        }
-
-        .kop-text {
-            text-align: center;
-        }
-
-        .kop-text strong {
-            font-size: 12.3pt;
-        }
-
-        .kop-text small {
-            font-size: 9.3pt;
-        }
-
-        .kop-garis {
-            border: none;
-            border-top: 2.5px solid #000;
-            margin: 6px 0 10px 0;
-        }
-
-        .judul-surat h3 {
-            font-size: 12.3pt;
-            margin: 0;
-        }
-
-        .nomor-surat {
-            margin-bottom: 11px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .tulisan {
-            text-align: justify;
             margin-bottom: 4px;
         }
-
-        table.tulisan {
+        .judul-surat h3 {
+            font-size: 13.5pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 0;
+        }
+        .nomor-surat {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+        .tulisan {
+            text-align: justify;
+            margin-bottom: 6px;
+        }
+        table.data {
             width: 100%;
             border-collapse: collapse;
-            margin: 3px 0 7px 0;
+            margin: 6px 0 10px 0;
         }
-
-        table.tulisan td {
-            padding: 1.3px 6px;
+        table.data td {
+            padding: 3px 6px;
             vertical-align: top;
         }
-
-        table.tulisan td:first-child {
-            width: 170px;
+        table.data td:first-child {
+            width: 155px;
             font-weight: bold;
         }
-
-        /* TTD */
-        .ttd-table {
+        .ttd-wrapper {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 14px;
+            margin-top: 25px;
         }
-
-        .ttd-spacer {
-            width: 54%;
-        }
-
-        .ttd-cell {
-            width: 46%;
+        .ttd-right {
+            width: 48%;
+            float: right;
             text-align: center;
-            vertical-align: top;
         }
-
-        .ttd-img-wrapper {
-            height: 68px;
-            text-align: center;
-            margin: -2px 0 -3px 0;
-        }
-
-        .ttd-img {
-            width: 235px;
-            height: auto;
-        }
-
-        .nama-kades {
+        .materai {
+            border: 1px solid #000;
+            padding: 7px 18px;
+            display: inline-block;
+            margin: 8px 0;
             font-weight: bold;
-            font-size: 11pt;
         }
-
-        .barcode img {
-            width: 72px;
-            height: auto;
+        .signature-line {
+            margin-top: 35px;
+            border-bottom: 1px solid #000;
+            width: 210px;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
-
 <body>
 
     <!-- KOP SURAT -->
@@ -142,83 +86,85 @@
         <table class="kop-table">
             <tr>
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Blitar">
                 </td>
                 <td class="kop-text">
-                    <strong>PEMERINTAH KABUPATEN BLITAR<br>
-                        KECAMATAN WATES<br>
-                        KANTOR KEPALA DESA WATES</strong><br>
+                    <strong>PEMERINTAH KABUPATEN BLITAR</strong><br>
+                    <strong>KECAMATAN WATES</strong><br>
+                    <strong>KANTOR KEPALA DESA WATES</strong><br>
                     <small>Jln. Merdeka No. 74 Telp. 082139324445<br>
-                        Email : watesberkelas@gmail.com Website : wates-blitarkab.desa.id</small>
+                    Email: watesberkelas@gmail.com | Website: wates-blitarkab.desa.id</small>
                 </td>
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td>
             </tr>
         </table>
         <hr class="kop-garis">
     </div>
 
-    <br><br>
-
-    <div class="text-center judul-surat">
-        <h3><u>SURAT PERNYATAAN</u></h3>
-        <strong>MEMILIH NAMA ALIAS</strong>
+    <!-- JUDUL -->
+    <div class="judul-surat">
+        <h3>SURAT PERNYATAAN</h3>
     </div>
 
+    <!-- NOMOR SURAT -->
     <div class="nomor-surat">
         Nomor: {{ $data->nomor_surat ?? '410 / --- / 409.41.2 / ' . now()->year }}
     </div>
 
-    <p class="tulisan">Yang bertanda tangan di bawah ini:</p>
+    <!-- ISI -->
+    <p class="tulisan"><strong>Yang bertanda tangan di bawah ini, Saya:</strong></p>
 
-    <table class="tulisan">
-        <tr>
-            <td>Nama</td>
-            <td>: {{ $data->nama }}</td>
-        </tr>
-        <tr>
-            <td>NIK</td>
-            <td>: {{ $data->nik }}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>: {{ $data->alamat }}</td>
-        </tr>
+    <table class="data">
+        <tr><td>Nama</td><td>: {{ $data->nama ?? $data->nama_pemilih ?? '...........................................' }}</td></tr>
+        <tr><td>NIK</td><td>: {{ $data->nik ?? '...........................................' }}</td></tr>
+        <tr><td>Alamat</td><td>: {{ $data->alamat ?? '...........................................' }}</td></tr>
     </table>
 
     <p class="tulisan">
-        Dengan ini menyatakan memilih nama alias <strong>{{ $data->alias ?? '-' }}</strong>
-        sebagaimana tercantum dalam data kependudukan.
+        Menyatakan dengan sebenarnya bahwa pada Akta Kelahiran:
+    </p>
+
+    <table class="data">
+        <tr><td>Nama</td><td>: {{ $data->nama_akta ?? $data->nama_pemilih ?? '...........................................' }}</td></tr>
+        <tr><td>No. Akta Kelahiran</td><td>: {{ $data->no_akta_kelahiran ?? '...........................................' }}</td></tr>
+    </table>
+
+    <p class="tulisan">
+        Nama orang tua yang tercatat adalah:
+    </p>
+    <p class="tulisan" style="margin-left: 15px;">
+        {{ $data->nama_orang_tua ?? '...........................................' }} alias {{ $data->alias ?? '...........................................' }}
     </p>
 
     <p class="tulisan">
-        Demikian surat pernyataan ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+        Selanjutnya saya mengajukan pembetulan nama orang tua pada Akta Kelahiran dengan menghapus bagian nama alias menjadi:
+    </p>
+    <p class="tulisan" style="margin-left: 15px;">
+        {{ $data->data_alias_dihapus ?? '...........................................' }}
     </p>
 
-    <!-- TTD -->
-    <table class="ttd-table">
-        <tr>
-            <td class="ttd-spacer"></td>
-            <td class="ttd-cell">
-                <p class="ttd-tanggal">Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-                <p class="ttd-jabatan">Kepala Desa Wates</p>
+    <p class="tulisan">
+        Berdasarkan: {{ $data->berdasarkan ?? '...........................................' }}
+    </p>
 
-                <div class="ttd-img-wrapper">
-                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
-                </div>
+    <p class="tulisan">
+        Demikian surat pernyataan ini saya buat dengan sebenar-sebenarnya dan apabila dikemudian hari ternyata pernyataan saya ini tidak benar, maka saya bersedia diproses secara hukum sesuai dengan peraturan perundang-undangan dan dokumen yang diterbitkan akibat dari pernyataan ini menjadi tidak sah.
+    </p>
 
-                <p class="nama-kades"><u>MOH. HAMID ALMAULUDI S.Pd.I</u></p>
-                <p class="jabatan-bawah">Kepala Desa Wates</p>
+    <!-- TANDA TANGAN -->
+    <div class="ttd-wrapper">
+        <div class="ttd-right">
+            <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+            <p><strong>Saya yang menyatakan,</strong></p>
 
-                <div class="barcode">
-                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                    <br><small>Scan untuk verifikasi surat resmi</small>
-                </div>
-            </td>
-        </tr>
-    </table>
+            <div class="materai">Materai<br>10.000</div>
+
+            <div class="signature-line"></div>
+            <p><strong>( {{ $data->nama ?? $data->nama_pemilih ?? '...........................................' }} )</strong></p>
+        </div>
+    </div>
 
 </body>
-
 </html>

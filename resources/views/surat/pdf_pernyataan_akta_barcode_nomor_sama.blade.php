@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Surat Pernyataan Anak Seorang Nama Ibu</title>
+    <title>Surat Pernyataan Akta Barcode Nomor Sama</title>
     <style>
         @page {
             margin: 1.2cm 1.5cm 1cm 1.5cm;
@@ -165,7 +165,7 @@
     </div>
 
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '450 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ $data->nomor_surat ?? '460 / --- / 409.41.2 / ' . now()->year }}
     </div>
 
     <p class="tulisan">Yang bertanda tangan di bawah ini, Saya:</p>
@@ -185,38 +185,40 @@
         </tr>
     </table>
 
-    <p class="tulisan">
-        Berdasarkan Peraturan Menteri Dalam Negeri RI No. 9 Tahun 2016, dan berkaitan dengan permohonan penerbitan
-        Kutipan Akta Kelahiran anak kandung saya atas nama:
-    </p>
+    <p class="tulisan">Menyatakan dengan sebenarnya bahwa Akta Kelahiran:</p>
 
     <table class="tulisan">
         <tr>
-            <td>Nama Anak</td>
-            <td>: {{ $data->nama_anak }}</td>
+            <td>Nama</td>
+            <td>: {{ $data->nama_dalam_akta }}</td>
         </tr>
         <tr>
-            <td>Tempat Lahir</td>
-            <td>: {{ $data->tempat_lahir }}</td>
-        </tr>
-        <tr>
-            <td>Tanggal Lahir</td>
-            <td>: {{ \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+            <td>No. Akta Kelahiran</td>
+            <td>: {{ $data->no_akta }}</td>
         </tr>
     </table>
 
     <p class="tulisan">
-        Dengan ini menyatakan bahwa saya tidak keberatan apabila dalam Kutipan Akta Kelahiran tersebut ditulis
-        <strong>“lahir dari seorang Ibu”</strong> dan tidak menyebutkan nama Ayah, dikarenakan saya belum melaksanakan
-        UU No. 1 Tahun 1974 tentang Perkawinan.
+        ternyata tidak dapat ditemukan / tidak tercatat di Dinas Kependudukan dan Pencatatan Sipil Kabupaten Blitar.
     </p>
 
     <p class="tulisan">
-        Demikian Surat Pernyataan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
+        Selanjutnya saya mengurus Akta Kelahiran dengan nomor <strong>{{ $data->nomor }}</strong> sesuai dengan asas
+        domisili dan ketentuan perundang-undangan yang berlaku.
+    </p>
+
+    <p class="tulisan">
+        Demikian surat pernyataan ini saya buat dengan sebenar-sebenarnya dan
+        apabila dikemudian hari ternyata pernyataan saya ini tidak benar, maka saya
+
+        bersedia diproses secara hukum sesuai dengan peraturan perundang-
+        undangan dan dokumen yang diterbitkan akibat dari pernyataan ini menjadi
+
+        tidak sah.
     </p>
 
     <!-- TTD -->
-     <table class="ttd-table">
+    <table class="ttd-table">
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
@@ -228,16 +230,15 @@
                 </div>
 
                 <p class="nama-kades"><u>{{ $data->nama }}</u></p>
-
+                <p>NIK: {{ $data->nik }}</p>
 
                 <div class="barcode">
-                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
+                    <img src="{{ public_path('assets/images/barcode_surat.png') }}" alt="Barcode">
                     <br><small>Scan untuk verifikasi surat resmi Desa Wates</small>
                 </div>
             </td>
         </tr>
     </table>
-
 
 </body>
 

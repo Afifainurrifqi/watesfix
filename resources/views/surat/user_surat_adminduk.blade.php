@@ -39,8 +39,7 @@
     <!-- Header Area -->
     <div class="header-area" id="headerArea">
         <div class="container">
-            <div
-                class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
+            <div class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
                 <!-- Back Button -->
                 <div class="back-button">
                     <a href="{{ route('surat.pengajuan_surat') }}">
@@ -61,7 +60,6 @@
         <div class="container">
 
             @php
-                // Daftar judul dari kamu
                 $titles = [
                     'SURAT PERNYATAAN TIDAK BISA MELAMPIRKAN KTP KEMATIAN',
                     'SURAT PERNYATAAN NUMPANG KK',
@@ -74,7 +72,7 @@
                     'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI',
                     'SPTJM KEMATIAN',
                     'PERNYATAAN PERUBAHAN DATA PENDIDIKAN',
-                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',
+                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',   // ← BARU
                     'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA',
                     'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI',
                     'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK',
@@ -94,7 +92,6 @@
                     'F-1.01 FORM  BIODATA KELUARGA',
                 ];
 
-                // Peta judul -> route yang sudah tersedia di app kamu
                 $routeMap = [
                     'SURAT PERNYATAAN TIDAK BISA MELAMPIRKAN KTP KEMATIAN' => 'surat.userkematianktp',
                     'SURAT PERNYATAAN NUMPANG KK' => 'surat.usernumpangkk',
@@ -106,10 +103,10 @@
                     'SURAT PERNYATAAN ANAK SEORANG NAMA IBU (BARU)' => 'surat.useranakseorangibu',
                     'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI' => 'surat.useraktabarcode',
                     'SPTJM KEMATIAN' => 'surat.usersptjm',
-                    // tambahkan mapping lain jika route-nya sudah ada...
+                    'PERNYATAAN PERUBAHAN DATA PENDIDIKAN' => 'surat.userperubahdatapendidikan',
+                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI' => 'surat.userpembetulandata', // ← BARU
                 ];
 
-                // Warna kartu akan dirotasi
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
             @endphp
 
@@ -118,9 +115,8 @@
                     $color = $colors[$i % count($colors)];
                     $subtitle = str_starts_with($title, 'F-')
                         ? 'Formulir'
-                        : (str_contains(strtolower($title), 'sptjm')
-                            ? 'SPTJM'
-                            : 'Surat Pernyataan');
+                        : (str_contains(strtolower($title), 'sptjm') ? 'SPTJM' : 'Surat Pernyataan');
+
                     $routeName = $routeMap[$title] ?? null;
                     $href = $routeName && Route::has($routeName) ? route($routeName) : null;
                 @endphp
@@ -132,8 +128,7 @@
                                 <h5 class="{{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
                                     {{ ucwords(strtolower($title)) }}
                                 </h5>
-                                <p
-                                    class="mb-0 {{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
+                                <p class="mb-0 {{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
                                     {{ $subtitle }}
                                 </p>
                             </div>
@@ -142,7 +137,7 @@
                                     <a class="btn m-1 btn-creative btn-light" href="{{ $href }}">Buat Surat</a>
                                 @else
                                     <button class="btn m-1 btn-creative btn-light" type="button" disabled>
-                                        Maintance
+                                        Maintenance
                                     </button>
                                 @endif
                             </div>
@@ -186,5 +181,4 @@
     <script src="{{ asset('assets4/dist/js/active.js') }}"></script>
     <script src="{{ asset('assets4/dist/js/pwa.js') }}"></script>
 </body>
-
 </html>

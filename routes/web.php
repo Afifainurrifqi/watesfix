@@ -59,6 +59,8 @@ use App\Http\Controllers\SuratPernyataanDanJaminanController;
 use App\Http\Controllers\SuratPernyataanKesanggupanController;
 use App\Http\Controllers\SuratPernyataanMemilihNamaAliasController;
 use App\Http\Controllers\SuratPernyataanNumpangKkController;
+use App\Http\Controllers\SuratPernyataanPembetulanDataTidakMerubahLagiController;
+use App\Http\Controllers\SuratPernyataanPerubahanDataPendidikanController;
 use App\Http\Controllers\SuratPernyataanTidakBisaMelampirkanKtpKematianController;
 use App\Http\Controllers\SuratSptjmKematianController;
 use App\Http\Controllers\UserController;
@@ -72,6 +74,7 @@ use App\Models\rtlembaga_keagamaan;
 use App\Models\rtlokasi;
 use App\Models\rtpuengurus;
 use App\Models\SuratPengantarSkck;
+use App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi;
 
 Route::get('/', [DashboardController::class, 'landingpage'])->name('landingpage');
 
@@ -131,9 +134,32 @@ Route::prefix('surat')->group(function () {
     Route::post('usersptjm', [SuratSptjmKematianController::class, 'userstore'])->name('surat.usersptjm.store');
     Route::post('userkepemilikantanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'userstore'])->name('surat.userkepemilikantanah.store');
     Route::post('userskck', [SuratPengantarSkckController::class, 'userstore'])->name('surat.userskck.store');
+    Route::get('user_perubahdatapendidikan', [SuratPernyataanPerubahanDataPendidikanController::class, 'user'])
+        ->name('surat.userperubahdatapendidikan');
+    Route::post('user_perubahdatapendidikan', [SuratPernyataanPerubahanDataPendidikanController::class, 'userstore'])
+        ->name('surat.userperubahdatapendidikan.store');
 
+    // ====================== PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI ======================
+    Route::get('user_pembetulan_data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'user'])
+        ->name('surat.userpembetulandata');
+
+    Route::post('user_pembetulan_data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'userstore'])
+        ->name('surat.userpembetulandata.store');
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
+
+        // ====================== PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI ======================
+        Route::get('pembetulan-data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'index'])
+            ->name('surat.pembetulandata.index');
+
+        Route::post('pembetulan-data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'store'])
+            ->name('surat.pembetulandata.store');
+
+        Route::get('pembetulan-data/{surat}/edit', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'edit'])
+            ->name('surat.pembetulandata.edit');
+
+        Route::put('pembetulan-data/{surat}', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'update'])
+            ->name('surat.pembetulandata.update');
 
         Route::get('suratmasuk', [SuratmasukController::class, 'index'])->name('surat.masuk');
         Route::get('suratkeluar', [SuratmasukController::class, 'suratkeluar'])->name('surat.keluar');
@@ -266,6 +292,15 @@ Route::prefix('surat')->group(function () {
         Route::post('skck',                [SuratPengantarSkckController::class, 'store'])->name('surat.skck.store');
         Route::get('skck/{skck}/edit',     [SuratPengantarSkckController::class, 'edit'])->name('surat.skck.edit');
         Route::put('skck/{skck}',          [SuratPengantarSkckController::class, 'update'])->name('surat.skck.update');
+
+        Route::get('pernyataan-perubahan-data-pendidikan', [SuratPernyataanPerubahanDataPendidikanController::class, 'index'])
+            ->name('surat.perubahdatapendidikan.index');
+        Route::post('pernyataan-perubahan-data-pendidikan', [SuratPernyataanPerubahanDataPendidikanController::class, 'store'])
+            ->name('surat.perubahdatapendidikan.store');
+        Route::get('pernyataan-perubahan-data-pendidikan/{surat}/edit', [SuratPernyataanPerubahanDataPendidikanController::class, 'edit'])
+            ->name('surat.perubahdatapendidikan.edit');
+        Route::put('pernyataan-perubahan-data-pendidikan/{surat}', [SuratPernyataanPerubahanDataPendidikanController::class, 'update'])
+            ->name('surat.perubahdatapendidikan.update');
     });
 });
 

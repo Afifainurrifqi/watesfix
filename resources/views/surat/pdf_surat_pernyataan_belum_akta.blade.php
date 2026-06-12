@@ -105,23 +105,22 @@
     </p>
 
     <!-- TTD -->
-     <table class="ttd-table">
+       <table class="ttd-table">
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p class="ttd-tanggal">Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-                <p class="ttd-jabatan">Kepala Desa Wates</p>
+                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Saya yang menyatakan,</p>
 
                 <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
                 </div>
 
-                <p class="nama-kades"><u>MOH. HAMID ALMAULUDI S.Pd.I</u></p>
-                <p class="jabatan-bawah">Kepala Desa Wates</p>
+                <p class="nama-kades"><u>{{ $data->ybt_nama }}</u></p>
 
                 <div class="barcode">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                    <br><small>Scan untuk verifikasi surat resmi</small>
+                    <br><small>Scan untuk verifikasi surat resmi Desa Wates</small>
                 </div>
             </td>
         </tr>

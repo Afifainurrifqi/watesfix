@@ -21,6 +21,8 @@ use App\Models\surat_pernyataan_dan_jaminan;
 use App\Models\surat_pernyataan_kesanggupan;
 use App\Models\surat_pernyataan_memilih_nama_alias;
 use App\Models\surat_pernyataan_numpang_kk;
+use App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi;
+use App\Models\surat_pernyataan_perubahan_data_pendidikan;
 use App\Models\surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian;
 use App\Models\surat_sptjm_kematian;
 use App\Models\suratketerangantidakmampu;
@@ -66,6 +68,8 @@ class SuratmasukController extends Controller
         $sptjmKematian = surat_sptjm_kematian::where('status_verif', '!=', 'Terverifikasi')->get();
         $kepemilikantanah = surat_keterangan_harga_kepemilikan_tanah::where('status_verif', '!=', 'Terverifikasi')->get();
         $skck = SuratPengantarSkck::where('status_verif', '!=', 'Terverifikasi')->get();
+        $perubahdatapendidikan = surat_pernyataan_perubahan_data_pendidikan::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pembetulanData = \App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi::where('status_verif', '!=', 'Terverifikasi')->get(); // lalu merge ke $data
 
 
 
@@ -89,7 +93,9 @@ class SuratmasukController extends Controller
             ->merge($aktaBarcode)
             ->merge($sptjmKematian)
             ->merge($kepemilikantanah)
-            ->merge($skck);
+            ->merge($skck)
+            ->merge($perubahdatapendidikan)
+            ->merge($pembetulanData);
 
 
         return view('surat.suratkeluar', compact('data'));
@@ -126,8 +132,8 @@ class SuratmasukController extends Controller
         $sptjmKematian = surat_sptjm_kematian::where('status_verif', 'Terverifikasi')->get();
         $kepemilikantanah = surat_keterangan_harga_kepemilikan_tanah::where('status_verif', 'Terverifikasi')->get();
         $skck = SuratPengantarSkck::where('status_verif', 'Terverifikasi')->get();
-
-
+        $perubahdatapendidikan = surat_pernyataan_perubahan_data_pendidikan::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pembetulanData = \App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi::where('status_verif', 'Terverifikasi')->get();
 
         $data = collect()
             ->merge($pernyataan_tidak_bisa_ktp)
@@ -149,7 +155,9 @@ class SuratmasukController extends Controller
             ->merge($aktaBarcode)
             ->merge($sptjmKematian)
             ->merge($kepemilikantanah)
-            ->merge($skck);
+            ->merge($skck)
+            ->merge($perubahdatapendidikan)
+            ->merge($pembetulanData);
 
         return view('surat.arsipsuratkeluar', compact('data'));
     }
@@ -164,6 +172,10 @@ class SuratmasukController extends Controller
 
         $kategori = $request->kategori;
         $jenis_form = $request->jenis_form;
+
+        if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_pembetulan_data_tidak_merubah_lagi') {
+            return redirect()->route('surat.pembetulandata.index')->with(compact('kategori', 'jenis_form'));
+        }
 
         if ($kategori == 'keterangan' && $jenis_form == 'surat_keterangan_kehilangan') {
             return redirect()->route('surat.surat_keterangan_kehilangan')->with(compact('kategori', 'jenis_form'));
@@ -245,17 +257,9 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.skck.index')->with(compact('kategori', 'jenis_form'));
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_perubahan_data_pendidikan') {
+            return redirect()->route('surat.perubahdatapendidikan.index')->with(compact('kategori', 'jenis_form'));
+        }
 
         return redirect()->back()->withErrors(['jenis_form' => 'Form tidak ditemukan.']);
     }
@@ -280,9 +284,29 @@ class SuratmasukController extends Controller
 
     public function exportPdf($jenis, $id)
     {
+       if (
+        $jenis === 'suratpernyataanpembetulandatatidakmerubahlagi' ||
+        $jenis === 'pernyataan_pembetulan_data_tidak_merubah_lagi'
+    ) {
+        $data = surat_pernyataan_pembetulan_data_tidak_merubah_lagi::findOrFail($id);
+        $pdf = Pdf::loadView('surat.pdf_pernyataan_pembetulan_data_tidak_merubah_lagi', compact('data'))
+            ->setPaper('A4', 'portrait');
+
+        $filename = Str::slug($data->nama ?? 'dokumen', '_');
+        return $pdf->download('pdf_pernyataan_pembetulan_data_' . $filename . '.pdf');
+    }
+
+        if ($jenis === 'suratpernyataanperubahandatapendidikan') {
+            $data = surat_pernyataan_perubahan_data_pendidikan::findOrFail($id);
+            $pdf  = Pdf::loadView('surat.pdf_pernyataan_perubahan_data_pendidikan', compact('data'))
+                ->setPaper('A4', 'portrait');
+            $filename = Str::slug($data->nama ?? 'dokumen', '_');
+            return $pdf->download('pdf_pernyataan_perubahan_data_pendidikan_' . $filename . '.pdf');
+        }
         if ($jenis === 'suratketerangankehilangan') {
             $data = surat_keterangan_kehilangan::findOrFail($id);
-            $pdf = Pdf::loadView('surat.pdfsuratketerangankehilangan', compact('data'))->setPaper('A4');
+            $pdf = Pdf::loadView('surat.pdfsuratketerangankehilangan', compact('data'))
+                ->setPaper('A4');
             return $pdf->download('pdfsuratketerangankehilangan' . $data->nama_pelapor . '.pdf');
         }
 

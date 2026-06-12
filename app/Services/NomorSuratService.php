@@ -81,5 +81,8 @@ class NomorSuratService
         'belumakta' => 410,
         'bedanama' => 440,
         'anakseorangibu' => 450,
+        'aktabarcode' => 460,
+        'sptjmkematian' => 470,
+        'perubahdatapendidikan' => 480,
     ];
 }

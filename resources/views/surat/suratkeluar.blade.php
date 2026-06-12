@@ -100,6 +100,10 @@
                                                 'App\Models\surat_keterangan_harga_kepemilikan_tanah'
                                                     => 'SuratKeteranganHargaKepemilikanTanah',
                                                 'App\Models\SuratPengantarSkck' => 'SuratPengantarSkck',
+                                                'App\Models\surat_pernyataan_perubahan_data_pendidikan'
+                                                    => 'SuratPernyataanPerubahanDataPendidikan',
+                                                'App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi'
+                                                    => 'SuratPernyataanPembetulanDataTidakMerubahLagi',
 
                                                 default => class_basename($item),
                                             };
@@ -183,6 +187,12 @@
                                                 @elseif ($jenisSurat === 'SuratPengantarSkck')
                                                     <a href="{{ route('surat.skck.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
+                                                    <a href="{{ route('surat.perubahdatapendidikan.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
+                                                    <a href="{{ route('surat.pembetulandata.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @endif
                                             </td>
 
@@ -227,6 +237,10 @@
                                                     {{ $item->atas_nama_hak_milik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPengantarSkck')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
+                                                    {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
+                                                    {{ $item->nama ?? '-' }}
                                                 @else
                                                     -
                                                 @endif
@@ -270,16 +284,8 @@
                                                     {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPengantarSkck')
                                                     {{ $item->nik ?? '-' }}
-
-
-
-
-
-
-
-
-
-                                                    -
+                                                @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
+                                                    {{ $item->nik ?? '-' }}
                                                 @else
                                                     -
                                                 @endif
@@ -344,6 +350,10 @@
                                                 @elseif ($jenisSurat === 'SuratKeteranganHargaKepemilikanTanah')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPengantarSkck')
+                                                    {{ $item->alamat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
+                                                    {{ $item->alamat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
                                                     {{ $item->alamat ?? '-' }}
                                                 @else
                                                     -
