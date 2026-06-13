@@ -39,7 +39,8 @@
     <!-- Header Area -->
     <div class="header-area" id="headerArea">
         <div class="container">
-            <div class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
+            <div
+                class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
                 <!-- Back Button -->
                 <div class="back-button">
                     <a href="{{ route('surat.pengajuan_surat') }}">
@@ -72,8 +73,8 @@
                     'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI',
                     'SPTJM KEMATIAN',
                     'PERNYATAAN PERUBAHAN DATA PENDIDIKAN',
-                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',   // ← BARU
-                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA',
+                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',
+                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA', // ← BARU
                     'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI',
                     'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK',
                     'FORM PERNYATAAN BATAL PINDAH',
@@ -104,7 +105,8 @@
                     'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI' => 'surat.useraktabarcode',
                     'SPTJM KEMATIAN' => 'surat.usersptjm',
                     'PERNYATAAN PERUBAHAN DATA PENDIDIKAN' => 'surat.userperubahdatapendidikan',
-                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI' => 'surat.userpembetulandata', // ← BARU
+                    'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI' => 'surat.userpembetulandata',
+                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA' => 'surat.userizinkk', // ← BARU
                 ];
 
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
@@ -115,7 +117,9 @@
                     $color = $colors[$i % count($colors)];
                     $subtitle = str_starts_with($title, 'F-')
                         ? 'Formulir'
-                        : (str_contains(strtolower($title), 'sptjm') ? 'SPTJM' : 'Surat Pernyataan');
+                        : (str_contains(strtolower($title), 'sptjm')
+                            ? 'SPTJM'
+                            : 'Surat Pernyataan');
 
                     $routeName = $routeMap[$title] ?? null;
                     $href = $routeName && Route::has($routeName) ? route($routeName) : null;
@@ -125,10 +129,12 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="service-text">
-                                <h5 class="{{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
+                                <h5
+                                    class="{{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
                                     {{ ucwords(strtolower($title)) }}
                                 </h5>
-                                <p class="mb-0 {{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
+                                <p
+                                    class="mb-0 {{ in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '' }}">
                                     {{ $subtitle }}
                                 </p>
                             </div>
@@ -181,4 +187,5 @@
     <script src="{{ asset('assets4/dist/js/active.js') }}"></script>
     <script src="{{ asset('assets4/dist/js/pwa.js') }}"></script>
 </body>
+
 </html>

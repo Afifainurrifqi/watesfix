@@ -58,6 +58,7 @@ use App\Http\Controllers\SuratPernyataanBelumAktaController;
 use App\Http\Controllers\SuratPernyataanDanJaminanController;
 use App\Http\Controllers\SuratPernyataanKesanggupanController;
 use App\Http\Controllers\SuratPernyataanMemilihNamaAliasController;
+use App\Http\Controllers\SuratPernyataanMengizinkanIkutKkController;
 use App\Http\Controllers\SuratPernyataanNumpangKkController;
 use App\Http\Controllers\SuratPernyataanPembetulanDataTidakMerubahLagiController;
 use App\Http\Controllers\SuratPernyataanPerubahanDataPendidikanController;
@@ -75,6 +76,7 @@ use App\Models\rtlokasi;
 use App\Models\rtpuengurus;
 use App\Models\SuratPengantarSkck;
 use App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi;
+
 
 Route::get('/', [DashboardController::class, 'landingpage'])->name('landingpage');
 
@@ -138,6 +140,12 @@ Route::prefix('surat')->group(function () {
         ->name('surat.userperubahdatapendidikan');
     Route::post('user_perubahdatapendidikan', [SuratPernyataanPerubahanDataPendidikanController::class, 'userstore'])
         ->name('surat.userperubahdatapendidikan.store');
+    // ====================== PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA ======================
+    Route::get('user_izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'user'])
+        ->name('surat.userizinkk');
+
+    Route::post('user_izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'userstore'])
+        ->name('surat.userizinkk.store');
 
     // ====================== PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI ======================
     Route::get('user_pembetulan_data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'user'])
@@ -148,6 +156,19 @@ Route::prefix('surat')->group(function () {
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
 
+        // ====================== PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA ======================
+        // ====================== PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA ======================
+        Route::get('izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'index'])
+            ->name('surat.izinkk.index');
+
+        Route::post('izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'store'])
+            ->name('surat.izinkk.store');
+
+        Route::get('izinkk/{surat}/edit', [SuratPernyataanMengizinkanIkutKkController::class, 'edit'])
+            ->name('surat.izinkk.edit');
+
+        Route::put('izinkk/{surat}', [SuratPernyataanMengizinkanIkutKkController::class, 'update'])
+            ->name('surat.izinkk.update');
         // ====================== PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI ======================
         Route::get('pembetulan-data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'index'])
             ->name('surat.pembetulandata.index');

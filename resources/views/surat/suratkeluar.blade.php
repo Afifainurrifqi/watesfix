@@ -104,6 +104,8 @@
                                                     => 'SuratPernyataanPerubahanDataPendidikan',
                                                 'App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi'
                                                     => 'SuratPernyataanPembetulanDataTidakMerubahLagi',
+                                                'App\Models\surat_pernyataan_mengizinkan_ikut_kk'
+                                                    => 'SuratPernyataanMengizinkanIkutKk',
 
                                                 default => class_basename($item),
                                             };
@@ -193,6 +195,9 @@
                                                 @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
                                                     <a href="{{ route('surat.pembetulandata.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanMengizinkanIkutKk')
+                                                    <a href="{{ route('surat.izinkk.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @endif
                                             </td>
 
@@ -241,6 +246,8 @@
                                                     {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanMengizinkanIkutKk')
+                                                    {{ $item->nama ?? '-' }}
                                                 @else
                                                     -
                                                 @endif
@@ -285,6 +292,8 @@
                                                 @elseif ($jenisSurat === 'SuratPengantarSkck')
                                                     {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
+                                                    {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanMengizinkanIkutKk')
                                                     {{ $item->nik ?? '-' }}
                                                 @else
                                                     -
@@ -354,6 +363,8 @@
                                                 @elseif ($jenisSurat === 'SuratPernyataanPerubahanDataPendidikan')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
+                                                    {{ $item->alamat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanMengizinkanIkutKk')
                                                     {{ $item->alamat ?? '-' }}
                                                 @else
                                                     -
@@ -503,7 +514,9 @@
             if (selected && data[selected]) {
                 data[selected].forEach(function(item) {
                     const option = document.createElement('option');
-                    option.value = item.toLowerCase().replace(/ /g, '_').replace(/[^a-z0-9_]/g, '');
+                    option.value = item.toLowerCase()
+                        .replace(/ /g, '_')
+                        .replace(/[^a-z0-9_-]/g, ''); // <-- tambahkan tanda strip (-)
                     option.textContent = item;
                     jenisFormSelect.appendChild(option);
                 });
