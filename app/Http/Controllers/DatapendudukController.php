@@ -216,7 +216,9 @@ class DatapendudukController extends Controller
                 'alamat'        => $penduduk->alamat ?? '',
                 'rt'            => $penduduk->RT ?? '',
                 'rw'            => $penduduk->RW ?? '',
-                'nokk'          => $nokk,                    // ← Tambahan No KK
+                'nokk'          => $nokk,
+                'agama'            => $penduduk->agama->agama ?? $penduduk->agama->nama_agama ?? '',
+                'status_perkawinan' => $penduduk->status->status ?? $penduduk->status->nama_status ?? '',        // ← Tambahan No KK
             ]
         ]);
     }

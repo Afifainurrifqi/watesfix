@@ -20,7 +20,7 @@ class NomorSuratService
         if (!$existing) {
             $col->insertOne([
                 '_id'        => $this->globalKey,
-                'seq'        => $startFrom - 1,   // 126 agar next = 127
+                'seq'        => $startFrom - 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -42,9 +42,9 @@ class NomorSuratService
 
     public function format(string $jenis, int $urut, int $tahun = null): string
     {
-        $tahun   = $tahun ?? now('Asia/Jakarta')->year;
-        $prefix  = $this->prefixMap[$jenis] ?? 400;
-        $nnn     = str_pad((string)$urut, 3, '0', STR_PAD_LEFT);
+        $tahun  = $tahun ?? now('Asia/Jakarta')->year;
+        $prefix = $this->prefixMap[$jenis] ?? 400;
+        $nnn    = str_pad((string)$urut, 3, '0', STR_PAD_LEFT);
 
         return "{$prefix} / {$nnn} / 409.41.2 / {$tahun}";
     }
@@ -69,20 +69,38 @@ class NomorSuratService
         }
     }
 
-    // Prefix Map
+    /**
+     * Prefix Map - Update ini setiap kali ada jenis surat baru
+     */
     protected array $prefixMap = [
-        'sktm'       => 475,
-        'spktp'      => 300,
-        'numpangkk'  => 400,
-        'alias'      => 410,
-        'alias_ortu' => 411,
-        'jaminan'    => 420,
-        'kehilangan' => 430,
-        'belumakta' => 410,
-        'bedanama' => 440,
-        'anakseorangibu' => 450,
-        'aktabarcode' => 460,
-        'sptjmkematian' => 470,
-        'perubahdatapendidikan' => 480,
+        // === KETERANGAN ===
+        'sktm'                    => 475,
+        'spktp'                   => 300,
+        'kehilangan'              => 430,
+        'kematian_desa'           => 470,
+        'pernah_menikah'          => 465,
+
+        // === PERNYATAAN ===
+        'numpangkk'                        => 400,
+        'alias'                            => 410,
+        'alias_ortu'                       => 411,
+        'jaminan'                          => 420,
+        'belumakta'                        => 410,
+        'bedanama'                         => 440,
+        'anakseorangibu'                   => 450,
+        'aktabarcode'                      => 460,
+        'perubahdatapendidikan'            => 480,
+        'pembetulandata'                   => 485,
+        'izinkk'                           => 490,
+        'pernyataan_memiliki_kk_asli'      => 495,
+
+        // === SPTJM ===
+        'sptjmkematian'           => 470,
+        'sptjm_suami_istri'       => 472,
+
+        // === LAINNYA ===
+        'formulir_user_id'        => 500,
+        'pelaporan_capil_f201'    => 510,
+        'batal_pindah'            => 520,
     ];
 }

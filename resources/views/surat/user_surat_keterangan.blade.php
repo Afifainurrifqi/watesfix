@@ -68,7 +68,7 @@
                     'KETERANGAN   PENGANTAR   SKCK',
                     'Surat Keterangan Kepemilikan  Aset',
                     'SURAT  KETERANGAN  USAHA',
-                    'Surat Keterangan Desa Warga Miskin',
+                    'SURAT KETERANGAN WARGA DESA MISKIN',
                     'SURAT KETERANGAN MISKIN ( SKM )',
                     'SURAT  KETERANGAN  AHLI WARIS',
                     'SURAT KETERANGAN GHOIB',
@@ -76,6 +76,7 @@
                     'SURAT KETERANGAN DOMISILI LEMBAGA',
                     'SURAT KETERANGAN DOMISILI WARGA',
                     'Surat Keterangan Desa Sebagai Penduduk Desa',
+
                 ];
 
                 // Normalisasi judul: buang spasi berlebih, kapitalisasi wajar
@@ -96,6 +97,10 @@
                     'SURAT KETERANGAN WARIS' => 'surat.userahliwaris',
                     'SURAT KETERANGAN HARGA KEPEMILIKAN TANAH' => 'surat.userkepemilikantanah',
                     'KETERANGAN PENGANTAR SKCK' => 'surat.userskck',
+                    'SURAT KETERANGAN NUMPANG NIKAH' => 'surat.usernumpangnikah',
+                    'SURAT KETERANGAN USAHA' => 'surat.userusaha',
+                    'SURAT KETERANGAN WARGA DESA MISKIN'  => 'surat.usermiskindesa',
+                    'SURAT KETERANGAN MISKIN ( SKM )' => 'surat.userskm',
                     // Tambahkan mapping lain bila route sudah dibuat
                 ];
 

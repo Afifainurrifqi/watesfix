@@ -11,8 +11,10 @@ use App\Models\surat_keterangan_desa_pernah_menikah;
 use App\Models\surat_keterangan_harga_kepemilikan_tanah;
 use App\Models\surat_keterangan_kehilangan;
 use App\Models\surat_keterangan_kematian_desa;
+use App\Models\surat_keterangan_numpang_nikah;
 use App\Models\surat_kuasa;
 use App\Models\surat_permohonan_pembukaan_rekening;
+use App\Models\surat_permohonan_pengantar_keabsahan_akta_kelahiran;
 use App\Models\surat_pernyataan_akta_barcode_nomor_sama;
 use App\Models\surat_pernyataan_anak_seorang_nama_ibu;
 use App\Models\surat_pernyataan_beda_nama_buku_nikah;
@@ -26,7 +28,10 @@ use App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi;
 use App\Models\surat_pernyataan_perubahan_data_pendidikan;
 use App\Models\surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian;
 use App\Models\surat_sptjm_kematian;
+use App\Models\SuratKeteranganDesaMiskin;
+use App\Models\SuratKeteranganMiskinSkm;
 use App\Models\suratketerangantidakmampu;
+use App\Models\SuratKeteranganUsaha;
 use App\Models\SuratPengantarSkck;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
@@ -72,6 +77,19 @@ class SuratmasukController extends Controller
         $perubahdatapendidikan = surat_pernyataan_perubahan_data_pendidikan::where('status_verif', '!=', 'Terverifikasi')->get();
         $pembetulanData = \App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi::where('status_verif', '!=', 'Terverifikasi')->get(); // lalu merge ke $data
         $izinkanIkutKk = surat_pernyataan_mengizinkan_ikut_kk::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pengantarKeabsahan = surat_permohonan_pengantar_keabsahan_akta_kelahiran::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pengantarKeabsahanAnak = \App\Models\surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak::where('status_verif', '!=', 'Terverifikasi')->get();
+        $batalPindah = \App\Models\surat_pernyataan_batal_pindah_penduduk::where('status_verif', '!=', 'Terverifikasi')->get();
+        $formulirUserId = \App\Models\surat_formulir_pengajuan_user_id::where('status_verif', '!=', 'Terverifikasi')->get();
+
+        $sptjmSuamiIstri = \App\Models\surat_sptjm_suami_istri::where('status_verif', '!=', 'Terverifikasi')->get();
+        $numpangNikah = surat_keterangan_numpang_nikah::where('status_verif', '!=', 'Terverifikasi')->get();
+        $usaha = SuratKeteranganUsaha::where('status_verif', '!=', 'Terverifikasi')->get();
+        $miskinDesa = SuratKeteranganDesaMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+       $skm = SuratKeteranganMiskinSkm::where('status_verif', '!=', 'Terverifikasi')->get();
+
+
+
 
 
         $data = collect()
@@ -97,7 +115,16 @@ class SuratmasukController extends Controller
             ->merge($skck)
             ->merge($perubahdatapendidikan)
             ->merge($pembetulanData)
-            ->merge($izinkanIkutKk);
+            ->merge($izinkanIkutKk)
+            ->merge($pengantarKeabsahan)
+            ->merge($pengantarKeabsahanAnak)
+            ->merge($batalPindah)
+            ->merge($formulirUserId)
+            ->merge($sptjmSuamiIstri)
+            ->merge($numpangNikah)
+            ->merge($usaha)
+            ->merge($miskinDesa)
+            ->merge($skm);
 
 
         return view('surat.suratkeluar', compact('data'));
@@ -137,6 +164,15 @@ class SuratmasukController extends Controller
         $perubahdatapendidikan = surat_pernyataan_perubahan_data_pendidikan::where('status_verif', '!=', 'Terverifikasi')->get();
         $pembetulanData = \App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi::where('status_verif', 'Terverifikasi')->get();
         $izinkanIkutKk = surat_pernyataan_mengizinkan_ikut_kk::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pengantarKeabsahan = surat_permohonan_pengantar_keabsahan_akta_kelahiran::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pengantarKeabsahanAnak = \App\Models\surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak::where('status_verif', '!=', 'Terverifikasi')->get();
+        $batalPindah = \App\Models\surat_pernyataan_batal_pindah_penduduk::where('status_verif', '!=', 'Terverifikasi')->get();
+        $formulirUserId = \App\Models\surat_formulir_pengajuan_user_id::where('status_verif', '!=', 'Terverifikasi')->get();
+        $sptjmSuamiIstri = \App\Models\surat_sptjm_suami_istri::where('status_verif', '!=', 'Terverifikasi')->get();
+        $numpangNikah = surat_keterangan_numpang_nikah::where('status_verif', '!=', 'Terverifikasi')->get();
+        $usaha = SuratKeteranganUsaha::where('status_verif', '!=', 'Terverifikasi')->get();
+        $miskinDesa = SuratKeteranganDesaMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+        $skm = SuratKeteranganMiskinSkm::where('status_verif', '!=', 'Terverifikasi')->get();
 
 
         $data = collect()
@@ -162,7 +198,16 @@ class SuratmasukController extends Controller
             ->merge($skck)
             ->merge($perubahdatapendidikan)
             ->merge($pembetulanData)
-            ->merge($izinkanIkutKk);
+            ->merge($izinkanIkutKk)
+            ->merge($pengantarKeabsahan)
+            ->merge($pengantarKeabsahanAnak)
+            ->merge($batalPindah)
+            ->merge($formulirUserId)
+            ->merge($sptjmSuamiIstri)
+            ->merge($numpangNikah)
+            ->merge($usaha)
+            ->merge($miskinDesa)
+            ->merge($skm);
 
         return view('surat.arsipsuratkeluar', compact('data'));
     }
@@ -171,105 +216,156 @@ class SuratmasukController extends Controller
     public function prosesForm(Request $request)
     {
         $request->validate([
-            'kategori' => 'required|string',
+            'kategori'   => 'required|string',
             'jenis_form' => 'required|string',
         ]);
 
-        $kategori = $request->kategori;
+        $kategori   = $request->kategori;
         $jenis_form = $request->jenis_form;
 
+        // =====================================================
+        // ==================== ADMINDUK =======================
+        // =====================================================
+
+        // Pengantar Keabsahan
+        if ($kategori === 'adminduk' && Str::contains($jenis_form, 'pengantar_keabsahan_untuk_diri')) {
+            return redirect()->route('surat.pengantar_keabsahan.index');
+        }
+
+        if ($kategori === 'adminduk' && Str::contains($jenis_form, 'pengantar_keabsahan_untuk_anak')) {
+            return redirect()->route('surat.pengantar_keabsahan_anak.index');
+        }
+
+        // Formulir Pengajuan User ID (F-3.01)
+        if ($kategori === 'adminduk' && Str::contains($jenis_form, 'formulir_pengajuan_user_id')) {
+            return redirect()->route('surat.formulir_pengajuan_user_id.index');
+        }
+
+        // Batal Pindah Penduduk
+        if ($kategori === 'adminduk' && Str::contains($jenis_form, 'batal_pindah')) {
+            return redirect()->route('surat.batal_pindah.index');
+        }
+
+        // Lainnya (Adminduk)
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_pembetulan_data_tidak_merubah_lagi') {
-            return redirect()->route('surat.pembetulandata.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.pembetulandata.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_mengizinkan_ikut_kk_suami-istri-keluarga') {
-            return redirect()->route('surat.izinkk.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori == 'keterangan' && $jenis_form == 'surat_keterangan_kehilangan') {
-            return redirect()->route('surat.surat_keterangan_kehilangan')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.izinkk.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_numpang_kk') {
-            return redirect()->route('surat.numpangkk.create')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.numpangkk.create');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian') {
-            return redirect()->route('surat.suratpernyataantidakbisamelampirkanktpkematian')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.suratpernyataantidakbisamelampirkanktpkematian');
         }
 
-        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_tidak_mampu') {
-            return redirect()->route('surat.tidakmampu.create')->with(compact('kategori', 'jenis_form'));
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_desa_warga_miskin') {
+            return redirect()->route('surat.miskindesa.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_memilih_nama_alias') {
-            return redirect()->route('surat.namaalias.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.namaalias.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_memilih_nama_alias_satu_orang_tua') {
-            return redirect()->route('surat.namaaliasortu.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.namaaliasortu.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_dan_jaminan') {
-            return redirect()->route('surat.pernyataandanjaminan.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_desa_pernah_menikah') {
-            return redirect()->route('surat.pernahmenikah.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_kematian_desa') {
-            return redirect()->route('surat.kematian.index')->with(compact('kategori', 'jenis_form')); // ⬅️ baru
-        }
-
-        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_ahli_waris') {
-            return redirect()->route('surat.ahliwaris.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_kesanggupan') {
-            return redirect()->route('surat.kesanggupan.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'pernyataan' && $jenis_form === 'surat__kuasa') {
-            return redirect()->route('surat.kuasa.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'pernyataan' && $jenis_form === 'permohonan_pembukaan_rekening_tabungan') {
-            return redirect()->route('surat.bukaanrekening.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.pernyataandanjaminan.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_belum_pernah_mengurus_akta_kelahiran') {
-            return redirect()->route('surat.belumakta.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.belumakta.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_beda_nama_buku_nikah') {
-            return redirect()->route('surat.bedanama.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.bedanama.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_anak_seorang_nama_ibu_baru') {
-            return redirect()->route('surat.anakseorangibu.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.anakseorangibu.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'surat_pernyataan_akta_barcode_nomor_samabaru_isi_sendiri') {
-            return redirect()->route('surat.aktabarcode.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.aktabarcode.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'sptjm_kematian') {
-            return redirect()->route('surat.sptjm.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_harga_kepemilikan_tanah') {
-            return redirect()->route('surat.kepemilikantanah.index')->with(compact('kategori', 'jenis_form'));
-        }
-
-        if ($kategori === 'keterangan' && $jenis_form === 'keterangan_pengantar_skck') {
-            return redirect()->route('surat.skck.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.sptjm.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_perubahan_data_pendidikan') {
-            return redirect()->route('surat.perubahdatapendidikan.index')->with(compact('kategori', 'jenis_form'));
+            return redirect()->route('surat.perubahdatapendidikan.index');
         }
 
+        // =====================================================
+        // ==================== KETERANGAN =====================
+        // =====================================================
+
+        if ($kategori == 'keterangan' && $jenis_form == 'surat_keterangan_kehilangan') {
+            return redirect()->route('surat.surat_keterangan_kehilangan');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_tidak_mampu') {
+            return redirect()->route('surat.tidakmampu.create');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_desa_pernah_menikah') {
+            return redirect()->route('surat.pernahmenikah.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_kematian_desa') {
+            return redirect()->route('surat.kematian.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_ahli_waris') {
+            return redirect()->route('surat.ahliwaris.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_harga_kepemilikan_tanah') {
+            return redirect()->route('surat.kepemilikantanah.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'keterangan_pengantar_skck') {
+            return redirect()->route('surat.skck.index');
+        }
+
+        // =====================================================
+        // ==================== PERNYATAAN =====================
+        // =====================================================
+
+        if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_kesanggupan') {
+            return redirect()->route('surat.kesanggupan.index');
+        }
+
+        if ($kategori === 'pernyataan' && $jenis_form === 'surat__kuasa') {
+            return redirect()->route('surat.kuasa.index');
+        }
+
+        if ($kategori === 'pernyataan' && $jenis_form === 'permohonan_pembukaan_rekening_tabungan') {
+            return redirect()->route('surat.bukaanrekening.index');
+        }
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_numpang_nikah') {
+            return redirect()->route('surat.numpangnikah.index');
+        }
+
+        if ($kategori === 'adminduk' && Str::contains($jenis_form, 'sptjm_suami_istri')) {
+            return redirect()->route('surat.sptjm_suami_istri.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_usaha') {
+            return redirect()->route('surat.usaha.index');
+        }
+        if ($kategori === 'keterangan' && Str::contains($jenis_form, 'surat_keterangan_miskin')) {
+            return redirect()->route('surat.skm.index');
+        }
+
+        // Jika tidak ada yang cocok
         return redirect()->back()->withErrors(['jenis_form' => 'Form tidak ditemukan.']);
     }
 
@@ -306,6 +402,80 @@ class SuratmasukController extends Controller
             return $pdf->download('pdf_pernyataan_mengizinkan_ikut_kk_' . $filename . '.pdf');
         }
         if (
+            $jenis === 'suratketerangandesamiskin' ||
+            $jenis === 'surat_keterangan_desa_miskin' ||
+            $jenis === 'miskindesa'
+        ) {
+            $data = SuratKeteranganDesaMiskin::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_desa_miskin', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'surat_keterangan_desa_miskin', '_');
+
+            return $pdf->download('surat_keterangan_desa_miskin_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'suratketeranganmiskinskm' ||
+            $jenis === 'surat_keterangan_miskin_skm' ||
+            $jenis === 'skm'
+        ) {
+            $data = SuratKeteranganMiskinSkm::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_miskin_skm', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'surat_keterangan_miskin_skm', '_');
+
+            return $pdf->download('surat_keterangan_miskin_skm_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'suratketerangannumpangnikah' ||
+            $jenis === 'surat_keterangan_numpang_nikah' ||
+            $jenis === 'numpang_nikah'
+        ) {
+            $data = surat_keterangan_numpang_nikah::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_numpang_nikah', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = 'Surat_Keterangan_Numpang_Nikah_'
+                . Str::slug($data->nama ?? $id, '_')
+                . '.pdf';
+
+            return $pdf->download($filename);
+        }
+
+        if (
+            $jenis === 'suratketerangankematiandesa' ||
+            $jenis === 'surat_keterangan_kematian_desa' ||
+            $jenis === 'kematian_desa'
+        ) {
+            $data = surat_keterangan_kematian_desa::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_kematian_desa', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = 'Surat_Keterangan_Kematian_Desa_'
+                . Str::slug($data->nama_lengkap ?? $id, '_')
+                . '.pdf';
+
+            return $pdf->download($filename);
+        }
+        if (
+            $jenis === 'surat_sptjm_suami_istri' ||
+            $jenis === 'sptjm_suami_istri'
+        ) {
+            $data = \App\Models\surat_sptjm_suami_istri::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_sptjm_suami_istri', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_deklaran ?? 'dokumen', '_');
+            return $pdf->download('sptjm_suami_istri_' . $filename . '.pdf');
+        }
+        if (
             $jenis === 'suratpernyataanpembetulandatatidakmerubahlagi' ||
             $jenis === 'pernyataan_pembetulan_data_tidak_merubah_lagi'
         ) {
@@ -315,6 +485,42 @@ class SuratmasukController extends Controller
 
             $filename = Str::slug($data->nama ?? 'dokumen', '_');
             return $pdf->download('pdf_pernyataan_pembetulan_data_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran' ||
+            $jenis === 'permohonan_pengantar_keabsahan_akta_kelahiran'
+        ) {
+            $data = surat_permohonan_pengantar_keabsahan_akta_kelahiran::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_permohonan_pengantar_keabsahan_akta_kelahiran', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'dokumen', '_');
+            return $pdf->download('surat_permohonan_pengantar_keabsahan_akta_kelahiran_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_pernyataan_batal_pindah_penduduk' ||
+            $jenis === 'pernyataan_batal_pindah_penduduk'
+        ) {
+            $data = \App\Models\surat_pernyataan_batal_pindah_penduduk::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_pernyataan_batal_pindah_penduduk', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'dokumen', '_');
+            return $pdf->download('surat_pernyataan_batal_pindah_penduduk_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_formulir_pengajuan_user_id' ||
+            $jenis === 'formulir_pengajuan_user_id'
+        ) {
+            $data = \App\Models\surat_formulir_pengajuan_user_id::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_formulir_pengajuan_user_id', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->instansi_pemohon ?? 'dokumen', '_');
+            return $pdf->download('formulir_pengajuan_user_id_' . $filename . '.pdf');
         }
 
         if ($jenis === 'suratpernyataanperubahandatapendidikan') {
@@ -335,6 +541,18 @@ class SuratmasukController extends Controller
             $data = surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian::findOrFail($id);
             $pdf = Pdf::loadView('surat.pdfsuratpernyataantidakbisamelampirkanktpkematian', compact('data'))->setPaper('A4');
             return $pdf->download('Surat_Pernyataan_KTP_' . $data->nama_pelapor . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak' ||
+            $jenis === 'permohonan_pengantar_keabsahan_akta_kelahiran_anak'
+        ) {
+            $data = \App\Models\surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'dokumen', '_');
+            return $pdf->download('surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak_' . $filename . '.pdf');
         }
 
         if ($jenis === 'suratpernyataannumpangkk') {
@@ -452,12 +670,34 @@ class SuratmasukController extends Controller
             return $pdf->download('pdf_surat_keterangan_harga_kepemilikan_tanah_' . $filename . '.pdf');
         }
 
-        if ($jenis === 'suratpengantarskck') {
-            $data = SuratPengantarSkck::findOrFail($id);
-            // gunakan blade cetak yang sudah kita buat sebelumnya: 'surat.cetak_skck'
-            $pdf  = Pdf::loadView('surat.cetak_skck', ['skck' => $data])->setPaper('A4');
-            $filename = Str::slug($data->nama ?? 'surat_pengantar_skck', '_');
+        if (
+            $jenis === 'suratpengantarskck' ||
+            $jenis === 'surat_pengantar_skck' ||
+            $jenis === 'skck'
+        ) {
+            $surat = SuratPengantarSkck::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_skck', compact('surat'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($surat->nama ?? 'surat_pengantar_skck', '_');
+
             return $pdf->download('surat_pengantar_skck_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'suratketeranganusaha' ||
+            $jenis === 'surat_keterangan_usaha' ||
+            $jenis === 'usaha'
+        ) {
+            $data = SuratKeteranganUsaha::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_usaha', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'surat_keterangan_usaha', '_');
+
+            return $pdf->download('surat_keterangan_usaha_' . $filename . '.pdf');
         }
 
 

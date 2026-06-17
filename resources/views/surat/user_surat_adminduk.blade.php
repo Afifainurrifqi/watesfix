@@ -74,8 +74,8 @@
                     'SPTJM KEMATIAN',
                     'PERNYATAAN PERUBAHAN DATA PENDIDIKAN',
                     'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',
-                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA', // ← BARU
-                    'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI',
+                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA',
+                    'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI', // ← Sudah ada
                     'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK',
                     'FORM PERNYATAAN BATAL PINDAH',
                     'F-3.01 Formulir Pengajuan User ID',
@@ -91,6 +91,7 @@
                     'F-1.03 PENDAFTARAN PERPINDAHAN PENDUDUK',
                     'F-1.02 PENDAFTARAN PERISTIWA KEPENDUDUKAN',
                     'F-1.01 FORM  BIODATA KELUARGA',
+                    'SURAT KETERANGAN NUMPANG NIKAH',
                 ];
 
                 $routeMap = [
@@ -106,7 +107,13 @@
                     'SPTJM KEMATIAN' => 'surat.usersptjm',
                     'PERNYATAAN PERUBAHAN DATA PENDIDIKAN' => 'surat.userperubahdatapendidikan',
                     'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI' => 'surat.userpembetulandata',
-                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA' => 'surat.userizinkk', // ← BARU
+                    'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA' => 'surat.userizinkk',
+                    'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI' => 'surat.user_pengantar_keabsahan',
+                    'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK' => 'surat.user_pengantar_keabsahan_anak',
+                    'FORM PERNYATAAN BATAL PINDAH' => 'surat.user_batal_pindah',
+                    'F-3.01 Formulir Pengajuan User ID' => 'surat.user_formulir_pengajuan_user_id',
+                    'F-2.04 SPTJM SUAMI ISTRI' => 'surat.user_sptjm_suami_istri',
+                    'SURAT KETERANGAN NUMPANG NIKAH' => 'surat.usernumpangnikah',
                 ];
 
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
@@ -119,7 +126,7 @@
                         ? 'Formulir'
                         : (str_contains(strtolower($title), 'sptjm')
                             ? 'SPTJM'
-                            : 'Surat Pernyataan');
+                            : 'Surat Permyataan / Permohonan');
 
                     $routeName = $routeMap[$title] ?? null;
                     $href = $routeName && Route::has($routeName) ? route($routeName) : null;

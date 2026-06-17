@@ -4,90 +4,43 @@
     <meta charset="UTF-8">
     <title>Surat Pernyataan Perubahan Data Pendidikan</title>
     <style>
-        @page {
-            margin: 1.2cm 1.6cm 1.2cm 1.6cm;
-        }
-
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 11.5pt;
-            line-height: 1.35;
-            color: #000;
-        }
+        @page { margin: 1.1cm 1.4cm 1.1cm 1.4cm; }
+        body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.35; }
 
         .kop-container { width: 100%; }
         .kop-table { width: 100%; border-collapse: collapse; }
-        .kop-logo { width: 14%; text-align: center; }
-        .kop-logo img { width: 70px; height: auto; }
+        .kop-logo { width: 12%; text-align: center; }
+        .kop-logo img { width: 60px; height: auto; }
         .kop-text { text-align: center; }
-        .kop-text strong { font-size: 11.8pt; }
-        .kop-text small { font-size: 8.8pt; }
-        .kop-garis { border: none; border-top: 2.5px solid #000; margin: 5px 0 10px 0; }
+        .kop-text strong { font-size: 11.5pt; }
+        .kop-text small { font-size: 8.5pt; }
+        .kop-garis { border: none; border-top: 2px solid #000; margin: 4px 0 8px 0; }
 
-        .judul-surat {
+        .judul-surat { text-align: center; margin-bottom: 6px; }
+        .judul-surat h3 { font-size: 13pt; font-weight: bold; text-decoration: underline; margin: 0; }
+
+        .nomor-surat {
             text-align: center;
-            margin-bottom: 8px;
-        }
-        .judul-surat h3 {
-            font-size: 13.5pt;
             font-weight: bold;
-            text-decoration: underline;
-            margin: 0;
+            margin-bottom: 10px;
+            font-size: 10.5pt;
         }
 
-        .tulisan {
-            text-align: justify;
-            margin-bottom: 6px;
-        }
+        .tulisan { text-align: justify; margin-bottom: 6px; }
 
-        table.data {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 5px 0 9px 0;
-        }
-        table.data td {
-            padding: 2.5px 5px;
-            vertical-align: top;
-        }
-        table.data td:first-child {
-            width: 145px;
-            font-weight: bold;
-        }
+        table.data { width: 100%; border-collapse: collapse; margin: 5px 0 8px 0; }
+        table.data td { padding: 3px 5px; vertical-align: top; }
+        table.data td:first-child { width: 150px; font-weight: bold; }
 
-        .ttd-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .ttd-spacer {
-            width: 54%;
-        }
-        .ttd-cell {
-            width: 46%;
-            text-align: center;
-            vertical-align: top;
-        }
-        .ttd-img-wrapper {
-            height: 68px;
-            text-align: center;
-            margin: -2px 0 -3px 0;
-        }
-        .ttd-img {
-            width: 235px;
-            height: auto;
-        }
-        .nama-kades {
-            font-weight: bold;
-            font-size: 11pt;
-        }
-        .barcode img {
-            width: 72px;
-            height: auto;
-        }
-        .catatan {
-            font-size: 9.5pt;
-            margin-top: 15px;
-        }
+        .ttd-table { width: 100%; margin-top: 25px; }
+        .ttd-spacer { width: 52%; }
+        .ttd-cell { width: 48%; text-align: center; vertical-align: top; }
+        .ttd-img-wrapper { height: 60px; }
+        .ttd-img { width: 220px; height: auto; }
+        .nama-kades { font-weight: bold; }
+        .barcode { margin-top: 8px; }
+        .barcode img { width: 70px; height: auto; }
+        .catatan { font-size: 9pt; margin-top: 12px; }
     </style>
 </head>
 <body>
@@ -119,6 +72,11 @@
         <h3>SURAT PERNYATAAN</h3>
     </div>
 
+    <!-- NOMOR SURAT -->
+    <div class="nomor-surat">
+        Nomor: {{ $data->nomor_surat ?? '480 / --- / 409.41.2 / ' . now()->year }}
+    </div>
+
     <!-- DATA PEMOHON -->
     <p class="tulisan"><strong>Yang bertanda tangan di bawah ini, Saya:</strong></p>
 
@@ -144,10 +102,10 @@
     </table>
 
     <div class="tulisan">
-        Dan saya menyatakan bahwa data yang saya sampaikan sesuai dengan kenyataan sebenarnya, apabila dikemudian hari ternyata diketahui bahwa data yang saya sampaikan ini tidak benar maka saya bersedia diproses secara hukum sesuai dengan peraturan perundang-undangan dan dokumen yang diterbitkan akibat dari pernyataan ini menjadi tidak sah.
+        Dan saya menyatakan bahwa data yang saya sampaikan sesuai dengan kenyataan sebenarnya. Apabila dikemudian hari ternyata diketahui bahwa data yang saya sampaikan ini tidak benar, maka saya bersedia diproses secara hukum sesuai dengan peraturan perundang-undangan dan dokumen yang diterbitkan akibat dari pernyataan ini menjadi tidak sah.
     </div>
 
-    <!-- TANDA TANGAN (sama persis seperti contoh Anak Seorang Nama Ibu) -->
+    <!-- TANDA TANGAN -->
     <table class="ttd-table">
         <tr>
             <td class="ttd-spacer"></td>
@@ -171,7 +129,7 @@
     </table>
 
     <div class="catatan">
-        <em>*Jenis Data Pendukung di isi Ijazah/Surat Keterangan Pengganti Ijazah</em>
+        <em>*Jenis Data Pendukung diisi dengan Ijazah / Surat Keterangan Pengganti Ijazah</em>
     </div>
 
 </body>
