@@ -32,7 +32,8 @@
     <!-- Header Area -->
     <div class="header-area" id="headerArea">
         <div class="container">
-            <div class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
+            <div
+                class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
                 <div class="back-button">
                     <a href="{{ route('surat.pengajuan_surat') }}"><i class="bi bi-arrow-left-short"></i></a>
                 </div>
@@ -49,7 +50,7 @@
 
             @php
                 $rawTitles = [
-                    'SURAT PERNYATAAN Kepemilikan Dokumen  Asli',  // ← BARU
+                    'SURAT PERNYATAAN Kepemilikan Dokumen  Asli', // ← BARU
                     'SURAT PERNYATAAN KESANGGUPAN',
                     'Surat Pernyataan Tidak memiliki kartu JAMKESMAS,ASKES atau JKN',
                     'Surat Pernyataan Miskin',
@@ -78,7 +79,8 @@
                 $routeMap = [
                     'SURAT PERNYATAAN KEPEMILIKAN DOKUMEN ASLI' => 'surat.user_pernyataan_kepemilikan_dokumen',
                     'SURAT PERNYATAAN KESANGGUPAN' => 'surat.user_pernyataan_kesanggupan',
-                    'SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS,ASKES ATAU JKN' => 'surat.usertidakpunyakartu.index',
+                    'SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS,ASKES ATAU JKN' =>
+                        'surat.pernyataan_tidak_punya_kartu_jkn.user', // ← GANTI INI
                     'SURAT PERNYATAAN MISKIN' => 'surat.userpernyataanmiskin.index',
                     'SURAT IJIN KELUARGA' => 'surat.userijinkeluarga.index',
                     'SURAT KUASA' => 'surat.userkuasa',
@@ -94,6 +96,8 @@
                     'SURAT PERMOHONAN TEBANG POHON' => 'surat.usertembangpohon.index',
                     'SURAT KETERANGAN USAHA' => 'surat.userusaha',
                     'SURAT KETERANGAN DESA MISKIN' => 'surat.usermiskindesa',
+                    'SURAT PERNYATAAN MISKIN' => 'surat.pernyataan_miskin.user',
+                    'SURAT IJIN KELUARGA' => 'surat.ijin_keluarga.user',
                 ];
 
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
@@ -124,7 +128,8 @@
                                 @if ($href)
                                     <a class="btn m-1 btn-creative btn-light" href="{{ $href }}">Buat Surat</a>
                                 @else
-                                    <button class="btn m-1 btn-creative btn-light" type="button" disabled>Maintance</button>
+                                    <button class="btn m-1 btn-creative btn-light" type="button"
+                                        disabled>Maintance</button>
                                 @endif
                             </div>
                         </div>

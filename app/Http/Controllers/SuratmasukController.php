@@ -29,6 +29,7 @@ use App\Models\surat_pernyataan_pembetulan_data_tidak_merubah_lagi;
 use App\Models\surat_pernyataan_perubahan_data_pendidikan;
 use App\Models\surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian;
 use App\Models\surat_sptjm_kematian;
+use App\Models\SuratIjinKeluarga;
 use App\Models\SuratKeteranganDesaMiskin;
 use App\Models\SuratKeteranganDesaSebagaiPenduduk;
 use App\Models\SuratKeteranganDomisiliLembaga;
@@ -40,6 +41,8 @@ use App\Models\SuratKeteranganUsaha;
 use App\Models\SuratPengantarSkck;
 use App\Models\SuratPernyataanKepemilikanDokumenAsli;
 use App\Models\SuratPernyataanKesanggupan;
+use App\Models\SuratPernyataanMiskin;
+use App\Models\SuratPernyataanTidakPunyaKartuJkn;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -103,9 +106,12 @@ class SuratmasukController extends Controller
         $kepemilikanAset = SuratKeteranganKepemilikanAset::where('status_verif', '!=', 'Terverifikasi')->get();
         $pernyataanKepemilikanDokumen = SuratPernyataanKepemilikanDokumenAsli::where('status_verif', '!=', 'Terverifikasi')->get();
         $kesanggupan = SuratPernyataanKesanggupan::where('status_verif', '!=', 'Terverifikasi')->get();
-
-
-
+        // Tambahkan setelah baris kesanggupan
+        $tidakPunyaKartuJkn = SuratPernyataanTidakPunyaKartuJkn::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah baris tidakPunyaKartuJkn
+        $pernyataanMiskin = SuratPernyataanMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah tidakPunyaKartuJkn
+        $ijinKeluarga = SuratIjinKeluarga::where('status_verif', '!=', 'Terverifikasi')->get();
 
         $data = collect()
             ->merge($pernyataan_tidak_bisa_ktp)
@@ -113,6 +119,7 @@ class SuratmasukController extends Controller
             ->merge($numpang_kk)
             ->merge($tidakmampu)
             ->merge($namaalias)
+            ->merge($pernyataanMiskin)
             ->merge($namaalias_satu_ortu)
             ->merge($pernyataandanjaminan)
             ->merge($pernah_menikah)
@@ -146,8 +153,10 @@ class SuratmasukController extends Controller
             ->merge($desaPenduduk)
             ->merge($domisiliLembaga)
             ->merge($domisiliWarga)
+            ->merge($ijinKeluarga)
             ->merge($kepemilikanAset)
-            ->merge($pernyataanKepemilikanDokumen);  // ← BARU
+            ->merge($tidakPunyaKartuJkn)
+            ->merge($pernyataanKepemilikanDokumen); // ← BARU
 
 
         return view('surat.suratkeluar', compact('data'));
@@ -205,18 +214,23 @@ class SuratmasukController extends Controller
         $kepemilikanAset = SuratKeteranganKepemilikanAset::where('status_verif', '!=', 'Terverifikasi')->get();
         $pernyataanKepemilikanDokumen = SuratPernyataanKepemilikanDokumenAsli::where('status_verif', '!=', 'Terverifikasi')->get(); // atau 'Terverifikasi' untuk arsip
         $kesanggupan = SuratPernyataanKesanggupan::where('status_verif', '!=', 'Terverifikasi')->get();
-
-
-
+        // Tambahkan setelah baris kesanggupan
+        $tidakPunyaKartuJkn = SuratPernyataanTidakPunyaKartuJkn::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah baris tidakPunyaKartuJkn
+        $pernyataanMiskin = SuratPernyataanMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah tidakPunyaKartuJkn
+        $ijinKeluarga = SuratIjinKeluarga::where('status_verif', '!=', 'Terverifikasi')->get();
 
         $data = collect()
             ->merge($pernyataan_tidak_bisa_ktp)
             ->merge($keterangan_kehilangan)
             ->merge($numpang_kk)
+            ->merge($pernyataanMiskin)
             ->merge($tidakmampu)
             ->merge($namaalias)
             ->merge($namaalias_satu_ortu)
             ->merge($pernyataandanjaminan)
+            ->merge($ijinKeluarga)
             ->merge($pernah_menikah)
             ->merge($kematian_desa)
             ->merge($ahliwaris)
@@ -249,6 +263,7 @@ class SuratmasukController extends Controller
             ->merge($domisiliLembaga)
             ->merge($domisiliWarga)
             ->merge($kepemilikanAset)
+            ->merge($tidakPunyaKartuJkn)
             ->merge($pernyataanKepemilikanDokumen);   // ← BARU  // ← BARU
 
         return view('surat.arsipsuratkeluar', compact('data'));
@@ -281,6 +296,10 @@ class SuratmasukController extends Controller
         // Formulir Pengajuan User ID (F-3.01)
         if ($kategori === 'adminduk' && Str::contains($jenis_form, 'formulir_pengajuan_user_id')) {
             return redirect()->route('surat.formulir_pengajuan_user_id.index');
+        }
+
+        if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_miskin') {
+            return redirect()->route('surat.pernyataan_miskin.index');
         }
 
         if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_ahli_waris_desa') {
@@ -427,6 +446,10 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.desa_penduduk.index');
         }
 
+        if ($kategori === 'pernyataan' && $jenis_form === 'surat_ijin_keluarga') {
+            return redirect()->route('surat.ijin_keluarga.index');
+        }
+
         if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_domisili_lembaga') {
             return redirect()->route('surat.domisili_lembaga.index');
         }
@@ -437,6 +460,17 @@ class SuratmasukController extends Controller
 
         if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_kesanggupan') {
             return redirect()->route('surat.pernyataan_kesanggupan.index');
+        } // ← TAMBAHKAN DI BAWAH INI
+
+
+        if (
+            $kategori === 'pernyataan' &&
+            ($jenis_form === 'surat_pernyataan_tidak_punya_kartu_jkn' ||
+                Str::contains($jenis_form, 'jamkesmas') ||
+                Str::contains($jenis_form, 'tidak_punya_kartu'))
+        ) {
+
+            return redirect()->route('surat.pernyataan_tidak_punya_kartu_jkn.index');
         }
 
         if (
@@ -498,6 +532,39 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama_lengkap ?? 'desa_penduduk', '_');
 
             return $pdf->download('surat_keterangan_desa_sebagai_penduduk_' . $filename . '.pdf');
+        }
+
+        // SURAT PERNYATAAN MISKIN
+        if (
+            $jenis === 'surat_pernyataan_miskin' ||
+            $jenis === 'pernyataan_miskin' ||
+            $jenis === 'suratpernyataanmiskin'
+        ) {
+            $data = SuratPernyataanMiskin::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_pernyataan_miskin', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'pernyataan_miskin', '_');
+
+            return $pdf->download('surat_pernyataan_miskin_' . $filename . '.pdf');
+        }
+
+        // SURAT IJIN KELUARGA
+        if (
+            $jenis === 'surat_ijin_keluarga' ||
+            $jenis === 'ijin_keluarga' ||
+            $jenis === 'suratijin_keluarga' ||
+            $jenis === 'suratijinkeluarga'
+        ) {
+            $data = SuratIjinKeluarga::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_ijin_keluarga', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_suami ?? 'ijin_keluarga', '_');
+
+            return $pdf->download('surat_ijin_keluarga_' . $filename . '.pdf');
         }
 
         if (in_array($jenis, ['surat_keterangan_kepemilikan_aset', 'kepemilikan_aset', 'suratketerangankepemilikanaset'])) {
@@ -797,6 +864,32 @@ class SuratmasukController extends Controller
 
             return $pdf->download('surat_pernyataan_kesanggupan_' . $filename . '.pdf');
         }
+
+        // ================================================
+        // SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS
+        // ================================================
+        // ================================================
+        // SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS
+        // ================================================
+        if (
+            $jenis === 'surat_pernyataan_tidak_punya_kartu_jkn' ||
+            $jenis === 'pernyataan_tidak_punya_kartu_jkn' ||
+            $jenis === 'tidak_punya_kartu' ||
+            $jenis === 'jamkesmas' ||
+            $jenis === 'jkn' ||
+            $jenis === 'suratpernyataantidakpunyakartujkn' ||   // ← TAMBAHKAN INI
+            $jenis === 'suratpernyataantidakpunyakartu'          // ← TAMBAHKAN INI
+        ) {
+            $data = SuratPernyataanTidakPunyaKartuJkn::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_pernyataan_tidak_punya_kartu_jkn', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'pernyataan_kartu', '_');
+
+            return $pdf->download('surat_pernyataan_tidak_punya_kartu_' . $filename . '.pdf');
+        }
+
         if ($jenis === 'suratkuasa') {
             $data = surat_kuasa::findOrFail($id);
             $pdf  = Pdf::loadView('surat.pdf_surat_kuasa', compact('data'))->setPaper('A4');
