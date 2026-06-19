@@ -12,6 +12,7 @@ use App\Models\surat_keterangan_harga_kepemilikan_tanah;
 use App\Models\surat_keterangan_kehilangan;
 use App\Models\surat_keterangan_kematian_desa;
 use App\Models\surat_keterangan_numpang_nikah;
+use App\Models\surat_keterangan_penghasilan;
 use App\Models\surat_kuasa;
 use App\Models\surat_permohonan_pembukaan_rekening;
 use App\Models\surat_permohonan_pengantar_keabsahan_akta_kelahiran;
@@ -29,10 +30,16 @@ use App\Models\surat_pernyataan_perubahan_data_pendidikan;
 use App\Models\surat_pernyataan_tidak_bisa_melampirkan_ktp_kematian;
 use App\Models\surat_sptjm_kematian;
 use App\Models\SuratKeteranganDesaMiskin;
+use App\Models\SuratKeteranganDesaSebagaiPenduduk;
+use App\Models\SuratKeteranganDomisiliLembaga;
+use App\Models\SuratKeteranganDomisiliWarga;
+use App\Models\SuratKeteranganKepemilikanAset;
 use App\Models\SuratKeteranganMiskinSkm;
 use App\Models\suratketerangantidakmampu;
 use App\Models\SuratKeteranganUsaha;
 use App\Models\SuratPengantarSkck;
+use App\Models\SuratPernyataanKepemilikanDokumenAsli;
+use App\Models\SuratPernyataanKesanggupan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -64,7 +71,6 @@ class SuratmasukController extends Controller
         $pernah_menikah = surat_keterangan_desa_pernah_menikah::where('status_verif', '!=', 'Terverifikasi')->get();
         $kematian_desa             = surat_keterangan_kematian_desa::where('status_verif', '!=', 'Terverifikasi')->get(); // ⬅️ baru
         $ahliwaris = surat_keterangan_ahli_waris::where('status_verif', '!=', 'Terverifikasi')->get();
-        $kesanggupan               = surat_pernyataan_kesanggupan::where('status_verif', '!=', 'Terverifikasi')->get(); // ⬅️ TAMBAH INI
         $kuasa = surat_kuasa::where('status_verif', '!=', 'Terverifikasi')->get();
         $bukaanrekening = surat_permohonan_pembukaan_rekening::where('status_verif', '!=', 'Terverifikasi')->get();
         $belumAkta = surat_pernyataan_belum_akta::where('status_verif', '!=', 'Terverifikasi')->get();
@@ -86,8 +92,17 @@ class SuratmasukController extends Controller
         $numpangNikah = surat_keterangan_numpang_nikah::where('status_verif', '!=', 'Terverifikasi')->get();
         $usaha = SuratKeteranganUsaha::where('status_verif', '!=', 'Terverifikasi')->get();
         $miskinDesa = SuratKeteranganDesaMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
-       $skm = SuratKeteranganMiskinSkm::where('status_verif', '!=', 'Terverifikasi')->get();
-
+        $skm = SuratKeteranganMiskinSkm::where('status_verif', '!=', 'Terverifikasi')->get();
+        $ahliwarisDesa = \App\Models\surat_keterangan_ahli_waris_desa::where('status_verif', '!=', 'Terverifikasi')->get();
+        $ghoib = \App\Models\surat_keterangan_ghoib::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah baris $ghoib = ...
+        $penghasilan = surat_keterangan_penghasilan::where('status_verif', '!=', 'Terverifikasi')->get();
+        $desaPenduduk = SuratKeteranganDesaSebagaiPenduduk::where('status_verif', '!=', 'Terverifikasi')->get(); // untuk suratkeluar
+        $domisiliLembaga = SuratKeteranganDomisiliLembaga::where('status_verif', '!=', 'Terverifikasi')->get();
+        $domisiliWarga = SuratKeteranganDomisiliWarga::where('status_verif', '!=', 'Terverifikasi')->get(); // untuk suratkeluar
+        $kepemilikanAset = SuratKeteranganKepemilikanAset::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pernyataanKepemilikanDokumen = SuratPernyataanKepemilikanDokumenAsli::where('status_verif', '!=', 'Terverifikasi')->get();
+        $kesanggupan = SuratPernyataanKesanggupan::where('status_verif', '!=', 'Terverifikasi')->get();
 
 
 
@@ -124,7 +139,15 @@ class SuratmasukController extends Controller
             ->merge($numpangNikah)
             ->merge($usaha)
             ->merge($miskinDesa)
-            ->merge($skm);
+            ->merge($skm)
+            ->merge($ahliwarisDesa)
+            ->merge($ghoib)
+            ->merge($penghasilan)
+            ->merge($desaPenduduk)
+            ->merge($domisiliLembaga)
+            ->merge($domisiliWarga)
+            ->merge($kepemilikanAset)
+            ->merge($pernyataanKepemilikanDokumen);  // ← BARU
 
 
         return view('surat.suratkeluar', compact('data'));
@@ -151,7 +174,6 @@ class SuratmasukController extends Controller
         $pernah_menikah = surat_keterangan_desa_pernah_menikah::where('status_verif', 'Terverifikasi')->get();
         $kematian_desa             = surat_keterangan_kematian_desa::where('status_verif', 'Terverifikasi')->get(); // ⬅️ baru
         $ahliwaris = surat_keterangan_ahli_waris::where('status_verif', 'Terverifikasi')->get();
-        $kesanggupan               = surat_pernyataan_kesanggupan::where('status_verif', 'Terverifikasi')->get(); // ⬅️ TAMBAH INI
         $kuasa = surat_kuasa::where('status_verif', 'Terverifikasi')->get();
         $bukaanrekening = surat_permohonan_pembukaan_rekening::where('status_verif', 'Terverifikasi')->get();
         $belumAkta = surat_pernyataan_belum_akta::where('status_verif', 'Terverifikasi')->get();
@@ -173,6 +195,18 @@ class SuratmasukController extends Controller
         $usaha = SuratKeteranganUsaha::where('status_verif', '!=', 'Terverifikasi')->get();
         $miskinDesa = SuratKeteranganDesaMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
         $skm = SuratKeteranganMiskinSkm::where('status_verif', '!=', 'Terverifikasi')->get();
+        $ahliwarisDesa = \App\Models\surat_keterangan_ahli_waris_desa::where('status_verif', '!=', 'Terverifikasi')->get();
+        $ghoib = \App\Models\surat_keterangan_ghoib::where('status_verif', '!=', 'Terverifikasi')->get();
+        // Tambahkan setelah baris $ghoib = ...
+        $penghasilan = surat_keterangan_penghasilan::where('status_verif', '!=', 'Terverifikasi')->get();
+        $desaPenduduk = SuratKeteranganDesaSebagaiPenduduk::where('status_verif', '!=', 'Terverifikasi')->get(); // untuk suratkeluar
+        $domisiliLembaga = SuratKeteranganDomisiliLembaga::where('status_verif', '!=', 'Terverifikasi')->get();
+        $domisiliWarga = SuratKeteranganDomisiliWarga::where('status_verif', '!=', 'Terverifikasi')->get(); // untuk suratkeluar
+        $kepemilikanAset = SuratKeteranganKepemilikanAset::where('status_verif', '!=', 'Terverifikasi')->get();
+        $pernyataanKepemilikanDokumen = SuratPernyataanKepemilikanDokumenAsli::where('status_verif', '!=', 'Terverifikasi')->get(); // atau 'Terverifikasi' untuk arsip
+        $kesanggupan = SuratPernyataanKesanggupan::where('status_verif', '!=', 'Terverifikasi')->get();
+
+
 
 
         $data = collect()
@@ -207,7 +241,15 @@ class SuratmasukController extends Controller
             ->merge($numpangNikah)
             ->merge($usaha)
             ->merge($miskinDesa)
-            ->merge($skm);
+            ->merge($skm)
+            ->merge($ahliwarisDesa)
+            ->merge($ghoib)
+            ->merge($penghasilan)
+            ->merge($desaPenduduk)
+            ->merge($domisiliLembaga)
+            ->merge($domisiliWarga)
+            ->merge($kepemilikanAset)
+            ->merge($pernyataanKepemilikanDokumen);   // ← BARU  // ← BARU
 
         return view('surat.arsipsuratkeluar', compact('data'));
     }
@@ -241,6 +283,14 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.formulir_pengajuan_user_id.index');
         }
 
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_ahli_waris_desa') {
+            return redirect()->route('surat.ahliwarisdesa.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_penghasilan') {
+            return redirect()->route('surat.penghasilan.index');   // sesuaikan nama route loe
+        }
+
         // Batal Pindah Penduduk
         if ($kategori === 'adminduk' && Str::contains($jenis_form, 'batal_pindah')) {
             return redirect()->route('surat.batal_pindah.index');
@@ -249,6 +299,10 @@ class SuratmasukController extends Controller
         // Lainnya (Adminduk)
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_pembetulan_data_tidak_merubah_lagi') {
             return redirect()->route('surat.pembetulandata.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_domisili_warga') {
+            return redirect()->route('surat.domisili_warga.index');
         }
 
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_mengizinkan_ikut_kk_suami-istri-keluarga') {
@@ -299,6 +353,10 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.sptjm.index');
         }
 
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_ghoib') {
+            return redirect()->route('surat.ghoib.index');
+        }
+
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_perubahan_data_pendidikan') {
             return redirect()->route('surat.perubahdatapendidikan.index');
         }
@@ -340,12 +398,13 @@ class SuratmasukController extends Controller
         // =====================================================
 
         if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_kesanggupan') {
-            return redirect()->route('surat.kesanggupan.index');
+            return redirect()->route('surat.pernyataan_kesanggupan.index');
         }
 
         if ($kategori === 'pernyataan' && $jenis_form === 'surat__kuasa') {
             return redirect()->route('surat.kuasa.index');
         }
+
 
         if ($kategori === 'pernyataan' && $jenis_form === 'permohonan_pembukaan_rekening_tabungan') {
             return redirect()->route('surat.bukaanrekening.index');
@@ -364,7 +423,30 @@ class SuratmasukController extends Controller
         if ($kategori === 'keterangan' && Str::contains($jenis_form, 'surat_keterangan_miskin')) {
             return redirect()->route('surat.skm.index');
         }
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_desa_sebagai_penduduk') {
+            return redirect()->route('surat.desa_penduduk.index');
+        }
 
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_domisili_lembaga') {
+            return redirect()->route('surat.domisili_lembaga.index');
+        }
+
+        if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_kepemilikan_aset') {
+            return redirect()->route('surat.kepemilikan_aset.index');
+        }
+
+        if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_kesanggupan') {
+            return redirect()->route('surat.pernyataan_kesanggupan.index');
+        }
+
+        if (
+            $kategori === 'pernyataan' &&
+            (Str::contains($jenis_form, 'kepemilikan_dokumen_asli') ||
+                $jenis_form === 'surat_pernyataan_kepemilikan_dokumen_asli')
+        ) {
+
+            return redirect()->route('surat.pernyataan_kepemilikan_dokumen.index');
+        }
         // Jika tidak ada yang cocok
         return redirect()->back()->withErrors(['jenis_form' => 'Form tidak ditemukan.']);
     }
@@ -401,6 +483,85 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama ?? 'dokumen', '_');
             return $pdf->download('pdf_pernyataan_mengizinkan_ikut_kk_' . $filename . '.pdf');
         }
+
+        if (
+            $jenis === 'suratketerangandesasebagaipenduduk' ||
+            $jenis === 'surat_keterangan_desa_sebagai_penduduk' ||
+            $jenis === 'desa_penduduk' ||
+            $jenis === 'desa-sebagai-penduduk'
+        ) {
+            $data = SuratKeteranganDesaSebagaiPenduduk::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_desa_sebagai_penduduk', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_lengkap ?? 'desa_penduduk', '_');
+
+            return $pdf->download('surat_keterangan_desa_sebagai_penduduk_' . $filename . '.pdf');
+        }
+
+        if (in_array($jenis, ['surat_keterangan_kepemilikan_aset', 'kepemilikan_aset', 'suratketerangankepemilikanaset'])) {
+            $data = SuratKeteranganKepemilikanAset::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_kepemilikan_aset', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'kepemilikan_aset', '_');
+
+            return $pdf->download('surat_keterangan_kepemilikan_aset_' . $filename . '.pdf');
+        }
+
+        if (in_array($jenis, ['surat_pernyataan_kepemilikan_dokumen_asli', 'pernyataan_kepemilikan_dokumen', 'suratpernyataankepemilikandokumenasli'])) {
+            $data = SuratPernyataanKepemilikanDokumenAsli::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_pernyataan_kepemilikan_dokumen_asli', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'pernyataan_dokumen', '_');
+
+            return $pdf->download('surat_pernyataan_kepemilikan_dokumen_asli_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_keterangan_penghasilan' ||
+            $jenis === 'suratketeranganpenghasilan' ||
+            $jenis === 'penghasilan'
+        ) {
+            $data = surat_keterangan_penghasilan::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_penghasilan', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_lengkap ?? 'keterangan_penghasilan', '_');
+
+            return $pdf->download('surat_keterangan_penghasilan_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_keterangan_domisili_warga' ||
+            $jenis === 'domisili_warga' ||
+            $jenis === 'suratketerangandomisiliwarga'
+        ) {
+            $data = SuratKeteranganDomisiliWarga::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_domisili_warga', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_lengkap ?? 'domisili_warga', '_');
+
+            return $pdf->download('surat_keterangan_domisili_warga_' . $filename . '.pdf');
+        }
+
+        if ($jenis === 'surat_keterangan_ghoib' || $jenis === 'ghoib') {
+            $data = \App\Models\surat_keterangan_ghoib::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_ghoib', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_pemohon ?? 'ghoib', '_');
+
+            return $pdf->download('surat_keterangan_ghoib_' . $filename . '.pdf');
+        }
         if (
             $jenis === 'suratketerangandesamiskin' ||
             $jenis === 'surat_keterangan_desa_miskin' ||
@@ -414,6 +575,21 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama ?? 'surat_keterangan_desa_miskin', '_');
 
             return $pdf->download('surat_keterangan_desa_miskin_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_keterangan_ahli_waris_desa' ||
+            $jenis === 'ahliwarisdesa' ||
+            $jenis === 'suratketeranganahliwarisdesa'
+        ) {
+            $data = \App\Models\surat_keterangan_ahli_waris_desa::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_ahli_waris_desa', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_almarhum ?? 'ahli_waris_desa', '_');
+
+            return $pdf->download('surat_keterangan_ahli_waris_desa_' . $filename . '.pdf');
         }
 
         if (
@@ -606,14 +782,21 @@ class SuratmasukController extends Controller
             $filename = $data->nama_lengkap ?? 'dokumen';
             return $pdf->download('pdf_surat_keterangan_ahli_waris_' . $filename . '.pdf');
         }
+        if (
+            $jenis === 'surat_pernyataan_kesanggupan' ||
+            $jenis === 'pernyataan_kesanggupan' ||
+            $jenis === 'suratpernyataankesanggupan' ||   // ← TAMBAHKAN INI
+            $jenis === 'kesanggupan'
+        ) {
+            $data = SuratPernyataanKesanggupan::findOrFail($id);
 
-        if ($jenis === 'suratpernyataankesanggupan') {
-            $data = surat_pernyataan_kesanggupan::findOrFail($id);
-            $pdf  = Pdf::loadView('surat.pdf_surat_pernyataan_kesanggupan', compact('data'))->setPaper('A4');
-            $filename = $data->nama ?? 'dokumen';
-            return $pdf->download('pdf_surat_pernyataan_kesanggupan_' . $filename . '.pdf');
+            $pdf = Pdf::loadView('surat.pdf_surat_pernyataan_kesanggupan', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'kesanggupan', '_');
+
+            return $pdf->download('surat_pernyataan_kesanggupan_' . $filename . '.pdf');
         }
-
         if ($jenis === 'suratkuasa') {
             $data = surat_kuasa::findOrFail($id);
             $pdf  = Pdf::loadView('surat.pdf_surat_kuasa', compact('data'))->setPaper('A4');
@@ -698,6 +881,18 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama ?? 'surat_keterangan_usaha', '_');
 
             return $pdf->download('surat_keterangan_usaha_' . $filename . '.pdf');
+        }
+
+        if (
+            $jenis === 'surat_keterangan_domisili_lembaga' ||
+            $jenis === 'domisili_lembaga' ||
+            $jenis === 'suratketerangandomisililembaga'
+        ) {
+            $data = SuratKeteranganDomisiliLembaga::findOrFail($id);
+            $pdf = Pdf::loadView('surat.pdf_surat_keterangan_domisili_lembaga', compact('data'))
+                ->setPaper('A4', 'portrait');
+            $filename = Str::slug($data->nama_lembaga ?? 'domisili_lembaga', '_');
+            return $pdf->download('surat_keterangan_domisili_lembaga_' . $filename . '.pdf');
         }
 
 

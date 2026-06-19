@@ -84,8 +84,6 @@
                                                 'App\Models\surat_keterangan_kematian_desa'
                                                     => 'SuratKeteranganKematianDesa',
                                                 'App\Models\surat_keterangan_ahli_waris' => 'SuratKeteranganAhliWaris',
-                                                'App\Models\surat_pernyataan_kesanggupan'
-                                                    => 'SuratPernyataanKesanggupan',
                                                 'App\Models\surat_kuasa' => 'SuratKuasa',
                                                 'App\Models\surat_permohonan_pembukaan_rekening'
                                                     => 'PermohonanPembukaanRekening',
@@ -118,7 +116,31 @@
                                                 'App\Models\SuratKeteranganUsaha' => 'SuratKeteranganUsaha',
                                                 'App\Models\SuratKeteranganDesaMiskin' => 'SuratKeteranganDesaMiskin',
                                                 'App\Models\SuratKeteranganMiskinSkm' => 'SuratKeteranganMiskinSkm',
-
+                                                'App\Models\surat_keterangan_penghasilan'
+                                                    => 'SuratKeteranganPenghasilan',
+                                                'App\Models\SuratKeteranganPenghasilan' => 'SuratKeteranganPenghasilan',
+                                                'App\Models\SuratKeteranganDesaSebagaiPenduduk'
+                                                    => 'SuratKeteranganDesaSebagaiPenduduk',
+                                                'App\Models\surat_keterangan_desa_sebagai_penduduk'
+                                                    => 'SuratKeteranganDesaSebagaiPenduduk',
+                                                'App\Models\SuratKeteranganDomisiliLembaga'
+                                                    => 'SuratKeteranganDomisiliLembaga',
+                                                'App\Models\surat_keterangan_domisili_lembaga'
+                                                    => 'SuratKeteranganDomisiliLembaga',
+                                                'App\Models\SuratKeteranganDomisiliWarga'
+                                                    => 'SuratKeteranganDomisiliWarga', // ← BARU
+                                                'App\Models\surat_keterangan_domisili_warga'
+                                                    => 'SuratKeteranganDomisiliWarga', // ← BARU
+                                                'App\Models\SuratKeteranganKepemilikanAset'
+                                                    => 'SuratKeteranganKepemilikanAset', // ← BARU
+                                                'App\Models\surat_keterangan_kepemilikan_aset'
+                                                    => 'SuratKeteranganKepemilikanAset',
+                                                'App\Models\SuratPernyataanKepemilikanDokumenAsli'
+                                                    => 'SuratPernyataanKepemilikanDokumenAsli',
+                                                'App\Models\surat_pernyataan_kepemilikan_dokumen_asli'
+                                                    => 'SuratPernyataanKepemilikanDokumenAsli',
+                                                'App\Models\surat_pernyataan_kesanggupan'
+                                                    => 'SuratPernyataanKesanggupan',
                                                 default => class_basename($item),
                                             };
 
@@ -144,14 +166,32 @@
                                                 @if ($jenisSurat === 'SuratKeteranganKehilangan')
                                                     <a href="{{ route('suratkehilangan.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif($jenisSurat === 'SuratKeteranganKepemilikanAset')
+                                                    <a href="{{ route('surat.kepemilikan_aset.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
+                                                    <a href="{{ route('surat.pernyataan_kesanggupan.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratPernyataanKepemilikanDokumenAsli')
+                                                    <a href="{{ route('surat.pernyataan_kepemilikan_dokumen.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif($jenisSurat === 'SuratKeteranganDomisiliWarga')
+                                                    <a href="{{ route('surat.domisili_warga.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratKeteranganUsaha')
                                                     <a href="{{ route('surat.usaha.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratKeteranganDesaMiskin')
                                                     <a href="{{ route('surat.miskindesa.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratKeteranganDesaSebagaiPenduduk')
+                                                    <a href="{{ route('surat.desa_penduduk.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratKeteranganMiskinSkm')
                                                     <a href="{{ route('surat.skm.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliLembaga')
+                                                    <a href="{{ route('surat.domisili_lembaga.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif (
                                                     $jenisSurat === 'SuratPermohonanPengantarKeabsahanAktaKelahiran' ||
@@ -184,9 +224,6 @@
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratKeteranganAhliWaris')
                                                     <a href="{{ route('surat.ahliwaris.edit', $item->_id) }}"
-                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
-                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
-                                                    <a href="{{ route('surat.kesanggupan.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'SuratKuasa')
                                                     <a href="{{ route('surat.kuasa.edit', $item->_id) }}"
@@ -240,8 +277,17 @@
                                                 @elseif ($jenisSurat === 'surat_sptjm_suami_istri')
                                                     <a href="{{ route('surat.sptjm_suami_istri.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'SuratKeteranganPenghasilan')
+                                                    <a href="{{ route('surat.penghasilan.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @elseif ($jenisSurat === 'surat_keterangan_numpang_nikah')
                                                     <a href="{{ route('surat.numpangnikah.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'surat_keterangan_ahli_waris_desa')
+                                                    <a href="{{ route('surat.ahliwarisdesa.edit', $item->_id) }}"
+                                                        class="btn btn-primary btn-sm ms-1">Edit</a>
+                                                @elseif ($jenisSurat === 'surat_keterangan_ghoib')
+                                                    <a href="{{ route('surat.ghoib.edit', $item->_id) }}"
                                                         class="btn btn-primary btn-sm ms-1">Edit</a>
                                                 @endif
                                             </td>
@@ -254,10 +300,16 @@
                                                     $jenisSurat === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak' ||
                                                         $jenisSurat === 'SuratPermohonanPengantarKeabsahanAktaKelahiranAnak')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganKepemilikanAset')
+                                                    {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_keterangan_numpang_nikah')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganPenghasilan')
+                                                    {{ $item->nama_lengkap ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanNumpangKk')
                                                     {{ $item->nama_pemilik_kk ?? '-' }}
+                                                @elseif($jenisSurat === 'SuratKeteranganDomisiliWarga')
+                                                    {{ $item->nama_lengkap ?? '-' }}
                                                 @elseif (
                                                     $jenisSurat === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran' ||
                                                         $jenisSurat === 'SuratPermohonanPengantarKeabsahanAktaKelahiran')
@@ -265,7 +317,8 @@
                                                 @elseif ($jenisSurat === 'surat_keterangan_tidakmampu')
                                                     {{ $item->nama_lengkap ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_pernyataan_memilih_nama_alias')
-                                                    {{ $item->nama_pemilih ?? ($item->nama ?? '-') }} {{-- ⬅️ pakai nama_pemilih; fallback ke nama --}}
+                                                    {{ $item->nama_pemilih ?? ($item->nama ?? '-') }}
+                                                    {{-- ⬅️ pakai nama_pemilih; fallback ke nama --}}
                                                 @elseif ($jenisSurat === 'surat_pernyataan_memilih_nama_alias_satu_orang_tua')
                                                     {{-- <<< baru --}}
                                                     {{ $item->nama_menyatakan ?? ($item->nama ?? '-') }}
@@ -281,8 +334,8 @@
                                                     {{ $item->nama_lengkap ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganUsaha')
                                                     {{ $item->nama ?? '-' }}
-                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
-                                                    {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliLembaga')
+                                                    {{ $item->nama_lembaga ?? ($item->nama_pengurus ?? '-') }}
                                                 @elseif ($jenisSurat === 'SuratKuasa')
                                                     {{ $item->p1_nama_lengkap ?? '-' }}
                                                 @elseif ($jenisSurat === 'PermohonanPembukaanRekening')
@@ -292,6 +345,8 @@
                                                 @elseif ($jenisSurat === 'SuratPernyataanBelumAkta')
                                                     {{ $item->ybt_nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanBedaNamaBukuNikah')
+                                                    {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanKepemilikanDokumenAsli')
                                                     {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_pernyataan_anak_seorang_nama_ibu')
                                                     {{ $item->nama ?? '-' }}
@@ -307,10 +362,14 @@
                                                     {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanPembetulanDataTidakMerubahLagi')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
+                                                    {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanMengizinkanIkutKk')
                                                     {{ $item->nama ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_pernyataan_batal_pindah_penduduk')
                                                     {{ $item->nama ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDesaSebagaiPenduduk')
+                                                    {{ $item->nama_lengkap ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_formulir_pengajuan_user_id')
                                                     {{ $item->nama_pemohon ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_sptjm_suami_istri')
@@ -327,7 +386,11 @@
                                                     {{ $item->nik_pemilik_kk ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_keterangan_tidakmampu')
                                                     {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanKepemilikanDokumenAsli')
+                                                    {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganDesaMiskin')
+                                                    {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
                                                     {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_formulir_pengajuan_user_id')
                                                     {{ $item->nik_pemohon ?? '-' }}
@@ -340,20 +403,28 @@
                                                     {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanDanJaminan')
                                                     {{ $item->nik_pembuat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDesaSebagaiPenduduk')
+                                                    {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliWarga')
+                                                    {{ $item->nik ?? '-' }}
                                                 @elseif (
                                                     $jenisSurat === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran' ||
                                                         $jenisSurat === 'SuratPermohonanPengantarKeabsahanAktaKelahiran')
                                                     {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganKepemilikanAset')
+                                                    {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganPenghasilan')
+                                                    {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganUsaha')
                                                     {{ $item->nik ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliLembaga')
+                                                    {{ $item->nik_pengurus ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganDesaPernahMenikah')
                                                     {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganKematianDesa')
                                                     {{ $item->NIK ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganAhliWaris')
                                                     {{ $item->no_ktp ?? '-' }}
-                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
-                                                    {{ $item->nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKuasa')
                                                     {{ $item->p1_nik ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanBelumAkta')
@@ -404,8 +475,10 @@
                                                             => 'Surat Keterangan Desa Pernah Menikah',
                                                         'SuratKeteranganKematianDesa'
                                                             => 'Surat Keterangan Kematian Desa',
+                                                        'SuratKeteranganDomisiliWarga'
+                                                            => 'Surat Keterangan Domisili Warga',
                                                         'SuratKeteranganAhliWaris' => 'Surat Keterangan Ahli Waris',
-                                                        'SuratPernyataanKesanggupan' => 'Surat Pernyataan Kesanggupan',
+
                                                         'SuratKuasa' => 'Surat Kuasa',
                                                         'PermohonanPembukaanRekening'
                                                             => 'Permohonan Pembukaan Rekening',
@@ -436,10 +509,20 @@
                                                             => 'Formulir Pengajuan User ID (F-3.01)',
                                                         'App\Models\surat_sptjm_suami_istri'
                                                             => 'surat_sptjm_suami_istri',
+                                                        'SuratPernyataanKesanggupan' => 'Surat Pernyataan Kesanggupan',
                                                         'surat_keterangan_numpang_nikah'
                                                             => 'Surat Keterangan Numpang Nikah',
                                                         'SuratKeteranganUsaha' => 'Surat Keterangan Usaha',
                                                         'SuratKeteranganMiskinSkm' => 'Surat Keterangan Miskin (SKM)',
+                                                        'SuratKeteranganPenghasilan' => 'Surat Keterangan Penghasilan',
+                                                        'SuratKeteranganDesaSebagaiPenduduk'
+                                                            => 'Surat Keterangan Desa Sebagai Penduduk',
+                                                        'SuratKeteranganDomisiliLembaga'
+                                                            => 'Surat Keterangan Domisili Lembaga',
+                                                        'SuratKeteranganKepemilikanAset'
+                                                            => 'Surat Keterangan Kepemilikan Aset',
+                                                        'SuratPernyataanKepemilikanDokumenAsli'
+                                                            => 'Surat Pernyataan Kepemilikan Dokumen Asli',
                                                         default => $jenisSurat,
                                                     };
                                                 @endphp
@@ -469,6 +552,10 @@
                                                     {{ $item->alamat_pelapor ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratPernyataanNumpangKk')
                                                     {{ $item->alamat_pemilik_kk ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliLembaga')
+                                                    {{ $item->alamat_lembaga ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDesaSebagaiPenduduk')
+                                                    {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_keterangan_tidakmampu')
                                                     {{ $item->alamat_rumah ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganMiskinSkm')
@@ -476,6 +563,8 @@
                                                 @elseif ($jenisSurat === 'surat_keterangan_numpang_nikah')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganUsaha')
+                                                    {{ $item->alamat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganPenghasilan')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif (
                                                     $jenisSurat === 'surat_pernyataan_memilih_nama_alias' ||
@@ -488,6 +577,8 @@
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganKematianDesa')
                                                     {{ $item->alamat ?? '-' }}
+                                                @elseif ($jenisSurat === 'SuratKeteranganDomisiliLembaga')
+                                                    {{ $item->alamat_lembaga ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKeteranganAhliWaris')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'surat_sptjm_suami_istri')
@@ -495,8 +586,6 @@
                                                 @elseif (
                                                     $jenisSurat === 'surat_permohonan_pengantar_keabsahan_akta_kelahiran' ||
                                                         $jenisSurat === 'SuratPermohonanPengantarKeabsahanAktaKelahiran')
-                                                    {{ $item->alamat ?? '-' }}
-                                                @elseif ($jenisSurat === 'SuratPernyataanKesanggupan')
                                                     {{ $item->alamat ?? '-' }}
                                                 @elseif ($jenisSurat === 'SuratKuasa')
                                                     {{ $item->p1_alamat ?? '-' }}
@@ -637,7 +726,8 @@
                 "SURAT KETERANGAN GHOIB",
                 "SURAT KETERANGAN PENGHASILAN",
                 "SURAT KETERANGAN DOMISILI USAHA",
-                "SURAT KETERANGAN DOMISILI WARGA"
+                "SURAT KETERANGAN DOMISILI WARGA",
+                "SURAT KETERANGAN DOMISILI LEMBAGA"
             ],
             pernyataan: [
                 "SURAT PERNYATAAN Kepemilikan Dokumen  Asli",
@@ -672,7 +762,8 @@
                     const option = document.createElement('option');
                     option.value = item.toLowerCase()
                         .replace(/ /g, '_')
-                        .replace(/[^a-z0-9_-]/g, ''); // <-- tambahkan tanda strip (-)
+                        .replace(/[^a-z0-9_-]/g, '')
+                        .replace(/_+/g, '_'); // <-- tambahkan tanda strip (-)
                     option.textContent = item;
                     jenisFormSelect.appendChild(option);
                 });

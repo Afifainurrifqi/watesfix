@@ -1,4 +1,3 @@
-{{-- resources/views/surat/user_pernyataan.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 
@@ -33,8 +32,7 @@
     <!-- Header Area -->
     <div class="header-area" id="headerArea">
         <div class="container">
-            <div
-                class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
+            <div class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
                 <div class="back-button">
                     <a href="{{ route('surat.pengajuan_surat') }}"><i class="bi bi-arrow-left-short"></i></a>
                 </div>
@@ -50,9 +48,8 @@
         <div class="container">
 
             @php
-                // === Data mentah: persis seperti yang diminta (biarkan spasi gandanya) ===
                 $rawTitles = [
-                    'SURAT PERNYATAAN Kepemilikan Dokumen  Asli',
+                    'SURAT PERNYATAAN Kepemilikan Dokumen  Asli',  // ← BARU
                     'SURAT PERNYATAAN KESANGGUPAN',
                     'Surat Pernyataan Tidak memiliki kartu JAMKESMAS,ASKES atau JKN',
                     'Surat Pernyataan Miskin',
@@ -72,62 +69,46 @@
                     'SURAT KETERANGAN DESA MISKIN',
                 ];
 
-                // Normalisasi tampilan: kompres spasi berlebih untuk ditampilkan,
-                // tetapi pencocokan route pakai versi UPPER yg sudah di-trim+compress.
                 $titles = collect($rawTitles)
                     ->map(function ($t) {
                         return preg_replace('/\s+/', ' ', trim($t));
                     })
                     ->values();
 
-                // === Mapping Judul -> Nama Route (USER) ===
-                // Pastikan nama route berikut sesuai definisi rute user-mu.
                 $routeMap = [
-                    'SURAT PERNYATAAN KEPEMILIKAN DOKUMEN ASLI' => 'surat.userkepemilikandokumen.index', // ganti sesuai route sebenarnya
-                    'SURAT PERNYATAAN KESANGGUPAN' => 'surat.userkesanggupan', // contoh user route
-                    'SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS,ASKES ATAU JKN' =>
-                        'surat.usertidakpunyakartu.index', // sesuaikan
-                    'SURAT PERNYATAAN MISKIN' => 'surat.userpernyataanmiskin.index', // sesuaikan
-                    'SURAT IJIN KELUARGA' => 'surat.userijinkeluarga.index', // sesuaikan
-                    'SURAT KUASA' => 'surat.userkuasa', // ← Surat Kuasa (user)
-                    'PERMOHONAN PEMBUKAAN REKENING TABUNGAN' => 'surat.userrekening', // sesuaikan
-                    'SURAT PERINTAH TUGAS' => 'surat.userspt.index', // sesuaikan
-                    'SURAT PERINTAH PERJALANAN DINAS' => 'surat.usersppd.index', // sesuaikan
-                    'UNDANGAN' => 'surat.userundangan.index', // sesuaikan
-                    'REKOMENDASI' => 'surat.userrekomendasi.index', // sesuaikan
-                    'FORMAT BLANGKO NOTA ANGKUTAN' => 'surat.usernotaangkutan.index', // sesuaikan
-                    'SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU' => 'surat.userrekombbm.index', // sesuaikan
-                    'SURAT PENYELENGGARAAN KERAMAIAN' => 'surat.userkeramaian.index', // sesuaikan
-                    'PERMOHONAN SURAT PERNYATAAN MISKIN' => 'surat.userpermohonanmiskin.index', // sesuaikan
+                    'SURAT PERNYATAAN KEPEMILIKAN DOKUMEN ASLI' => 'surat.user_pernyataan_kepemilikan_dokumen',
+                    'SURAT PERNYATAAN KESANGGUPAN' => 'surat.user_pernyataan_kesanggupan',
+                    'SURAT PERNYATAAN TIDAK MEMILIKI KARTU JAMKESMAS,ASKES ATAU JKN' => 'surat.usertidakpunyakartu.index',
+                    'SURAT PERNYATAAN MISKIN' => 'surat.userpernyataanmiskin.index',
+                    'SURAT IJIN KELUARGA' => 'surat.userijinkeluarga.index',
+                    'SURAT KUASA' => 'surat.userkuasa',
+                    'PERMOHONAN PEMBUKAAN REKENING TABUNGAN' => 'surat.userrekening',
+                    'SURAT PERINTAH TUGAS' => 'surat.userspt.index',
+                    'SURAT PERINTAH PERJALANAN DINAS' => 'surat.usersppd.index',
+                    'UNDANGAN' => 'surat.userundangan.index',
+                    'REKOMENDASI' => 'surat.userrekomendasi.index',
+                    'FORMAT BLANGKO NOTA ANGKUTAN' => 'surat.usernotaangkutan.index',
+                    'SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU' => 'surat.userrekombbm.index',
+                    'SURAT PENYELENGGARAAN KERAMAIAN' => 'surat.userkeramaian.index',
+                    'PERMOHONAN SURAT PERNYATAAN MISKIN' => 'surat.userpermohonanmiskin.index',
                     'SURAT PERMOHONAN TEBANG POHON' => 'surat.usertembangpohon.index',
-                    'SURAT KETERANGAN USAHA' => 'surat.userusaha', // sesuaikan
+                    'SURAT KETERANGAN USAHA' => 'surat.userusaha',
                     'SURAT KETERANGAN DESA MISKIN' => 'surat.usermiskindesa',
                 ];
 
-                // Warna kartu (rotasi)
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
             @endphp
 
             @foreach ($titles as $i => $titleDisplay)
                 @php
-                    // Kunci untuk route-map: uppercase versi normalized
                     $key = mb_strtoupper($titleDisplay, 'UTF-8');
-
-                    // Khusus dua item yang berbeda kapital/spasi di sumber:
-                    // - "SURAT  KUASA " -> normalized ke "SURAT KUASA"
-                    // - trailing spaces sudah di-trim di atas
                     $key = preg_replace('/\s+/', ' ', trim($key));
 
                     $routeName = $routeMap[$key] ?? null;
                     $href = $routeName && Route::has($routeName) ? route($routeName) : null;
 
-                    // Judul cantik
                     $titlePretty = ucwords(strtolower($titleDisplay));
-
-                    // Subjudul
                     $subtitle = 'Surat Pernyataan';
-
-                    // Warna & teks
                     $color = $colors[$i % count($colors)];
                     $textDark = in_array($color, ['success', 'warning', 'primary']) ? 'text-dark' : '';
                 @endphp
@@ -143,8 +124,7 @@
                                 @if ($href)
                                     <a class="btn m-1 btn-creative btn-light" href="{{ $href }}">Buat Surat</a>
                                 @else
-                                    <button class="btn m-1 btn-creative btn-light" type="button"
-                                        disabled>Maintance</button>
+                                    <button class="btn m-1 btn-creative btn-light" type="button" disabled>Maintance</button>
                                 @endif
                             </div>
                         </div>
@@ -171,7 +151,7 @@
         </div>
     </div>
 
-    <!-- JS -->
+    <!-- All JavaScript Files -->
     <script src="{{ asset('assets4/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets4/dist/js/slideToggle.min.js') }}"></script>
     <script src="{{ asset('assets4/dist/js/internet-status.js') }}"></script>

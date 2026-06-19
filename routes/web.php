@@ -43,13 +43,20 @@ use App\Http\Controllers\SdgspendidikanController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SuratFormulirPengajuanUserIdController;
 use App\Http\Controllers\SuratKeteranganAhliWarisController;
+use App\Http\Controllers\SuratKeteranganAhliWarisDesaController;
 use App\Http\Controllers\SuratKeteranganDesaMiskinController;
 use App\Http\Controllers\SuratKeteranganDesaPernahMenikahController;
+use App\Http\Controllers\SuratKeteranganDesaSebagaiPendudukController;
+use App\Http\Controllers\SuratKeteranganDomisiliLembagaController;
+use App\Http\Controllers\SuratKeteranganDomisiliWargaController;
+use App\Http\Controllers\SuratKeteranganGhoibController;
 use App\Http\Controllers\SuratKeteranganHargaKepemilikanTanahController;
 use App\Http\Controllers\SuratKeteranganKehilanganController;
 use App\Http\Controllers\SuratKeteranganKematianDesaController;
+use App\Http\Controllers\SuratKeteranganKepemilikanAsetController;
 use App\Http\Controllers\SuratKeteranganMiskinSkmController;
 use App\Http\Controllers\SuratKeteranganNumpangNikahController;
+use App\Http\Controllers\SuratKeteranganPenghasilanController;
 use App\Http\Controllers\SuratketerangantidakmampuController;
 use App\Http\Controllers\SuratKeteranganUsahaController;
 use App\Http\Controllers\SuratKuasaController;
@@ -64,6 +71,7 @@ use App\Http\Controllers\SuratPernyataanBatalPindahPendudukController;
 use App\Http\Controllers\SuratPernyataanBedaNamaBukuNikahController;
 use App\Http\Controllers\SuratPernyataanBelumAktaController;
 use App\Http\Controllers\SuratPernyataanDanJaminanController;
+use App\Http\Controllers\SuratPernyataanKepemilikanDokumenAsliController;
 use App\Http\Controllers\SuratPernyataanKesanggupanController;
 use App\Http\Controllers\SuratPernyataanMemilihNamaAliasController;
 use App\Http\Controllers\SuratPernyataanMengizinkanIkutKkController;
@@ -103,7 +111,7 @@ Route::prefix('surat')->group(function () {
     Route::get('usersuratketerangantidakmampu', [SuratketerangantidakmampuController::class, 'usertidakmampu'])->name('surat.usertidakmampu');
     Route::get('usersuratnamaalias', [SuratPernyataanMemilihNamaAliasController::class, 'usernamaalias'])->name('surat.usernamaalias');
     Route::get('usersuratnamaaliasortu', [NamaAliasOrtuController::class, 'usernamaaliasortu'])->name('surat.usernamaaliasortu');
-    Route::get('usersuratkesanggupan', [SuratPernyataanKesanggupanController::class, 'userkesanggupan'])->name('surat.userkesanggupan');
+
     Route::get('userrekening', [SuratPermohonanPembukaanRekeningController::class, 'userrekening'])->name('surat.userrekening');
     Route::get('userkepemilikantanah', [SuratKeteranganHargaKepemilikanTanahController::class, 'userkepemilikantanah'])->name('surat.userkepemilikantanah');
     Route::get('userskck', [SuratPengantarSkckController::class, 'userskck'])->name('surat.userskck');
@@ -134,7 +142,7 @@ Route::prefix('surat')->group(function () {
     Route::post('user_userpernyataanjaminan', [SuratPernyataanDanJaminanController::class, 'userstore'])->name('surat.userpernyataanjaminan.store');
     Route::post('userpernahmenikah', [SuratKeteranganDesaPernahMenikahController::class, 'userstore'])->name('surat.userpernahmenikah.store');
     Route::post('userkematian', [SuratKeteranganKematianDesaController::class, 'userstore'])->name('surat.userkematian.store');
-    Route::post('userkesanggupan', [SuratPernyataanKesanggupanController::class, 'userstore'])->name('surat.userkesanggupan.store');
+
     Route::post('userahliwaris', [SuratKeteranganAhliWarisController::class, 'userstore'])->name('surat.userahliwaris.store');
     Route::post('userkuasa', [SuratKuasaController::class, 'userstore'])->name('surat.userkuasa.store');
     Route::post('userrekening', [SuratPermohonanPembukaanRekeningController::class, 'userstore'])->name('surat.userrekening.store');
@@ -156,12 +164,25 @@ Route::prefix('surat')->group(function () {
     Route::post('user_izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'userstore'])
         ->name('surat.userizinkk.store');
 
+    Route::get('user_domisili_lembaga', [SuratKeteranganDomisiliLembagaController::class, 'userForm'])
+        ->name('surat.user_domisili_lembaga');
+
+    Route::post('user_domisili_lembaga', [SuratKeteranganDomisiliLembagaController::class, 'userstore'])
+        ->name('surat.user_domisili_lembaga.store');
+
     // ====================== PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI ======================
     Route::get('user_pembetulan_data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'user'])
         ->name('surat.userpembetulandata');
 
     Route::post('user_pembetulan_data', [SuratPernyataanPembetulanDataTidakMerubahLagiController::class, 'userstore'])
         ->name('surat.userpembetulandata.store');
+
+    Route::get('user_ahliwaris_desa', [SuratKeteranganAhliWarisDesaController::class, 'user_ahliwaris_desa'])
+        ->name('surat.userahliwarisdesa');
+
+    Route::post('user_ahliwaris_desa', [SuratKeteranganAhliWarisDesaController::class, 'userstore'])
+        ->name('surat.userahliwarisdesa.store');
+
 
     // ==================== PERMOHONAN PENGANTAR KEABSAHAN AKTA KELAHIRAN ====================
     Route::get('user_pengantar_keabsahan', [SuratPermohonanPengantarKeabsahanAktaKelahiranController::class, 'user'])
@@ -175,6 +196,12 @@ Route::prefix('surat')->group(function () {
 
     Route::post('user_pengantar_keabsahan_anak', [SuratPermohonanPengantarKeabsahanAktaKelahiranAnakController::class, 'userstore'])
         ->name('surat.user_pengantar_keabsahan_anak.store');
+
+    Route::get('user_domisili_warga', [SuratKeteranganDomisiliWargaController::class, 'userForm'])
+        ->name('surat.user_domisili_warga');
+
+    Route::post('user_domisili_warga', [SuratKeteranganDomisiliWargaController::class, 'userstore'])
+        ->name('surat.user_domisili_warga.store');
 
     Route::get('user_batal_pindah', [SuratPernyataanBatalPindahPendudukController::class, 'user'])
         ->name('surat.user_batal_pindah');
@@ -194,6 +221,12 @@ Route::prefix('surat')->group(function () {
     Route::post('user_sptjm_suami_istri', [SuratSptjmSuamiIstriController::class, 'store'])
         ->name('surat.user_sptjm_suami_istri.store');
 
+    Route::get('user_ghoib', [SuratKeteranganGhoibController::class, 'user_ghoib'])
+        ->name('surat.userghoib');
+
+    Route::post('user_ghoib', [SuratKeteranganGhoibController::class, 'userstore'])
+        ->name('surat.userghoib.store');
+
     Route::get('user_numpang_nikah', [SuratKeteranganNumpangNikahController::class, 'user_numpang_nikah'])
         ->name('surat.usernumpangnikah');
 
@@ -202,8 +235,26 @@ Route::prefix('surat')->group(function () {
     Route::get('userskm', [SuratKeteranganMiskinSkmController::class, 'userskm'])
         ->name('surat.userskm');
 
+    Route::get('user_pernyataan_kepemilikan_dokumen', [SuratPernyataanKepemilikanDokumenAsliController::class, 'userForm'])
+        ->name('surat.user_pernyataan_kepemilikan_dokumen');
+
+    Route::post('user_pernyataan_kepemilikan_dokumen', [SuratPernyataanKepemilikanDokumenAsliController::class, 'userstore'])
+        ->name('surat.user_pernyataan_kepemilikan_dokumen.store');
+
     Route::post('userskm', [SuratKeteranganMiskinSkmController::class, 'userstore'])
         ->name('surat.userskm.store');
+
+    Route::get('user_kepemilikan_aset', [SuratKeteranganKepemilikanAsetController::class, 'userForm'])
+        ->name('surat.user_kepemilikan_aset');
+
+    Route::post('user_kepemilikan_aset', [SuratKeteranganKepemilikanAsetController::class, 'userstore'])
+        ->name('surat.user_kepemilikan_aset.store');
+
+    Route::get('user_pernyataan_kesanggupan', [SuratPernyataanKesanggupanController::class, 'userForm'])
+        ->name('surat.user_pernyataan_kesanggupan');
+
+    Route::post('user_pernyataan_kesanggupan', [SuratPernyataanKesanggupanController::class, 'userstore'])
+        ->name('surat.user_pernyataan_kesanggupan.store');
 
     Route::get('usermiskindesa', [SuratKeteranganDesaMiskinController::class, 'usermiskin'])
         ->name('surat.usermiskindesa');
@@ -216,6 +267,15 @@ Route::prefix('surat')->group(function () {
 
     Route::post('userusaha', [SuratKeteranganUsahaController::class, 'userstore'])
         ->name('surat.userusaha.store');
+
+    Route::get('surat/user_surat_keterangan_penghasilan', [SuratKeteranganPenghasilanController::class, 'user_penghasilan'])->name('surat.userpenghasilan.index');
+    Route::post('surat/user_surat_keterangan_penghasilan/store', [SuratKeteranganPenghasilanController::class, 'userstore'])->name('surat.userpenghasilan.store');
+
+    // User
+    Route::get('user_desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'userForm'])
+        ->name('surat.user_desa_penduduk');
+    Route::post('user_desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'userstore'])
+        ->name('surat.user_desa_penduduk.store');
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
         Route::get('izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'index'])
@@ -307,6 +367,17 @@ Route::prefix('surat')->group(function () {
         Route::put('suratpernyataanmemilihnamaaliasortu/{surat}', [NamaAliasOrtuController::class, 'update'])->name('surat.namaaliasortu.update');
 
 
+        Route::get('pernyataan_kepemilikan_dokumen', [SuratPernyataanKepemilikanDokumenAsliController::class, 'index'])
+            ->name('surat.pernyataan_kepemilikan_dokumen.index');
+
+        Route::post('pernyataan_kepemilikan_dokumen', [SuratPernyataanKepemilikanDokumenAsliController::class, 'store'])
+            ->name('surat.pernyataan_kepemilikan_dokumen.store');
+
+        Route::get('pernyataan_kepemilikan_dokumen/{surat}/edit', [SuratPernyataanKepemilikanDokumenAsliController::class, 'edit'])
+            ->name('surat.pernyataan_kepemilikan_dokumen.edit');
+
+        Route::put('pernyataan_kepemilikan_dokumen/{surat}', [SuratPernyataanKepemilikanDokumenAsliController::class, 'update'])
+            ->name('surat.pernyataan_kepemilikan_dokumen.update');
         Route::get('surat-keterangan-usaha', [SuratKeteranganUsahaController::class, 'index'])
             ->name('surat.usaha.index');
 
@@ -319,6 +390,43 @@ Route::prefix('surat')->group(function () {
         Route::put('surat-keterangan-usaha/{surat}', [SuratKeteranganUsahaController::class, 'update'])
             ->name('surat.usaha.update');
 
+        Route::get('desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'index'])
+            ->name('surat.desa_penduduk.index');
+        Route::post('desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'store'])
+            ->name('surat.desa_penduduk.store');
+        Route::get('desa_penduduk/{surat}/edit', [SuratKeteranganDesaSebagaiPendudukController::class, 'edit'])
+            ->name('surat.desa_penduduk.edit');
+        Route::put('desa_penduduk/{surat}', [SuratKeteranganDesaSebagaiPendudukController::class, 'update'])
+            ->name('surat.desa_penduduk.update');
+
+        Route::get('desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'index'])
+            ->name('surat.desa_penduduk.index');
+
+        Route::post('desa_penduduk', [SuratKeteranganDesaSebagaiPendudukController::class, 'store'])
+            ->name('surat.desa_penduduk.store');
+
+        Route::get('desa_penduduk/{surat}/edit', [SuratKeteranganDesaSebagaiPendudukController::class, 'edit'])
+            ->name('surat.desa_penduduk.edit');
+
+        Route::put('desa_penduduk/{surat}', [SuratKeteranganDesaSebagaiPendudukController::class, 'update'])
+            ->name('surat.desa_penduduk.update');
+
+        Route::get('kepemilikan_aset', [SuratKeteranganKepemilikanAsetController::class, 'index'])
+            ->name('surat.kepemilikan_aset.index')
+            ->middleware('checkrole:admin');
+
+        Route::post('kepemilikan_aset', [SuratKeteranganKepemilikanAsetController::class, 'store'])
+            ->name('surat.kepemilikan_aset.store')
+            ->middleware('checkrole:admin');
+
+        Route::get('kepemilikan_aset/{surat}/edit', [SuratKeteranganKepemilikanAsetController::class, 'edit'])
+            ->name('surat.kepemilikan_aset.edit')
+            ->middleware('checkrole:admin');
+
+        Route::put('kepemilikan_aset/{surat}', [SuratKeteranganKepemilikanAsetController::class, 'update'])
+            ->name('surat.kepemilikan_aset.update')
+            ->middleware('checkrole:admin');
+
         Route::get('surat-keterangan-miskin-skm', [SuratKeteranganMiskinSkmController::class, 'index'])
             ->name('surat.skm.index');
 
@@ -330,6 +438,57 @@ Route::prefix('surat')->group(function () {
 
         Route::put('surat-keterangan-miskin-skm/{surat}', [SuratKeteranganMiskinSkmController::class, 'update'])
             ->name('surat.skm.update');
+
+        Route::get('domisili_warga', [SuratKeteranganDomisiliWargaController::class, 'index'])
+            ->name('surat.domisili_warga.index')
+            ->middleware('checkrole:admin');
+
+        Route::post('domisili_warga', [SuratKeteranganDomisiliWargaController::class, 'store'])
+            ->name('surat.domisili_warga.store')
+            ->middleware('checkrole:admin');
+
+        Route::get('domisili_warga/{surat}/edit', [SuratKeteranganDomisiliWargaController::class, 'edit'])
+            ->name('surat.domisili_warga.edit')
+            ->middleware('checkrole:admin');
+
+        Route::put('domisili_warga/{surat}', [SuratKeteranganDomisiliWargaController::class, 'update'])
+            ->name('surat.domisili_warga.update')
+            ->middleware('checkrole:admin');
+
+        Route::get('ahli-waris-desa', [SuratKeteranganAhliWarisDesaController::class, 'index'])
+            ->name('surat.ahliwarisdesa.index');
+
+        Route::post('ahli-waris-desa', [SuratKeteranganAhliWarisDesaController::class, 'store'])
+            ->name('surat.ahliwarisdesa.store');
+
+        Route::get('ahli-waris-desa/{surat}/edit', [SuratKeteranganAhliWarisDesaController::class, 'edit'])
+            ->name('surat.ahliwarisdesa.edit');
+
+        Route::put('ahli-waris-desa/{surat}', [SuratKeteranganAhliWarisDesaController::class, 'update'])
+            ->name('surat.ahliwarisdesa.update');
+
+        Route::get('surat/surat_keterangan_penghasilan', [SuratKeteranganPenghasilanController::class, 'index'])->name('surat.penghasilan.index');
+
+
+        // Prosedur Simpan (Store)
+        Route::post('surat/surat_keterangan_penghasilan/store', [SuratKeteranganPenghasilanController::class, 'store'])->name('surat.penghasilan.store');
+
+
+        // Prosedur Ubah & Perbarui Data (Edit & Update)
+        Route::get('surat/surat_keterangan_penghasilan/{surat}/edit', [SuratKeteranganPenghasilanController::class, 'edit'])->name('surat.penghasilan.edit');
+        Route::put('surat/surat_keterangan_penghasilan/{surat}', [SuratKeteranganPenghasilanController::class, 'update'])->name('surat.penghasilan.update');
+
+        Route::get('keterangan-ghoib', [SuratKeteranganGhoibController::class, 'index'])
+            ->name('surat.ghoib.index');
+
+        Route::post('keterangan-ghoib', [SuratKeteranganGhoibController::class, 'store'])
+            ->name('surat.ghoib.store');
+
+        Route::get('keterangan-ghoib/{surat}/edit', [SuratKeteranganGhoibController::class, 'edit'])
+            ->name('surat.ghoib.edit');
+
+        Route::put('keterangan-ghoib/{surat}', [SuratKeteranganGhoibController::class, 'update'])
+            ->name('surat.ghoib.update');
 
 
 
@@ -414,12 +573,18 @@ Route::prefix('surat')->group(function () {
         Route::get('ahli-waris/{surat}/edit', [SuratKeteranganAhliWarisController::class, 'edit'])->name('surat.ahliwaris.edit');
         Route::put('ahli-waris/{surat}', [SuratKeteranganAhliWarisController::class, 'update'])->name('surat.ahliwaris.update');
 
-        // SURAT PERNYATAAN KESANGGUPAN
-        Route::get('kesanggupan', [SuratPernyataanKesanggupanController::class, 'index'])->name('surat.kesanggupan.index');
-        Route::get('kesanggupan/create', [SuratPernyataanKesanggupanController::class, 'create'])->name('surat.kesanggupan.create');
-        Route::post('kesanggupan', [SuratPernyataanKesanggupanController::class, 'store'])->name('surat.kesanggupan.store');
-        Route::get('kesanggupan/{surat}/edit', [SuratPernyataanKesanggupanController::class, 'edit'])->name('surat.kesanggupan.edit');
-        Route::put('kesanggupan/{surat}', [SuratPernyataanKesanggupanController::class, 'update'])->name('surat.kesanggupan.update');
+        Route::get('pernyataan_kesanggupan', [SuratPernyataanKesanggupanController::class, 'index'])
+            ->name('surat.pernyataan_kesanggupan.index');
+
+        Route::post('pernyataan_kesanggupan', [SuratPernyataanKesanggupanController::class, 'store'])
+            ->name('surat.pernyataan_kesanggupan.store');
+
+        Route::get('pernyataan_kesanggupan/{surat}/edit', [SuratPernyataanKesanggupanController::class, 'edit'])
+            ->name('surat.pernyataan_kesanggupan.edit');
+
+        Route::put('pernyataan_kesanggupan/{surat}', [SuratPernyataanKesanggupanController::class, 'update'])
+            ->name('surat.pernyataan_kesanggupan.update');
+
 
         Route::get('kuasa', [SuratKuasaController::class, 'index'])->name('surat.kuasa.index');
         Route::post('kuasa', [SuratKuasaController::class, 'store'])->name('surat.kuasa.store');
@@ -501,6 +666,22 @@ Route::prefix('surat')->group(function () {
 
         Route::put('pengantar_keabsahan_anak/{surat}', [SuratPermohonanPengantarKeabsahanAktaKelahiranAnakController::class, 'update'])
             ->name('surat.pengantar_keabsahan_anak.update');
+
+        Route::get('domisili_lembaga', [SuratKeteranganDomisiliLembagaController::class, 'index'])
+            ->name('surat.domisili_lembaga.index')
+            ->middleware('checkrole:admin');
+
+        Route::post('domisili_lembaga', [SuratKeteranganDomisiliLembagaController::class, 'store'])
+            ->name('surat.domisili_lembaga.store')
+            ->middleware('checkrole:admin');
+
+        Route::get('domisili_lembaga/{surat}/edit', [SuratKeteranganDomisiliLembagaController::class, 'edit'])
+            ->name('surat.domisili_lembaga.edit')
+            ->middleware('checkrole:admin');
+
+        Route::put('domisili_lembaga/{surat}', [SuratKeteranganDomisiliLembagaController::class, 'update'])
+            ->name('surat.domisili_lembaga.update')
+            ->middleware('checkrole:admin');
     });
 });
 
