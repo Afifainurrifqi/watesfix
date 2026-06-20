@@ -83,12 +83,11 @@
                         'surat.pernyataan_tidak_punya_kartu_jkn.user', // ← GANTI INI
                     'SURAT PERNYATAAN MISKIN' => 'surat.userpernyataanmiskin.index',
                     'SURAT IJIN KELUARGA' => 'surat.userijinkeluarga.index',
-                    'SURAT KUASA' => 'surat.userkuasa',
-                    'PERMOHONAN PEMBUKAAN REKENING TABUNGAN' => 'surat.userrekening',
-                    'SURAT PERINTAH TUGAS' => 'surat.userspt.index',
-                    'SURAT PERINTAH PERJALANAN DINAS' => 'surat.usersppd.index',
-                    'UNDANGAN' => 'surat.userundangan.index',
-                    'REKOMENDASI' => 'surat.userrekomendasi.index',
+                    'PERMOHONAN PEMBUKAAN REKENING TABUNGAN' => 'surat.user.permohonan_rekening',
+                    'SURAT PERINTAH TUGAS' => 'surat.user.perintah_tugas',
+                    'SURAT PERINTAH PERJALANAN DINAS' => 'surat.user.perintah_perjalanan_dinas',
+                    'UNDANGAN' => 'surat.user.undangan',
+                    'REKOMENDASI' => 'surat.user.rekomendasi',
                     'FORMAT BLANGKO NOTA ANGKUTAN' => 'surat.usernotaangkutan.index',
                     'SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU' => 'surat.userrekombbm.index',
                     'SURAT PENYELENGGARAAN KERAMAIAN' => 'surat.userkeramaian.index',
@@ -98,6 +97,7 @@
                     'SURAT KETERANGAN DESA MISKIN' => 'surat.usermiskindesa',
                     'SURAT PERNYATAAN MISKIN' => 'surat.pernyataan_miskin.user',
                     'SURAT IJIN KELUARGA' => 'surat.ijin_keluarga.user',
+                    'SURAT KUASA' => 'surat.user_kuasa',
                 ];
 
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];
