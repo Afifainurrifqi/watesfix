@@ -88,16 +88,17 @@
                     'SURAT PERINTAH PERJALANAN DINAS' => 'surat.user.perintah_perjalanan_dinas',
                     'UNDANGAN' => 'surat.user.undangan',
                     'REKOMENDASI' => 'surat.user.rekomendasi',
-                    'FORMAT BLANGKO NOTA ANGKUTAN' => 'surat.usernotaangkutan.index',
-                    'SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU' => 'surat.userrekombbm.index',
+                    'FORMAT BLANGKO NOTA ANGKUTAN' => 'surat.user.nota_angkutan',
+                    'SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU' => 'surat.user_rekomendasi_bbm',
                     'SURAT PENYELENGGARAAN KERAMAIAN' => 'surat.userkeramaian.index',
                     'PERMOHONAN SURAT PERNYATAAN MISKIN' => 'surat.userpermohonanmiskin.index',
-                    'SURAT PERMOHONAN TEBANG POHON' => 'surat.usertembangpohon.index',
+                    'SURAT PERMOHONAN TEBANG POHON' => 'surat.user_permohonan_tebang_pohon', // ← BARU
                     'SURAT KETERANGAN USAHA' => 'surat.userusaha',
                     'SURAT KETERANGAN DESA MISKIN' => 'surat.usermiskindesa',
                     'SURAT PERNYATAAN MISKIN' => 'surat.pernyataan_miskin.user',
                     'SURAT IJIN KELUARGA' => 'surat.ijin_keluarga.user',
                     'SURAT KUASA' => 'surat.user_kuasa',
+                    'PERMOHONAN SURAT PERNYATAAN MISKIN' => 'surat.user_permohonan_pernyataan_miskin',
                 ];
 
                 $colors = ['danger', 'info', 'success', 'warning', 'primary'];

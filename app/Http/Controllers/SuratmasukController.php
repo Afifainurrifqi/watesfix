@@ -39,15 +39,19 @@ use App\Models\SuratKeteranganMiskinSkm;
 use App\Models\suratketerangantidakmampu;
 use App\Models\SuratKeteranganUsaha;
 use App\Models\SuratKuasa;
+use App\Models\SuratNotaAngkutan;
 use App\Models\SuratPengantarSkck;
 use App\Models\SuratPerintahPerjalananDinas;
 use App\Models\SuratPerintahTugas;
 use App\Models\SuratPermohonanPembukaanRekening;
+use App\Models\SuratPermohonanPernyataanMiskin;
+use App\Models\SuratPermohonanTebangPohon;
 use App\Models\SuratPernyataanKepemilikanDokumenAsli;
 use App\Models\SuratPernyataanKesanggupan;
 use App\Models\SuratPernyataanMiskin;
 use App\Models\SuratPernyataanTidakPunyaKartuJkn;
 use App\Models\SuratRekomendasi;
+use App\Models\SuratRekomendasiBbm;
 use App\Models\SuratUndangan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
@@ -123,11 +127,10 @@ class SuratmasukController extends Controller
         $perintahTugas = SuratPerintahTugas::where('status_verif', '!=', 'Terverifikasi')->get();
         $undangan = SuratUndangan::where('status_verif', '!=', 'Terverifikasi')->get();
         $rekomendasi = SuratRekomendasi::where('status_verif', '!=', 'Terverifikasi')->get();
-
-
-
-
-
+        $notaAngkutan = SuratNotaAngkutan::where('status_verif', '!=', 'Terverifikasi')->get();
+        $rekomendasiBbm = SuratRekomendasiBbm::where('status_verif', '!=', 'Terverifikasi')->get();
+        $permohonanPernyataanMiskin = SuratPermohonanPernyataanMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+        $permohonanTebangPohon = SuratPermohonanTebangPohon::where('status_verif', '!=', 'Terverifikasi')->get();
 
 
 
@@ -137,8 +140,10 @@ class SuratmasukController extends Controller
             ->merge($pernyataan_tidak_bisa_ktp)
             ->merge($keterangan_kehilangan)
             ->merge($numpang_kk)
+            ->merge($permohonanPernyataanMiskin)
             ->merge($suratKuasa)
             ->merge($tidakmampu)
+            ->merge($notaAngkutan)
             ->merge($namaalias)
             ->merge($pernyataanMiskin)
             ->merge($namaalias_satu_ortu)
@@ -173,12 +178,14 @@ class SuratmasukController extends Controller
             ->merge($penghasilan)
             ->merge($desaPenduduk)
             ->merge($domisiliLembaga)
+            ->merge($rekomendasiBbm)
             ->merge($domisiliWarga)
             ->merge($rekomendasi)
             ->merge($ijinKeluarga)
             ->merge($kepemilikanAset)
             ->merge($undangan)
             ->merge($perintahPerjalananDinas)
+            ->merge($permohonanTebangPohon)
             ->merge($tidakPunyaKartuJkn)
             ->merge($pernyataanKepemilikanDokumen); // ← BARU
 
@@ -201,6 +208,7 @@ class SuratmasukController extends Controller
         $keterangan_kehilangan = surat_keterangan_kehilangan::where('status_verif', 'Terverifikasi')->get();
         $numpang_kk = surat_pernyataan_numpang_kk::where('status_verif', 'Terverifikasi')->get();
         $tidakmampu = suratketerangantidakmampu::where('status_verif', 'Terverifikasi')->get();
+        $notaAngkutan = SuratNotaAngkutan::where('status_verif', '!=', 'Terverifikasi')->get();
         $namaalias = surat_pernyataan_memilih_nama_alias::where('status_verif', 'Terverifikasi')->get();
         $namaalias_satu_ortu = nama_alias_ortu::where('status_verif', 'Terverifikasi')->get();
         $pernyataandanjaminan      = surat_pernyataan_dan_jaminan::where('status_verif', 'Terverifikasi')->get();
@@ -246,13 +254,24 @@ class SuratmasukController extends Controller
         $ijinKeluarga = SuratIjinKeluarga::where('status_verif', '!=', 'Terverifikasi')->get();
         $suratKuasa = SuratKuasa::where('status_verif', '!=', 'Terverifikasi')->get();
         $perintahTugas = SuratPerintahTugas::where('status_verif', 'Terverifikasi')->get();
-
+        $rekomendasiBbm = SuratRekomendasiBbm::where('status_verif', '!=', 'Terverifikasi')->get();
         $perintahPerjalananDinas = SuratPerintahPerjalananDinas::where('status_verif', '!=', 'Terverifikasi')->get();
+        $permohonanPernyataanMiskin = SuratPermohonanPernyataanMiskin::where('status_verif', '!=', 'Terverifikasi')->get();
+        $permohonanTebangPohon = SuratPermohonanTebangPohon::where('status_verif', '!=', 'Terverifikasi')->get();
+
+
+
+
+
+
+
         $data = collect()
             ->merge($pernyataan_tidak_bisa_ktp)
             ->merge($perintahPerjalananDinas)
+            ->merge($permohonanPernyataanMiskin)
             ->merge($keterangan_kehilangan)
             ->merge($numpang_kk)
+            ->merge($notaAngkutan)
             ->merge($rekomendasi)
             ->merge($pernyataanMiskin)
             ->merge($tidakmampu)
@@ -294,7 +313,9 @@ class SuratmasukController extends Controller
             ->merge($domisiliWarga)
             ->merge($kepemilikanAset)
             ->merge($undangan)
+            ->merge($rekomendasiBbm)
             ->merge($tidakPunyaKartuJkn)
+            ->merge($permohonanTebangPohon)
             ->merge($pernyataanKepemilikanDokumen);   // ← BARU  // ← BARU
 
         return view('surat.arsipsuratkeluar', compact('data'));
@@ -324,9 +345,28 @@ class SuratmasukController extends Controller
             return redirect()->route('surat.pengantar_keabsahan_anak.index');
         }
 
+        // SURAT PERMOHONAN PERNYATAAN MISKIN
+        if (
+            ($kategori === 'pernyataan' || $kategori === 'keterangan') &&
+            (Str::contains(strtolower($jenis_form), 'permohonan_pernyataan_miskin') ||
+                Str::contains(strtolower($jenis_form), 'pernyataan miskin') ||
+                Str::contains(strtolower($jenis_form), 'permohonan surat pernyataan miskin'))
+        ) {
+            return redirect()->route('surat.permohonan_pernyataan_miskin.index');
+        }
+
         // Formulir Pengajuan User ID (F-3.01)
         if ($kategori === 'adminduk' && Str::contains($jenis_form, 'formulir_pengajuan_user_id')) {
             return redirect()->route('surat.formulir_pengajuan_user_id.index');
+        }
+
+        // === TAMBAHKAN DI SINI ===
+        if (
+            $kategori === 'pernyataan' &&
+            (Str::contains(strtolower($jenis_form), 'rekomendasi_bbm') ||
+                Str::contains(strtolower($jenis_form), 'bbm'))
+        ) {
+            return redirect()->route('surat.rekomendasi_bbm.index');
         }
 
         if ($kategori === 'pernyataan' && $jenis_form === 'surat_pernyataan_miskin') {
@@ -349,10 +389,22 @@ class SuratmasukController extends Controller
         if ($kategori === 'adminduk' && Str::contains($jenis_form, 'batal_pindah')) {
             return redirect()->route('surat.batal_pindah.index');
         }
+        if (
+            ($kategori === 'pernyataan' || $kategori === 'keterangan') &&
+            (Str::contains(strtolower($jenis_form), 'tebang_pohon') ||
+                Str::contains(strtolower($jenis_form), 'permohonan tebang pohon') ||
+                Str::contains(strtolower($jenis_form), 'tebangpohon'))
+        ) {
+            return redirect()->route('surat.permohonan_tebang_pohon.index');
+        }
 
         // Lainnya (Adminduk)
         if ($kategori === 'adminduk' && $jenis_form === 'pernyataan_pembetulan_data_tidak_merubah_lagi') {
             return redirect()->route('surat.pembetulandata.index');
+        }
+
+        if ($kategori === 'pernyataan' && Str::contains($jenis_form, 'nota_angkutan')) {
+            return redirect()->route('surat.nota_angkutan.index');
         }
 
         if ($kategori === 'keterangan' && $jenis_form === 'surat_keterangan_domisili_warga') {
@@ -614,6 +666,77 @@ class SuratmasukController extends Controller
             $filename = Str::slug($data->nama ?? 'pernyataan_miskin', '_');
 
             return $pdf->download('surat_pernyataan_miskin_' . $filename . '.pdf');
+        }
+
+        // SURAT REKOMENDASI PEMBELIAN BBM
+        // SURAT REKOMENDASI PEMBELIAN BBM
+        if (
+            Str::contains(strtolower($jenis), 'rekomendasi_bbm') ||
+            $jenis === 'surat_rekomendasi_bbm' ||
+            $jenis === 'surat-rekomendasi-bbm' ||
+            $jenis === 'rekomendasi_bbm' ||
+            $jenis === 'suratrekomendasibbm' ||           // ← TAMBAHKAN INI
+            strtolower($jenis) === 'suratrekomendasibbm'
+        ) {
+            $data = SuratRekomendasiBbm::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_rekomendasi_bbm', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_lengkap ?? 'rekomendasi_bbm', '_');
+
+            return $pdf->download('surat_rekomendasi_pembelian_bbm_' . $filename . '.pdf');
+        }
+
+        // SURAT PERMOHONAN PERNYATAAN MISKIN
+        // SURAT PERMOHONAN PERNYATAAN MISKIN
+        if (
+            Str::contains(strtolower($jenis), 'permohonan_pernyataan_miskin') ||
+            Str::contains(strtolower($jenis), 'permohonanpernyataanmiskin') ||   // ← TAMBAHKAN INI
+            $jenis === 'surat_permohonan_pernyataan_miskin' ||
+            $jenis === 'suratpermohonanpernyataanmiskin' ||                      // ← TAMBAHKAN INI
+            $jenis === 'permohonan_pernyataan_miskin'
+        ) {
+            $data = SuratPermohonanPernyataanMiskin::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_permohonan_pernyataan_miskin', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_lengkap ?? 'permohonan_miskin', '_');
+
+            return $pdf->download('surat_permohonan_pernyataan_miskin_' . $filename . '.pdf');
+        }
+
+        // SURAT PERMOHONAN TEBANG POHON
+        if (
+            Str::contains(strtolower($jenis), 'permohonan_tebang_pohon') ||
+            Str::contains(strtolower($jenis), 'tebangpohon') ||
+            $jenis === 'surat_permohonan_tebang_pohon' ||
+            $jenis === 'permohonan_tebang_pohon'
+        ) {
+            $data = SuratPermohonanTebangPohon::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_permohonan_tebang_pohon', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama ?? 'tebang_pohon', '_');
+
+            return $pdf->download('surat_permohonan_tebang_pohon_' . $filename . '.pdf');
+        }
+
+        if (
+            Str::contains(strtolower($jenis), 'nota_angkutan') ||
+            Str::contains(strtolower($jenis), 'notaangkutan') ||
+            $jenis === 'surat_nota_angkutan'
+        ) {
+            $data = SuratNotaAngkutan::findOrFail($id);
+
+            $pdf = Pdf::loadView('surat.pdf_surat_nota_angkutan', compact('data'))
+                ->setPaper('A4', 'portrait');
+
+            $filename = Str::slug($data->nama_pengirim ?? 'nota_angkutan', '_');
+
+            return $pdf->download('nota_angkutan_' . $filename . '.pdf');
         }
 
         // SURAT IJIN KELUARGA
