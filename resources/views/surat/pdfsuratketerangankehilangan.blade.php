@@ -101,7 +101,7 @@
                     Email: watesberkelas@gmail.com | Website: wates-blitarkab.desa.id</small>
                 </td>
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
                 </td>
             </tr>
         </table>
