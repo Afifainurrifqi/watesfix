@@ -71,6 +71,10 @@ class DatapendudukController extends Controller
                     ->select('datapenduduks.*'); // hindari duplikasi kolom
             })
 
+            ->addColumn('nik', function ($row) {
+                return $row->nik ?? '';
+            })
+
             ->addColumn('updated_by', function ($datapenduduk) {
                 return optional($datapenduduk->updatedByUser)->name; // Menampilkan nama user
             })
