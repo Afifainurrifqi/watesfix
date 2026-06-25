@@ -58,10 +58,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="{{ route('dashboard') }}">
-                    <b class="logo-abbr"><img src="/assets/images/logositakro2.png" alt=""> </b>
-                    <span class="logo-compact"><img src="/assets/images/logositakro2.png"  alt=""></span>
+                    <b class="logo-abbr"><img src="/assets3/img/logosi2.png" alt=""></b>
+                    <span class="logo-compact"><img src="/assets3/img/logosi2.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="/assets/images/logositakro2.png" width="120" alt="">
+                        <img src="/assets3/img/logosi2.png" width="120" alt="">
                     </span>
                 </a>
             </div>
@@ -87,7 +87,8 @@
                         <span class="brand-title">
                             <img src="/assets/images/Wates2.png" style="width:20%" alt="">
                         </span>
-                        <span class="nav-link" style="font-weight: bold; font-size: 16px;">Haloo, {{ Auth::user()->role }}</span>
+                        <span class="nav-link" style="font-weight: bold; font-size: 16px;">Haloo,
+                            {{ Auth::user()->role }}</span>
                     </div>
                 </div>
                 <div class="header-right">
