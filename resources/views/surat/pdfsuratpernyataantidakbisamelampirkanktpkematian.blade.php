@@ -15,14 +15,71 @@
             color: #000;
         }
 
-        .kop-container { width: 100%; }
-        .kop-table { width: 100%; border-collapse: collapse; }
-        .kop-logo { width: 15%; text-align: center; }
-        .kop-logo img { width: 78px; height: auto; }
-        .kop-text { text-align: center; }
-        .kop-text strong { font-size: 12.5pt; line-height: 1.2; }
-        .kop-text small { font-size: 9.3pt; line-height: 1.1; }
-        .kop-garis { border: none; border-top: 2.5px solid #000; margin: 6px 0 12px 0; }
+        /* KOP SURAT */
+        .kop-container {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .kop-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .kop-logo {
+            width: 16%;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .kop-logo img {
+            width: 82px;
+            height: auto;
+        }
+
+        .kop-text {
+            width: 68%;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.15;
+        }
+
+        .kop-text .kop-baris-1 {
+            font-size: 15pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .kop-text .kop-baris-2 {
+            font-size: 15pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .kop-text .kop-baris-3 {
+            font-size: 17pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .kop-text .kop-alamat {
+            font-size: 11pt;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        .kop-text .kop-kontak {
+            font-size: 10pt;
+            font-weight: normal;
+        }
+
+        .kop-garis {
+            border: none;
+            border-top: 3px solid #000;
+            border-bottom: 1px solid #000;
+            height: 3px;
+            margin: 6px 0 12px 0;
+        }
 
         .judul-surat {
             text-align: center;
@@ -122,20 +179,25 @@
         <table class="kop-table">
             <tr>
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Blitar">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
                 </td>
+
                 <td class="kop-text">
-                    <strong>PEMERINTAH KABUPATEN BLITAR</strong><br>
-                    <strong>KECAMATAN WATES</strong><br>
-                    <strong>KANTOR KEPALA DESA WATES</strong><br>
-                    <small>Jln. Merdeka No. 74 Telp. 082139324445<br>
-                    Email: watesberkelas@gmail.com | Website: wates-blitarkab.desa.id</small>
+                    <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
+                    <div class="kop-baris-2">KECAMATAN WATES</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-kontak">
+                        email :watesberkelas@gmail.com / website : wates-blitarkab.desa.id
+                    </div>
                 </td>
+
                 <td class="kop-logo">
                     <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td>
             </tr>
         </table>
+
         <hr class="kop-garis">
     </div>
 
@@ -154,9 +216,7 @@
     <table class="data">
         <tr>
             <td>Nama</td>
-            <td>: {{ $data->nama_pelapor ?? '...........................................' }}
-
-            </td>
+            <td>: {{ $data->nama_pelapor ?? '...........................................' }}</td>
         </tr>
         <tr>
             <td>NIK</td>
@@ -165,7 +225,8 @@
         <tr>
             <td>Tempat, Tanggal Lahir</td>
             <td>: {{ $data->tempat_lahir_pelapor ?? '' }},
-                {{ isset($data->tanggal_lahir_pelapor) ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y') : '...........................................' }}</td>
+                {{ isset($data->tanggal_lahir_pelapor) ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y') : '...........................................' }}
+            </td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
@@ -189,14 +250,13 @@
     <table class="data">
         <tr>
             <td>NIK</td>
-            <td>: {{ $data->nik_jenazah ?? '...........................................' }}
-
-            </td>
+            <td>: {{ $data->nik_jenazah ?? '...........................................' }}</td>
         </tr>
         <tr>
             <td>Nama / Tanggal Lahir</td>
             <td>: {{ $data->nama_jenazah ?? '...........................................' }} /
-                {{ isset($data->tanggal_lahir_jenazah) ? \Carbon\Carbon::parse($data->tanggal_lahir_jenazah)->translatedFormat('d F Y') : '...........................................' }}</td>
+                {{ isset($data->tanggal_lahir_jenazah) ? \Carbon\Carbon::parse($data->tanggal_lahir_jenazah)->translatedFormat('d F Y') : '...........................................' }}
+            </td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
@@ -226,9 +286,10 @@
             <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div>
-<br>
-            <p><strong><u>{{ $data->nama_pelapor ?? '...........................................' }}</u></strong></p>
 
+            <br>
+
+            <p><strong><u>{{ $data->nama_pelapor ?? '...........................................' }}</u></strong></p>
 
             <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
