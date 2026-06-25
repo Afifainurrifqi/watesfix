@@ -50,59 +50,45 @@ class DatapendudukController extends Controller
     {
         $allowedDatakValues = ['tetap', 'tidaktetap'];
 
-        $query = Datapenduduk::with([
-            'agama',
-            'pendidikan',
-            'pekerjaan',
-            'goldar',
-            'status',
-            'detailkk.kk',
-            'updatedByUser'
-        ])->whereIn('Datak', $allowedDatakValues);
+        $query = Datapenduduk::with(['kk', 'agama', 'pendidikan', 'pekerjaan', 'goldar', 'status', 'detailkk.kk', 'updatedByUser'])
+            ->whereIn('Datak', $allowedDatakValues);
 
         return DataTables::of($query)
-            ->addIndexColumn()                    // Kolom "No"
-
-            // === KOLOM PENTING (Eksplisit) ===
             ->addColumn('nokk', function ($row) {
-                return optional(optional($row->detailkk)->kk)->nokk ?? '';
+                return optional($row->detailkk->kk)->nokk;
             })
-            ->addColumn('nik', function ($row) {
-                return $row->nik ?? '';           // PASTIKAN INI BENAR
+            // ⬇️ Izinkan pencarian global di kolom NO KK (relasi)
+            ->filterColumn('nokk', function ($q, $keyword) {
+                $q->whereHas('detailkk.kk', function ($qq) use ($keyword) {
+                    $qq->where('nokk', 'like', "%{$keyword}%");
+                });
             })
-
-            ->addColumn('updated_by', function ($row) {
-                return optional($row->updatedByUser)->name ?? '-';
-            })
-
-            ->addColumn('action', function ($row) {
-                $editUrl = route('datapenduduk.show', ['nik' => $row->nik]);
-
-                $deleteForm = '
-                <form onsubmit="return deleteData(\'' . addslashes($row->nama ?? '') . '\')"
-                      action="' . url("datapenduduk/{$row->nik}") . '"
-                      method="POST" style="display:inline;">
-                    ' . csrf_field() . method_field('DELETE') . '
-                </form>';
-
-                return '
-                <a href="' . $editUrl . '" class="btn btn-info btn-sm mb-1" title="Edit">
-                    <i class="fas fa-edit"></i>
-                </a>
-                ' . $deleteForm;
-            })
-
-            // Filter & Order No KK
-            ->filterColumn('nokk', function ($query, $keyword) {
-                $query->whereHas('detailkk.kk', fn($q) => $q->where('nokk', 'like', "%{$keyword}%"));
-            })
-            ->orderColumn('nokk', function ($query, $order) {
-                $query->join('detailkks', 'detailkks.nik', '=', 'datapenduduks.nik')
+            // (opsional) izinkan sorting kolom NO KK
+            ->orderColumn('nokk', function ($q, $order) {
+                $q->join('detailkks', 'detailkks.nik', '=', 'datapenduduks.nik')
                     ->join('kks', 'kks.id', '=', 'detailkks.kk_id')
                     ->orderBy('kks.nokk', $order)
-                    ->select('datapenduduks.*');
+                    ->select('datapenduduks.*'); // hindari duplikasi kolom
             })
 
+            ->addColumn('updated_by', function ($datapenduduk) {
+                return optional($datapenduduk->updatedByUser)->name; // Menampilkan nama user
+            })
+            ->addColumn('action', function ($datapenduduk) {
+                $editUrl = route('datapenduduk.show', ['nik' => $datapenduduk->nik]);
+                $deleteForm = '<form onsubmit="return deleteData(\'' . $datapenduduk->nama . '\')"
+                                action="' . url('datapenduduk') . '/' . $datapenduduk->nik . '" style="display: inline"
+                                method="POST">
+                                ' . csrf_field() . '
+                                ' . method_field('DELETE') . '
+                            </form>';
+                $actionsHtml = '<a href="' . $editUrl . '" class="btn mb-1 btn-info btn-sm" title="Edit data">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            ' . $deleteForm;
+
+                return $actionsHtml;
+            })
             ->rawColumns(['action'])
             ->toJson();
     }
