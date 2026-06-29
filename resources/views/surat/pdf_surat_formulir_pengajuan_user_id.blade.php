@@ -20,8 +20,8 @@
 
     <div class="kop">
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
-        KECAMATAN WATES<br>
-        KANTOR KEPALA DESA WATES</strong><br>
+        KECAMATAN Wates<br>
+        KANTOR KEPALA DESA Wates</strong><br>
         <small>Jln. Merdeka No. 74 Telp. 082139324445</small>
     </div>
 

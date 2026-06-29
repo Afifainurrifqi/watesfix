@@ -33,7 +33,7 @@
         }
 
         .kop-logo img {
-            width: 82px;
+            width: 105px;
             height: auto;
         }
 
@@ -46,13 +46,13 @@
 
         .kop-text .kop-baris-1 {
             font-size: 15pt;
-            font-weight: bold;
+            font-weight: light;
             text-transform: uppercase;
         }
 
         .kop-text .kop-baris-2 {
             font-size: 15pt;
-            font-weight: bold;
+            font-weight: light;
             text-transform: uppercase;
         }
 
@@ -184,16 +184,16 @@
 
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-baris-2">KECAMATAN WATES</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-baris-2">KECAMATAN Wates</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :watesberkelas@gmail.com / website : wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
                 </td>
             </tr>
         </table>
@@ -286,8 +286,6 @@
             <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div>
-
-            <br>
 
             <p><strong><u>{{ $data->nama_pelapor ?? '...........................................' }}</u></strong></p>
 

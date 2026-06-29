@@ -137,11 +137,11 @@
             </td>
             <td class="kop-text">
                 <strong>PEMERINTAH KABUPATEN BLITAR</strong><br>
-                <strong>KECAMATAN WATES</strong><br>
-                <strong>KANTOR KEPALA DESA WATES</strong><br>
+                <strong>KECAMATAN Wates</strong><br>
+                <strong>KANTOR KEPALA DESA Wates</strong><br>
                 <small>
                     Jln. Merdeka No. 74 Telp. 082139324445<br>
-                    Email: watesberkelas@gmail.com | Website: wates-blitarkab.desa.id
+                    Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
                 </small>
             </td>
             <td class="kop-logo">
