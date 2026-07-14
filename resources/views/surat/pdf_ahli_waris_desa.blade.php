@@ -143,10 +143,10 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email : Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
+                        email : Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -192,15 +192,15 @@
     <p><strong>Simpanan:</strong><br>
         1. {{ $data->simpanan_jenis ?? '' }} (jenis simpanan), nomor rekening:
         <strong>{{ $data->simpanan_rekening ?? '' }}</strong><br>
-        Atas nama <strong>{{ $data->simpanan_nama ?? $data->nama_almarhum }}</strong> di BRI Unit KEMIRIGEDE.
+        Atas nama <strong>{{ $data->simpanan_nama ?? $data->nama_almarhum }}</strong> di BRI Unit Wates.
     </p>
 
     <table class="ttd-table">
         <tr>
             <td></td>
             <td class="ttd-cell">
-                <p>KEMIRIGEDE, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
+                <p>Wates, {{ $tanggalSurat }}</p>
+                <p><strong>KEPALA DESA Wates</strong></p>
                 <br><br>
                 <p class="nama"><u>Hari Purnawan, S.Sos.</u></p>
             </td>

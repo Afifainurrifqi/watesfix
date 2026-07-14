@@ -49,8 +49,8 @@
       <div class="hero-block">
         <div class="hero-block-content text-center">
           <img class="mb-4" src="{{ asset('assets/images/blitar1.png') }}" alt="">
-          <h2 class="display-4 text-white mb-2">Selamat Datang di Pelayanan Surat Desa KEMIRIGEDE</h2>
-          <p class="text-white">Pelayanan Surat Desa KEMIRIGEDE bisa diakses dimana saja agar dapat meningkatkan kualitas pelayanan dan mempermudah masyarakat</p>
+          <h2 class="display-4 text-white mb-2">Selamat Datang di Pelayanan Surat Desa Wates</h2>
+          <p class="text-white">Pelayanan Surat Desa Wates bisa diakses dimana saja agar dapat meningkatkan kualitas pelayanan dan mempermudah masyarakat</p>
           <a class="btn btn-warning btn-lg w-100" href="{{ route('surat.pengajuan_surat') }}">Buat Pengajuan Surat</a>
         </div>
       </div>

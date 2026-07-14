@@ -480,7 +480,7 @@
         /*
          * Penandatangan dibuat tetap karena tidak disimpan dalam Model.
          */
-        $jabatanKades = 'KEPALA DESA KEMIRIGEDE';
+        $jabatanKades = 'KEPALA DESA Wates';
         $namaKades = 'Hari Purnawan, S.Sos.';
     @endphp
 
@@ -507,7 +507,7 @@
                     </div>
 
                     <div class="kop-desa-3">
-                        PEMERINTAH DESA KEMIRIGEDE
+                        PEMERINTAH DESA Wates
                     </div>
 
                     <div class="kop-desa-alamat">
@@ -516,7 +516,7 @@
 
                     <div class="kop-desa-kontak">
                         email: Kemiriberkelas@gmail.com /
-                        website: Kemirigede-blitarkab.desa.id
+                        website: Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -664,7 +664,7 @@
     ========================================================== --}}
     <div class="ttd">
         <div>
-            Kemirigede, {{ $tanggalSurat }}
+            Wates, {{ $tanggalSurat }}
         </div>
 
         <div class="ttd-jabatan">
@@ -695,7 +695,7 @@
                 >
 
                 <small>
-                    Scan untuk verifikasi surat resmi Desa Kemirigede
+                    Scan untuk verifikasi surat resmi Desa Wates
                 </small>
             </div>
         @endif --}}

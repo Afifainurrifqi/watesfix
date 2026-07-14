@@ -231,7 +231,7 @@
                                                         class="form-control @error('penerima_tugas.' . $index . '.kedudukan') is-invalid @enderror"
                                                         value="{{ $penerima['kedudukan'] ?? '' }}"
                                                         maxlength="255"
-                                                        placeholder="Contoh: Direktur BUMDes Desa Kemirigede"
+                                                        placeholder="Contoh: Direktur BUMDes Desa Wates"
                                                         required
                                                     >
 
@@ -634,7 +634,7 @@
                                         id="penerima_kedudukan_${index}"
                                         class="form-control"
                                         maxlength="255"
-                                        placeholder="Contoh: Direktur BUMDes Desa Kemirigede"
+                                        placeholder="Contoh: Direktur BUMDes Desa Wates"
                                         required
                                     >
                                 </div>

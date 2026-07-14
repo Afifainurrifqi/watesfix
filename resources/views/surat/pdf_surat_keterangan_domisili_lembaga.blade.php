@@ -202,15 +202,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
             </tr>
         </table>
@@ -240,7 +240,7 @@
         <tr>
             <td>Alamat</td>
             <td>:</td>
-            <td>Dsn. Sidomulyo RT 04 RW 01 Desa KEMIRIGEDE, Kecamatan Kesamben</td>
+            <td>Dsn. Sidomulyo RT 04 RW 01 Desa Wates, Kecamatan Kesamben</td>
         </tr>
     </table>
 
@@ -285,7 +285,7 @@
     </table>
 
     <p class="tulisan">
-        Lembaga tersebut di atas adalah benar-benar berdomisili di Desa KEMIRIGEDE Kecamatan Kesamben Kabupaten Blitar.
+        Lembaga tersebut di atas adalah benar-benar berdomisili di Desa Wates Kecamatan Kesamben Kabupaten Blitar.
         Dan sampai saat ini masih aktif. Surat keterangan ini dipergunakan untuk
         {{ $data->keterangan_tambahan ?? '....................' }}.
     </p>
@@ -298,8 +298,8 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>KEMIRIGEDE, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
+                <p>Wates, {{ $tanggalSurat }}</p>
+                <p><strong>KEPALA DESA Wates</strong></p>
                 {{--
             <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
@@ -313,7 +313,7 @@
 
                 {{-- <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR">
-                <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
             </div> --}}
             </td>
         </tr>

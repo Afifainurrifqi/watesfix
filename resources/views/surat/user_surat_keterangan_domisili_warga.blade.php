@@ -423,7 +423,7 @@
                 {{-- Alamat domisili --}}
                 <div class="mb-3">
                     <label for="alamat_domisili" class="form-label">
-                        Alamat Domisili di Desa Kemirigede
+                        Alamat Domisili di Desa Wates
                         <span class="text-danger">*</span>
                     </label>
 

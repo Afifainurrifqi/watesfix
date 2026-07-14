@@ -194,15 +194,15 @@
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA KEMIRIGEDE</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -222,7 +222,7 @@
 
     <!-- ISI -->
     <p class="tulisan">
-        Yang bertanda tangan di bawah ini KEPALA DESA KEMIRIGEDE, Kecamatan Kesamben,
+        Yang bertanda tangan di bawah ini KEPALA DESA Wates, Kecamatan Kesamben,
         Kabupaten Blitar, menerangkan dengan sebenarnya bahwa:
     </p>
 
@@ -274,8 +274,8 @@
     </table>
 
     <p class="tulisan">
-        Berdasarkan data kependudukan yang ada pada Pemerintah Desa KEMIRIGEDE,
-        yang bersangkutan tersebut di atas benar-benar penduduk Desa KEMIRIGEDE
+        Berdasarkan data kependudukan yang ada pada Pemerintah Desa Wates,
+        yang bersangkutan tersebut di atas benar-benar penduduk Desa Wates
         dan <strong>benar pernah menikah</strong>.
     </p>
 
@@ -287,7 +287,7 @@
     <div class="ttd-wrapper">
         <div class="ttd-right">
             <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-            <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
+            <p><strong>KEPALA DESA Wates</strong></p>
 
             {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
@@ -308,7 +308,7 @@
 
             {{-- <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
             </div> --}}
         </div>
     </div>

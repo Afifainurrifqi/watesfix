@@ -272,15 +272,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -411,7 +411,7 @@
 
             <td>
                 <div class="ttd-label">Mengetahui :</div>
-                <div class="ttd-jabatan">KEPALA DESA KEMIRIGEDE</div>
+                <div class="ttd-jabatan">KEPALA DESA Wates</div>
 
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD Kepala Desa">

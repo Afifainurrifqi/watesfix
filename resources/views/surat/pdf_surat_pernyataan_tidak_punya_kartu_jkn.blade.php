@@ -234,7 +234,7 @@
                     </div>
 
                     <div class="kop-desa-3">
-                        PEMERINTAH DESA KEMIRIGEDE
+                        PEMERINTAH DESA Wates
                     </div>
 
                     <div class="kop-desa-alamat">
@@ -243,7 +243,7 @@
 
                     <div class="kop-desa-kontak">
                         Email: Kemiriberkelas@gmail.com /
-                        Website: Kemirigede-blitarkab.desa.id
+                        Website: Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -325,7 +325,7 @@
                 <div>Mengetahui,</div>
 
                 <div class="ttd-jabatan">
-                    KEPALA DESA KEMIRIGEDE
+                    KEPALA DESA Wates
                 </div>
 
                 <div class="ttd-img-wrapper">

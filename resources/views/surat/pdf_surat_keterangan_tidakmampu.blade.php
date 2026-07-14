@@ -212,16 +212,16 @@
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA KEMIRIGEDE</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email : Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
+                        email : Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{--
                 <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Kemirigede">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
                 </td>
                 --}}
             </tr>
@@ -293,7 +293,7 @@
 
     <!-- ISI -->
     <p class="tulisan">
-        Yang bertanda tangan di bawah ini KEPALA DESA KEMIRIGEDE, Kecamatan Kesamben,
+        Yang bertanda tangan di bawah ini KEPALA DESA Wates, Kecamatan Kesamben,
         Kabupaten Blitar, menerangkan dengan sebenarnya bahwa:
     </p>
 
@@ -339,7 +339,7 @@
 
     <p class="tulisan">
         Bahwa berdasarkan keterangan yang bersangkutan serta data administrasi yang ada,
-        nama tersebut di atas adalah benar warga Desa Kemirigede yang kondisi sosial ekonominya
+        nama tersebut di atas adalah benar warga Desa Wates yang kondisi sosial ekonominya
         tergolong kurang mampu/tidak mampu.
     </p>
 
@@ -390,7 +390,7 @@
     <div class="ttd-wrapper">
         <div class="ttd-right">
             <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
-            <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
+            <p><strong>KEPALA DESA Wates</strong></p>
 
             {{--
             <div class="ttd-img-wrapper">
@@ -407,7 +407,7 @@
             {{--
             <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
-                <small>Scan untuk verifikasi surat resmi Desa Kemirigede</small>
+                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
             </div>
             --}}
         </div>

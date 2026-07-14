@@ -21,8 +21,8 @@
 
 <div class="ttd">
     <div class="jabatan">
-        KEMIRIGEDE, ..................................<br>
-        KEPALA DESA KEMIRIGEDE
+        Wates, ..................................<br>
+        KEPALA DESA Wates
     </div>
     <div class="nama-kades">Hari Purnawan, S.Sos. S.Pd.I</div>
 </div>

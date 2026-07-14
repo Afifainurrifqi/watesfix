@@ -343,11 +343,11 @@
          */
         $kepadaNamaInstansi =
             $data->kepada_nama_instansi ??
-            'PT Bank BRI Unit KEMIRIGEDE';
+            'PT Bank BRI Unit Wates';
 
         $kepadaAlamat =
             $data->kepada_alamat ??
-            'KEMIRIGEDE';
+            'Wates';
 
         $ybtNama =
             $data->ybt_nama ??
@@ -357,7 +357,7 @@
         $ybtJabatan =
             $data->ybt_jabatan ??
             $data->jabatan ??
-            'KEPALA DESA KEMIRIGEDE';
+            'KEPALA DESA Wates';
 
         $ybtAlamat =
             $data->ybt_alamat ??
@@ -462,7 +462,7 @@
                     </div>
 
                     <div class="kop-desa-3">
-                        PEMERINTAH DESA KEMIRIGEDE
+                        PEMERINTAH DESA Wates
                     </div>
 
                     <div class="kop-desa-alamat">
@@ -471,7 +471,7 @@
 
                     <div class="kop-desa-kontak">
                         email: Kemiriberkelas@gmail.com /
-                        website: Kemirigede-blitarkab.desa.id
+                        website: Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
