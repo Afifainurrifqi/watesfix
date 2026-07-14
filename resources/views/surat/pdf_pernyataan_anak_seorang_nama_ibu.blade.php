@@ -205,17 +205,17 @@
 
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-baris-2">KECAMATAN Wates</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -293,19 +293,20 @@
                 <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
                 <p>Saya yang menyatakan,</p>
 
-                <div class="ttd-img-wrapper">
+                {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div>
+                </div> --}}
+                <br><br><br>
 
                 <p class="nama-kades">
                     <u>{{ $data->nama ?? '...........................................' }}</u>
                 </p>
 
-                <div class="barcode">
+                {{-- <div class="barcode">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
                     <br>
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-                </div>
+                    <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+                </div> --}}
             </td>
         </tr>
     </table>

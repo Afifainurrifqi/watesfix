@@ -287,17 +287,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -505,7 +505,7 @@
                     <p>Pemohon</p>
                 </td>
                 <td>
-                    <p><strong>Kepala Desa Wates</strong></p>
+                    <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
                 </td>
             </tr>
 
@@ -524,7 +524,7 @@
                 </td>
                 <td>
                     <p class="nama-kades">
-                        MOH. HAMID ALMAULUDI, S.Pd.I
+                        Hari Purnawan, S.Sos.
                     </p>
                 </td>
             </tr>

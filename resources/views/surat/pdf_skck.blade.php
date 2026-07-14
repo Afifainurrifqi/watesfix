@@ -215,17 +215,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -242,7 +242,7 @@
 
     <div class="isi">
         <p>
-            Yang bertanda tangan dibawah ini Kepala Desa Wates, Kec. Wates,
+            Yang bertanda tangan dibawah ini KEPALA DESA KEMIRIGEDE, Kec. KEMIRIGEDE,
             Kab. Blitar, menerangkan bahwa :
         </p>
 
@@ -300,7 +300,7 @@
         </table>
 
         <p>
-            Orang tersebut diatas adalah benar-benar penduduk Desa Wates dan sepanjang
+            Orang tersebut diatas adalah benar-benar penduduk Desa KEMIRIGEDE dan sepanjang
             pengetahuan dan pengamatan kami belum pernah melakukan Pelanggaran Kejahatan,
             pelanggaran polisi, selalu taat dan patuh pada Peraturan Pemerintah yang berlaku.
         </p>
@@ -319,11 +319,11 @@
     <table class="ttd-table">
         <tr>
             <td></td>
-            <td>Wates, {{ $tanggalSurat }}</td>
+            <td>KEMIRIGEDE, {{ $tanggalSurat }}</td>
         </tr>
         <tr>
             <td>Pemegang surat</td>
-            <td><strong>Kepala Desa Wates</strong></td>
+            <td><strong>KEPALA DESA KEMIRIGEDE</strong></td>
         </tr>
         <tr>
             <td>
@@ -334,22 +334,23 @@
             </td>
 
             <td>
-                <div class="ttd-img-wrapper">
+                {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div>
+                </div> --}}
+<br><br><br>
 
-                <div class="nama-ttd">MOH. HAMID ALMAULUDI S.Pd.I</div>
-
+                <div class="nama-ttd">Hari Purnawan, S.Sos. S.Pd.I</div>
+{{--
                 <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-                </div>
+                    <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+                </div> --}}
             </td>
         </tr>
     </table>
 
     <div class="kapolsek">
-        KAPOLSEK Wates
+        KAPOLSEK KEMIRIGEDE
     </div>
 
     <div class="kapolsek-line">

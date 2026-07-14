@@ -195,17 +195,17 @@
 
             <td class="kop-desa-text">
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN Wates</div>
-                <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                 <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                 </div>
             </td>
 
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-            </td>
+              {{-- <td class="kop-desa-logo">
+                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+            </td> --}}
         </tr>
     </table>
 
@@ -225,12 +225,12 @@
         <tr>
             <td>Nama</td>
             <td>:</td>
-            <td>MOH. HAMID ALMAULUDI, S.Pd.I</td>
+            <td>Hari Purnawan, S.Sos.</td>
         </tr>
         <tr>
             <td>Jabatan</td>
             <td>:</td>
-            <td>Kepala Desa Wates, Kec. Wates, Kab. Blitar</td>
+            <td>KEPALA DESA KEMIRIGEDE, Kec. KEMIRIGEDE, Kab. Blitar</td>
         </tr>
     </table>
 
@@ -265,11 +265,11 @@
     </table>
 
     <p>
-        Orang tersebut diatas adalah benar-benar penduduk Desa Wates Kec. Wates Kab. Blitar.
+        Orang tersebut diatas adalah benar-benar penduduk Desa KEMIRIGEDE Kec. KEMIRIGEDE Kab. Blitar.
     </p>
 
     <p>
-        Orang tersebut diatas adalah benar-benar penduduk Desa Wates Kec. Wates Kab. Blitar,
+        Orang tersebut diatas adalah benar-benar penduduk Desa KEMIRIGEDE Kec. KEMIRIGEDE Kab. Blitar,
         yang tergolong tidak mampu <strong>(MISKIN)</strong> yang belum masuk daftar usulan
         karena pada saat pendaftaran tertinggal.
     </p>
@@ -291,7 +291,7 @@
     </tr>
     <tr>
         <td><strong>Bidan Desa</strong></td>
-        <td><strong>Kepala Desa Wates</strong></td>
+        <td><strong>KEPALA DESA KEMIRIGEDE</strong></td>
     </tr>
     <tr>
         <td>
@@ -299,16 +299,18 @@
             <strong><u>...........................................</u></strong>
         </td>
         <td>
-            <div class="ttd-img-wrapper">
+            {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-            </div>
+            </div> --}}
+            <br><br>
 
-            <div class="nama-kades">MOH. HAMID ALMAULUDI, S.Pd.I</div>
+            <div class="nama-kades">Hari Purnawan, S.Sos.</div>
 
+              {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div>
+                <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+            </div> --}}
         </td>
     </tr>
 </table>

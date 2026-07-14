@@ -250,7 +250,7 @@
             $data->jenis_objek ??
             ($data->jenis_tanah_bangunan ?? ($data->tanah_dan ?? '...........................................'));
 
-        $dusun = $data->dusun ?? 'Wates';
+        $dusun = $data->dusun ?? 'KEMIRIGEDE';
         $rt = $data->rt ?? '...';
         $rw = $data->rw ?? '...';
 
@@ -274,7 +274,8 @@
 
         $alamatPemilik =
             $data->alamat ??
-            ($data->alamat_pemilik ?? 'Dusun ........ RT ... RW ... Desa Wates Kecamatan Wates Kabupaten Blitar');
+            ($data->alamat_pemilik ??
+                'Dusun ........ RT ... RW ... Desa KEMIRIGEDE Kecamatan Kesamben Kabupaten Blitar');
 
         $pekerjaanPemilik =
             $data->pekerjaan ?? ($data->pekerjaan_pemilik ?? '...........................................');
@@ -319,17 +320,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -346,7 +347,7 @@
     </div>
 
     <p class="tulisan">
-        Yang bertandatangan di bawah ini Kepala Desa Wates, Kecamatan Wates, Kabupaten Blitar,
+        Yang bertandatangan di bawah ini KEPALA DESA KEMIRIGEDE, Kecamatan Kesamben, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa :
     </p>
 
@@ -356,7 +357,7 @@
             <td class="nomor">1.</td>
             <td>
                 Sebidang tanah dan {{ $jenisObjek }} yang terletak di Dusun {{ $dusun }}
-                RT {{ $rt }} RW {{ $rw }} Desa Wates, No persil : {{ $noPersil }},
+                RT {{ $rt }} RW {{ $rw }} Desa KEMIRIGEDE, No persil : {{ $noPersil }},
                 No SPPT : {{ $noSppt }}, Seluas {{ $luasTanah }} M<sup>2</sup>,
                 Sertifikat no {{ $noSertifikat }}, Luas {{ $luasSertifikat }},
                 atas nama hak milik {{ $atasNamaHakMilik }} dengan batas-batas:
@@ -462,18 +463,19 @@
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
                 <p>Blitar, {{ $tanggalSurat }}</p>
-                <p><strong>Kepala Desa Wates</strong></p>
+                <p><strong>KEPALA DESA KEMIRIGEDE</strong></p>
 
-                <div class="ttd-img-wrapper">
+                {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div>
+                </div> --}}
+                <br><br><br>
 
-                <p class="nama-kades">MOH. HAMID ALMAULUDI, S.Pd.I</p>
+                <p class="nama-kades">Hari Purnawan, S.Sos.</p>
 
-                <div class="qr-section">
+                {{-- <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-                </div>
+                    <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+                </div> --}}
             </td>
         </tr>
     </table>

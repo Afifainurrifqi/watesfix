@@ -289,7 +289,7 @@
 
         $nomorSurat = $data->nomor_surat ?? '005/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/409.41.2/' . $tahunSurat;
 
-        $namaKades = $data->nama_kepala_desa ?? 'MOH. HAMID ALMAULUDI, S.Pd.I';
+        $namaKades = $data->nama_kepala_desa ?? 'Hari Purnawan, S.Sos.';
 
         $perihal = $data->perihal ?? 'Undangan';
 
@@ -297,7 +297,7 @@
 
         $isiPembuka =
             $data->isi_pembuka ??
-            'Sehubungan dengan akan dilaksanakan Pelantikan dan Pengambilan sumpah janji perangkat desa di Desa Wates kecematan Wates Kabupaten Blitar. Berkaitan dengan hal tersebut maka kami mengundang Bapak/Ibu /saudara untuk hadir pada:';
+            'Sehubungan dengan akan dilaksanakan Pelantikan dan Pengambilan sumpah janji perangkat desa di Desa KEMIRIGEDE kecematan KEMIRIGEDE Kabupaten Blitar. Berkaitan dengan hal tersebut maka kami mengundang Bapak/Ibu /saudara untuk hadir pada:';
     @endphp
 
     <!-- KOP SURAT -->
@@ -310,17 +310,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -393,7 +393,7 @@
             <tr>
                 <td class="label">Tempat</td>
                 <td class="colon">:</td>
-                <td class="value">{{ $data->tempat ?? 'Pendopo Kantor Balai Desa Wates' }}</td>
+                <td class="value">{{ $data->tempat ?? 'Pendopo Kantor Balai Desa KEMIRIGEDE' }}</td>
             </tr>
             <tr>
                 <td class="label">Acara</td>
@@ -421,7 +421,7 @@
             <td class="ttd-cell">
                 <p>Blitar, {{ $tanggalSurat }}</p>
                 <p>Mengetahui,</p>
-                <p>Kepala Desa Wates</p>
+                <p>KEPALA DESA KEMIRIGEDE</p>
 
                 <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
@@ -434,7 +434,7 @@
                 <div class="barcode">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
                     <br>
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                    <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
                 </div>
             </td>
         </tr>

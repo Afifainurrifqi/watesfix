@@ -267,7 +267,7 @@
     @php
         $sapaan = $data->sapaan_pasien ?? 'Tn.';
         $namaPasien = $data->nama_pasien ?? 'Cornelius Tri Utomo';
-        $alamatPasien = $data->alamat_pasien ?? 'Dusun Wates RT 02 RW 03 Desa Wates Kec. Wates Kab. Blitar';
+        $alamatPasien = $data->alamat_pasien ?? 'Dusun KEMIRIGEDE RT 02 RW 03 Desa KEMIRIGEDE Kec. KEMIRIGEDE Kab. Blitar';
         $rumahSakit = $data->rumah_sakit_tujuan ?? 'Ngudi Waluyo';
         $lokasiRumahSakit = $data->lokasi_rumah_sakit ?? 'Wlingi';
 
@@ -288,17 +288,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -357,7 +357,7 @@
         </p>
 
         <p class="paragraf-tanpa-indent">
-            Sehubungan dengan kondisi tersebut, kami atas nama Kepala Desa Wates Kecamatan Wates
+            Sehubungan dengan kondisi tersebut, kami atas nama KEPALA DESA KEMIRIGEDE Kecamatan Kesamben
             Kabupaten Blitar, sangat berharap bantuan Bapak untuk bias memberikan keringanan berobat
         </p>
 
@@ -376,7 +376,7 @@
             <tr>
                 <td class="ttd-spacer"></td>
                 <td class="ttd-cell">
-                    <p>Kepala Desa Wates</p>
+                    <p>KEPALA DESA KEMIRIGEDE</p>
 
                     <div class="ttd-img-wrapper">
                         @if (file_exists($ttdKades))
@@ -384,13 +384,13 @@
                         @endif
                     </div>
 
-                    <p class="nama-kades">MOH. HAMID ALMAULUDI</p>
+                    <p class="nama-kades">Hari Purnawan, S.Sos.</p>
 
                     @if (file_exists($barcodeSurat))
                         <div class="barcode">
                             <img src="{{ $barcodeSurat }}" alt="Barcode Surat">
                             <br>
-                            <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                            <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
                         </div>
                     @endif
                 </td>

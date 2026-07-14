@@ -39,8 +39,8 @@
     <!-- KOP SURAT -->
     <div class="kop">
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
-        KECAMATAN Wates<br>
-        KANTOR KEPALA DESA Wates</strong><br>
+        KECAMATAN KESAMBEN<br>
+        KANTOR KEPALA DESA KEMIRIGEDE</strong><br>
         <small>Jln. Merdeka No. 74 Telp. 082139324445</small>
     </div>
     <hr class="kop-garis">
@@ -86,7 +86,7 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>KEMIRIGEDE, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
                 <p>Saya yang menyatakan,</p>
                 <div style="height: 45px;"></div>
                 <p class="nama"><u>{{ $data->nama_deklaran ?? '...........................................' }}</u></p>

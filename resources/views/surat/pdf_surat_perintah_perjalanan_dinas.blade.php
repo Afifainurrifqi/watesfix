@@ -339,21 +339,21 @@
             $data->nomor_sppd ??
             ($data->nomor_surat ?? 'B/010.02/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/409.41.2/' . $tahunSurat);
 
-        $namaKades = $data->nama_kepala_desa ?? 'MOH. HAMID ALMAULUDI, S.Pd.I';
-        $pejabat = $data->pejabat_pemberi_perintah ?? 'Kepala Desa Wates Kecamatan Wates Kabupaten Blitar';
+        $namaKades = $data->nama_kepala_desa ?? 'Hari Purnawan, S.Sos.';
+        $pejabat = $data->pejabat_pemberi_perintah ?? 'KEPALA DESA KEMIRIGEDE Kecamatan Kesamben Kabupaten Blitar';
 
         $namaPegawai = $data->nama_pegawai ?? 'ITA PUJI LESTARI';
-        $pangkatGolongan = $data->pangkat_golongan ?? '- Perangkat Desa Wates';
+        $pangkatGolongan = $data->pangkat_golongan ?? '- Perangkat Desa KEMIRIGEDE';
         $jabatan = $data->jabatan ?? '- Kaur Keuangan';
         $tingkatBiaya = $data->tingkat_biaya ?? '';
 
         $maksud = $data->maksud_perjalanan ?? 'Pengiriman Berkas Revisi Lampiran Add Tahap 1 Permin1';
         $alatAngkutan = $data->alat_angkutan ?? 'Kendaraan Roda Empat';
-        $tempatBerangkat = $data->tempat_berangkat ?? 'Desa Wates';
+        $tempatBerangkat = $data->tempat_berangkat ?? 'Desa KEMIRIGEDE';
         $tempatTujuan = $data->tempat_tujuan ?? 'Ke DPMD';
         $lamaPerjalanan = $data->lama_perjalanan ?? '1';
 
-        $instansi = $data->instansi ?? 'Pemerintah Desa Wates';
+        $instansi = $data->instansi ?? 'Pemerintah Desa KEMIRIGEDE';
         $sumberAnggaran = $data->sumber_anggaran ?? 'APBDesa';
     @endphp
 
@@ -370,17 +370,17 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                     <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                     </div>
                 </td>
 
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-                </td>
+                {{-- <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+                </td> --}}
             </tr>
         </table>
 
@@ -553,7 +553,7 @@
             <td class="left">Dikeluarkan di</td>
             <td class="middle">Pada tanggal</td>
             <td class="colon">:</td>
-            <td class="right">Wates</td>
+            <td class="right">KEMIRIGEDE</td>
         </tr>
         <tr>
             <td></td>
@@ -564,7 +564,7 @@
     </table>
 
     <div class="ttd-kanan">
-        <div>Kepala Desa Wates</div>
+        <div>KEPALA DESA KEMIRIGEDE</div>
         <div class="nama">{{ $namaKades }}</div>
     </div>
 
@@ -602,7 +602,7 @@
                 </table>
 
                 <div class="lembar-ttd">
-                    <div>Kepala Desa Wates</div>
+                    <div>KEPALA DESA KEMIRIGEDE</div>
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>
@@ -771,7 +771,7 @@
                 </div>
 
                 <div class="lembar-ttd">
-                    <div>Kepala Desa Wates</div>
+                    <div>KEPALA DESA KEMIRIGEDE</div>
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>

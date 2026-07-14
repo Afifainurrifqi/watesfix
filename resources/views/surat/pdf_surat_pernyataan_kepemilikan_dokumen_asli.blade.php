@@ -185,17 +185,17 @@
 
             <td class="kop-desa-text">
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN Wates</div>
-                <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                <div class="kop-desa-3">PEMERINTAH DESA KEMIRIGEDE</div>
                 <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :Kemiriberkelas@gmail.com / website : Kemirigede-blitarkab.desa.id
                 </div>
             </td>
 
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
-            </td>
+                {{-- <td class="kop-desa-logo">
+                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa KEMIRIGEDE">
+            </td> --}} 
         </tr>
     </table>
 
@@ -298,10 +298,11 @@
                 {{ $data->nama ?? '...........................................' }}
             </div>
 
+              {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div>
+                <small>Scan untuk verifikasi surat resmi Desa KEMIRIGEDE</small>
+            </div> --}}
         </td>
     </tr>
 </table>
