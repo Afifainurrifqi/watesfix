@@ -192,37 +192,202 @@ class DatapendudukController extends Controller
 
     public function lookupByNik($nik)
     {
-        $penduduk = Datapenduduk::where('nik', $nik)
-            ->with(['pekerjaan', 'detailkk.kk'])   // ← Tambahkan ini
+        $nik = preg_replace('/\D/', '', trim($nik));
+
+        if (!preg_match('/^\d{16}$/', $nik)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'NIK harus terdiri dari 16 digit.',
+            ], 422);
+        }
+
+        $penduduk = Datapenduduk::with([
+            'agama',
+            'pekerjaan',
+            'pendidikan',
+            'status',
+            'detailkk.kk',
+        ])
+            ->where('nik', $nik)
             ->first();
 
         if (!$penduduk) {
             return response()->json([
                 'success' => false,
-                'message' => 'NIK tidak ditemukan'
+                'message' => 'NIK tidak ditemukan.',
             ], 404);
         }
 
-        $nokk = optional(optional($penduduk->detailkk)->kk)->nokk ?? '';
+        /*
+    |--------------------------------------------------------------------------
+    | Pekerjaan
+    |--------------------------------------------------------------------------
+    */
+
+        $pekerjaan = optional($penduduk->pekerjaan)->nama
+            ?? optional($penduduk->pekerjaan)->nama_pekerjaan
+            ?? optional($penduduk->pekerjaan)->pekerjaan
+            ?? '';
+
+        /*
+    |--------------------------------------------------------------------------
+    | Pendidikan
+    |--------------------------------------------------------------------------
+    */
+
+        $pendidikan = optional($penduduk->pendidikan)->nama
+            ?? optional($penduduk->pendidikan)->nama_pendidikan
+            ?? optional($penduduk->pendidikan)->pendidikan
+            ?? optional($penduduk->pendidikan)->jenjang
+            ?? '';
+
+        /*
+    |--------------------------------------------------------------------------
+    | Agama
+    |--------------------------------------------------------------------------
+    */
+
+        $agama = optional($penduduk->agama)->nama
+            ?? optional($penduduk->agama)->agama
+            ?? optional($penduduk->agama)->nama_agama
+            ?? '';
+
+        /*
+    |--------------------------------------------------------------------------
+    | Status perkawinan
+    |--------------------------------------------------------------------------
+    */
+
+        $statusPerkawinan = optional($penduduk->status)->nama
+            ?? optional($penduduk->status)->status
+            ?? optional($penduduk->status)->nama_status
+            ?? '';
+
+        /*
+    |--------------------------------------------------------------------------
+    | Nomor KK
+    |--------------------------------------------------------------------------
+    */
+
+        $nokk = optional(
+            optional($penduduk->detailkk)->kk
+        )->nokk ?? '';
+
+        /*
+    |--------------------------------------------------------------------------
+    | Jenis kelamin
+    |--------------------------------------------------------------------------
+    */
+
+        $jenisKelaminRaw = $penduduk->getRawOriginal('jenis_kelamin')
+            ?? $penduduk->jenis_kelamin
+            ?? $penduduk->jk
+            ?? $penduduk->kelamin
+            ?? '';
+
+        $jenisKelaminNormal = strtoupper(
+            preg_replace(
+                '/[^A-Za-z0-9]/',
+                '',
+                trim((string) $jenisKelaminRaw)
+            )
+        );
+
+        if (
+            in_array($jenisKelaminNormal, [
+                '1',
+                'L',
+                'LK',
+                'LAKI',
+                'LAKILAKI',
+                'PRIA',
+                'MALE',
+            ], true)
+        ) {
+            $jenisKelamin = 'Laki-laki';
+        } elseif (
+            in_array($jenisKelaminNormal, [
+                '0',
+                '2',
+                'P',
+                'PR',
+                'PEREMPUAN',
+                'WANITA',
+                'FEMALE',
+            ], true)
+        ) {
+            $jenisKelamin = 'Perempuan';
+        } else {
+            $jenisKelamin = '';
+        }
+
+        /*
+    |--------------------------------------------------------------------------
+    | Tanggal lahir
+    |--------------------------------------------------------------------------
+    */
+
+        $tanggalLahir = '';
+
+        if (!empty($penduduk->tanggal_lahir)) {
+            try {
+                $tanggalLahir = \Carbon\Carbon::parse(
+                    $penduduk->tanggal_lahir
+                )->format('Y-m-d');
+            } catch (\Throwable $e) {
+                $tanggalLahir = '';
+            }
+        }
 
         return response()->json([
             'success' => true,
+
             'data' => [
-                'nama'          => $penduduk->nama ?? '',
-                'tempat_lahir'  => $penduduk->tempat_lahir ?? '',
-                'tanggal_lahir' => $penduduk->tanggal_lahir ?? '',
-                'jenis_kelamin' => $penduduk->jenis_kelamin == '1' ? 'Laki-laki' : 'Perempuan',
-                'pekerjaan'     => optional($penduduk->pekerjaan)->nama ?? '',
-                'alamat'        => $penduduk->alamat ?? '',
-                'rt'            => $penduduk->RT ?? '',
-                'rw'            => $penduduk->RW ?? '',
-                'nokk'          => $nokk,
-                'agama'            => $penduduk->agama->agama ?? $penduduk->agama->nama_agama ?? '',
-                'status_perkawinan' => $penduduk->status->status ?? $penduduk->status->nama_status ?? '',        // ← Tambahan No KK
-            ]
+                'nama' => $penduduk->nama ?? '',
+
+                'tempat_lahir' => $penduduk->tempat_lahir ?? '',
+
+                'tanggal_lahir' => $tanggalLahir,
+
+                'jenis_kelamin' => $jenisKelamin,
+
+                'pekerjaan' => trim((string) $pekerjaan),
+
+                'pendidikan' => trim((string) $pendidikan),
+
+                'agama' => trim((string) $agama),
+
+                'kewarganegaraan' => $penduduk->kewarganegaraan
+                    ?? $penduduk->warganegara
+                    ?? 'WNI',
+
+                'alamat' => $penduduk->alamat ?? '',
+
+                'rt' => $penduduk->RT
+                    ?? $penduduk->rt
+                    ?? '',
+
+                'rw' => $penduduk->RW
+                    ?? $penduduk->rw
+                    ?? '',
+
+                'nokk' => $nokk,
+
+                'status_perkawinan' => trim(
+                    (string) $statusPerkawinan
+                ),
+            ],
+
+            /*
+         * Debug sementara. Hapus setelah berhasil.
+         */
+            'debug' => [
+                'jenis_kelamin_asli' => $jenisKelaminRaw,
+                'jenis_kelamin_normal' => $jenisKelaminNormal,
+                'jenis_kelamin_hasil' => $jenisKelamin,
+            ],
         ]);
     }
-
 
     public function addadmin()
     {
@@ -247,29 +412,97 @@ class DatapendudukController extends Controller
 
     public function export_excel()
     {
-        return Excel::download(new Exportdatapenduduk, "datapenduduk.xlsx");
+        $filename = 'datapenduduk_'
+            . now()->format('Ymd_His')
+            . '.xlsx';
+
+        return Excel::download(
+            new Exportdatapenduduk(),
+            $filename
+        );
     }
 
-    public function import_excel(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|mimes:csv,txt',
-        ]);
+   public function import_excel(Request $request)
+{
+    $request->validate(
+        [
+            'file' => [
+                'required',
+                'file',
+                'mimes:xlsx',
+                'max:20480',
+            ],
+        ],
+        [
+            'file.required' =>
+                'File XLSX wajib dipilih.',
 
-        $file = $request->file('file');
-        $spreadsheet = IOFactory::load($file->getPathname());
-        $sheet = $spreadsheet->getActiveSheet();
-        $data = $sheet->toArray();
+            'file.file' =>
+                'File import tidak valid.',
 
-        // Skip the header row
-        array_shift($data);
+            'file.mimes' =>
+                'File import harus berformat XLSX.',
 
-        foreach ($data as $rowData) {
-            (new Importdatapenduduk())->model($rowData);
-        }
+            'file.max' =>
+                'Ukuran file maksimal 20 MB.',
+        ]
+    );
 
-        return redirect('datapenduduk');
+    $import = new Importdatapenduduk();
+
+    try {
+        /*
+         * Gunakan satu instance import untuk seluruh file.
+         * Jangan membuat instance baru pada setiap baris.
+         */
+        Excel::import(
+            $import,
+            $request->file('file')
+        );
+    } catch (\Throwable $e) {
+        report($e);
+
+        return redirect()
+            ->back()
+            ->with(
+                'error',
+                'Import gagal diproses. Periksa format file XLSX ' .
+                'dan pastikan baris pertama berisi header yang benar.'
+            );
     }
+
+    $summary = $import->getSummary();
+
+    $message =
+        'Import selesai: ' .
+        $summary['inserted'] .
+        ' data baru berhasil diimpor, ' .
+        $summary['skipped_existing'] .
+        ' NIK sudah ada di database, ' .
+        $summary['skipped_duplicate_file'] .
+        ' NIK ganda dalam file, dan ' .
+        $summary['invalid'] .
+        ' baris tidak valid.';
+
+    $routeName = (
+        auth()->check() &&
+        auth()->user()->role === 'admin'
+    )
+        ? 'datapenduduk.index_admin'
+        : 'datapenduduk.index';
+
+    return redirect()
+        ->route($routeName)
+        ->with('msg', $message)
+        ->with(
+            'import_warnings',
+            $summary['warnings']
+        )
+        ->with(
+            'import_warning_overflow',
+            $summary['warning_overflow']
+        );
+}
 
 
 

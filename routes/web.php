@@ -371,6 +371,21 @@ Route::prefix('surat')->group(function () {
         ->name('surat.user_desa_penduduk.store');
 
     Route::middleware(['auth', 'checkrole:admin,user'])->group(function () {
+        Route::get(
+            '/surat/export-docx/{jenis}/{id}',
+            [SuratmasukController::class, 'exportDocx']
+        )->name('surat.export-docx');
+
+        Route::get(
+            '/surat/export-docx-source/{jenis}/{id}',
+            [SuratmasukController::class, 'exportDocxSource']
+        )->name('surat.export-docx.source');
+
+        Route::post(
+            '/surat/export-docx-build/{jenis}/{id}',
+            [SuratmasukController::class, 'exportDocxBuild']
+        )->name('surat.export-docx.build');
+
         Route::get('izinkk', [SuratPernyataanMengizinkanIkutKkController::class, 'index'])
             ->name('surat.izinkk.index');
 
@@ -1279,7 +1294,7 @@ Route::middleware(['checkrole:admin,dasawisma'])->group(
 
 Route::middleware(['checkrole:admin'])->group(
     function () {
-        Route::get('datapenduduk/export/datapenduduk', [DatapendudukController::class, 'export_excel']);
+        Route::get('datapenduduk/export/datapenduduk', [DatapendudukController::class, 'export_excel'])->name('export_excel');;
     }
 );
 
