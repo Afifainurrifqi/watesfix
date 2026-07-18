@@ -376,6 +376,39 @@ Route::prefix('surat')->group(function () {
             [SuratmasukController::class, 'exportDocx']
         )->name('surat.export-docx');
 
+        /*
+|--------------------------------------------------------------------------
+| ROUTE AUTOFILL NIK DATA RT
+|--------------------------------------------------------------------------
+|
+| Letakkan pada middleware yang sama dengan route:
+| datart.create dan datart.add.
+|
+*/
+
+        Route::post(
+            'sdgs/RT/datart/find-penduduk-by-nik',
+            [DataRtController::class, 'findPendudukByNik']
+        )->name('datart.findPendudukByNik');
+
+
+        /*
+|--------------------------------------------------------------------------
+| ROUTE DATA RT YANG DIPAKAI
+|--------------------------------------------------------------------------
+*/
+
+        Route::get(
+            'sdgs/RT/tambahdatart',
+            [DataRtController::class, 'add']
+        )->name('datart.create');
+
+        Route::post(
+            'sdgs/RT/tambahdatart',
+            [DataRtController::class, 'store']
+        )->name('datart.add');
+
+
         Route::get(
             '/surat/export-docx-source/{jenis}/{id}',
             [SuratmasukController::class, 'exportDocxSource']
