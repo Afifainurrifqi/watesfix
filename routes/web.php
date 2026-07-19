@@ -1246,6 +1246,7 @@ Route::middleware(['checkrole:admin,dasawisma,akundemo'])->group(
 
         Route::post('/individu/import', [DataindividuController::class, 'import'])->name('individu.import');
         Route::post('/lokasipemukiman/import', [LokasipemukimanController::class, 'import'])->name('lokasipemukiman.import');
+        Route::get('/data-rt/export', [DataRtController::class, 'export'])->name('data-rt.export');
         Route::post('/data-rt/import', [DataRtController::class, 'import'])->name('data-rt.import');
     }
 );
