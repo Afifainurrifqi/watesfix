@@ -24,5 +24,5 @@
         Wates, ..................................<br>
         KEPALA DESA Wates
     </div>
-    <div class="nama-kades">Hari Purnawan, S.Sos. S.Pd.I</div>
+    <div class="nama-kades">MOH HAMID ALMAULUDI, S.Sos </div>
 </div>

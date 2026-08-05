@@ -303,7 +303,7 @@
             $tanggalSurat = \Carbon\Carbon::parse($sumberTanggal)
                 ->timezone('Asia/Jakarta')
                 ->locale('id')
-                ->translatedFormat('d F Y');
+                 ->locale('id')->translatedFormat('d F Y');
 
             $tahunSurat = \Carbon\Carbon::parse($sumberTanggal)
                 ->timezone('Asia/Jakarta')
@@ -311,7 +311,7 @@
         } catch (\Throwable $e) {
             $tanggalSurat = now('Asia/Jakarta')
                 ->locale('id')
-                ->translatedFormat('d F Y');
+                 ->locale('id')->translatedFormat('d F Y');
 
             $tahunSurat = now('Asia/Jakarta')->format('Y');
         }
@@ -320,131 +320,7 @@
          * nomor_surat hanya dibaca sebagai fallback untuk data lama.
          * Data baru menampilkan format nomor yang dapat diisi manual.
          */
-        $nomorSurat = filled($data->nomor_surat ?? null)
-            ? $data->nomor_surat
-            : '094 /        / 409.41.2 / ' . $tahunSurat;
-
-        /*
-         * =========================================================
-         * DASAR SURAT
-         * =========================================================
-         */
-        if (is_array($data->dasar ?? null)) {
-            $daftarDasar = array_values(
-                array_filter(
-                    array_map(
-                        static fn ($item) => trim((string) $item),
-                        $data->dasar
-                    ),
-                    static fn ($item) => $item !== ''
-                )
-            );
-        } elseif (filled($data->dasar ?? null)) {
-            $daftarDasar = [trim((string) $data->dasar)];
-        } else {
-            $daftarDasar = [];
-        }
-
-        /*
-         * =========================================================
-         * PENERIMA TUGAS BARU + FALLBACK DATA LAMA
-         * =========================================================
-         */
-        if (is_array($data->penerima_tugas ?? null)) {
-            $penerimaTugas = array_values($data->penerima_tugas);
-        } elseif (
-            filled($data->nama_penerima ?? null) ||
-            filled($data->jabatan_penerima ?? null)
-        ) {
-            $penerimaTugas = [
-                [
-                    'nama' => $data->nama_penerima ?? '-',
-                    'kedudukan' => $data->jabatan_penerima ?? '-',
-                ],
-            ];
-        } else {
-            $penerimaTugas = [];
-        }
-
-        $penerimaTugas = array_values(
-            array_filter(
-                array_map(
-                    static function ($item) {
-                        $item = is_array($item) ? $item : [];
-
-                        $nama = trim((string) ($item['nama'] ?? ''));
-                        $kedudukan = trim(
-                            (string) ($item['kedudukan'] ?? '')
-                        );
-
-                        if ($nama === '' && $kedudukan === '') {
-                            return null;
-                        }
-
-                        return [
-                            'nama' => $nama !== '' ? $nama : '-',
-                            'kedudukan' =>
-                                $kedudukan !== '' ? $kedudukan : '-',
-                        ];
-                    },
-                    $penerimaTugas
-                )
-            )
-        );
-
-        if (count($penerimaTugas) === 0) {
-            $penerimaTugas = [
-                [
-                    'nama' => '...........................................',
-                    'kedudukan' => '...........................................',
-                ],
-            ];
-        }
-
-        /*
-         * =========================================================
-         * BAGIAN UNTUK BARU + FALLBACK DATA LAMA
-         * =========================================================
-         */
-        $uraianUntuk = trim((string) ($data->untuk ?? ''));
-
-        if ($uraianUntuk === '') {
-            $bagianUntuk = [];
-
-            if (filled($data->untuk_mengikuti ?? null)) {
-                $bagianUntuk[] = trim(
-                    (string) $data->untuk_mengikuti
-                );
-            }
-
-            $detailKegiatan = [];
-
-            if (filled($data->hari ?? null)) {
-                $detailKegiatan[] =
-                    'pada hari ' . trim((string) $data->hari);
-            }
-
-            if (filled($data->tanggal_kegiatan ?? null)) {
-                try {
-                    $tanggalKegiatan = \Carbon\Carbon::parse(
-                        $data->tanggal_kegiatan
-                    )
-                        ->locale('id')
-                        ->translatedFormat('d F Y');
-                } catch (\Throwable $e) {
-                    $tanggalKegiatan =
-                        (string) $data->tanggal_kegiatan;
-                }
-
-                $detailKegiatan[] =
-                    'tanggal ' . $tanggalKegiatan;
-            }
-
-            if (filled($data->waktu_mulai ?? null)) {
-                $detailKegiatan[] =
-                    'pukul ' .
-                    trim((string) $data->waktu_mulai) .
-                    ' WIB sampai selesai';
+        $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'perintah_tugas');
             }
 
             if (filled($data->tempat_kegiatan ?? null)) {
@@ -481,7 +357,7 @@
          * Penandatangan dibuat tetap karena tidak disimpan dalam Model.
          */
         $jabatanKades = 'KEPALA DESA Wates';
-        $namaKades = 'Hari Purnawan, S.Sos.';
+        $namaKades = 'MOH HAMID ALMAULUDI';
     @endphp
 
     {{-- =========================================================
@@ -511,11 +387,11 @@
                     </div>
 
                     <div class="kop-desa-alamat">
-                        Jln. Merdeka No. 74 Telp. 082139324445
+                        Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445
                     </div>
 
                     <div class="kop-desa-kontak">
-                        email: Kemiriberkelas@gmail.com /
+                        email: watesberkelas@gmail.com /
                         website: Wates-blitarkab.desa.id
                     </div>
                 </td>
@@ -681,7 +557,7 @@
             @endif
         </div> --}}
 
-        <br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br>
 
         <div class="nama-kades">
             {{ $namaKades }}

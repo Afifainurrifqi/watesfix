@@ -186,14 +186,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -207,7 +207,7 @@
     </div>
 
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '300 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'ktp_kematian') }}
     </div>
 
     <!-- ISI -->
@@ -225,7 +225,7 @@
         <tr>
             <td>Tempat, Tanggal Lahir</td>
             <td>: {{ $data->tempat_lahir_pelapor ?? '' }},
-                {{ isset($data->tanggal_lahir_pelapor) ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y') : '...........................................' }}
+                {{ isset($data->tanggal_lahir_pelapor) ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor) ->locale('id')->translatedFormat('d F Y') : '...........................................' }}
             </td>
         </tr>
         <tr>
@@ -255,7 +255,7 @@
         <tr>
             <td>Nama / Tanggal Lahir</td>
             <td>: {{ $data->nama_jenazah ?? '...........................................' }} /
-                {{ isset($data->tanggal_lahir_jenazah) ? \Carbon\Carbon::parse($data->tanggal_lahir_jenazah)->translatedFormat('d F Y') : '...........................................' }}
+                {{ isset($data->tanggal_lahir_jenazah) ? \Carbon\Carbon::parse($data->tanggal_lahir_jenazah) ->locale('id')->translatedFormat('d F Y') : '...........................................' }}
             </td>
         </tr>
         <tr>
@@ -280,14 +280,14 @@
     <!-- TANDA TANGAN -->
     <div class="ttd-wrapper" style="margin-top: 35px;">
         <div class="ttd-right">
-            <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+            <p>Blitar, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
             <p><strong>Yang membuat pernyataan</strong></p>
 
             {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div> --}}
 
-            <br><br><br><br><br>
+            <br><br><br><br><br><br>
 
             <p><strong><u>{{ $data->nama_pelapor ?? '...........................................' }}</u></strong></p>
 

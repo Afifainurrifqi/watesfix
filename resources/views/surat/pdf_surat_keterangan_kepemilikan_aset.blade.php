@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Kepemilikan Aset</title>
@@ -184,169 +185,171 @@
         }
     </style>
 </head>
+
 <body>
 
-@php
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    @php
+        $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
 
-    $tanggalLahir = !empty($data->tanggal_lahir)
-        ? \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y')
-        : '-';
-@endphp
+        $tanggalLahir = !empty($data->tanggal_lahir)
+            ? \Carbon\Carbon::parse($data->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
+            : '-';
+    @endphp
 
-<!-- KOP SURAT -->
-<div class="kop-desa-container">
-    <table class="kop-desa-table">
-        <tr>
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
-            </td>
+    <!-- KOP SURAT -->
+    <div class="kop-desa-container">
+        <table class="kop-desa-table">
+            <tr>
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
+                </td>
 
-            <td class="kop-desa-text">
-                <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
-                <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
-                <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
-                </div>
-            </td>
+                <td class="kop-desa-text">
+                    <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-kontak">
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    </div>
+                </td>
 
                 {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
+            </tr>
+        </table>
+
+        <hr class="kop-desa-garis">
+    </div>
+
+    <div class="judul">DATA KEPEMILIKAN</div>
+
+    <div class="nomor">
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'kepemilikan_aset') }}
+    </div>
+
+    <p>Yang bertanda tangan di bawah ini KEPALA DESA Wates menerangkan dengan sebenarnya bahwa :</p>
+
+    <table class="data">
+        <tr>
+            <td>Nama</td>
+            <td>:</td>
+            <td>{{ $data->nama ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Tempat Tgl Lahir</td>
+            <td>:</td>
+            <td>{{ $data->tempat_lahir ?? '-' }}, {{ $tanggalLahir }}</td>
+        </tr>
+        <tr>
+            <td>No KTP / NIK</td>
+            <td>:</td>
+            <td>{{ $data->nik ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Pekerjaan</td>
+            <td>:</td>
+            <td>{{ $data->pekerjaan ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td>{{ $data->alamat ?? '-' }}</td>
         </tr>
     </table>
 
-    <hr class="kop-desa-garis">
-</div>
+    <p>Dengan hasil survey seperti dibawah ini :</p>
 
-<div class="judul">DATA KEPEMILIKAN</div>
+    <table class="data">
+        <tr class="section-title">
+            <td colspan="3"><strong>A. Pendapatan Keluarga</strong></td>
+        </tr>
+        <tr>
+            <td>Kurang dari</td>
+            <td>:</td>
+            <td>Rp {{ $data->pendapatan_bulanan ?? '-' }}/bulan</td>
+        </tr>
 
-<div class="nomor">
-    Nomor : {{ $data->nomor_surat ?? '470 / --- / 409.41.2 / ' . now()->year }}
-</div>
+        <tr class="section-title">
+            <td colspan="3"><strong>B. Kepemilikan Tanah</strong></td>
+        </tr>
+        <tr>
+            <td>Pekarangan</td>
+            <td>:</td>
+            <td>{{ $data->pekarangan ?? '-' }} M²</td>
+        </tr>
+        <tr>
+            <td>Sawah</td>
+            <td>:</td>
+            <td>{{ $data->sawah ?? '-' }} M²</td>
+        </tr>
+        <tr>
+            <td>Perkebunan</td>
+            <td>:</td>
+            <td>{{ $data->perkebunan ?? '-' }} M²</td>
+        </tr>
 
-<p>Yang bertanda tangan di bawah ini KEPALA DESA Wates menerangkan dengan sebenarnya bahwa :</p>
+        <tr class="section-title">
+            <td colspan="3"><strong>C. Aset / Barang Berharga</strong></td>
+        </tr>
+        <tr>
+            <td>Mobil</td>
+            <td>:</td>
+            <td>{{ $data->mobil ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Sepeda Motor</td>
+            <td>:</td>
+            <td>{{ $data->sepeda_motor ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Perhiasan Emas</td>
+            <td>:</td>
+            <td>{{ $data->perhiasan_emas ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Lainnya</td>
+            <td>:</td>
+            <td>{{ $data->lainnya ?? '-' }}</td>
+        </tr>
 
-<table class="data">
-    <tr>
-        <td>Nama</td>
-        <td>:</td>
-        <td>{{ $data->nama ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Tempat Tgl Lahir</td>
-        <td>:</td>
-        <td>{{ $data->tempat_lahir ?? '-' }}, {{ $tanggalLahir }}</td>
-    </tr>
-    <tr>
-        <td>No KTP / NIK</td>
-        <td>:</td>
-        <td>{{ $data->nik ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Pekerjaan</td>
-        <td>:</td>
-        <td>{{ $data->pekerjaan ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Alamat</td>
-        <td>:</td>
-        <td>{{ $data->alamat ?? '-' }}</td>
-    </tr>
-</table>
+        <tr class="section-title">
+            <td colspan="3"><strong>D. Kepemilikan Rumah</strong></td>
+        </tr>
+        <tr>
+            <td colspan="3">{{ $data->kepemilikan_rumah ?? '-' }}</td>
+        </tr>
+    </table>
 
-<p>Dengan hasil survey seperti dibawah ini :</p>
+    <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
 
-<table class="data">
-    <tr class="section-title">
-        <td colspan="3"><strong>A. Pendapatan Keluarga</strong></td>
-    </tr>
-    <tr>
-        <td>Kurang dari</td>
-        <td>:</td>
-        <td>Rp {{ $data->pendapatan_bulanan ?? '-' }}/bulan</td>
-    </tr>
-
-    <tr class="section-title">
-        <td colspan="3"><strong>B. Kepemilikan Tanah</strong></td>
-    </tr>
-    <tr>
-        <td>Pekarangan</td>
-        <td>:</td>
-        <td>{{ $data->pekarangan ?? '-' }} M²</td>
-    </tr>
-    <tr>
-        <td>Sawah</td>
-        <td>:</td>
-        <td>{{ $data->sawah ?? '-' }} M²</td>
-    </tr>
-    <tr>
-        <td>Perkebunan</td>
-        <td>:</td>
-        <td>{{ $data->perkebunan ?? '-' }} M²</td>
-    </tr>
-
-    <tr class="section-title">
-        <td colspan="3"><strong>C. Aset / Barang Berharga</strong></td>
-    </tr>
-    <tr>
-        <td>Mobil</td>
-        <td>:</td>
-        <td>{{ $data->mobil ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Sepeda Motor</td>
-        <td>:</td>
-        <td>{{ $data->sepeda_motor ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Perhiasan Emas</td>
-        <td>:</td>
-        <td>{{ $data->perhiasan_emas ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Lainnya</td>
-        <td>:</td>
-        <td>{{ $data->lainnya ?? '-' }}</td>
-    </tr>
-
-    <tr class="section-title">
-        <td colspan="3"><strong>D. Kepemilikan Rumah</strong></td>
-    </tr>
-    <tr>
-        <td colspan="3">{{ $data->kepemilikan_rumah ?? '-' }}</td>
-    </tr>
-</table>
-
-<p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
-
-<table class="ttd">
-    <tr>
-        <td></td>
-        <td>Blitar, {{ $tanggalSurat }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><strong>KEPALA DESA Wates</strong></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            {{-- <div class="ttd-img-wrapper">
+    <table class="ttd">
+        <tr>
+            <td></td>
+            <td>Blitar, {{ $tanggalSurat }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><strong>KEPALA DESA Wates</strong></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
             </div> --}}
-<br><br><br>
-            <div class="nama-kades">Hari Purnawan, S.Sos.</div>
+                <br><br><br><br>
+                <div class="nama-kades">MOH HAMID ALMAULUDI</div>
 
-            {{-- <div class="qr-section">
+                {{-- <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR">
                 <small>Scan untuk verifikasi surat resmi Desa Wates</small>
             </div> --}}
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+    </table>
 
 </body>
+
 </html>

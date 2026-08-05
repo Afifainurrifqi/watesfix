@@ -129,8 +129,8 @@
 
 <body>
     @php
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
-        $tanggalMeninggal = \Carbon\Carbon::parse($data->tanggal_meninggal)->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
+        $tanggalMeninggal = \Carbon\Carbon::parse($data->tanggal_meninggal) ->locale('id')->translatedFormat('d F Y');
     @endphp
 
     {{-- KOP SURAT --}}
@@ -144,9 +144,9 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email : Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email : watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -155,7 +155,7 @@
     </div>
 
     <div class="judul-surat">SURAT KETERANGAN AHLI WARIS DESA</div>
-    <div class="nomor-surat">Nomor : {{ $data->nomor_surat ?? '422.4/---/409.41.2/' . now()->year }}</div>
+    <div class="nomor-surat">Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'ahli_waris_desa') }}</div>
 
     <p>Kami yang bertanda tangan di bawah ini adalah ahli waris yang sah dari almarhum/almarhumah
         <strong>{{ $data->nama_almarhum }}</strong> yang meninggal dunia pada hari
@@ -202,7 +202,7 @@
                 <p>Wates, {{ $tanggalSurat }}</p>
                 <p><strong>KEPALA DESA Wates</strong></p>
                 <br><br>
-                <p class="nama"><u>Hari Purnawan, S.Sos.</u></p>
+                <p class="nama"><u>MOH HAMID ALMAULUDI</u></p>
             </td>
         </tr>
     </table>

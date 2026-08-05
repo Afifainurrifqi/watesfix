@@ -185,7 +185,7 @@
 @php
     $s = $surat ?? $data ?? null;
 
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $isiField = function ($field, $default = '...........................................') use ($s) {
         $value = data_get($s, $field);
@@ -193,7 +193,7 @@
     };
 
     $tanggalLahir = !empty(data_get($s, 'tanggal_lahir'))
-        ? \Carbon\Carbon::parse(data_get($s, 'tanggal_lahir'))->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse(data_get($s, 'tanggal_lahir')) ->locale('id')->translatedFormat('d F Y')
         : '...........................................';
 @endphp
 
@@ -209,14 +209,14 @@
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                 <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                 <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                 </div>
             </td>
 
                 {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
         </tr>
     </table>
@@ -227,7 +227,7 @@
 <div class="judul">SURAT KETERANGAN PENGHASILAN</div>
 
 <div class="nomor">
-    Nomor : {{ $isiField('nomor_surat', '470/   /409.41.2/' . now('Asia/Jakarta')->year) }}
+    Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'penghasilan') }}
 </div>
 
 <div class="isi">
@@ -339,8 +339,8 @@
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div> --}}
 
-            <br><br><br>
-            <div class="nama-kades">Hari Purnawan, S.Sos.</div>
+            <br><br><br><br>
+            <div class="nama-kades">MOH HAMID ALMAULUDI</div>
 
               {{--
             <div class="qr-section">

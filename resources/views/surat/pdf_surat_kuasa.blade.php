@@ -252,7 +252,7 @@
 
 <body>
 @php
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $tanggalLahirPihak1 = !empty($data->tanggal_lahir_pihak1)
         ? \Carbon\Carbon::parse($data->tanggal_lahir_pihak1)->format('d-m-Y')
@@ -275,14 +275,14 @@
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                 <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                 <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                 </div>
             </td>
 
                 {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
         </tr>
     </table>
@@ -293,7 +293,7 @@
 <div class="judul">SURAT KUASA</div>
 
 <p class="nomor">
-    No : {{ $data->nomor_surat ?? '470 / --- / 409.42.1 / ' . now('Asia/Jakarta')->year }}
+    No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'kuasa') }}
 </p>
 
 <p class="pembuka">
@@ -434,8 +434,8 @@
         {{-- <div class="ttd-img-wrapper">
             <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD Kepala Desa">
         </div> --}}
-<br><br><br>
-        <p class="nama-kades">Hari Purnawan, S.Sos.</p>
+<br><br><br><br>
+        <p class="nama-kades">MOH HAMID ALMAULUDI</p>
 
         <div class="barcode">
             <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">

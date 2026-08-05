@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Keterangan Pengantar SKCK</title>
@@ -198,10 +199,10 @@
 
 <body>
     @php
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
 
         $tanggalLahir = !empty($surat->tanggal_lahir)
-            ? \Carbon\Carbon::parse($surat->tanggal_lahir)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($surat->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
             : '...........................................';
     @endphp
 
@@ -217,14 +218,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -237,7 +238,7 @@
     </div>
 
     <div class="nomor-surat">
-        Nomor : {{ $surat->nomor_surat ?? '300 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($surat, 'skck') }}
     </div>
 
     <div class="isi">
@@ -337,10 +338,10 @@
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
                 </div> --}}
-<br><br><br>
+                <br><br><br><br><br>
 
-                <div class="nama-ttd">Hari Purnawan, S.Sos. S.Pd.I</div>
-{{--
+                <div class="nama-ttd">MOH HAMID ALMAULUDI</div>
+                {{--
                 <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
                     <small>Scan untuk verifikasi surat resmi Desa Wates</small>
@@ -357,4 +358,5 @@
         ___________________
     </div>
 </body>
+
 </html>

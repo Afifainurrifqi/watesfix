@@ -185,14 +185,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -207,7 +207,7 @@
 
     <!-- NOMOR SURAT -->
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '430 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'kehilangan') }}
     </div>
 
     <!-- ISI -->
@@ -230,7 +230,7 @@
             <td>
                 : {{ $data->tempat_lahir_pelapor ?? '' }},
                 {{ !empty($data->tanggal_lahir_pelapor)
-                    ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor)->translatedFormat('d F Y')
+                    ? \Carbon\Carbon::parse($data->tanggal_lahir_pelapor) ->locale('id')->translatedFormat('d F Y')
                     : '...........................................' }}
             </td>
         </tr>
@@ -263,7 +263,7 @@
         pada tanggal
         <strong>
             {{ !empty($data->tanggal_kehilangan)
-                ? \Carbon\Carbon::parse($data->tanggal_kehilangan)->translatedFormat('d F Y')
+                ? \Carbon\Carbon::parse($data->tanggal_kehilangan) ->locale('id')->translatedFormat('d F Y')
                 : '...........................................' }}
         </strong>,
         hilang saat <strong>{{ $data->hilang_saat ?? '...........................................' }}</strong>.
@@ -276,17 +276,17 @@
     <!-- TANDA TANGAN -->
     <div class="ttd-wrapper">
         <div class="ttd-right">
-            <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+            <p>Blitar, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
             <p><strong>KEPALA DESA Wates</strong></p>
 
             {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div> --}}
 
-            <br><br><br><br>
+            <br><br><br><br><br>
 
 
-            <p><strong><u>Hari Purnawan, S.Sos. S.Pd.I</u></strong></p>
+            <p><strong><u>MOH HAMID ALMAULUDI  </u></strong></p>
 
             {{-- <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">

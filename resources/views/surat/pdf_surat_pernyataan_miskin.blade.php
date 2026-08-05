@@ -229,14 +229,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -248,6 +248,8 @@
     <div class="judul">
         SURAT&nbsp;&nbsp;&nbsp;PERNYATAAN
     </div>
+
+    <div style="text-align:center; margin-top:-4px; margin-bottom:12px;">Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'pernyataan_miskin') }}</div>
 
     <p class="pembuka">Yang bertanda tangan di bawah ini :</p>
 
@@ -309,8 +311,8 @@
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan Kepala Desa">
                 </div> --}}
-<br><br><br>
-                <div class="nama-kades">Hari Purnawan, S.Sos.</div>
+<br><br><br><br>
+                <div class="nama-kades">MOH HAMID ALMAULUDI</div>
 {{--
                 {{--
                 <div class="qr-section">

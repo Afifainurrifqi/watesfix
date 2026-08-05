@@ -244,7 +244,7 @@
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
         $jenisObjek =
             $data->jenis_objek ??
@@ -322,14 +322,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -343,7 +343,7 @@
     </div>
 
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '594 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'harga_tanah') }}
     </div>
 
     <p class="tulisan">
@@ -468,9 +468,9 @@
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
                 </div> --}}
-                <br><br><br>
+                <br><br><br><br>
 
-                <p class="nama-kades">Hari Purnawan, S.Sos.</p>
+                <p class="nama-kades">MOH HAMID ALMAULUDI</p>
 
                 {{-- <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">

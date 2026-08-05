@@ -190,14 +190,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -206,6 +206,8 @@
     </div>
 
     <div class="judul">SURAT PERNYATAAN BATAL PINDAH PENDUDUK</div>
+
+    <div style="text-align:center; margin-top:-4px; margin-bottom:12px;">Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'batal_pindah') }}</div>
 
     <p class="isi"><strong>Yang bertanda tangan di bawah ini:</strong></p>
 
@@ -219,7 +221,7 @@
             <td>
                 : {{ $data->ttl_tempat ?? '' }} /
                 {{ !empty($data->ttl_tanggal)
-                    ? \Carbon\Carbon::parse($data->ttl_tanggal)->translatedFormat('d F Y')
+                    ? \Carbon\Carbon::parse($data->ttl_tanggal) ->locale('id')->translatedFormat('d F Y')
                     : '...........................................' }}
             </td>
         </tr>
@@ -267,14 +269,14 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Blitar, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
                 <p>Saya yang menyatakan,</p>
 
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
                 </div> --}}
 
-<br><br><br>
+<br><br><br><br>
                 <p class="nama">
                     <u>{{ $data->nama ?? '...........................................' }}</u>
                 </p>

@@ -289,14 +289,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -308,7 +308,7 @@
     <div class="judul">SURAT REKOMENDASI PEMBELIAN BBM JENIS TERTENTU</div>
 
     <div class="nomor">
-        Nomor : {{ $data->nomor_surat ?? '541 / / 409.41.2 / ' . date('Y') }}
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'rekomendasi_bbm') }}
     </div>
 
     {{-- DASAR HUKUM --}}
@@ -446,7 +446,7 @@
     <p>
         4. Jangka Waktu pemberlakuan surat Rekomendasi sampai dengan
         <strong>
-            {{ !empty($data->jangka_waktu) ? \Carbon\Carbon::parse($data->jangka_waktu)->translatedFormat('d F Y') : '-' }}
+            {{ !empty($data->jangka_waktu) ? \Carbon\Carbon::parse($data->jangka_waktu) ->locale('id')->translatedFormat('d F Y') : '-' }}
         </strong>
     </p>
 
@@ -481,7 +481,7 @@
     <p>
         Masa berlaku surat rekomendasi sampai dengan
         <strong>
-            {{ !empty($data->jangka_waktu) ? \Carbon\Carbon::parse($data->jangka_waktu)->translatedFormat('d F Y') : '-' }}
+            {{ !empty($data->jangka_waktu) ? \Carbon\Carbon::parse($data->jangka_waktu) ->locale('id')->translatedFormat('d F Y') : '-' }}
         </strong>
     </p>
 
@@ -496,7 +496,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                    <p>Blitar, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
                 </td>
             </tr>
 
@@ -515,7 +515,7 @@
                     <img src="{{ public_path('assets/images/ttd.png') }}" alt="TTD" class="ttd-img">
                 </td>
             </tr> --}}
-<br><br><br>
+<br><br><br><br>
             <tr>
                 <td>
                     <p class="nama-pemohon">
@@ -524,7 +524,7 @@
                 </td>
                 <td>
                     <p class="nama-kades">
-                        Hari Purnawan, S.Sos.
+                        MOH HAMID ALMAULUDI
                     </p>
                 </td>
             </tr>

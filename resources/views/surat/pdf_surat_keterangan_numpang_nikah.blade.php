@@ -241,14 +241,14 @@
 <body>
 
 @php
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $tanggalLahir = !empty($data->tanggal_lahir)
-        ? \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
         : '...........................................';
 
     $mulaiBerangkat = !empty($data->mulai_berangkat)
-        ? \Carbon\Carbon::parse($data->mulai_berangkat)->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->mulai_berangkat) ->locale('id')->translatedFormat('d F Y')
         : '...........................................';
 
     $namaPengikut = (array) ($data->nama_pengikut ?? []);
@@ -272,14 +272,14 @@
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                 <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                 <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                 </div>
             </td>
 
               {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
         </tr>
     </table>
@@ -292,7 +292,7 @@
 </div>
 
 <div class="nomor-surat">
-    Reg. No : {{ $data->nomor_surat ?? '474.2 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+    Reg. No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'numpang_nikah') }}
 </div>
 
 <p class="pembuka">
@@ -419,9 +419,9 @@
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div> --}}
 
-            <br><br><br>
+             <br><br><br><br><br>
 
-            <p class="nama-kades">Hari Purnawan, S.Sos.</p>
+            <p class="nama-kades">MOH HAMID ALMAULUDI</p>
 
               {{--
             <div class="qr-section">

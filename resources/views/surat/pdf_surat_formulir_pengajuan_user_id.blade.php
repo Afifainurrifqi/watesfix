@@ -22,10 +22,11 @@
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
         KECAMATAN KESAMBEN<br>
         KANTOR KEPALA DESA Wates</strong><br>
-        <small>Jln. Merdeka No. 74 Telp. 082139324445</small>
+        <small>Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
     </div>
 
     <div class="judul">FORMULIR PENGAJUAN USER ID (F-3.01)</div>
+    <div style="text-align:center; margin-top:-4px; margin-bottom:10px;">Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'formulir_user_id') }}</div>
 
     <p><strong>Kepada Yth.</strong><br>
     Menteri Dalam Negeri<br>
@@ -74,8 +75,8 @@
         <tr>
             <td width="55%"></td>
             <td width="45%" style="text-align: center;">
-                Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}<br>
-                Yang Mengajukan,<br><br><br><br>
+                Wates, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}<br>
+                Yang Mengajukan,<br><br><br><br><br>
                 <u><strong>{{ $data->nama_pemohon ?? '...........................................' }}</strong></u><br>
                 NIK. {{ $data->nik_pemohon ?? '...........................................' }}
             </td>

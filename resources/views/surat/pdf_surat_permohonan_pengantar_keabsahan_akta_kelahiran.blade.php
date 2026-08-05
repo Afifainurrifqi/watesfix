@@ -234,14 +234,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -251,7 +251,7 @@
 
     <!-- NOMOR SURAT -->
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '--- / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'keabsahan_diri') }}
     </div>
 
     <!-- HEADER SURAT -->
@@ -262,7 +262,7 @@
         </div>
 
         <div class="header-right">
-            Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}<br><br>
+            Blitar, {{ now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y') }}<br><br>
             Kepada Yth.<br>
             Kepala Dinas Kependudukan dan Pencatatan Sipil<br>
             Kabupaten Blitar<br>
@@ -294,7 +294,7 @@
             <td>
                 : {{ $data->ttl_tempat ?? '' }} /
                 {{ !empty($data->ttl_tanggal)
-                    ? \Carbon\Carbon::parse($data->ttl_tanggal)->translatedFormat('d F Y')
+                    ? \Carbon\Carbon::parse($data->ttl_tanggal) ->locale('id')->translatedFormat('d F Y')
                     : '...........................................' }}
             </td>
         </tr>
@@ -327,7 +327,7 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Blitar, {{ now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y') }}</p>
                 <p>Hormat Saya,</p>
 
                 {{-- <div class="ttd-img-wrapper">
@@ -336,7 +336,7 @@
 
 
                 {{-- <div class="materai">Materai<br>10.000</div> --}}
-                <br><br><br>
+                <br><br><br><br>
                 <p class="nama">
                     <u>{{ $data->nama ?? '...........................................' }}</u>
                 </p>

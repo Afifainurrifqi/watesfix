@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Kematian Desa</title>
@@ -215,18 +216,14 @@
 <body>
 
     @php
+        use App\Models\Status;
         $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
 
         $tanggalMeninggal = !empty($data->tanggal)
             ? \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y')
             : '...........................................';
 
-        $statusLabel = '...........................................';
-
-        if (!empty($data->status)) {
-            $statusData = \App\Models\Status::find($data->status);
-            $statusLabel = $statusData->nama ?? $data->status;
-        }
+        $statusLabel = $data->status ?? '...........................................';
     @endphp
 
     {{-- KOP SURAT --}}
@@ -241,14 +238,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
-               {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                {{-- <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -263,7 +260,7 @@
 
     {{-- NOMOR SURAT --}}
     <div class="nomor-surat">
-        Nomor : {{ $data->nomor_surat ?? '470 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'kematian_desa') }}
     </div>
 
     <p class="tulisan">
@@ -347,12 +344,12 @@
                 {{-- {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
                 </div> --}}
- --}}
+                --}}
 
-                <br><br><br>
+                <br><br><br><br>
 
                 <p class="nama">
-                    <u>Hari Purnawan, S.Sos.</u>
+                    <u>MOH HAMID ALMAULUDI</u>
                 </p>
 
                 {{-- <div class="qr-section">
@@ -364,4 +361,5 @@
     </table>
 
 </body>
+
 </html>

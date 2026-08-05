@@ -178,10 +178,10 @@
 
 <body>
 @php
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $tanggalLahir = !empty($data->tanggal_lahir)
-        ? \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
         : '...........................................';
 @endphp
 
@@ -197,14 +197,14 @@
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                 <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                 <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                 </div>
             </td>
 
               {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
         </tr>
     </table>
@@ -215,7 +215,7 @@
 <div class="judul">SURAT KETERANGAN DESA</div>
 
 <div class="nomor">
-    Nomor : {{ $data->nomor_surat ?? '470 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+    Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'desa_miskin') }}
 </div>
 
 <div class="isi">
@@ -225,7 +225,7 @@
         <tr>
             <td>Nama</td>
             <td>:</td>
-            <td>Hari Purnawan, S.Sos.</td>
+            <td>MOH HAMID ALMAULUDI</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -304,7 +304,7 @@
             </div> --}}
             <br><br>
 
-            <div class="nama-kades">Hari Purnawan, S.Sos.</div>
+            <div class="nama-kades">MOH HAMID ALMAULUDI</div>
 
               {{--
             <div class="qr-section">

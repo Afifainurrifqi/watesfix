@@ -357,21 +357,21 @@
 <body>
 @php
     $tanggalMulai = !empty($data->tanggal_mulai)
-        ? \Carbon\Carbon::parse($data->tanggal_mulai)->locale('id')->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->tanggal_mulai)->locale('id') ->locale('id')->translatedFormat('d F Y')
         : '';
 
     $tanggalSelesai = !empty($data->tanggal_selesai)
-        ? \Carbon\Carbon::parse($data->tanggal_selesai)->locale('id')->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->tanggal_selesai)->locale('id') ->locale('id')->translatedFormat('d F Y')
         : '';
 
     $bulanTahunSurat = !empty($data->tanggal_surat)
         ? \Carbon\Carbon::parse($data->tanggal_surat)->locale('id')->translatedFormat('F Y')
         : now('Asia/Jakarta')->locale('id')->translatedFormat('F Y');
 
-    $nomorSurat = $data->nomor_surat ?? '';
+    $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'nota_angkutan');
     $nomorPeraturan = $data->nomor_peraturan ?? '';
     $tanggalPeraturan = !empty($data->tanggal_peraturan)
-        ? \Carbon\Carbon::parse($data->tanggal_peraturan)->locale('id')->translatedFormat('d F Y')
+        ? \Carbon\Carbon::parse($data->tanggal_peraturan)->locale('id') ->locale('id')->translatedFormat('d F Y')
         : '';
 
     $desa = $data->desa ?? 'Wates';
@@ -410,14 +410,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>

@@ -323,7 +323,7 @@
             $tanggalSurat = \Carbon\Carbon::parse($sumberTanggal)
                 ->timezone('Asia/Jakarta')
                 ->locale('id')
-                ->translatedFormat('d F Y');
+                 ->locale('id')->translatedFormat('d F Y');
 
             $tahunSurat = \Carbon\Carbon::parse($sumberTanggal)
                 ->timezone('Asia/Jakarta')
@@ -331,7 +331,7 @@
         } catch (\Throwable $e) {
             $tanggalSurat = now('Asia/Jakarta')
                 ->locale('id')
-                ->translatedFormat('d F Y');
+                 ->locale('id')->translatedFormat('d F Y');
 
             $tahunSurat = now('Asia/Jakarta')->format('Y');
         }
@@ -434,9 +434,7 @@
          * nomor_surat tidak lagi ada pada Model/Controller.
          * Nilai lama tetap digunakan jika dokumen lama masih memilikinya.
          */
-        $nomorSurat =
-            $data->nomor_surat ??
-            '470/      /409.41.2/' . $tahunSurat;
+        $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'pembukaan_rekening');
     @endphp
 
     {{-- =========================================================
@@ -466,11 +464,11 @@
                     </div>
 
                     <div class="kop-desa-alamat">
-                        Jln. Merdeka No. 74 Telp. 082139324445
+                        Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445
                     </div>
 
                     <div class="kop-desa-kontak">
-                        email: Kemiriberkelas@gmail.com /
+                        email: watesberkelas@gmail.com /
                         website: Wates-blitarkab.desa.id
                     </div>
                 </td>

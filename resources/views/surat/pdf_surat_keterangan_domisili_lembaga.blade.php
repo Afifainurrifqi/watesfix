@@ -188,7 +188,7 @@
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
     @endphp
 
     {{-- KOP SURAT --}}
@@ -203,14 +203,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
             </tr>
         </table>
@@ -221,7 +221,7 @@
     <div class="judul-surat">SURAT KETERANGAN DOMISILI</div>
 
     <div class="nomor-surat">
-        Nomor : {{ $data->nomor_surat ?? '220 / --- / 409.41.2 / ' . now()->year }}
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'domisili_lembaga') }}
     </div>
 
     <p class="tulisan">Yang bertanda tangan di bawah ini:</p>
@@ -230,7 +230,7 @@
         <tr>
             <td>Nama</td>
             <td>:</td>
-            <td>{{ $data->nama_pengurus ?? 'Hari Purnawan, S.Sos.' }}</td>
+            <td>{{ $data->nama_pengurus ?? 'MOH HAMID ALMAULUDI' }}</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -305,10 +305,10 @@
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
             </div> --}}
 
-                <br><br><br>
+                <br><br><br><br>
 
                 <p class="nama">
-                    <u>Hari Purnawan, S.Sos.</u>
+                    <u>MOH HAMID ALMAULUDI</u>
                 </p>
 
                 {{-- <div class="qr-section">

@@ -270,15 +270,15 @@
 <body>
     @php
         $tanggalSurat = !empty($data->tanggal_surat)
-            ? \Carbon\Carbon::parse($data->tanggal_surat)->locale('id')->translatedFormat('d F Y')
-            : now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
+            ? \Carbon\Carbon::parse($data->tanggal_surat)->locale('id') ->locale('id')->translatedFormat('d F Y')
+            : now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y');
 
         $tahunSurat = !empty($data->tanggal_surat)
             ? \Carbon\Carbon::parse($data->tanggal_surat)->format('Y')
             : now('Asia/Jakarta')->format('Y');
 
         $tanggalAcara = !empty($data->tanggal_acara)
-            ? \Carbon\Carbon::parse($data->tanggal_acara)->locale('id')->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->tanggal_acara)->locale('id') ->locale('id')->translatedFormat('d F Y')
             : '-';
 
         $hariAcara =
@@ -287,9 +287,9 @@
                 ? \Carbon\Carbon::parse($data->tanggal_acara)->locale('id')->translatedFormat('l')
                 : '-');
 
-        $nomorSurat = $data->nomor_surat ?? '005/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/409.41.2/' . $tahunSurat;
+        $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'undangan');
 
-        $namaKades = $data->nama_kepala_desa ?? 'Hari Purnawan, S.Sos.';
+        $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI';
 
         $perihal = $data->perihal ?? 'Undangan';
 
@@ -312,14 +312,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>

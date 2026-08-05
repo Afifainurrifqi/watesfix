@@ -125,7 +125,7 @@
 <body>
 
 @php
-    $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 @endphp
 
 {{-- KOP SURAT --}}
@@ -140,7 +140,7 @@
                 <strong>KECAMATAN KESAMBEN</strong><br>
                 <strong>KANTOR KEPALA DESA Wates</strong><br>
                 <small>
-                    Jln. Merdeka No. 74 Telp. 082139324445<br>
+                    Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445<br>
                     Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
                 </small>
             </td>
@@ -159,7 +159,7 @@
 
 {{-- NOMOR SURAT --}}
 <div class="nomor-surat">
-    Nomor : {{ $data->nomor_surat ?? '470 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+    Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'desa_penduduk') }}
 </div>
 
 <p class="tulisan">
@@ -170,7 +170,7 @@
 <table class="data">
     <tr><td>Nama</td><td>:</td><td>{{ $data->nama_lengkap ?? '...........................................' }}</td></tr>
     <tr><td>Jenis Kelamin</td><td>:</td><td>{{ $data->jenis_kelamin ?? '...........................................' }}</td></tr>
-    <tr><td>Tempat, Tgl Lahir</td><td>:</td><td>{{ $data->tempat_lahir ?? '...........................................' }}, {{ $data->tanggal_lahir ? \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y') : '...........................................' }}</td></tr>
+    <tr><td>Tempat, Tgl Lahir</td><td>:</td><td>{{ $data->tempat_lahir ?? '...........................................' }}, {{ $data->tanggal_lahir ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y') : '...........................................' }}</td></tr>
     <tr><td>Kewarganegaraan</td><td>:</td><td>{{ $data->kewarganegaraan ?? '...........................................' }}</td></tr>
     <tr><td>Agama</td><td>:</td><td>{{ $data->agama ?? '...........................................' }}</td></tr>
     <tr><td>NIK</td><td>:</td><td>{{ $data->nik ?? '...........................................' }}</td></tr>
@@ -197,7 +197,7 @@
             <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div>
-            <p class="nama"><u>Hari Purnawan, S.Sos.</u></p>
+            <p class="nama"><u>MOH HAMID ALMAULUDI</u></p>
               {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">

@@ -290,14 +290,14 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -310,6 +310,11 @@
         <tr>
             <td class="header-kiri">
                 <table class="meta-table">
+                    <tr>
+                        <td class="meta-label">NOMOR</td>
+                        <td class="meta-colon">:</td>
+                        <td>{{ app(\App\Services\NomorSuratService::class)->display($data, 'permohonan_pernyataan_miskin') }}</td>
+                    </tr>
                     <tr>
                         <td class="meta-label">SIFAT</td>
                         <td class="meta-colon">:</td>
@@ -384,7 +389,7 @@
                         @endif
                     </div>
 
-                    <p class="nama-kades">Hari Purnawan, S.Sos.</p>
+                    <p class="nama-kades">awan, S.Sos.</p>
 
                     @if (file_exists($barcodeSurat))
                         <div class="barcode">

@@ -234,18 +234,18 @@
     @php
         \Carbon\Carbon::setLocale('id');
 
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
         $tanggalLahirPemohon = !empty($data->ttl_tanggal)
-            ? \Carbon\Carbon::parse($data->ttl_tanggal)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->ttl_tanggal) ->locale('id')->translatedFormat('d F Y')
             : '';
 
         $tanggalLahirJenazah = !empty($data->ttl_tanggal_jenazah)
-            ? \Carbon\Carbon::parse($data->ttl_tanggal_jenazah)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->ttl_tanggal_jenazah) ->locale('id')->translatedFormat('d F Y')
             : '';
 
         $tanggalKematian = !empty($data->tanggal_kematian)
-            ? \Carbon\Carbon::parse($data->tanggal_kematian)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->tanggal_kematian) ->locale('id')->translatedFormat('d F Y')
             : '';
 
         $ttlPemohon = trim(
@@ -269,14 +269,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
                 {{-- <td class="kop-logo">
-                <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
             </td> --}}
             </tr>
         </table>
@@ -290,7 +290,7 @@
         KEBENARAN DATA KEMATIAN
     </div>
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '460 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'sptjm_kematian') }}
     </div>
 
     <!-- DATA PEMBUAT PERNYATAAN -->
@@ -390,10 +390,12 @@
         <tr>
             <td class="ttd-left">
                 <p class="saksi-title">Saksi I,</p>
+                <br><br><br><br>
                 <div class="saksi-name uppercase">{{ $data->nama_saksi_1 ?? '' }}</div>
                 <div class="saksi-nik">NIK: {{ $data->nik_saksi_1 ?? '' }}</div>
 
                 <p class="saksi-title">Saksi II,</p>
+                <br><br><br><br>
                 <div class="saksi-name uppercase">{{ $data->nama_saksi_2 ?? '' }}</div>
                 <div class="saksi-nik">NIK: {{ $data->nik_saksi_2 ?? '' }}</div>
 
@@ -411,7 +413,7 @@
                 {{-- <div class="materai-space">
                 Meterai 10.000
             </div> --}}
-                <br><br><br>
+                <br><br><br><br>
 
                 <div class="nama-pernyataan uppercase">
                     {{ $data->nama ?? '' }}

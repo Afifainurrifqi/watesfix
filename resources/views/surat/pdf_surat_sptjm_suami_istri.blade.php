@@ -41,12 +41,13 @@
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
         KECAMATAN KESAMBEN<br>
         KANTOR KEPALA DESA Wates</strong><br>
-        <small>Jln. Merdeka No. 74 Telp. 082139324445</small>
+        <small>Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
     </div>
     <hr class="kop-garis">
 
     <div class="judul">SURAT PERNYATAAN TANGGUNG JAWAB MUTLAK (SPTJM)<br>
     KEBENARAN SEBAGAI PASANGAN SUAMI ISTRI</div>
+    <div style="text-align:center; margin-top:-4px; margin-bottom:10px;">Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'sptjm_suami_istri') }}</div>
 
     <p class="section-title">Saya yang bertandatangan di bawah ini:</p>
 
@@ -86,7 +87,7 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Wates, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+                <p>Wates, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
                 <p>Saya yang menyatakan,</p>
                 <div style="height: 45px;"></div>
                 <p class="nama"><u>{{ $data->nama_deklaran ?? '...........................................' }}</u></p>

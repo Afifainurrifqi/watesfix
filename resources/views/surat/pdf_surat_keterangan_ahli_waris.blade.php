@@ -195,14 +195,14 @@
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta')->translatedFormat('d F Y');
+        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
         $tanggalLahir = !empty($data->tanggal_lahir)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
             : '...........................................';
 
         $tanggalLahirIstri = !empty($data->tanggal_lahir_istri)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir_istri)->translatedFormat('d F Y')
+            ? \Carbon\Carbon::parse($data->tanggal_lahir_istri) ->locale('id')->translatedFormat('d F Y')
             : '...........................................';
 
         $namaAnak = (array) ($data->nama_anak ?? []);
@@ -224,9 +224,9 @@
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email : Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email : watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -237,7 +237,7 @@
     {{-- JUDUL --}}
     <div class="judul-surat">SURAT KETERANGAN WARIS</div>
     <div class="nomor-surat">
-        No : {{ $data->nomor_surat ?? '470 / --- / 409.41.2 / ' . now('Asia/Jakarta')->year }}
+        No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'waris') }}
     </div>
 
     <p class="tulisan">
@@ -379,8 +379,9 @@
 
                     {{-- Jarak tanda tangan dioptimalkan dengan margin murni --}}
                     <div style="margin-top: 45px;"></div>
+                     <br><br><br><br><br>
 
-                    <p class="nama-kades">Hari Purnawan, S.Sos.</p>
+                    <p class="nama-kades">MOH HAMID ALMAULUDI</p>
                 </td>
             </tr>
         </table>

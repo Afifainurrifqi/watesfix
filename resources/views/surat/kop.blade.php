@@ -33,7 +33,7 @@
                 KECAMATAN KESAMBEN<br>
                 KANTOR KEPALA DESA Wates</strong><br>
                 <small>
-                    Jln. Merdeka No. 74 Telp. 082139324445<br>
+                    Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445<br>
                     Email : Watesberkelas@gmail.com Website : Wates-blitarkab.desa.id| Website: Wates-blitarkab.desa.id
                 </small>
             </td>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Pernyataan Numpang KK</title>
@@ -190,6 +191,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- KOP SURAT -->
@@ -204,14 +206,14 @@
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jln. Merdeka No. 74 Telp. 082139324445</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :Kemiriberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
                     </div>
                 </td>
 
-               {{-- <td class="kop-logo">
-                    <img src="{{ public_path('assets/images/wates.png') }}" alt="Logo Desa Wates">
+                {{-- <td class="kop-logo">
+                    <img src="{{ public_path('assets/images/Wates.png') }}" alt="Logo Desa Wates">
                 </td> --}}
             </tr>
         </table>
@@ -234,7 +236,7 @@
 
     <!-- NOMOR SURAT -->
     <div class="nomor-surat">
-        Nomor: {{ $data->nomor_surat ?? '400 / --- / 409.41.2 / ' . now()->year }}
+        Nomor: {{ app(\App\Services\NomorSuratService::class)->display($data, 'numpang_kk') }}
     </div>
 
     <!-- ISI SURAT -->
@@ -282,7 +284,7 @@
             <td>
                 : {{ $data->tempat_lahir_penumpang_kk ?? '' }},
                 {{ !empty($data->tanggal_lahir_penumpang_kk)
-                    ? \Carbon\Carbon::parse($data->tanggal_lahir_penumpang_kk)->translatedFormat('d F Y')
+                    ? \Carbon\Carbon::parse($data->tanggal_lahir_penumpang_kk)->locale('id')->translatedFormat('d F Y')
                     : '...........................................' }}
             </td>
         </tr>
@@ -304,12 +306,13 @@
     <!-- TANDA TANGAN -->
     <div class="ttd-wrapper clearfix">
         <div class="ttd-right">
-            <p>Blitar, {{ now('Asia/Jakarta')->translatedFormat('d F Y') }}</p>
+            <p>Blitar, {{ now('Asia/Jakarta')->locale('id')->locale('id')->translatedFormat('d F Y') }}</p>
             <p><strong>Saya yang menyatakan,</strong></p>
 
             {{-- <div class="materai">Materai<br>10.000</div> --}}
-
+            <br><br><br><br>
             <div class="signature-line"></div>
+
 
             <p>
                 <strong>
@@ -320,4 +323,5 @@
     </div>
 
 </body>
+
 </html>
