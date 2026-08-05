@@ -201,7 +201,7 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-desa-2">KECAMATAN Wates</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
@@ -240,7 +240,7 @@
         <tr>
             <td>Alamat</td>
             <td>:</td>
-            <td>Dsn. Sidomulyo RT 04 RW 01 Desa Wates, Kecamatan Kesamben</td>
+            <td>Dsn. Sidomulyo RT 04 RW 01 Desa Wates, Kecamatan Wates</td>
         </tr>
     </table>
 
@@ -285,7 +285,7 @@
     </table>
 
     <p class="tulisan">
-        Lembaga tersebut di atas adalah benar-benar berdomisili di Desa Wates Kecamatan Kesamben Kabupaten Blitar.
+        Lembaga tersebut di atas adalah benar-benar berdomisili di Desa Wates Kecamatan Wates Kabupaten Blitar.
         Dan sampai saat ini masih aktif. Surat keterangan ini dipergunakan untuk
         {{ $data->keterangan_tambahan ?? '....................' }}.
     </p>

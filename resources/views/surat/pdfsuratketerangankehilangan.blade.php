@@ -183,7 +183,7 @@
 
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-baris-2">KECAMATAN KESAMBEN</div>
+                    <div class="kop-baris-2">KECAMATAN Wates</div>
                     <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
@@ -212,7 +212,7 @@
 
     <!-- ISI -->
     <p class="tulisan">
-        Yang bertanda tangan di bawah ini, KEPALA DESA Wates, Kecamatan Kesamben, Kabupaten Blitar,
+        Yang bertanda tangan di bawah ini, KEPALA DESA Wates, Kecamatan Wates, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa:
     </p>
 
