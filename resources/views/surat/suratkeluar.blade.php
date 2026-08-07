@@ -1525,79 +1525,79 @@
              * keys  = nilai internal $jenisSurat pada setiap baris tabel.
              */
             const semuaJenisSurat = [{
-                //     kategori: 'ADMINDUK',
-                //     items: [{
-                //             label: 'SURAT PERNYATAAN TIDAK BISA MELAMPIRKAN KTP KEMATIAN',
-                //             keys: ['SuratPernyataanTidakBisaMelampirkanKtpKematian']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN NUMPANG KK',
-                //             keys: ['SuratPernyataanNumpangKk']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN MEMILIH NAMA ALIAS',
-                //             keys: ['surat_pernyataan_memilih_nama_alias']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN MEMILIH NAMA ALIAS SATU ORANG TUA',
-                //             keys: ['surat_pernyataan_memilih_nama_alias_satu_orang_tua']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN DAN JAMINAN',
-                //             keys: ['SuratPernyataanDanJaminan']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN BELUM PERNAH MENGURUS AKTA KELAHIRAN',
-                //             keys: ['SuratPernyataanBelumAkta']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN BEDA NAMA BUKU NIKAH',
-                //             keys: ['SuratPernyataanBedaNamaBukuNikah']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN ANAK SEORANG NAMA IBU (BARU)',
-                //             keys: ['surat_pernyataan_anak_seorang_nama_ibu']
-                //         },
-                //         {
-                //             label: 'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI',
-                //             keys: ['SuratPernyataanAktaBarcodeNomorSama']
-                //         },
-                //         {
-                //             label: 'SPTJM KEMATIAN',
-                //             keys: ['SptjmKematian']
-                //         },
-                //         {
-                //             label: 'PERNYATAAN PERUBAHAN DATA PENDIDIKAN',
-                //             keys: ['SuratPernyataanPerubahanDataPendidikan']
-                //         },
-                //         {
-                //             label: 'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',
-                //             keys: ['SuratPernyataanPembetulanDataTidakMerubahLagi']
-                //         },
-                //         {
-                //             label: 'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA',
-                //             keys: ['SuratPernyataanMengizinkanIkutKk']
-                //         },
-                //         {
-                //             label: 'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI',
-                //             keys: [
-                //                 'surat_permohonan_pengantar_keabsahan_akta_kelahiran',
-                //                 'SuratPermohonanPengantarKeabsahanAktaKelahiran'
-                //             ]
-                //         },
-                //         {
-                //             label: 'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK',
-                //             keys: [
-                //                 'surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak',
-                //                 'SuratPermohonanPengantarKeabsahanAktaKelahiranAnak'
-                //             ]
-                //         },
-                //         {
-                //             label: 'FORM PERNYATAAN BATAL PINDAH',
-                //             keys: ['surat_pernyataan_batal_pindah_penduduk']
-                //         }
-                //     ]
-                // },
+                    kategori: 'ADMINDUK',
+                    items: [{
+                            label: 'SURAT PERNYATAAN TIDAK BISA MELAMPIRKAN KTP KEMATIAN',
+                            keys: ['SuratPernyataanTidakBisaMelampirkanKtpKematian']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN NUMPANG KK',
+                            keys: ['SuratPernyataanNumpangKk']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN MEMILIH NAMA ALIAS',
+                            keys: ['surat_pernyataan_memilih_nama_alias']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN MEMILIH NAMA ALIAS SATU ORANG TUA',
+                            keys: ['surat_pernyataan_memilih_nama_alias_satu_orang_tua']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN DAN JAMINAN',
+                            keys: ['SuratPernyataanDanJaminan']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN BELUM PERNAH MENGURUS AKTA KELAHIRAN',
+                            keys: ['SuratPernyataanBelumAkta']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN BEDA NAMA BUKU NIKAH',
+                            keys: ['SuratPernyataanBedaNamaBukuNikah']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN ANAK SEORANG NAMA IBU (BARU)',
+                            keys: ['surat_pernyataan_anak_seorang_nama_ibu']
+                        },
+                        {
+                            label: 'SURAT PERNYATAAN AKTA BARCODE NOMOR SAMA-BARU ISI SENDIRI',
+                            keys: ['SuratPernyataanAktaBarcodeNomorSama']
+                        },
+                        {
+                            label: 'SPTJM KEMATIAN',
+                            keys: ['SptjmKematian']
+                        },
+                        {
+                            label: 'PERNYATAAN PERUBAHAN DATA PENDIDIKAN',
+                            keys: ['SuratPernyataanPerubahanDataPendidikan']
+                        },
+                        {
+                            label: 'PERNYATAAN PEMBETULAN DATA TIDAK MERUBAH LAGI',
+                            keys: ['SuratPernyataanPembetulanDataTidakMerubahLagi']
+                        },
+                        {
+                            label: 'PERNYATAAN MENGIZINKAN IKUT KK SUAMI-ISTRI-KELUARGA',
+                            keys: ['SuratPernyataanMengizinkanIkutKk']
+                        },
+                        {
+                            label: 'PERMOHONAN PENGANTAR KEABSAHAN UNTUK DIRI SENDIRI',
+                            keys: [
+                                'surat_permohonan_pengantar_keabsahan_akta_kelahiran',
+                                'SuratPermohonanPengantarKeabsahanAktaKelahiran'
+                            ]
+                        },
+                        {
+                            label: 'PERMOHONAN PENGANTAR KEABSAHAN UNTUK ANAK',
+                            keys: [
+                                'surat_permohonan_pengantar_keabsahan_akta_kelahiran_anak',
+                                'SuratPermohonanPengantarKeabsahanAktaKelahiranAnak'
+                            ]
+                        },
+                        {
+                            label: 'FORM PERNYATAAN BATAL PINDAH',
+                            keys: ['surat_pernyataan_batal_pindah_penduduk']
+                        }
+                    ]
+                },
                 {
                     kategori: 'KETERANGAN',
                     items: [{
