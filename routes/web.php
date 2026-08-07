@@ -122,6 +122,11 @@ Route::get('/maintance', [SesiController::class, 'maintance'])->name('maintance'
 Route::get('/loginfarm', [SesiController::class, 'maintance'])->name('maintance');
 Route::prefix('surat')->group(function () {
 
+
+    // Halaman verifikasi surat - PUBLIC
+    Route::get('/verifikasi', [SuratmasukController::class, 'verifikasi'])
+        ->name('surat.verifikasi');
+
     Route::get(
         '/surat/{jenis}/{id}/docx-source.pdf',
         [SuratDocxController::class, 'sourcePdf']
@@ -1007,14 +1012,20 @@ Route::get('farmingprofile', [FarmingController::class, 'profile'])->name('farm.
 Route::get('farmingsemualahan', [FarmingController::class, 'semualahan'])->name('farm.semualahan');
 Route::get('farmingformupdatelahan', [FarmingController::class, 'formupdatelahan'])->name('farm.formupdatelahan');
 
-Route::get('datapenduduk', [DatapendudukController::class, 'index']);
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Public
 Route::get('landing', [DashboardController::class, 'landingpage'])->name('landingpage');
-Route::get('/get-birth-data/{year}', [DashboardController::class, 'getBirthData']);
-Route::get('KK', [KkController::class, 'index']);
-Route::get('KK/{id}', [KkController::class, 'show']);
 
-Route::middleware(['checkrole:admin,operator,dasawisma,akundemo'])->group(
+// Backend: wajib login dan hanya untuk role internal.
+// Route datapenduduk tidak didefinisikan di sini karena sudah ada
+// di dalam group role admin/operator/dasawisma/akundemo di bawah.
+Route::middleware(['auth', 'checkrole:admin,operator,dasawisma,akundemo'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/get-birth-data/{year}', [DashboardController::class, 'getBirthData']);
+    Route::get('KK', [KkController::class, 'index']);
+    Route::get('KK/{id}', [KkController::class, 'show']);
+});
+
+Route::middleware(['auth', 'checkrole:admin,operator,dasawisma,akundemo'])->group(
     function () {
 
 
@@ -1189,7 +1200,7 @@ Route::middleware(['checkrole:admin,operator,dasawisma,akundemo'])->group(
 //Operator, Admin, dasawisma
 
 
-Route::middleware(['checkrole:admin,operator,akundemo'])->group(
+Route::middleware(['auth', 'checkrole:admin,operator,akundemo'])->group(
     function () {
         Route::get('datamutasi/export/datamutasi', [DatamutasiController::class, 'exportexcelm'])->name('export.meninggal');
         Route::get('datamutasi/export/datapindah', [DatamutasiController::class, 'exportexcelp'])->name('export.pindah');
@@ -1198,7 +1209,7 @@ Route::middleware(['checkrole:admin,operator,akundemo'])->group(
     }
 );
 
-Route::middleware(['checkrole:admin,operator'])->group(
+Route::middleware(['auth', 'checkrole:admin,operator'])->group(
     function () {
 
         Route::get('datamutasi/export/datamutasi', [DatamutasiController::class, 'exportexcelm'])->name('export.meninggal');
@@ -1210,7 +1221,7 @@ Route::middleware(['checkrole:admin,operator'])->group(
 );
 
 
-Route::middleware(['checkrole:admin,dasawisma,akundemo'])->group(
+Route::middleware(['auth', 'checkrole:admin,dasawisma,akundemo'])->group(
     function () {
 
 
@@ -1293,7 +1304,7 @@ Route::middleware(['checkrole:admin,dasawisma,akundemo'])->group(
     }
 );
 
-Route::middleware(['checkrole:admin,dasawisma'])->group(
+Route::middleware(['auth', 'checkrole:admin,dasawisma'])->group(
     function () {
 
         Route::put('datapenduduk/update/{nik}', [DatapendudukController::class, 'update'])
@@ -1368,14 +1379,14 @@ Route::middleware(['checkrole:admin,dasawisma'])->group(
     }
 );
 
-Route::middleware(['checkrole:admin'])->group(
+Route::middleware(['auth', 'checkrole:admin'])->group(
     function () {
         Route::get('datapenduduk/export/datapenduduk', [DatapendudukController::class, 'export_excel'])->name('export_excel');;
     }
 );
 
 
-Route::middleware(['checkrole:operator,admin'])->group(
+Route::middleware(['auth', 'checkrole:operator,admin'])->group(
     function () {
         Route::get('/datadasawisma/show/{nik}', [DatadasawismaController::class, 'show'])->name('dasawisma.show');
         Route::post('/datadasawisma/update/{nik}', [DatadasawismaController::class, 'update'])->name('dasawisma.update');

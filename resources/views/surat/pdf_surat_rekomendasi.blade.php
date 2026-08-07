@@ -349,7 +349,7 @@
 
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
@@ -387,7 +387,7 @@
             <td class="header-right">
                 <div class="tujuan">
                     Kepada :<br>
-                    Yth. Muspika Kecamatan Wates<br>
+                    Yth. Muspika Kecamatan Kesamben<br>
                     Di<br>
                     <span class="tempat">TEMPAT</span>
                 </div>
@@ -397,7 +397,7 @@
 
     <!-- ISI SURAT -->
     <p class="paragraph indent">
-        Yang bertandatangan dibawah ini KEPALA DESA Wates Kecamatan Wates Kabupaten Blitar menerangkan bahwa :
+        Yang bertandatangan dibawah ini KEPALA DESA Wates Kecamatan Kesamben Kabupaten Blitar menerangkan bahwa :
     </p>
 
     <table class="data-table">

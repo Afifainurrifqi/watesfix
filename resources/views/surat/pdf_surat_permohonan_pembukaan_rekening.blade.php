@@ -456,7 +456,7 @@
                     </div>
 
                     <div class="kop-desa-2">
-                        KECAMATAN Wates
+                        KECAMATAN KESAMBEN
                     </div>
 
                     <div class="kop-desa-3">

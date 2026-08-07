@@ -222,7 +222,7 @@
                 </td>
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                    <div class="kop-desa-2">KECAMATAN Wates</div>
+                    <div class="kop-desa-2">KECAMATAN KESAMBEN</div>
                     <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
                     <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
@@ -241,7 +241,7 @@
     </div>
 
     <p class="tulisan">
-        Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Wates, Kabupaten Blitar,
+        Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Kesamben, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa :
     </p>
 
@@ -339,7 +339,7 @@
     </ol>
 
     <p class="tulisan">
-        Menerangkan bahwa orang tersebut benar-benar penduduk Desa Wates, Kecamatan Wates,
+        Menerangkan bahwa orang tersebut benar-benar penduduk Desa Wates, Kecamatan Kesamben,
         Kabupaten Blitar dan benar memiliki ahli waris untuk
         <strong>{{ $data->hubungan_dengan_ahli_waris ?? '...........................................' }}</strong>.
     </p>
@@ -389,7 +389,7 @@
         {{-- MENGETAHUI CAMAT --}}
         <div class="camat-section">
             <p><strong>Mengetahui</strong></p>
-            <p><strong>CAMAT Wates</strong></p>
+            <p><strong>CAMAT KESAMBEN</strong></p>
             <div style="margin-top: 45px;"></div>
             <p><strong><u>...........................................</u></strong></p>
         </div>

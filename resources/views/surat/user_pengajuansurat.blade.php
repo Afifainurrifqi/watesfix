@@ -106,7 +106,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row g-3">
-                        <div class="col-4">
+                        {{-- <div class="col-4">
                             <div class="feature-card mx-auto text-center">
                                 <div class="card mx-auto bg-gray">
                                     <a href="{{ route('surat.adminduk') }}">
@@ -115,9 +115,9 @@
                                 </div>
                                 <p class="mb-0">FORM PENGAJUAN ADMINDUK</p>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="feature-card mx-auto text-center">
                                 <div class="card mx-auto bg-gray">
                                        <a href="{{ route('surat.keterangan') }}">
@@ -128,7 +128,7 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="feature-card mx-auto text-center">
                                 <div class="card mx-auto bg-gray">
                                     <a href="{{ route('surat.pernyataan') }}">

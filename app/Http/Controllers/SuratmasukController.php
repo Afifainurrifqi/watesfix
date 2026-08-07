@@ -83,6 +83,11 @@ class SuratmasukController extends Controller
         return view('surat.arsipsuratmasuk');
     }
 
+    public function verifikasi()
+    {
+        return view('surat.verifikasi');
+    }
+
 
     public function suratkeluar(Request $request)
     {

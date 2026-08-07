@@ -20,7 +20,7 @@
 
     <div class="kop">
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
-        KECAMATAN Wates<br>
+        KECAMATAN KESAMBEN<br>
         KANTOR KEPALA DESA Wates</strong><br>
         <small>Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
     </div>
