@@ -169,7 +169,7 @@
                 margin: 6px 0 12px 0;
             }
         }
-
+    
 
         /* =====================================================
            BARCODE VERIFIKASI PDF - STANDARD SEMUA SURAT
@@ -188,8 +188,8 @@
 
         .pdf-barcode-verification img {
             display: block;
-            width: 90px;
-            height: 90px;
+            width: 58px;
+            height: 58px;
             object-fit: contain;
             margin: 0 auto 2px auto;
         }
