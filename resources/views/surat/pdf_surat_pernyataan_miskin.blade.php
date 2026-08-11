@@ -201,7 +201,38 @@
                 margin: 6px 0 12px 0;
             }
         }
-    </style>
+
+
+        /* =====================================================
+           BARCODE VERIFIKASI PDF - STANDARD SEMUA SURAT
+           Tidak mempengaruhi flow/layout isi surat.
+        ====================================================== */
+        .pdf-barcode-verification {
+            position: fixed;
+            left: 4mm;
+            bottom: 4mm;
+            width: 62px;
+            text-align: center;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+            line-height: 1.05;
+        }
+
+        .pdf-barcode-verification img {
+            display: block;
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin: 0 auto 2px auto;
+        }
+
+        .pdf-barcode-verification small {
+            display: block;
+            font-size: 5.5px;
+            color: #222;
+            white-space: nowrap;
+        }
+</style>
 </head>
 
 <body>
@@ -333,5 +364,28 @@
             </td>
         </tr>
     </table>
+
+
+    {{-- =====================================================
+         BARCODE VERIFIKASI PDF
+         Sumber utama: public/assets/images/barcode.png
+         Base64 dipakai agar kompatibel/stabil pada DomPDF.
+    ====================================================== --}}
+    @php
+        $pdfBarcodePath = public_path('assets/images/barcode.png');
+        $pdfBarcodeSrc = null;
+
+        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+        }
+    @endphp
+
+    @if ($pdfBarcodeSrc)
+        <div class="pdf-barcode-verification">
+            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+            <small>Verifikasi Surat Desa Wates</small>
+        </div>
+    @endif
+
 </body>
 </html>
