@@ -410,7 +410,23 @@
 
                     {{-- Jarak tanda tangan dioptimalkan dengan margin murni --}}
                     <div style="margin-top: 45px;"></div>
-                     <br><br><br><br><br>
+                   @php
+    $ttdPath = public_path('assets/images/ttd.png');
+    $ttdSrc = null;
+
+    if(file_exists($ttdPath) && is_readable($ttdPath)){
+        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+    }
+@endphp
+
+
+@if($ttdSrc)
+<div class="ttd-img-wrapper">
+    <img src="{{ $ttdSrc }}" class="ttd-img">
+</div>
+@else
+<br><br><br><br>
+@endif
 
                     <p class="nama-kades">MOH HAMID ALMAULUDI</p>
                 </td>

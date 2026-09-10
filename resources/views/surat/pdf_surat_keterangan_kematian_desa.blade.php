@@ -371,13 +371,23 @@
             <td class="ttd-cell">
                 <p>Blitar, {{ $tanggalSurat }}</p>
                 <p><strong>KEPALA DESA Wates</strong></p>
+@php
+    $ttdPath = public_path('assets/images/ttd.png');
+    $ttdSrc = null;
 
-                {{-- {{-- <div class="ttd-img-wrapper">
-                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div> --}}
-                --}}
+    if(file_exists($ttdPath) && is_readable($ttdPath)){
+        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+    }
+@endphp
 
-                <br><br><br><br>
+
+@if($ttdSrc)
+<div class="ttd-img-wrapper">
+    <img src="{{ $ttdSrc }}" class="ttd-img">
+</div>
+@else
+<br><br><br><br>
+@endif
 
                 <p class="nama">
                     <u>MOH HAMID ALMAULUDI</u>

@@ -232,7 +232,23 @@
             <td class="ttd-cell">
                 <p>Wates, {{ $tanggalSurat }}</p>
                 <p><strong>KEPALA DESA Wates</strong></p>
-                <br><br>
+               @php
+    $ttdPath = public_path('assets/images/ttd.png');
+    $ttdSrc = null;
+
+    if(file_exists($ttdPath) && is_readable($ttdPath)){
+        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+    }
+@endphp
+
+
+@if($ttdSrc)
+<div class="ttd-img-wrapper">
+    <img src="{{ $ttdSrc }}" class="ttd-img">
+</div>
+@else
+<br><br><br><br>
+@endif
                 <p class="nama"><u>MOH HAMID ALMAULUDI</u></p>
             </td>
         </tr>
