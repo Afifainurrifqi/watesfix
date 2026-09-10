@@ -314,10 +314,26 @@
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
             </div> --}}
 
-            <br><br><br><br><br>
+           @php
+    $ttdPath = public_path('assets/images/ttd.png');
+    $ttdSrc = null;
+
+    if(file_exists($ttdPath) && is_readable($ttdPath)){
+        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+    }
+@endphp
 
 
-            <p><strong><u>MOH HAMID ALMAULUDI  </u></strong></p>
+@if($ttdSrc)
+<div class="ttd-img-wrapper">
+    <img src="{{ $ttdSrc }}" class="ttd-img">
+</div>
+@else
+<br><br><br><br>
+@endif
+
+
+<p><strong><u>MOH HAMID ALMAULUDI</u></strong></p>
 
             {{-- <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
