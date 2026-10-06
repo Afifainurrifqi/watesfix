@@ -165,7 +165,7 @@
 
         .ttd-wrapper {
             width: 100%;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .ttd-right {
@@ -179,13 +179,15 @@
         }
 
         .ttd-img-wrapper {
-            margin: 8px 0;
+            height: 65px;
             text-align: center;
+            margin: 8px 0;
         }
 
         .ttd-img {
-            width: 160px;
+            width: 180px;
             height: auto;
+            margin-top: -45px;
         }
 
         .nama {
