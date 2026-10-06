@@ -147,11 +147,11 @@
             width: 10px;
         }
 
-      .ttd-table {
-    width: 100%;
-    margin-top: 25px;
-    border-collapse: collapse;
-}
+        .ttd-table {
+            width: 100%;
+            margin-top: 250px;
+            border-collapse: collapse;
+        }
 
         .ttd-spacer {
             width: 52%;
