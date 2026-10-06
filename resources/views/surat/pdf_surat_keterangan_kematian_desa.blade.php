@@ -386,7 +386,7 @@
     <img src="{{ $ttdSrc }}" class="ttd-img">
 </div>
 @else
-<br><br><br><br>
+<br><br><br><br><br><br>
 @endif
 
                 <p class="nama">
