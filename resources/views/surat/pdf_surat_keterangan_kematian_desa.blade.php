@@ -149,7 +149,7 @@
 
         .ttd-table {
             width: 100%;
-            margin-top: 45px;
+            margin-top: 25px;
             border-collapse: collapse;
         }
 
@@ -167,8 +167,8 @@
         }
 
         .ttd-img-wrapper {
-            height: 52px;
-            margin-bottom: 3px;
+            height: 65px;
+            margin: 8px 0;
             text-align: center;
         }
 
