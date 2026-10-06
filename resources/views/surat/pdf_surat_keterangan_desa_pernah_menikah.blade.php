@@ -120,7 +120,7 @@
 
         .ttd-wrapper {
             width: 100%;
-            margin-top: 35px;
+            margin-top: 20px;
         }
 
         .ttd-right {
