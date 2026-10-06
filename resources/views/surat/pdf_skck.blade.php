@@ -141,7 +141,7 @@
 
         .ttd-img-wrapper {
             height: 55px;
-            margin: 5px 0 3px 0;
+            margin: 50px 0 3px 0;
             text-align: center;
         }
 
