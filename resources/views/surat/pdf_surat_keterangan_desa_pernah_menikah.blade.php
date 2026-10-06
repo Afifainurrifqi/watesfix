@@ -142,6 +142,7 @@
         .ttd-img {
             width: 180px;
             height: auto;
+            margin-top: -15px;
         }
 
         .materai {
