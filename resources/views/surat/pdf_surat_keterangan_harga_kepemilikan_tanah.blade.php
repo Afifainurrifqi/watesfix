@@ -176,7 +176,7 @@
 
         .ttd-table {
             width: 100%;
-            margin-top: 30px;
+            margin-top: 10px;
             border-collapse: collapse;
         }
 
@@ -202,8 +202,8 @@
 
         .ttd-img {
             width: 165px;
-            height: auto; 
-margin-top: -45px;
+            height: auto;
+            margin-top: -45px;
         }
 
         .nama-kades {
@@ -270,76 +270,76 @@ margin-top: -45px;
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
-        $jenisObjek =
-            $data->jenis_objek ??
-            ($data->jenis_tanah_bangunan ?? ($data->tanah_dan ?? '...........................................'));
+    $jenisObjek =
+    $data->jenis_objek ??
+    ($data->jenis_tanah_bangunan ?? ($data->tanah_dan ?? '...........................................'));
 
-        $dusun = $data->dusun ?? 'Wates';
-        $rt = $data->rt ?? '...';
-        $rw = $data->rw ?? '...';
+    $dusun = $data->dusun ?? 'Wates';
+    $rt = $data->rt ?? '...';
+    $rw = $data->rw ?? '...';
 
-        $noPersil = $data->no_persil ?? ($data->persil ?? '...');
-        $noSppt = $data->no_sppt ?? ($data->sppt ?? '...');
-        $luasTanah = $data->luas_tanah ?? ($data->luas ?? '...');
-        $noSertifikat = $data->no_sertifikat ?? ($data->sertifikat_no ?? ($data->sertifikat ?? '...'));
-        $luasSertifikat = $data->luas_sertifikat ?? ($data->luas_bangunan ?? '...');
-        $atasNamaHakMilik =
-            $data->atas_nama_hak_milik ??
-            ($data->atas_nama ?? ($data->nama ?? '...........................................'));
+    $noPersil = $data->no_persil ?? ($data->persil ?? '...');
+    $noSppt = $data->no_sppt ?? ($data->sppt ?? '...');
+    $luasTanah = $data->luas_tanah ?? ($data->luas ?? '...');
+    $noSertifikat = $data->no_sertifikat ?? ($data->sertifikat_no ?? ($data->sertifikat ?? '...'));
+    $luasSertifikat = $data->luas_sertifikat ?? ($data->luas_bangunan ?? '...');
+    $atasNamaHakMilik =
+    $data->atas_nama_hak_milik ??
+    ($data->atas_nama ?? ($data->nama ?? '...........................................'));
 
-        $batasUtara = $data->batas_utara ?? ($data->utara ?? '...........................................');
-        $batasTimur = $data->batas_timur ?? ($data->timur ?? '...........................................');
-        $batasSelatan = $data->batas_selatan ?? ($data->selatan ?? '...........................................');
-        $batasBarat = $data->batas_barat ?? ($data->barat ?? '...........................................');
+    $batasUtara = $data->batas_utara ?? ($data->utara ?? '...........................................');
+    $batasTimur = $data->batas_timur ?? ($data->timur ?? '...........................................');
+    $batasSelatan = $data->batas_selatan ?? ($data->selatan ?? '...........................................');
+    $batasBarat = $data->batas_barat ?? ($data->barat ?? '...........................................');
 
-        $namaPemilik =
-            $data->nama ??
-            ($data->nama_pemilik ?? ($data->atas_nama_hak_milik ?? '...........................................'));
+    $namaPemilik =
+    $data->nama ??
+    ($data->nama_pemilik ?? ($data->atas_nama_hak_milik ?? '...........................................'));
 
-        $alamatPemilik =
-            $data->alamat ??
-            ($data->alamat_pemilik ??
-                'Dusun ........ RT ... RW ... Desa Wates Kecamatan Wates Kabupaten Blitar');
+    $alamatPemilik =
+    $data->alamat ??
+    ($data->alamat_pemilik ??
+    'Dusun ........ RT ... RW ... Desa Wates Kecamatan Wates Kabupaten Blitar');
 
-        $pekerjaanPemilik =
-            $data->pekerjaan ?? ($data->pekerjaan_pemilik ?? '...........................................');
+    $pekerjaanPemilik =
+    $data->pekerjaan ?? ($data->pekerjaan_pemilik ?? '...........................................');
 
-        $tertulisAtasNama = $data->tertulis_atas_nama ?? ($data->atas_nama_hak_milik ?? $atasNamaHakMilik);
+    $tertulisAtasNama = $data->tertulis_atas_nama ?? ($data->atas_nama_hak_milik ?? $atasNamaHakMilik);
 
-        $hargaTanah = $data->harga_tanah ?? ($data->nilai_tanah ?? null);
-        $hargaBangunan = $data->harga_bangunan ?? ($data->nilai_bangunan ?? null);
-        $jumlahHarga = $data->harga_jumlah ?? ($data->jumlah_harga ?? ($data->total_harga ?? ($data->jumlah ?? null)));
+    $hargaTanah = $data->harga_tanah ?? ($data->nilai_tanah ?? null);
+    $hargaBangunan = $data->harga_bangunan ?? ($data->nilai_bangunan ?? null);
+    $jumlahHarga = $data->harga_jumlah ?? ($data->jumlah_harga ?? ($data->total_harga ?? ($data->jumlah ?? null)));
 
-        if (($jumlahHarga === null || $jumlahHarga === '') && !empty($hargaTanah) && !empty($hargaBangunan)) {
-            $angkaTanah = (int) preg_replace('/[^0-9]/', '', (string) $hargaTanah);
-            $angkaBangunan = (int) preg_replace('/[^0-9]/', '', (string) $hargaBangunan);
-            $jumlahHarga = $angkaTanah + $angkaBangunan;
-        }
+    if (($jumlahHarga === null || $jumlahHarga === '') && !empty($hargaTanah) && !empty($hargaBangunan)) {
+    $angkaTanah = (int) preg_replace('/[^0-9]/', '', (string) $hargaTanah);
+    $angkaBangunan = (int) preg_replace('/[^0-9]/', '', (string) $hargaBangunan);
+    $jumlahHarga = $angkaTanah + $angkaBangunan;
+    }
 
-        if (!function_exists('formatRupiahPdf')) {
-            function formatRupiahPdf($value)
-            {
-                if ($value === null || $value === '') {
-                    return '...........................................';
-                }
+    if (!function_exists('formatRupiahPdf')) {
+    function formatRupiahPdf($value)
+    {
+    if ($value === null || $value === '') {
+    return '...........................................';
+    }
 
-                $angka = preg_replace('/[^0-9]/', '', (string) $value);
+    $angka = preg_replace('/[^0-9]/', '', (string) $value);
 
-                if ($angka === '') {
-                    return $value;
-                }
+    if ($angka === '') {
+    return $value;
+    }
 
-                return number_format((int) $angka, 0, ',', '.');
-            }
-        }
+    return number_format((int) $angka, 0, ',', '.');
+    }
+    }
     @endphp
 
     {{-- KOP SURAT --}}
@@ -360,9 +360,9 @@ margin-top: -45px;
                     </div>
                 </td>
 
-                 <td class="kop-desa-logo">
+                <td class="kop-desa-logo">
                     <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
-                </td> 
+                </td>
             </tr>
         </table>
 
@@ -497,29 +497,29 @@ margin-top: -45px;
                 <p>Blitar, {{ $tanggalSurat }}</p>
                 <p><strong>KEPALA DESA Wates</strong></p>
 
-              @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                if(file_exists($ttdPath) && is_readable($ttdPath)){
+                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
 
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
+                @if($ttdSrc)
+                <div class="ttd-img-wrapper">
+                    <img src="{{ $ttdSrc }}" class="ttd-img">
+                </div>
+                @else
+                <br><br><br><br>
+                @endif
 
                 <p class="nama-kades">MOH HAMID ALMAULUDI</p>
 
                 {{-- <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
                 </div> --}}
             </td>
         </tr>
@@ -533,19 +533,19 @@ margin-top: -45px;
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa Wates</small>
+    </div>
     @endif
 
 </body>

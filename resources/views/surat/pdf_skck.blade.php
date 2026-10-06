@@ -147,8 +147,8 @@
 
         .ttd-img {
             width: 165px;
-            height: auto; 
-margin-top: -45px;
+            height: auto;
+            margin-top: -45px;
         }
 
         .nama-ttd {
@@ -226,16 +226,16 @@ margin-top: -45px;
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
     @php
-        $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
 
-        $tanggalLahir = !empty($surat->tanggal_lahir)
-            ? \Carbon\Carbon::parse($surat->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
-            : '...........................................';
+    $tanggalLahir = !empty($surat->tanggal_lahir)
+    ? \Carbon\Carbon::parse($surat->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
     @endphp
 
     {{-- KOP SURAT --}}
@@ -256,9 +256,9 @@ margin-top: -45px;
                     </div>
                 </td>
 
-                 <td class="kop-desa-logo">
+                <td class="kop-desa-logo">
                     <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
-                </td> 
+                </td>
             </tr>
         </table>
 
@@ -370,29 +370,29 @@ margin-top: -45px;
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
                 </div> --}}
-               @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                if(file_exists($ttdPath) && is_readable($ttdPath)){
+                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
 
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
+                @if($ttdSrc)
+                <div class="ttd-img-wrapper">
+                    <img src="{{ $ttdSrc }}" class="ttd-img">
+                </div>
+                @else
+                <br><br><br><br>
+                @endif
 
                 <div class="nama-ttd">MOH HAMID ALMAULUDI</div>
                 {{--
                 <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
                 </div> --}}
             </td>
         </tr>
@@ -413,19 +413,19 @@ margin-top: -45px;
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa Wates</small>
+    </div>
     @endif
 
 </body>
