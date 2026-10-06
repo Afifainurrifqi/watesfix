@@ -136,7 +136,7 @@
         }
 
         .space-ttd {
-            height: 72px;
+            height: 55px;
         }
 
         .ttd-img-wrapper {
@@ -148,7 +148,7 @@
         .ttd-img {
             width: 165px;
             height: auto;
-            margin-top: -45px;
+              margin-top: 0px;
         }
 
         .nama-ttd {
