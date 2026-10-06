@@ -163,7 +163,7 @@
         }
 
         .ttd-cell p {
-            margin: 100px 0;
+            margin: 80px 0;
         }
 
         .ttd-img-wrapper {
