@@ -163,7 +163,7 @@
         }
 
         .ttd-cell p {
-            margin: 100px 0;
+            margin: 200px 0;
         }
 
         .ttd-img-wrapper {
@@ -175,7 +175,6 @@
         .ttd-img {
             width: 170px;
             height: auto;
-            margin-top: -45px;
         }
 
         .nama {
