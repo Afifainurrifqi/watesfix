@@ -191,7 +191,7 @@
         }
 
         .ttd-cell p {
-            margin: 2px 0;
+            margin: 40px 0;
         }
 
         .ttd-img-wrapper {
@@ -202,7 +202,8 @@
 
         .ttd-img {
             width: 165px;
-            height: auto;
+            height: auto; 
+margin-top: -45px;
         }
 
         .nama-kades {

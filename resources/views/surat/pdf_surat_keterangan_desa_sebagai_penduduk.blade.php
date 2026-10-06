@@ -90,7 +90,7 @@
             text-align: center;
         }
         .ttd-cell p {
-            margin: 2px 0;
+            margin: 40px 0;
         }
         .ttd-img-wrapper {
             height: 52px;

@@ -147,7 +147,8 @@
 
         .ttd-img {
             width: 165px;
-            height: auto;
+            height: auto; 
+margin-top: -45px;
         }
 
         .nama-ttd {
