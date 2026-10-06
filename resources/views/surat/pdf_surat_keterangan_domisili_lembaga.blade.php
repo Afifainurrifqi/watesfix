@@ -226,8 +226,9 @@
     <div class="kop-desa-container">
         <table class="kop-desa-table">
             <tr>
-                <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
+                 <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates">
+                </td>  src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
                 </td>
 
                 <td class="kop-desa-text">
