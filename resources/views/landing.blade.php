@@ -61,7 +61,7 @@
                         <img src="/assets/images/logositakro.png" class="wow slideInLeft" style="width: 30%">
                         <h2 class="wow slideInLeft">SITAKRO Wates </h2>
                         <p class="wow fadeInLeft">
-                            Sistem Informasi Data Mikro yang dimiliki oleh Desa Wates Kecamatan Kesamben Kabupaten
+                            Sistem Informasi Data Mikro yang dimiliki oleh Desa Wates Kecamatan Wates Kabupaten
                             Blitar
                         </p>
                         <a class="wow fadeInDown btn btn-light border btn-md" href="{{ route('login') }}">LOGIN

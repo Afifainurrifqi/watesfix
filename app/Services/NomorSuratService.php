@@ -37,7 +37,7 @@ class NomorSuratService
         'keabsahan_diri'                => '471',
         'keabsahan_anak'                => '472',
         'batal_pindah'                  => '471',
-        'kehilangan'                    => '470',
+        'kehilangan'                    => '471',
         'pernah_menikah'                => '472',
         'tidak_mampu'                   => '465',
         'kematian_desa'                 => '472',

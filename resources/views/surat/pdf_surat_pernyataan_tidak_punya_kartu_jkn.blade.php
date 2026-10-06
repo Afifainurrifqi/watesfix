@@ -261,7 +261,7 @@
                     </div>
 
                     <div class="kop-desa-2">
-                        KECAMATAN KESAMBEN
+                        KECAMATAN WATES
                     </div>
 
                     <div class="kop-desa-3">
