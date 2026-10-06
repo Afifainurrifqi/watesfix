@@ -175,6 +175,7 @@
         .ttd-img {
             width: 170px;
             height: auto;
+             margin-top: -45px;
         }
 
         .nama {
