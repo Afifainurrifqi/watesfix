@@ -149,7 +149,7 @@
 
         .ttd-table {
             width: 100%;
-            margin-top: 25px;
+            margin-top: 45px;
             border-collapse: collapse;
         }
 
@@ -163,12 +163,12 @@
         }
 
         .ttd-cell p {
-            margin: 2px 0;
+            margin: 200px 0;
         }
 
         .ttd-img-wrapper {
             height: 52px;
-            margin-bottom: 300px;
+            margin-bottom: 3px;
             text-align: center;
         }
 
