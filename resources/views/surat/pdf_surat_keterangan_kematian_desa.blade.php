@@ -147,47 +147,34 @@
             width: 10px;
         }
 
-        table.data {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 6px 0 12px 0;
+      .ttd-table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+
+        .ttd-spacer {
+            width: 52%;
         }
 
-        table.data td {
-            padding: 3px 6px;
-            vertical-align: top;
-        }
-
-        table.data td:first-child {
-            width: 160px;
-            font-weight: bold;
-        }
-
-        .ttd-wrapper {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .ttd-right {
+        .ttd-cell {
             width: 48%;
-            float: right;
             text-align: center;
         }
 
-        .ttd-right p {
-            margin: 3px 0;
+        .ttd-cell p {
+            margin: 2px 0;
         }
 
         .ttd-img-wrapper {
-            height: 65px;
+            height: 52px;
+            margin-bottom: 3px;
             text-align: center;
-            margin: 8px 0;
         }
 
         .ttd-img {
-            width: 180px;
+            width: 170px;
             height: auto;
-            margin-top: -45px;
         }
 
         .nama {
