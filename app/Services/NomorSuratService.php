@@ -10,7 +10,7 @@ use MongoDB\Operation\FindOneAndUpdate;
 
 class NomorSuratService
 {
-    public const KLASIFIKASI = '409.47.5';
+    public const KLASIFIKASI = '409.41.2';
     public const TIMEZONE = 'Asia/Jakarta';
 
     /**
@@ -21,57 +21,79 @@ class NomorSuratService
      * sebelum status diubah menjadi Diterima + Terverifikasi.
      */
     protected array $prefixMap = [
-        'ktp_kematian'                  => '472',
-        'numpang_kk'                    => '471',
-        'nama_alias'                    => '470',
-        'nama_alias_ortu'               => '470',
-        'pernyataan_jaminan'            => null,
-        'belum_akta'                    => '472',
-        'beda_nama_buku_nikah'          => '472',
-        'anak_seorang_ibu'              => '472',
-        'akta_barcode'                  => null,
-        'sptjm_kematian'                => '472',
-        'perubahan_pendidikan'          => '471',
-        'pembetulan_data'               => '471',
-        'izin_ikut_kk'                  => '471',
-        'keabsahan_diri'                => '471',
-        'keabsahan_anak'                => '472',
-        'batal_pindah'                  => '471',
-        'kehilangan'                    => '471',
-        'pernah_menikah'                => '472',
-        'tidak_mampu'                   => '465',
-        'kematian_desa'                 => '472',
-        'waris'                         => '593',
-        'harga_tanah'                   => '590',
-        'numpang_nikah'                 => '472',
-        'skck'                          => null,
-        'kepemilikan_aset'              => null,
-        'usaha'                         => '580',
-        'desa_miskin'                   => '465',
-        'skm'                           => '365',
-        'ahli_waris_desa'               => '470',
-        'ghoib'                         => null,
-        'penghasilan'                   => null,
-        'domisili_lembaga'              => '147',
-        'domisili_warga'                => '470',
-        'desa_penduduk'                 => '470',
-        'kepemilikan_dokumen'           => '470',
-        'kesanggupan'                   => null,
-        'jkn'                           => '365',
-        'pernyataan_miskin'             => '365',
-        'izin_keluarga'                 => '470',
-        'kuasa'                         => null,
-        'pembukaan_rekening'            => null,
-        'perintah_tugas'                => '140',
-        'sppd'                          => '090',
-        'undangan'                      => '005',
-        'rekomendasi'                   => null,
-        'nota_angkutan'                 => null,
-        'rekomendasi_bbm'               => '510',
-        'permohonan_pernyataan_miskin'  => '365',
-        'tebang_pohon'                  => '522.21',
-        'formulir_user_id'              => null,
-        'sptjm_suami_istri'             => null,
+
+        // SURAT KETERANGAN
+
+        'kehilangan' => '471',
+
+        'pernah_menikah' => '474.2',
+
+        'tidak_mampu' => '400',
+
+        'kematian_desa' => '474.3',
+
+        'waris' => '593.2',
+
+        'harga_tanah' => '593.2',
+
+        'numpang_nikah' => '474.2',
+
+        'skck' => '300',
+
+        'kepemilikan_aset' => '590',
+
+        'usaha' => '510',
+
+        'desa_miskin' => '401',
+
+        'skm' => '593',
+
+        'ahli_waris_desa' => '470',
+
+        'ghoib' => '474.2',
+
+        'penghasilan' => '407',
+
+        'domisili_lembaga' => '470',
+
+        'domisili_warga' => '471',
+
+        'desa_penduduk' => '471.1',
+
+
+        // SURAT PERNYATAAN
+
+        'kepemilikan_dokumen' => '470',
+
+        'kesanggupan' => '06/SPN',
+
+        'jkn' => '06/SPN',
+
+        'pernyataan_miskin' => '06/SPN',
+
+        'izin_keluarga' => '471.23',
+
+        'kuasa' => 'SK',
+
+        'pembukaan_rekening' => '900',
+
+        'perintah_tugas' => '094',
+
+        'sppd' => '90',
+
+        'undangan' => '5',
+
+        'rekomendasi' => '10/SR',
+
+        'nota_angkutan' => '551',
+
+        'rekomendasi_bbm' => '503',
+
+        'permohonan_pernyataan_miskin' => '401',
+
+        'tebang_pohon' => '500',
+
+
     ];
 
     /**
@@ -489,15 +511,17 @@ class NomorSuratService
     {
         $result = [];
 
-        foreach ([
-            'status_surat',
-            'status_verif',
-            'kode_jenis_surat',
-            'kode_surat',
-            'nomor_jenis_surat',
-            'nomor_surat',
-            'tahun_nomor',
-        ] as $field) {
+        foreach (
+            [
+                'status_surat',
+                'status_verif',
+                'kode_jenis_surat',
+                'kode_surat',
+                'nomor_jenis_surat',
+                'nomor_surat',
+                'tahun_nomor',
+            ] as $field
+        ) {
             $result[$field] = $payload[$field]
                 ?? $this->readValue($model, $field);
         }
