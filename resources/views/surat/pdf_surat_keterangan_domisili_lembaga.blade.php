@@ -261,7 +261,7 @@
         <tr>
             <td>Nama</td>
             <td>:</td>
-            <td>{{ $data->nama_pengurus ?? 'MOH HAMID ALMAULUDI' }}</td>
+            <td>{{ $data->nama_pengurus ?? 'MOH HAMID ALMAULUDI, S.Pd.I' }}</td>
         </tr>
         <tr>
             <td>Jabatan</td>
@@ -349,7 +349,7 @@
 <br><br><br><br>
 @endif
                 <p class="nama">
-                    <u>MOH HAMID ALMAULUDI</u>
+                    <u>MOH HAMID ALMAULUDI, S.Pd.I</u>
                 </p>
 
                 {{-- <div class="qr-section">

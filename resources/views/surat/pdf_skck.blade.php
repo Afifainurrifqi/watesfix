@@ -141,7 +141,7 @@
 
         .ttd-img-wrapper {
             height: 55px;
-            margin: 50px 0 3px 0;
+            margin: 5px 0 3px 0;
             text-align: center;
         }
 
@@ -388,7 +388,7 @@
                 <br><br><br><br>
                 @endif
 
-                <div class="nama-ttd">MOH HAMID ALMAULUDI</div>
+                <div class="nama-ttd">MOH HAMID ALMAULUDI, S.Pd.I</div>
                 {{--
                 <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">

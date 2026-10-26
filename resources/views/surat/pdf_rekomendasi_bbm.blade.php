@@ -555,7 +555,7 @@
                 </td>
                 <td>
                     <p class="nama-kades">
-                        MOH HAMID ALMAULUDI
+                        MOH HAMID ALMAULUDI, S.Pd.I
                     </p>
                 </td>
             </tr>

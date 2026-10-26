@@ -333,7 +333,7 @@
 @endif
 
 
-<p><strong><u>MOH HAMID ALMAULUDI</u></strong></p>
+<p><strong><u>MOH HAMID ALMAULUDI, S.Pd.I</u></strong></p>
 
             {{-- <div class="barcode">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">

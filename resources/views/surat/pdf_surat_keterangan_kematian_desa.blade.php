@@ -397,7 +397,7 @@
                 @endif
 
                 <p class="nama">
-                    <u>MOH HAMID ALMAULUDI</u>
+                    <u>MOH HAMID ALMAULUDI, S.Pd.I</u>
                 </p>
 
                 {{-- <div class="qr-section">

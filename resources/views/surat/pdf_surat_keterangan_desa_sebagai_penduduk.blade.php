@@ -242,7 +242,7 @@
 @else
 <br><br><br><br>
 @endif
-            <p class="nama"><u>MOH HAMID ALMAULUDI</u></p>
+            <p class="nama"><u>MOH HAMID ALMAULUDI, S.Pd.I</u></p>
               {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">

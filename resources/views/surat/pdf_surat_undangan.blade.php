@@ -320,7 +320,7 @@
 
         $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'undangan');
 
-        $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI';
+        $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
 
         $perihal = $data->perihal ?? 'Undangan';
 

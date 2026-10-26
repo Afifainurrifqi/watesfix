@@ -420,7 +420,7 @@
                         @endif
                     </div>
 
-                    <p class="nama-kades">awan, S.Sos.</p>
+                    <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
                     @if (file_exists($barcodeSurat))
                         <div class="barcode">

@@ -515,7 +515,7 @@
                 <br><br><br><br>
                 @endif
 
-                <p class="nama-kades">MOH HAMID ALMAULUDI</p>
+                <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
                 {{-- <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">

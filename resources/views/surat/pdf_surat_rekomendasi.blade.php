@@ -366,7 +366,7 @@
     $tempat = $data->tempat ?? 'Lapangan Desa Wates Kab Blitar';
     $keperluan = $data->keperluan ?? 'Pasar Malam';
 
-    $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI';
+    $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
     $namaKadesFormatted = str_replace(', ', ",\n", $namaKades);
 @endphp
 

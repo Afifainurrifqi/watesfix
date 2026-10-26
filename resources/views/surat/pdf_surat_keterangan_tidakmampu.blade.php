@@ -443,7 +443,7 @@
 
             {{-- <div class="materai">Materai<br>10.000</div> --}}
 
-            <p><strong><u>MOH HAMID ALMAULUDI, S.Sos </u></strong></p>
+            <p><strong><u>MOH HAMID ALMAULUDI,S.Pd.I </u></strong></p>
 
             {{--
             <div class="barcode">

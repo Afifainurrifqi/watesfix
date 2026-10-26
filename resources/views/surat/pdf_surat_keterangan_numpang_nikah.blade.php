@@ -453,7 +453,7 @@ margin-top: -45px;
 
              <br><br><br><br><br>
 
-            <p class="nama-kades">MOH HAMID ALMAULUDI</p>
+            <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
               {{--
             <div class="qr-section">

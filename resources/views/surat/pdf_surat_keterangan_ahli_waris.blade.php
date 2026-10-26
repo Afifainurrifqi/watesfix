@@ -428,7 +428,7 @@
 <br><br><br><br>
 @endif
 
-                    <p class="nama-kades">MOH HAMID ALMAULUDI</p>
+                    <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
                 </td>
             </tr>
         </table>

@@ -368,7 +368,7 @@
 
         $nomorSppd = app(\App\Services\NomorSuratService::class)->display($data, 'sppd');
 
-        $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI';
+        $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
         $pejabat = $data->pejabat_pemberi_perintah ?? 'KEPALA DESA Wates Kecamatan Wates Kabupaten Blitar';
 
         $namaPegawai = $data->nama_pegawai ?? 'ITA PUJI LESTARI';

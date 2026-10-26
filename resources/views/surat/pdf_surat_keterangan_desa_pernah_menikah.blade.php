@@ -348,7 +348,7 @@
 @endif
             <p>
                 <strong>
-                      <p class="nama">MOH HAMID ALMAULUDI</p>
+                      <p class="nama">MOH HAMID ALMAULUDI, S.Pd.I</p>
                 </strong>
             </p>
 

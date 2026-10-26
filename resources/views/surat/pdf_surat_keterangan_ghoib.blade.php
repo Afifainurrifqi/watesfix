@@ -382,7 +382,7 @@
 <br><br><br><br>
 @endif
 
-            <div class="nama-kades">MOH HAMID ALMAULUDI</div>
+            <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
 
               {{--
             <div class="qr-section">

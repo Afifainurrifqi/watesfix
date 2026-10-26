@@ -479,7 +479,7 @@
 @else
 <br><br><br><br>
 @endif
-        <p class="nama-kades">MOH HAMID ALMAULUDI</p>
+        <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
         {{-- Legacy barcode dinonaktifkan; memakai pdf-barcode-verification standar.
 <div class="barcode">

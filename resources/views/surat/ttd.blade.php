@@ -24,5 +24,5 @@
         Wates, ..................................<br>
         KEPALA DESA Wates
     </div>
-    <div class="nama-kades">MOH HAMID ALMAULUDI, S.Sos </div>
+    <div class="nama-kades">MOH HAMID ALMAULUDI,S.Pd.I </div>
 </div>

@@ -249,7 +249,7 @@
 @else
 <br><br><br><br>
 @endif
-                <p class="nama"><u>MOH HAMID ALMAULUDI</u></p>
+                <p class="nama"><u>MOH HAMID ALMAULUDI, S.Pd.I</u></p>
             </td>
         </tr>
     </table>

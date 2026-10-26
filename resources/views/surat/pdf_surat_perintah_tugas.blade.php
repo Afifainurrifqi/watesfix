@@ -388,7 +388,7 @@
          * Penandatangan dibuat tetap karena tidak disimpan dalam Model.
          */
         $jabatanKades = 'KEPALA DESA Wates';
-        $namaKades = 'MOH HAMID ALMAULUDI';
+        $namaKades = 'MOH HAMID ALMAULUDI, S.Pd.I';
     @endphp
 
     {{-- =========================================================
