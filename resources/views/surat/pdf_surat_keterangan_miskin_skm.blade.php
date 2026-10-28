@@ -228,15 +228,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                    <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
             </td> 
             </tr>
         </table>
@@ -262,7 +262,7 @@
             <tr>
                 <td>Jabatan</td>
                 <td>:</td>
-                <td>KEPALA DESA Wates Kec. Wates Kab. Blitar</td>
+                <td>KEPALA DESA WATES Kec. WATES Kab. Blitar</td>
             </tr>
         </table>
 
@@ -307,40 +307,67 @@
         </p>
     </div>
 
-    <table class="ttd">
-        <tr>
-            <td colspan="2">Blitar, {{ $tanggalSurat }}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><strong>TIM VERIFIKATOR DESA:</strong></td>
-        </tr>
-        <tr>
-            <td><strong>KEPALA DESA Wates</strong></td>
-            <td><strong>Bidan Desa</strong></td>
-        </tr>
-        <tr>
-            <td>
+   
+<table class="ttd" style="width: 100%; border-collapse: collapse; margin-top: 25px; page-break-inside: avoid;">
+    <tr>
+        <td colspan="2" style="text-align: center;">
+            Blitar, {{ $tanggalSurat }}
+        </td>
+    </tr>
 
-                <br><br><br><br>
-                {{-- <div class="ttd-img-wrapper">
-                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div> --}}
+    <tr>
+        <td colspan="2" style="text-align: center;">
+            <strong>TIM VERIFIKATOR DESA:</strong>
+        </td>
+    </tr>
 
+    <tr>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            <strong>KEPALA DESA WATES</strong>
+        </td>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            <strong>Bidan Desa</strong>
+        </td>
+    </tr>
 
-                <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
+    <tr>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-              {{--
-            <div class="qr-section">
-                <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div> --}}
-            </td>
-            <td>
-                <div class="space-sign"></div>
-                <strong><u>...........................................</u></strong>
-            </td>
-        </tr>
-    </table>
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                    $ttdSrc = 'data:image/png;base64,' .
+                        base64_encode(file_get_contents($ttdPath));
+                }
+            @endphp
+
+            @if ($ttdSrc)
+                <div style="height: 120px; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Stempel dan tanda tangan Kepala Desa"
+                        style="width: 170px; height: auto; display: inline-block; margin: 0;"
+                    >
+                </div>
+            @else
+                <div style="height: 120px; font-size: 9px;">
+                    File ttd.png tidak ditemukan
+                </div>
+            @endif
+
+            <div class="nama-kades" style="text-align: center; margin: 0;">
+                MOH HAMID ALMAULUDI, S.Pd.I
+            </div>
+        </td>
+
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            <div style="height: 120px;"></div>
+            <strong><u>...........................................</u></strong>
+        </td>
+    </tr>
+</table>
+
 
 
 
@@ -361,7 +388,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

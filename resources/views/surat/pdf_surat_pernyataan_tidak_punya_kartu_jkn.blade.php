@@ -265,16 +265,16 @@
                     </div>
 
                     <div class="kop-desa-3">
-                        PEMERINTAH DESA Wates
+                        PEMERINTAH DESA WATES
                     </div>
 
                     <div class="kop-desa-alamat">
-                        Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445
+                        Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445
                     </div>
 
                     <div class="kop-desa-kontak">
                         Email: watesberkelas@gmail.com /
-                        Website: Wates-blitarkab.desa.id
+                        Website: WATES-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -358,7 +358,7 @@
                 <div>Mengetahui,</div>
 
                 <div class="ttd-jabatan">
-                    KEPALA DESA Wates
+                    KEPALA DESA WATES
                 </div>
 
                @php
@@ -420,7 +420,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

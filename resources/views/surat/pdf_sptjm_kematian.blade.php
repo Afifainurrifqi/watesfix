@@ -299,15 +299,15 @@
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN WATES</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
             </td> 
             </tr>
         </table>
@@ -472,7 +472,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

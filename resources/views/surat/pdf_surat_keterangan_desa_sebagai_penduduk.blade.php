@@ -169,14 +169,14 @@
             <td class="kop-text">
                 <strong>PEMERINTAH KABUPATEN BLITAR</strong><br>
                 <strong>KECAMATAN WATES</strong><br>
-                <strong>KANTOR KEPALA DESA Wates</strong><br>
+                <strong>KANTOR KEPALA DESA WATES</strong><br>
                 <small>
-                    Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445<br>
-                    Email: Watesberkelas@gmail.com | Website: Wates-blitarkab.desa.id
+                    Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445<br>
+                    Email: Watesberkelas@gmail.com | Website: WATES-blitarkab.desa.id
                 </small>
             </td>
             <td class="kop-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
             </td>
         </tr>
     </table>
@@ -194,7 +194,7 @@
 </div>
 
 <p class="tulisan">
-    Yang bertanda tangan di bawah ini, kami KEPALA DESA Wates Kecamatan Wates Kabupaten Blitar,
+    Yang bertanda tangan di bawah ini, kami KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar,
     menerangkan dengan sebenarnya bahwa orang tersebut di bawah ini :
 </p>
 
@@ -211,7 +211,7 @@
 </table>
 
 <p class="tulisan">
-    Orang tersebut adalah benar-benar penduduk Desa Wates Kecamatan Wates Kabupaten Blitar.
+    Orang tersebut adalah benar-benar penduduk Desa WATES Kecamatan WATES Kabupaten Blitar.
     Surat pengantar/keterangan ini dipergunakan untuk {{ $data->keterangan_tambahan ?? 'keperluan yang bersangkutan' }}.
 </p>
 
@@ -223,8 +223,8 @@
     <tr>
         <td class="ttd-spacer"></td>
         <td class="ttd-cell">
-            <p>Wates, {{ $tanggalSurat }}</p>
-            <p><strong>KEPALA DESA Wates</strong></p>
+            <p>WATES, {{ $tanggalSurat }}</p>
+            <p><strong>KEPALA DESA WATES</strong></p>
            @php
     $ttdPath = public_path('assets/images/ttd.png');
     $ttdSrc = null;
@@ -246,7 +246,7 @@
               {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                <small>Scan untuk verifikasi surat resmi Desa WATES</small>
             </div> --}}
         </td>
     </tr>
@@ -271,7 +271,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

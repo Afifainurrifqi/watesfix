@@ -21,8 +21,8 @@
 
 <div class="ttd">
     <div class="jabatan">
-        Wates, ..................................<br>
-        KEPALA DESA Wates
+        WATES, ..................................<br>
+        KEPALA DESA WATES
     </div>
     <div class="nama-kades">MOH HAMID ALMAULUDI,S.Pd.I </div>
 </div>

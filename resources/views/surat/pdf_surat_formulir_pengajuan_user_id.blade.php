@@ -52,8 +52,8 @@
     <div class="kop">
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
         KECAMATAN WATES<br>
-        KANTOR KEPALA DESA Wates</strong><br>
-        <small>Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
+        KANTOR KEPALA DESA WATES</strong><br>
+        <small>Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
     </div>
 
     <div class="judul">FORMULIR PENGAJUAN USER ID (F-3.01)</div>
@@ -106,7 +106,7 @@
         <tr>
             <td width="55%"></td>
             <td width="45%" style="text-align: center;">
-                Wates, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}<br>
+                WATES, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}<br>
                 Yang Mengajukan,<br><br><br><br><br>
                 <u><strong>{{ $data->nama_pemohon ?? '...........................................' }}</strong></u><br>
                 NIK. {{ $data->nik_pemohon ?? '...........................................' }}
@@ -133,7 +133,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

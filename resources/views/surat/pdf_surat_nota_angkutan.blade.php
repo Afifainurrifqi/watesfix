@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Nota Angkutan Hasil Hutan Kayu - Desa Wates</title>
+    <title>Nota Angkutan Hasil Hutan Kayu - Desa WATES</title>
 
     <style>
         @page {
@@ -405,8 +405,8 @@
         ? \Carbon\Carbon::parse($data->tanggal_peraturan)->locale('id') ->locale('id')->translatedFormat('d F Y')
         : '';
 
-    $desa = $data->desa ?? 'Wates';
-    $kecamatan = $data->kecamatan ?? 'Wates';
+    $desa = $data->desa ?? 'WATES';
+    $kecamatan = $data->kecamatan ?? 'WATES';
     $kabupaten = $data->kabupaten ?? 'Blitar';
     $provinsi = $data->provinsi ?? 'Jawa Timur';
 
@@ -440,15 +440,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td> 
             </tr>
         </table>
@@ -678,7 +678,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

@@ -282,7 +282,7 @@
     $data->jenis_objek ??
     ($data->jenis_tanah_bangunan ?? ($data->tanah_dan ?? '...........................................'));
 
-    $dusun = $data->dusun ?? 'Wates';
+    $dusun = $data->dusun ?? 'WATES';
     $rt = $data->rt ?? '...';
     $rw = $data->rw ?? '...';
 
@@ -307,7 +307,7 @@
     $alamatPemilik =
     $data->alamat ??
     ($data->alamat_pemilik ??
-    'Dusun ........ RT ... RW ... Desa Wates Kecamatan Wates Kabupaten Blitar');
+    'Dusun ........ RT ... RW ... Desa WATES Kecamatan WATES Kabupaten Blitar');
 
     $pekerjaanPemilik =
     $data->pekerjaan ?? ($data->pekerjaan_pemilik ?? '...........................................');
@@ -353,15 +353,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                 <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td>
             </tr>
         </table>
@@ -379,7 +379,7 @@
     </div>
 
     <p class="tulisan">
-        Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Wates, Kabupaten Blitar,
+        Yang bertandatangan di bawah ini KEPALA DESA WATES, Kecamatan WATES, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa :
     </p>
 
@@ -389,7 +389,7 @@
             <td class="nomor">1.</td>
             <td>
                 Sebidang tanah dan {{ $jenisObjek }} yang terletak di Dusun {{ $dusun }}
-                RT {{ $rt }} RW {{ $rw }} Desa Wates, No persil : {{ $noPersil }},
+                RT {{ $rt }} RW {{ $rw }} Desa WATES, No persil : {{ $noPersil }},
                 No SPPT : {{ $noSppt }}, Seluas {{ $luasTanah }} M<sup>2</sup>,
                 Sertifikat no {{ $noSertifikat }}, Luas {{ $luasSertifikat }},
                 atas nama hak milik {{ $atasNamaHakMilik }} dengan batas-batas:
@@ -495,7 +495,7 @@
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
                 <p>Blitar, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA Wates</strong></p>
+                <p><strong>KEPALA DESA WATES</strong></p>
 
                 @php
                 $ttdPath = public_path('assets/images/ttd.png');
@@ -519,7 +519,7 @@
 
                 {{-- <div class="qr-section">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                <small>Scan untuk verifikasi surat resmi Desa WATES</small>
                 </div> --}}
             </td>
         </tr>
@@ -544,7 +544,7 @@
     @if ($pdfBarcodeSrc)
     <div class="pdf-barcode-verification">
         <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-        <small>Verifikasi Surat Desa Wates</small>
+        <small>Verifikasi Surat Desa WATES</small>
     </div>
     @endif
 

@@ -303,15 +303,15 @@ margin-top: -45px;
             <td class="kop-desa-text">
                 <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                 <div class="kop-desa-2">KECAMATAN WATES</div>
-                <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                 <div class="kop-desa-kontak">
-                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                    email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                 </div>
             </td>
 
               <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
             </td> 
         </tr>
     </table>
@@ -328,7 +328,7 @@ margin-top: -45px;
 </div>
 
 <p class="pembuka">
-    Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Wates,
+    Yang bertandatangan di bawah ini KEPALA DESA WATES, Kecamatan WATES,
     Kabupaten Blitar, menerangkan dengan sebenarnya bahwa:
 </p>
 
@@ -440,29 +440,55 @@ margin-top: -45px;
     dan guna seperlunya.
 </p>
 
-<table class="ttd-table">
+
+<table class="ttd-table" style="width: 100%; border-collapse: collapse; margin-top: 18px;">
     <tr>
-        <td class="ttd-spacer"></td>
-        <td class="ttd-cell">
-            <p>Blitar, {{ $tanggalSurat }}</p>
-            <p><strong>KEPALA DESA Wates</strong></p>
-{{--
-            <div class="ttd-img-wrapper">
-                <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-            </div> --}}
+        <td class="ttd-spacer" style="width: 55%;"></td>
 
-             <br><br><br><br><br>
+        <td class="ttd-cell" style="width: 45%; text-align: center; vertical-align: top;">
 
-            <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
+            <p style="margin: 0 0 8px 0;">
+                Blitar, {{ $tanggalSurat }}
+            </p>
 
-              {{--
-            <div class="qr-section">
-                <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div> --}}
+            <p style="margin: 0;">
+                <strong>KEPALA DESA WATES</strong>
+            </p>
+
+            @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
+
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                    $ttdSrc = 'data:image/png;base64,' .
+                        base64_encode(file_get_contents($ttdPath));
+                }
+            @endphp
+
+            @if ($ttdSrc)
+                <div style="height: 85px; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Tanda Tangan Kepala Desa"
+                        style="width: 140px; height: auto; display: inline-block; margin-top: 0;"
+                    >
+                </div>
+            @else
+                <div style="height: 85px;">
+                    <p style="font-size: 9px; color: red; margin: 5px 0;">
+                        File ttd.png tidak ditemukan.
+                    </p>
+                </div>
+            @endif
+
+            <p class="nama-kades" style="margin: 0; text-align: center;">
+                MOH HAMID ALMAULUDI, S.Pd.I
+            </p>
+
         </td>
     </tr>
 </table>
+
 
 
 
@@ -483,7 +509,7 @@ margin-top: -45px;
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

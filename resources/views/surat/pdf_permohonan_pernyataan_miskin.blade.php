@@ -298,7 +298,7 @@
     @php
         $sapaan = $data->sapaan_pasien ?? 'Tn.';
         $namaPasien = $data->nama_pasien ?? 'Cornelius Tri Utomo';
-        $alamatPasien = $data->alamat_pasien ?? 'Dusun Wates RT 02 RW 03 Desa Wates Kec. Wates Kab. Blitar';
+        $alamatPasien = $data->alamat_pasien ?? 'Dusun WATES RT 02 RW 03 Desa WATES Kec. WATES Kab. Blitar';
         $rumahSakit = $data->rumah_sakit_tujuan ?? 'Ngudi Waluyo';
         $lokasiRumahSakit = $data->lokasi_rumah_sakit ?? 'Wlingi';
 
@@ -320,15 +320,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td> 
             </tr>
         </table>
@@ -393,7 +393,7 @@
         </p>
 
         <p class="paragraf-tanpa-indent">
-            Sehubungan dengan kondisi tersebut, kami atas nama KEPALA DESA Wates Kecamatan Wates
+            Sehubungan dengan kondisi tersebut, kami atas nama KEPALA DESA WATES Kecamatan WATES
             Kabupaten Blitar, sangat berharap bantuan Bapak untuk bias memberikan keringanan berobat
         </p>
 
@@ -412,7 +412,7 @@
             <tr>
                 <td class="ttd-spacer"></td>
                 <td class="ttd-cell">
-                    <p>KEPALA DESA Wates</p>
+                    <p>KEPALA DESA WATES</p>
 
                     <div class="ttd-img-wrapper">
                         @if (file_exists($ttdKades))
@@ -426,7 +426,7 @@
                         <div class="barcode">
                             <img src="{{ $barcodeSurat }}" alt="Barcode Surat">
                             <br>
-                            <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                            <small>Scan untuk verifikasi surat resmi Desa WATES</small>
                         </div>
                     @endif
                 </td>
@@ -453,7 +453,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

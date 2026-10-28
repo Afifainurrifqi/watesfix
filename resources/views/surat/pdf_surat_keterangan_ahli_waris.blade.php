@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Waris</title>
@@ -220,28 +221,28 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
-        $tanggalLahir = !empty($data->tanggal_lahir)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
-            : '...........................................';
+    $tanggalLahir = !empty($data->tanggal_lahir)
+    ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
 
-        $tanggalLahirIstri = !empty($data->tanggal_lahir_istri)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir_istri) ->locale('id')->translatedFormat('d F Y')
-            : '...........................................';
+    $tanggalLahirIstri = !empty($data->tanggal_lahir_istri)
+    ? \Carbon\Carbon::parse($data->tanggal_lahir_istri) ->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
 
-        $namaAnak = (array) ($data->nama_anak ?? []);
-        $namaSaksi = (array) ($data->nama_saksi ?? []);
-        $nikSaksi = (array) ($data->nik_saksi ?? []);
+    $namaAnak = (array) ($data->nama_anak ?? []);
+    $namaSaksi = (array) ($data->nama_saksi ?? []);
+    $nikSaksi = (array) ($data->nik_saksi ?? []);
 
-        $jumlahAnak = max((int) ($data->jumlah_anak ?? count($namaAnak)), count($namaAnak), 2);
-        $jumlahSaksi = max((int) ($data->jumlah_saksi ?? count($namaSaksi)), count($namaSaksi), 2);
+    $jumlahAnak = max((int) ($data->jumlah_anak ?? count($namaAnak)), count($namaAnak), 2);
+    $jumlahSaksi = max((int) ($data->jumlah_saksi ?? count($namaSaksi)), count($namaSaksi), 2);
     @endphp
 
     {{-- KOP SURAT --}}
@@ -254,10 +255,10 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email : watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email : watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -272,7 +273,7 @@
     </div>
 
     <p class="tulisan">
-        Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Wates, Kabupaten Blitar,
+        Yang bertandatangan di bawah ini KEPALA DESA WATES, Kecamatan WATES, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa :
     </p>
 
@@ -366,11 +367,11 @@
     <ol class="anak-list">
         @for ($i = 0; $i < $jumlahAnak; $i++)
             <li>{{ $namaAnak[$i] ?? '...........................................' }}</li>
-        @endfor
+            @endfor
     </ol>
 
     <p class="tulisan">
-        Menerangkan bahwa orang tersebut benar-benar penduduk Desa Wates, Kecamatan Wates,
+        Menerangkan bahwa orang tersebut benar-benar penduduk Desa WATES, Kecamatan WATES,
         Kabupaten Blitar dan benar memiliki ahli waris untuk
         <strong>{{ $data->hubungan_dengan_ahli_waris ?? '...........................................' }}</strong>.
     </p>
@@ -389,48 +390,53 @@
                     <table class="saksi-table">
                         @for ($i = 0; $i < $jumlahSaksi; $i++)
                             <tr>
-                                <td style="width: 15px;">{{ $i + 1 }}.</td>
-                                <td style="width: 130px;">{{ $namaSaksi[$i] ?? '...........................................' }}</td>
-                                <td style="width: 8px;">:</td>
-                                <td>__________________</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>NIK</td>
-                                <td>:</td>
-                                <td>{{ $nikSaksi[$i] ?? '...........................................' }}</td>
-                            </tr>
-                        @endfor
-                    </table>
-                </td>
-
-                <td class="ttd-cell">
-                    <p>Blitar, {{ $tanggalSurat }}</p>
-                    <p><strong>KEPALA DESA Wates</strong></p>
-
-                    {{-- Jarak tanda tangan dioptimalkan dengan margin murni --}}
-                    <div style="margin-top: 45px;"></div>
-                   @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
-
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
-
-
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
-
-                    <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
-                </td>
+                            <td style="width: 15px;">{{ $i + 1 }}.</td>
+                            <td style="width: 130px;">{{ $namaSaksi[$i] ?? '...........................................' }}</td>
+                            <td style="width: 8px;">:</td>
+                            <td>__________________</td>
             </tr>
+            <tr>
+                <td></td>
+                <td>NIK</td>
+                <td>:</td>
+                <td>{{ $nikSaksi[$i] ?? '...........................................' }}</td>
+            </tr>
+            @endfor
+        </table>
+        </td>
+
+        <td class="ttd-cell">
+            <p>Blitar, {{ $tanggalSurat }}</p>
+            <p><strong>KEPALA DESA WATES</strong></p>
+
+            {{-- Jarak tanda tangan dioptimalkan dengan margin murni --}}
+            <div style="margin-top: 20px;"></div>
+            @php
+            $ttdPath = public_path('assets/images/ttd.png');
+            $ttdSrc = null;
+
+            if(file_exists($ttdPath) && is_readable($ttdPath)){
+            $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+            }
+            @endphp
+
+
+
+            @if($ttdSrc)
+            <div style="width: 100%; text-align: center; margin: 0 auto; padding: 0;">
+                <img
+                    src="{{ $ttdSrc }}"
+                    alt="Tanda tangan Kepala Desa"
+                    style="display: block; width: 140px; max-width: 100%; height: auto; margin: 0 auto;">
+            </div>
+            @else
+            <div style="height: 100px;"></div>
+            @endif
+
+
+            <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
+        </td>
+        </tr>
         </table>
 
         {{-- MENGETAHUI CAMAT --}}
@@ -450,20 +456,21 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>
+
 </html>

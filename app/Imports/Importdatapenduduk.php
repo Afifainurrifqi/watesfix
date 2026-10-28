@@ -72,7 +72,7 @@ class Importdatapenduduk implements
 
     /**
      * Status kependudukan default untuk baris yang kolomnya kosong.
-     * Dataset Wates pada file ini merupakan penduduk tetap.
+     * Dataset WATES pada file ini merupakan penduduk tetap.
      */
     private const DEFAULT_STATUS_KEPENDUDUKAN = 'tetap';
 
@@ -709,7 +709,7 @@ class Importdatapenduduk implements
         /*
          * Pada file sumber, mulai baris tertentu kolom status
          * kependudukan memang kosong. Karena seluruh dataset ini
-         * merupakan data penduduk Wates, nilai kosong otomatis
+         * merupakan data penduduk WATES, nilai kosong otomatis
          * disimpan sebagai penduduk tetap.
          */
         if ($cleanValue === null) {

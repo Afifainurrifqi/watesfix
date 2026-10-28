@@ -249,15 +249,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                 <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td>
             </tr>
         </table>
@@ -275,7 +275,7 @@
 
     <div class="isi">
         <p>
-            Yang bertanda tangan dibawah ini KEPALA DESA Wates, Kec. Wates,
+            Yang bertanda tangan dibawah ini KEPALA DESA WATES, Kec. WATES,
             Kab. Blitar, menerangkan bahwa :
         </p>
 
@@ -333,7 +333,7 @@
         </table>
 
         <p>
-            Orang tersebut diatas adalah benar-benar penduduk Desa Wates dan sepanjang
+            Orang tersebut diatas adalah benar-benar penduduk Desa WATES dan sepanjang
             pengetahuan dan pengamatan kami belum pernah melakukan Pelanggaran Kejahatan,
             pelanggaran polisi, selalu taat dan patuh pada Peraturan Pemerintah yang berlaku.
         </p>
@@ -349,57 +349,64 @@
         </p>
     </div>
 
-    <table class="ttd-table">
-        <tr>
-            <td></td>
-            <td>Wates, {{ $tanggalSurat }}</td>
-        </tr>
-        <tr>
-            <td>Pemegang surat</td>
-            <td><strong>KEPALA DESA Wates</strong></td>
-        </tr>
-        <tr>
-            <td>
-                <div class="space-ttd"></div>
-                <div class="nama-ttd">
-                    {{ strtoupper($surat->nama ?? '...........................................') }}
-                </div>
-            </td>
+    
+<table class="ttd-table" style="width: 100%; border-collapse: collapse; margin-top: 26px;">
+    <tr>
+        <td style="width: 50%; text-align: center; vertical-align: top;"></td>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            WATES, {{ $tanggalSurat }}
+        </td>
+    </tr>
 
-            <td>
-                {{-- <div class="ttd-img-wrapper">
-                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-                </div> --}}
-                @php
+    <tr>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            Pemegang surat
+        </td>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            <strong>KEPALA DESA WATES</strong>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            <div style="height: 100px;"></div>
+            <div class="nama-ttd">
+                {{ strtoupper($surat->nama ?? '...........................................') }}
+            </div>
+        </td>
+
+        <td style="width: 50%; text-align: center; vertical-align: top;">
+            @php
                 $ttdPath = public_path('assets/images/ttd.png');
                 $ttdSrc = null;
 
-                if(file_exists($ttdPath) && is_readable($ttdPath)){
-                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                    $ttdSrc = 'data:image/png;base64,' .
+                        base64_encode(file_get_contents($ttdPath));
                 }
-                @endphp
+            @endphp
 
-
-                @if($ttdSrc)
-                <div class="ttd-img-wrapper">
-                    <img src="{{ $ttdSrc }}" class="ttd-img">
+            @if ($ttdSrc)
+                <div style="width: 100%; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Tanda Tangan Kepala Desa"
+                        style="display: block; width: 125px; height: auto; margin: 5px auto 0;"
+                    >
                 </div>
-                @else
-                <br><br><br><br>
-                @endif
+            @else
+                <div style="height: 100px;"></div>
+            @endif
 
-                <div class="nama-ttd">MOH HAMID ALMAULUDI, S.Pd.I</div>
-                {{--
-                <div class="qr-section">
-                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-                </div> --}}
-            </td>
-        </tr>
-    </table>
+            <div style="text-align: center; font-weight: bold; text-decoration: underline; margin-top: 0;">
+                MOH HAMID ALMAULUDI, S.Pd.I
+            </div>
+        </td>
+    </tr>
+</table>
 
     <div class="kapolsek">
-        KAPOLSEK Wates
+        KAPOLSEK WATES
     </div>
 
     <div class="kapolsek-line">
@@ -424,7 +431,7 @@
     @if ($pdfBarcodeSrc)
     <div class="pdf-barcode-verification">
         <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-        <small>Verifikasi Surat Desa Wates</small>
+        <small>Verifikasi Surat Desa WATES</small>
     </div>
     @endif
 

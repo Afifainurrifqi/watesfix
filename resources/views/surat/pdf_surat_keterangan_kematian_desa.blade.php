@@ -275,15 +275,15 @@
                 <td class="kop-text">
                     <div class="kop-baris-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-baris-2">KECAMATAN WATES</div>
-                    <div class="kop-baris-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-baris-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                 <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td>
             </tr>
         </table>
@@ -302,7 +302,7 @@
     </div>
 
     <p class="tulisan">
-        Yang bertandatangan di bawah ini KEPALA DESA Wates, Kecamatan Wates, Kabupaten Blitar,
+        Yang bertandatangan di bawah ini KEPALA DESA WATES, Kecamatan WATES, Kabupaten Blitar,
         menerangkan dengan sebenarnya bahwa :
     </p>
 
@@ -341,7 +341,7 @@
     </table>
 
     <p class="tulisan">
-        Orang tersebut di atas benar-benar penduduk Desa Wates, Kecamatan Wates, Kabupaten Blitar
+        Orang tersebut di atas benar-benar penduduk Desa WATES, Kecamatan WATES, Kabupaten Blitar
         dan benar telah <strong>Meninggal Dunia</strong> pada :
     </p>
 
@@ -372,41 +372,51 @@
     </p>
 
     {{-- TANDA TANGAN + QR --}}
-    <table class="ttd-table">
-        <tr>
-            <td class="ttd-spacer"></td>
-            <td class="ttd-cell">
-                <p>Blitar, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA Wates</strong></p>
-                @php
+   
+<table class="ttd-table" style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td class="ttd-spacer" style="width: 50%;"></td>
+
+        <td class="ttd-cell" style="width: 50%; text-align: center; vertical-align: top;">
+
+            <p style="margin: 0 0 28px 0;">
+                Blitar, {{ $tanggalSurat }}
+            </p>
+
+            <p style="margin: 0;">
+                <strong>KEPALA DESA WATES</strong>
+            </p>
+
+            @php
                 $ttdPath = public_path('assets/images/ttd.png');
                 $ttdSrc = null;
 
-                if(file_exists($ttdPath) && is_readable($ttdPath)){
-                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                    $ttdSrc = 'data:image/png;base64,' .
+                        base64_encode(file_get_contents($ttdPath));
                 }
-                @endphp
+            @endphp
 
-
-                @if($ttdSrc)
-                <div class="ttd-img-wrapper">
-                    <img src="{{ $ttdSrc }}" class="ttd-img">
+            @if ($ttdSrc)
+                <div style="width: 100%; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Tanda tangan Kepala Desa"
+                        style="display: block; width: 190px; max-width: 100%; height: auto; margin: 0 auto;"
+                    >
                 </div>
-                @else
-                <br><br><br><br><br><br>
-                @endif
+            @else
+                <div style="height: 150px;"></div>
+            @endif
 
-                <p class="nama">
-                    <u>MOH HAMID ALMAULUDI, S.Pd.I</u>
-                </p>
+            <p style="margin: 0; padding: 0; text-align: center; font-weight: bold;">
+                <u>MOH HAMID ALMAULUDI, S.Pd.I</u>
+            </p>
 
-                {{-- <div class="qr-section">
-                    <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-                </div> --}}
-            </td>
-        </tr>
-    </table>
+        </td>
+    </tr>
+</table>
+
 
 
 
@@ -427,7 +437,7 @@
     @if ($pdfBarcodeSrc)
     <div class="pdf-barcode-verification">
         <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-        <small>Verifikasi Surat Desa Wates</small>
+        <small>Verifikasi Surat Desa WATES</small>
     </div>
     @endif
 

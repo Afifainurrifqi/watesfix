@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Usaha</title>
@@ -200,155 +201,157 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
-@php
+    @php
     $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $tanggalLahir = !empty($data->tanggal_lahir)
-        ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
-        : '...........................................';
-@endphp
+    ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
+    @endphp
 
-<!-- KOP SURAT -->
-<div class="kop-desa-container">
-    <table class="kop-desa-table">
+    <!-- KOP SURAT -->
+    <div class="kop-desa-container">
+        <table class="kop-desa-table">
+            <tr>
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
+                </td>
+
+                <td class="kop-desa-text">
+                    <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
+                    <div class="kop-desa-2">KECAMATAN WATES</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-kontak">
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
+                    </div>
+                </td>
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                </td>
+            </tr>
+        </table>
+
+        <hr class="kop-desa-garis">
+    </div>
+
+    <div class="judul">SURAT KETERANGAN USAHA</div>
+
+    <div class="nomor">
+        No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'usaha') }}
+    </div>
+
+    <div class="isi">
+        <p>Yang bertanda tangan dibawah ini:</p>
+
+        <table class="data">
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>MOH HAMID ALMAULUDI, S.Pd.I</td>
+            </tr>
+            <tr>
+                <td>Jabatan</td>
+                <td>:</td>
+                <td>KEPALA DESA WATES</td>
+            </tr>
+        </table>
+
+        <p>Menerangkan dengan sebenarnya bahwa orang tersebut dibawah ini:</p>
+
+        <table class="data">
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>{{ $data->nama ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Nama/Bidang Usaha</td>
+                <td>:</td>
+                <td>{{ $data->nama_usaha ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>{{ $data->alamat ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>No NIK</td>
+                <td>:</td>
+                <td>{{ $data->nik ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Tempat, Tanggal Lahir</td>
+                <td>:</td>
+                <td>{{ $data->tempat_lahir ?? '....................' }}, {{ $tanggalLahir }}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td>{{ $data->jenis_kelamin ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Kewarganegaraan</td>
+                <td>:</td>
+                <td>{{ $data->kewarganegaraan ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Keperluan</td>
+                <td>:</td>
+                <td>{{ $data->keperluan ?? '...........................................' }}</td>
+            </tr>
+        </table>
+
+        <p>
+            Demikian surat ini yang kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
+        </p>
+    </div>
+
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 25px; page-break-inside: avoid;">
         <tr>
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
-            </td>
+            <td style="width: 50%;"></td>
+            <td style="width: 50%; text-align: center; vertical-align: top;">
+                <p style="text-align: center; margin: 0 0 5px 0;">
+                    Blitar, {{ $tanggalSurat }}
+                </p>
 
-            <td class="kop-desa-text">
-                <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN WATES</div>
-                <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
-                <div class="kop-desa-kontak">
-                    email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                <p style="text-align: center; margin: 0;">
+                    <strong>KEPALA DESA WATES</strong>
+                </p>
+
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
+
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                $ttdSrc = 'data:image/png;base64,' .
+                base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
+
+                @if ($ttdSrc)
+                <div style="height: 115px; width: 100%; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Tanda tangan Kepala Desa"
+                        style="width: 150px; height: auto; display: inline-block; margin: 0;">
                 </div>
+                @else
+                <div style="height: 115px;"></div>
+                @endif
+
+                <p style="text-align: center; margin: 0; padding: 0; font-weight: bold; text-decoration: underline;">
+                    MOH HAMID ALMAULUDI, S.Pd.I
+                </p>
             </td>
-       <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
-            </td>
         </tr>
     </table>
 
-    <hr class="kop-desa-garis">
-</div>
-
-<div class="judul">SURAT KETERANGAN USAHA</div>
-
-<div class="nomor">
-    No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'usaha') }}
-</div>
-
-<div class="isi">
-    <p>Yang bertanda tangan dibawah ini:</p>
-
-    <table class="data">
-        <tr>
-            <td>Nama</td>
-            <td>:</td>
-            <td>MOH HAMID ALMAULUDI, S.Pd.I</td>
-        </tr>
-        <tr>
-            <td>Jabatan</td>
-            <td>:</td>
-            <td>KEPALA DESA Wates</td>
-        </tr>
-    </table>
-
-    <p>Menerangkan dengan sebenarnya bahwa orang tersebut dibawah ini:</p>
-
-    <table class="data">
-        <tr>
-            <td>Nama</td>
-            <td>:</td>
-            <td>{{ $data->nama ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Nama/Bidang Usaha</td>
-            <td>:</td>
-            <td>{{ $data->nama_usaha ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>:</td>
-            <td>{{ $data->alamat ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>No NIK</td>
-            <td>:</td>
-            <td>{{ $data->nik ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Tempat, Tanggal Lahir</td>
-            <td>:</td>
-            <td>{{ $data->tempat_lahir ?? '....................' }}, {{ $tanggalLahir }}</td>
-        </tr>
-        <tr>
-            <td>Jenis Kelamin</td>
-            <td>:</td>
-            <td>{{ $data->jenis_kelamin ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Kewarganegaraan</td>
-            <td>:</td>
-            <td>{{ $data->kewarganegaraan ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Keperluan</td>
-            <td>:</td>
-            <td>{{ $data->keperluan ?? '...........................................' }}</td>
-        </tr>
-    </table>
-
-    <p>
-        Demikian surat ini yang kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
-    </p>
-</div>
-
-<table class="ttd">
-    <tr>
-        <td></td>
-        <td>Blitar, {{ $tanggalSurat }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><strong>KEPALA DESA Wates</strong></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-           @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
-
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
-
-
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
-            <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
-
-            {{--
-            <div class="qr-section">
-                <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div> --}}
-        </td>
-    </tr>
-</table>
 
 
 
@@ -358,20 +361,21 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>
+
 </html>

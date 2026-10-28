@@ -328,7 +328,7 @@
 
         $isiPembuka =
             $data->isi_pembuka ??
-            'Sehubungan dengan akan dilaksanakan Pelantikan dan Pengambilan sumpah janji perangkat desa di Desa Wates kecematan Wates Kabupaten Blitar. Berkaitan dengan hal tersebut maka kami mengundang Bapak/Ibu /saudara untuk hadir pada:';
+            'Sehubungan dengan akan dilaksanakan Pelantikan dan Pengambilan sumpah janji perangkat desa di Desa WATES kecematan WATES Kabupaten Blitar. Berkaitan dengan hal tersebut maka kami mengundang Bapak/Ibu /saudara untuk hadir pada:';
     @endphp
 
     <!-- KOP SURAT -->
@@ -342,15 +342,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td> 
             </tr>
         </table>
@@ -424,7 +424,7 @@
             <tr>
                 <td class="label">Tempat</td>
                 <td class="colon">:</td>
-                <td class="value">{{ $data->tempat ?? 'Pendopo Kantor Balai Desa Wates' }}</td>
+                <td class="value">{{ $data->tempat ?? 'Pendopo Kantor Balai Desa WATES' }}</td>
             </tr>
             <tr>
                 <td class="label">Acara</td>
@@ -452,7 +452,7 @@
             <td class="ttd-cell">
                 <p>Blitar, {{ $tanggalSurat }}</p>
                 <p>Mengetahui,</p>
-                <p>KEPALA DESA Wates</p>
+                <p>KEPALA DESA WATES</p>
 
                 <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD">
@@ -466,7 +466,7 @@
 <div class="barcode">
                     <img src="{{ public_path('assets/images/barcode.png') }}" alt="Barcode">
                     <br>
-                    <small>Scan untuk verifikasi surat resmi Desa Wates</small>
+                    <small>Scan untuk verifikasi surat resmi Desa WATES</small>
                 </div>
                 --}}
             </td>
@@ -492,7 +492,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

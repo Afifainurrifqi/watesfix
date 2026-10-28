@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Verifikasi Surat | Desa Wates</title>
+    <title>Verifikasi Surat | Desa WATES</title>
 
     <style>
         * {
@@ -364,7 +364,7 @@
 
         <p class="verification-text">
             Surat ini sudah terverifikasi oleh
-            <strong>Kepala Desa Wates</strong>.
+            <strong>Kepala Desa WATES</strong>.
         </p>
 
         <div class="divider"></div>
@@ -388,7 +388,7 @@
                 </span>
 
                 <span class="info-value">
-                    Pemerintah Desa Wates
+                    Pemerintah Desa WATES
                 </span>
             </div>
 
@@ -398,7 +398,7 @@
                 </span>
 
                 <span class="info-value">
-                    Kepala Desa Wates
+                    Kepala Desa WATES
                 </span>
             </div>
 
@@ -432,9 +432,9 @@
     </div>
 
     <div class="footer">
-        Sistem Informasi Pemerintah Desa Wates
+        Sistem Informasi Pemerintah Desa WATES
         <br>
-        &copy; {{ date('Y') }} Desa Wates
+        &copy; {{ date('Y') }} Desa WATES
     </div>
 
 </div>

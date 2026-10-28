@@ -71,8 +71,8 @@
     <div class="kop">
         <strong>PEMERINTAH KABUPATEN BLITAR<br>
         KECAMATAN WATES<br>
-        KANTOR KEPALA DESA Wates</strong><br>
-        <small>Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
+        KANTOR KEPALA DESA WATES</strong><br>
+        <small>Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</small>
     </div>
     <hr class="kop-garis">
 
@@ -118,7 +118,7 @@
         <tr>
             <td class="ttd-spacer"></td>
             <td class="ttd-cell">
-                <p>Wates, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
+                <p>WATES, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
                 <p>Saya yang menyatakan,</p>
                 <div style="height: 45px;"></div>
                 <p class="nama"><u>{{ $data->nama_deklaran ?? '...........................................' }}</u></p>
@@ -163,7 +163,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

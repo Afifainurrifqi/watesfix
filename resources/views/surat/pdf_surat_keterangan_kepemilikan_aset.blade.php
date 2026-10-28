@@ -214,17 +214,17 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y');
 
-        $tanggalLahir = !empty($data->tanggal_lahir)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
-            : '-';
+    $tanggalLahir = !empty($data->tanggal_lahir)
+    ? \Carbon\Carbon::parse($data->tanggal_lahir)->locale('id')->translatedFormat('d F Y')
+    : '-';
     @endphp
 
     <!-- KOP SURAT -->
@@ -238,16 +238,16 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                 <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
-            </td> 
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                </td>
             </tr>
         </table>
 
@@ -260,7 +260,7 @@
         Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'kepemilikan_aset') }}
     </div>
 
-    <p>Yang bertanda tangan di bawah ini KEPALA DESA Wates menerangkan dengan sebenarnya bahwa :</p>
+    <p>Yang bertanda tangan di bawah ini KEPALA DESA WATES menerangkan dengan sebenarnya bahwa :</p>
 
     <table class="data">
         <tr>
@@ -355,41 +355,42 @@
 
     <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
 
-    <table class="ttd">
+
+    <table class="ttd" style="width: 100%; border-collapse: collapse; margin-top: 10px; page-break-inside: avoid;">
         <tr>
-            <td></td>
-            <td>Blitar, {{ $tanggalSurat }}</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><strong>KEPALA DESA Wates</strong></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-              @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+            <td style="width: 50%;"></td>
+            <td style="width: 50%; text-align: center; vertical-align: top; padding: 0;">
+                <p style="margin: 0 0 5px 0; text-align: center;">
+                    Blitar, {{ $tanggalSurat }}
+                </p>
+                <p style="margin: 0; text-align: center;">
+                    <strong>KEPALA DESA WATES</strong>
+                </p>
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                $ttdSrc = 'data:image/png;base64,' .
+                base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
-                <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
+                @if ($ttdSrc)
+                <div style="height: 100px; width: 100%; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Tanda Tangan Kepala Desa"
+                        style="width: 125px; height: auto; display: inline-block; margin: 0;">
+                </div>
+                @else
+                <div style="height: 100px;"></div>
+                @endif
 
-                {{-- <div class="qr-section">
-                <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR">
-                <small>Scan untuk verifikasi surat resmi Desa Wates</small>
-            </div> --}}
+                <p style="margin: 0; padding: 0; text-align: center; font-weight: bold; text-decoration: underline;">
+                    MOH HAMID ALMAULUDI, S.Pd.I
+                </p>
             </td>
         </tr>
     </table>
@@ -402,19 +403,19 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>

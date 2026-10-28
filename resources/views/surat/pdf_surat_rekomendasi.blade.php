@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Surat Rekomendasi - Desa Wates</title>
+    <title>Surat Rekomendasi - Desa WATES</title>
 
     <style>
         @page {
@@ -363,7 +363,7 @@
 
     $kegiatan = $data->kegiatan ?? 'Pasar Malam';
     $pukul = $data->pukul ?? $data->waktu ?? '17.00 - Selesai';
-    $tempat = $data->tempat ?? 'Lapangan Desa Wates Kab Blitar';
+    $tempat = $data->tempat ?? 'Lapangan Desa WATES Kab Blitar';
     $keperluan = $data->keperluan ?? 'Pasar Malam';
 
     $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
@@ -381,15 +381,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td> 
             </tr>
         </table>
@@ -418,7 +418,7 @@
             <td class="header-right">
                 <div class="tujuan">
                     Kepada :<br>
-                    Yth. Muspika Kecamatan Wates<br>
+                    Yth. Muspika Kecamatan WATES<br>
                     Di<br>
                     <span class="tempat">TEMPAT</span>
                 </div>
@@ -428,7 +428,7 @@
 
     <!-- ISI SURAT -->
     <p class="paragraph indent">
-        Yang bertandatangan dibawah ini KEPALA DESA Wates Kecamatan Wates Kabupaten Blitar menerangkan bahwa :
+        Yang bertandatangan dibawah ini KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar menerangkan bahwa :
     </p>
 
     <table class="data-table">
@@ -495,7 +495,7 @@
             <td class="ttd-right">
                 <p>Blitar, {{ $tanggalSurat }}</p>
                 <p>Mengetahui</p>
-                <p>KEPALA DESA Wates</p>
+                <p>KEPALA DESA WATES</p>
 
                 {{-- <div class="ttd-img-wrapper">
                     <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD Kepala Desa">
@@ -527,7 +527,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

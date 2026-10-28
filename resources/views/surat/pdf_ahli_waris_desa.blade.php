@@ -174,10 +174,10 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email : watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email : watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
             </tr>
@@ -223,15 +223,15 @@
     <p><strong>Simpanan:</strong><br>
         1. {{ $data->simpanan_jenis ?? '' }} (jenis simpanan), nomor rekening:
         <strong>{{ $data->simpanan_rekening ?? '' }}</strong><br>
-        Atas nama <strong>{{ $data->simpanan_nama ?? $data->nama_almarhum }}</strong> di BRI Unit Wates.
+        Atas nama <strong>{{ $data->simpanan_nama ?? $data->nama_almarhum }}</strong> di BRI Unit WATES.
     </p>
 
     <table class="ttd-table">
         <tr>
             <td></td>
             <td class="ttd-cell">
-                <p>Wates, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA Wates</strong></p>
+                <p>WATES, {{ $tanggalSurat }}</p>
+                <p><strong>KEPALA DESA WATES</strong></p>
                @php
     $ttdPath = public_path('assets/images/ttd.png');
     $ttdSrc = null;
@@ -278,7 +278,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

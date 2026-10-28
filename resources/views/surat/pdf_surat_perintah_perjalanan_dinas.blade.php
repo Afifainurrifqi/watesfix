@@ -369,20 +369,20 @@
         $nomorSppd = app(\App\Services\NomorSuratService::class)->display($data, 'sppd');
 
         $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
-        $pejabat = $data->pejabat_pemberi_perintah ?? 'KEPALA DESA Wates Kecamatan Wates Kabupaten Blitar';
+        $pejabat = $data->pejabat_pemberi_perintah ?? 'KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar';
 
         $namaPegawai = $data->nama_pegawai ?? 'ITA PUJI LESTARI';
-        $pangkatGolongan = $data->pangkat_golongan ?? '- Perangkat Desa Wates';
+        $pangkatGolongan = $data->pangkat_golongan ?? '- Perangkat Desa WATES';
         $jabatan = $data->jabatan ?? '- Kaur Keuangan';
         $tingkatBiaya = $data->tingkat_biaya ?? '';
 
         $maksud = $data->maksud_perjalanan ?? 'Pengiriman Berkas Revisi Lampiran Add Tahap 1 Permin1';
         $alatAngkutan = $data->alat_angkutan ?? 'Kendaraan Roda Empat';
-        $tempatBerangkat = $data->tempat_berangkat ?? 'Desa Wates';
+        $tempatBerangkat = $data->tempat_berangkat ?? 'Desa WATES';
         $tempatTujuan = $data->tempat_tujuan ?? 'Ke DPMD';
         $lamaPerjalanan = $data->lama_perjalanan ?? '1';
 
-        $instansi = $data->instansi ?? 'Pemerintah Desa Wates';
+        $instansi = $data->instansi ?? 'Pemerintah Desa WATES';
         $sumberAnggaran = $data->sumber_anggaran ?? 'APBDesa';
     @endphp
 
@@ -400,15 +400,15 @@
                 <td class="kop-desa-text">
                     <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
                     <div class="kop-desa-2">KECAMATAN WATES</div>
-                    <div class="kop-desa-3">PEMERINTAH DESA Wates</div>
-                    <div class="kop-desa-alamat">Jl. Merdeka No.74, Wates, Kec. Wates, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
                     <div class="kop-desa-kontak">
-                        email :watesberkelas@gmail.com / website : Wates-blitarkab.desa.id
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
                     </div>
                 </td>
 
                  <td class="kop-desa-logo">
-                    <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa Wates" style="width: 90%;">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
                 </td> 
             </tr>
         </table>
@@ -582,7 +582,7 @@
             <td class="left">Dikeluarkan di</td>
             <td class="middle">Pada tanggal</td>
             <td class="colon">:</td>
-            <td class="right">Wates</td>
+            <td class="right">WATES</td>
         </tr>
         <tr>
             <td></td>
@@ -593,7 +593,7 @@
     </table>
 
     <div class="ttd-kanan">
-        <div>KEPALA DESA Wates</div>
+        <div>KEPALA DESA WATES</div>
         <div class="nama">{{ $namaKades }}</div>
     </div>
 
@@ -631,7 +631,7 @@
                 </table>
 
                 <div class="lembar-ttd">
-                    <div>KEPALA DESA Wates</div>
+                    <div>KEPALA DESA WATES</div>
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>
@@ -800,7 +800,7 @@
                 </div>
 
                 <div class="lembar-ttd">
-                    <div>KEPALA DESA Wates</div>
+                    <div>KEPALA DESA WATES</div>
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>
@@ -848,7 +848,7 @@
     @if ($pdfBarcodeSrc)
         <div class="pdf-barcode-verification">
             <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa Wates</small>
+            <small>Verifikasi Surat Desa WATES</small>
         </div>
     @endif
 

@@ -131,7 +131,7 @@
                                     name="ybt_jabatan"
                                     id="ybt_jabatan"
                                     class="form-control @error('ybt_jabatan') is-invalid @enderror"
-                                    value="{{ old('ybt_jabatan', 'KEPALA DESA Wates') }}"
+                                    value="{{ old('ybt_jabatan', 'KEPALA DESA WATES') }}"
                                     maxlength="255"
                                     required
                                 >
