@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Domisili Warga</title>
@@ -130,14 +131,23 @@
             vertical-align: top;
         }
 
+
         .ttd-img-wrapper {
-            height: 55px;
-            margin: 5px 0 3px 0;
+            height: 130px;
+            width: 100%;
+            margin: 5px 0 0 0;
+            padding: 0;
+            text-align: center;
         }
 
         .ttd-img {
+            display: inline-block;
             width: 165px;
+            height: auto;
+            max-width: 100%;
+            margin: 0 auto;
         }
+
 
         .nama-kades {
             font-weight: bold;
@@ -200,149 +210,157 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
+
 <body>
 
-@php
+    @php
     $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $tanggalLahir = !empty($data->tanggal_lahir)
-        ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
-        : '...........................................';
-@endphp
+    ? \Carbon\Carbon::parse($data->tanggal_lahir) ->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
+    @endphp
 
-<!-- KOP SURAT -->
-<div class="kop-desa-container">
-    <table class="kop-desa-table">
+    <!-- KOP SURAT -->
+    <div class="kop-desa-container">
+        <table class="kop-desa-table">
+            <tr>
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
+                </td>
+
+                <td class="kop-desa-text">
+                    <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
+                    <div class="kop-desa-2">KECAMATAN WATES</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-kontak">
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
+                    </div>
+                </td>
+
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                </td>
+            </tr>
+        </table>
+
+        <hr class="kop-desa-garis">
+    </div>
+
+    <div class="judul">SURAT KETERANGAN DOMISILI</div>
+
+    <div class="nomor">
+        No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'domisili_warga') }}
+    </div>
+
+    <div class="isi">
+        <p>
+            Yang bertanda tangan dibawah ini KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar menerangkan dengan sebenarnya bahwa :
+        </p>
+
+        <table class="data">
+            <tr>
+                <td>Nama Lengkap</td>
+                <td>:</td>
+                <td>{{ $data->nama_lengkap ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td>{{ $data->jenis_kelamin ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Tempat, Tanggal Lahir</td>
+                <td>:</td>
+                <td>{{ $data->tempat_lahir ?? '....................' }}, {{ $tanggalLahir }}</td>
+            </tr>
+            <tr>
+                <td>Agama</td>
+                <td>:</td>
+                <td>{{ $data->agama ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>:</td>
+                <td>{{ $data->status ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{ $data->pekerjaan ?? '...........................................' }}</td>
+            </tr>
+            <tr>
+                <td>Alamat Asal</td>
+                <td>:</td>
+                <td>{{ $data->alamat_asal ?? '...........................................' }}</td>
+            </tr>
+        </table>
+
+        <p>
+            Orang tersebut di atas benar penduduk Desa WATES namun berdomisili di
+            <strong>{{ $data->alamat_domisili ?? '...........................................' }}</strong>.
+        </p>
+
+        <p>
+            Demikian surat keterangan Domisili ini dibuat atas dasar yang sebenarnya untuk dijadikan periksa
+            dan dapat dipergunakan sebagaimana perlunya.
+        </p>
+    </div>
+
+    <!-- TANDA TANGAN -->
+    <table class="ttd">
         <tr>
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
-            </td>
-
-            <td class="kop-desa-text">
-                <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN WATES</div>
-                <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
-                <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
-                <div class="kop-desa-kontak">
-                    email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
-                </div>
-            </td>
-
-                 <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
-            </td> 
-        </tr>
-    </table>
-
-    <hr class="kop-desa-garis">
-</div>
-
-<div class="judul">SURAT KETERANGAN DOMISILI</div>
-
-<div class="nomor">
-    No : {{ app(\App\Services\NomorSuratService::class)->display($data, 'domisili_warga') }}
-</div>
-
-<div class="isi">
-    <p>
-        Yang bertanda tangan dibawah ini KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar menerangkan dengan sebenarnya bahwa :
-    </p>
-
-    <table class="data">
-        <tr>
-            <td>Nama Lengkap</td>
-            <td>:</td>
-            <td>{{ $data->nama_lengkap ?? '...........................................' }}</td>
+            <td></td>
+            <td>Blitar, {{ $tanggalSurat }}</td>
         </tr>
         <tr>
-            <td>Jenis Kelamin</td>
-            <td>:</td>
-            <td>{{ $data->jenis_kelamin ?? '...........................................' }}</td>
+            <td></td>
+            <td><strong>KEPALA DESA WATES</strong></td>
         </tr>
         <tr>
-            <td>Tempat, Tanggal Lahir</td>
-            <td>:</td>
-            <td>{{ $data->tempat_lahir ?? '....................' }}, {{ $tanggalLahir }}</td>
-        </tr>
-        <tr>
-            <td>Agama</td>
-            <td>:</td>
-            <td>{{ $data->agama ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>:</td>
-            <td>{{ $data->status ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Pekerjaan</td>
-            <td>:</td>
-            <td>{{ $data->pekerjaan ?? '...........................................' }}</td>
-        </tr>
-        <tr>
-            <td>Alamat Asal</td>
-            <td>:</td>
-            <td>{{ $data->alamat_asal ?? '...........................................' }}</td>
-        </tr>
-    </table>
-
-    <p>
-        Orang tersebut di atas benar penduduk Desa WATES namun berdomisili di
-        <strong>{{ $data->alamat_domisili ?? '...........................................' }}</strong>.
-    </p>
-
-    <p>
-        Demikian surat keterangan Domisili ini dibuat atas dasar yang sebenarnya untuk dijadikan periksa
-        dan dapat dipergunakan sebagaimana perlunya.
-    </p>
-</div>
-
-<!-- TANDA TANGAN -->
-<table class="ttd">
-    <tr>
-        <td></td>
-        <td>Blitar, {{ $tanggalSurat }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><strong>KEPALA DESA WATES</strong></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            {{-- <div class="ttd-img-wrapper">
+            <td></td>
+            <td>
+                {{-- <div class="ttd-img-wrapper">
                 <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-            </div> --}}
+                </div> --}}
 
-           @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                if(file_exists($ttdPath) && is_readable($ttdPath)){
+                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
 
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
+               
+@if ($ttdSrc)
+    <div class="ttd-img-wrapper">
+        <img
+            src="{{ $ttdSrc }}"
+            class="ttd-img"
+            alt="Stempel dan tanda tangan Kepala Desa"
+        >
+    </div>
 @else
-<br><br><br><br>
+    <div style="height: 130px;"></div>
 @endif
-            <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
 
-              {{--
+<div class="nama-kades" style="text-align: center; margin: 0; padding: 0;">
+    MOH HAMID ALMAULUDI, S.Pd.I
+</div>
+
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
                 <small>Scan untuk verifikasi surat resmi Desa WATES</small>
-            </div> --}}
-        </td>
-    </tr>
-</table>
+                </div> 
+            </td>
+        </tr>
+    </table>
 
 
 
@@ -352,20 +370,21 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa WATES</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>
+
 </html>

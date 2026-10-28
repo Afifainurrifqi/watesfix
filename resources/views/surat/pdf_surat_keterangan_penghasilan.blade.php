@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Surat Keterangan Penghasilan</title>
@@ -145,14 +146,17 @@
         }
 
         .ttd-img-wrapper {
-            height: 60px;
-            margin: 5px auto;
+            height: 125px;
+            margin: 5px 0 3px 0;
             text-align: center;
+            width: 100%;
         }
 
         .ttd-img {
-            max-height: 60px;
-            width: auto;
+            width: 175px;
+            max-height: none;
+            height: auto;
+            display: inline-block;
         }
 
         .nama-kades {
@@ -209,190 +213,191 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
+
 <body>
 
-@php
+    @php
     $s = $surat ?? $data ?? null;
 
     $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
 
     $isiField = function ($field, $default = '...........................................') use ($s) {
-        $value = data_get($s, $field);
-        return !empty($value) ? $value : $default;
+    $value = data_get($s, $field);
+    return !empty($value) ? $value : $default;
     };
 
     $tanggalLahir = !empty(data_get($s, 'tanggal_lahir'))
-        ? \Carbon\Carbon::parse(data_get($s, 'tanggal_lahir')) ->locale('id')->translatedFormat('d F Y')
-        : '...........................................';
-@endphp
+    ? \Carbon\Carbon::parse(data_get($s, 'tanggal_lahir')) ->locale('id')->translatedFormat('d F Y')
+    : '...........................................';
+    @endphp
 
-<!-- KOP SURAT -->
-<div class="kop-desa-container">
-    <table class="kop-desa-table">
+    <!-- KOP SURAT -->
+    <div class="kop-desa-container">
+        <table class="kop-desa-table">
+            <tr>
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
+                </td>
+
+                <td class="kop-desa-text">
+                    <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
+                    <div class="kop-desa-2">KECAMATAN WATES</div>
+                    <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
+                    <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
+                    <div class="kop-desa-kontak">
+                        email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
+                    </div>
+                </td>
+
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                </td>
+            </tr>
+        </table>
+
+        <hr class="kop-desa-garis">
+    </div>
+
+    <div class="judul">SURAT KETERANGAN PENGHASILAN</div>
+
+    <div class="nomor">
+        Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'penghasilan') }}
+    </div>
+
+    <div class="isi">
+        <p class="normal">
+            Yang bertandatangan dibawah ini KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar
+            Menerangkan dengan sebenarnya bahwa :
+        </p>
+
+        <table class="data">
+            <tr>
+                <td>Nama Lengkap</td>
+                <td>:</td>
+                <td class="text-uppercase" style="font-weight: bold;">
+                    {{ strtoupper($isiField('nama_lengkap')) }}
+                </td>
+            </tr>
+            <tr>
+                <td>NIK</td>
+                <td>:</td>
+                <td>{{ $isiField('nik') }}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td>{{ $isiField('jenis_kelamin') }}</td>
+            </tr>
+            <tr>
+                <td>Tempat, Tanggal Lahir</td>
+                <td>:</td>
+                <td>{{ $isiField('tempat_lahir', '....................') }}, {{ $tanggalLahir }}</td>
+            </tr>
+            <tr>
+                <td>Agama</td>
+                <td>:</td>
+                <td>{{ $isiField('agama') }}</td>
+            </tr>
+            <tr>
+                <td>Kewarganegaraan</td>
+                <td>:</td>
+                <td>{{ $isiField('kewarganegaraan') }}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>:</td>
+                <td>{{ $isiField('status') }}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{ $isiField('pekerjaan') }}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>{{ $isiField('alamat') }}</td>
+            </tr>
+            <tr>
+                <td>Penghasilan</td>
+                <td>:</td>
+                <td><strong>{{ $isiField('nominal_penghasilan') }}</strong> / Bulan</td>
+            </tr>
+        </table>
+
+        <p>Orang tersebut di atas benar-benar Orang tua / Wali dari :</p>
+
+        <table class="data">
+            <tr>
+                <td>Nama Lengkap</td>
+                <td>:</td>
+                <td class="text-uppercase" style="font-weight: bold;">
+                    {{ strtoupper($isiField('nama_anak')) }}
+                </td>
+            </tr>
+            <tr>
+                <td>NIK</td>
+                <td>:</td>
+                <td>{{ $isiField('nik_anak') }}</td>
+            </tr>
+            <tr>
+                <td>Sekolah / Universitas</td>
+                <td>:</td>
+                <td>{{ $isiField('sekolah_universitas') }}</td>
+            </tr>
+        </table>
+
+        <p>
+            Surat keterangan ini dipergunakan untuk
+            <strong>{{ $isiField('keperluan') }}</strong>.
+        </p>
+
+        <p>
+            Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
+        </p>
+    </div>
+
+    <table class="ttd-table">
         <tr>
-            <td class="kop-desa-logo">
-                <img src="{{ public_path('assets/images/blitar.jpg') }}" alt="Logo Kabupaten Blitar">
-            </td>
+            <td></td>
+            <td>Blitar, {{ $tanggalSurat }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><strong>KEPALA DESA WATES</strong></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-            <td class="kop-desa-text">
-                <div class="kop-desa-1">PEMERINTAH KABUPATEN BLITAR</div>
-                <div class="kop-desa-2">KECAMATAN WATES</div>
-                <div class="kop-desa-3">PEMERINTAH DESA WATES</div>
-                <div class="kop-desa-alamat">Jl. Merdeka No.74, WATES, Kec. WATES, Kabupaten Blitar, Jawa Timur Telp. 082139324445</div>
-                <div class="kop-desa-kontak">
-                    email :watesberkelas@gmail.com / website : WATES-blitarkab.desa.id
+                if(file_exists($ttdPath) && is_readable($ttdPath)){
+                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
+
+
+                @if($ttdSrc)
+                <div class="ttd-img-wrapper">
+                    <img src="{{ $ttdSrc }}" class="ttd-img">
                 </div>
-            </td>
+                @else
+                <br><br><br><br>
+                @endif
+                <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
 
-                 <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
-            </td> 
-        </tr>
-    </table>
-
-    <hr class="kop-desa-garis">
-</div>
-
-<div class="judul">SURAT KETERANGAN PENGHASILAN</div>
-
-<div class="nomor">
-    Nomor : {{ app(\App\Services\NomorSuratService::class)->display($data, 'penghasilan') }}
-</div>
-
-<div class="isi">
-    <p class="normal">
-        Yang bertandatangan dibawah ini KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar
-        Menerangkan dengan sebenarnya bahwa :
-    </p>
-
-    <table class="data">
-        <tr>
-            <td>Nama Lengkap</td>
-            <td>:</td>
-            <td class="text-uppercase" style="font-weight: bold;">
-                {{ strtoupper($isiField('nama_lengkap')) }}
-            </td>
-        </tr>
-        <tr>
-            <td>NIK</td>
-            <td>:</td>
-            <td>{{ $isiField('nik') }}</td>
-        </tr>
-        <tr>
-            <td>Jenis Kelamin</td>
-            <td>:</td>
-            <td>{{ $isiField('jenis_kelamin') }}</td>
-        </tr>
-        <tr>
-            <td>Tempat, Tanggal Lahir</td>
-            <td>:</td>
-            <td>{{ $isiField('tempat_lahir', '....................') }}, {{ $tanggalLahir }}</td>
-        </tr>
-        <tr>
-            <td>Agama</td>
-            <td>:</td>
-            <td>{{ $isiField('agama') }}</td>
-        </tr>
-        <tr>
-            <td>Kewarganegaraan</td>
-            <td>:</td>
-            <td>{{ $isiField('kewarganegaraan') }}</td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>:</td>
-            <td>{{ $isiField('status') }}</td>
-        </tr>
-        <tr>
-            <td>Pekerjaan</td>
-            <td>:</td>
-            <td>{{ $isiField('pekerjaan') }}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>:</td>
-            <td>{{ $isiField('alamat') }}</td>
-        </tr>
-        <tr>
-            <td>Penghasilan</td>
-            <td>:</td>
-            <td><strong>{{ $isiField('nominal_penghasilan') }}</strong> / Bulan</td>
-        </tr>
-    </table>
-
-    <p>Orang tersebut di atas benar-benar Orang tua / Wali dari :</p>
-
-    <table class="data">
-        <tr>
-            <td>Nama Lengkap</td>
-            <td>:</td>
-            <td class="text-uppercase" style="font-weight: bold;">
-                {{ strtoupper($isiField('nama_anak')) }}
-            </td>
-        </tr>
-        <tr>
-            <td>NIK</td>
-            <td>:</td>
-            <td>{{ $isiField('nik_anak') }}</td>
-        </tr>
-        <tr>
-            <td>Sekolah / Universitas</td>
-            <td>:</td>
-            <td>{{ $isiField('sekolah_universitas') }}</td>
-        </tr>
-    </table>
-
-    <p>
-        Surat keterangan ini dipergunakan untuk
-        <strong>{{ $isiField('keperluan') }}</strong>.
-    </p>
-
-    <p>
-        Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
-    </p>
-</div>
-
-<table class="ttd-table">
-    <tr>
-        <td></td>
-        <td>Blitar, {{ $tanggalSurat }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><strong>KEPALA DESA WATES</strong></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-           @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
-
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
-
-
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
-            <div class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</div>
-
-              {{--
+                {{--
             <div class="qr-section">
                 <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR Code">
                 <small>Scan untuk verifikasi surat resmi Desa WATES</small>
-            </div> --}}
-        </td>
-    </tr>
-</table>
+                </div> --}}
+            </td>
+        </tr>
+    </table>
 
 
 
@@ -402,20 +407,21 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa WATES</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>
+
 </html>

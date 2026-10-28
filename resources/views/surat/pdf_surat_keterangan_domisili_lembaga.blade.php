@@ -213,13 +213,13 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
 
     @php
-        $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
+    $tanggalSurat = now('Asia/Jakarta') ->locale('id')->translatedFormat('d F Y');
     @endphp
 
     {{-- KOP SURAT --}}
@@ -240,9 +240,9 @@
                     </div>
                 </td>
 
-                 <td class="kop-desa-logo">
-                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
-            </td> 
+                <td class="kop-desa-logo">
+                    <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                </td>
             </tr>
         </table>
 
@@ -325,40 +325,53 @@
         Demikian Surat Keterangan Domisili ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
     </p>
 
-    <table class="ttd-table">
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 25px; page-break-inside: avoid;">
         <tr>
-            <td class="ttd-spacer"></td>
-            <td class="ttd-cell">
-                <p>WATES, {{ $tanggalSurat }}</p>
-                <p><strong>KEPALA DESA WATES</strong></p>
-             @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+            <td style="width: 52%;"></td>
+            <td style="width: 48%; text-align: center; vertical-align: top;">
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                <div style="text-align: center; margin: 0 0 5px 0;">
+                    WATES, {{ $tanggalSurat }}
+                </div>
 
+                <div style="text-align: center; margin: 0;">
+                    <strong>KEPALA DESA WATES</strong>
+                </div>
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
-                <p class="nama">
-                    <u>MOH HAMID ALMAULUDI, S.Pd.I</u>
-                </p>
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-                {{-- <div class="qr-section">
-                <img src="{{ public_path('assets/images/barcode.png') }}" alt="QR">
-                <small>Scan untuk verifikasi surat resmi Desa WATES</small>
-            </div> --}}
+                if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                $ttdSrc = 'data:image/png;base64,' .
+                base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
+
+                @if ($ttdSrc)
+                <div style="width: 100%; height: 125px; text-align: center; margin: 0; padding: 0;">
+                    <img
+                        src="{{ $ttdSrc }}"
+                        alt="Stempel dan tanda tangan Kepala Desa"
+                        style="width: 145px; height: auto; display: inline-block; margin: 0;">
+                </div>
+                @else
+                <div style="height: 125px;">
+                    <span style="font-size: 9px; color: red;">
+                        File ttd.png tidak ditemukan
+                    </span>
+                </div>
+                @endif
+
+                <div style="text-align: center; font-weight: bold; text-decoration: underline; margin: 0; padding: 0;">
+                    MOH HAMID ALMAULUDI, S.Pd.I
+                </div>
+
             </td>
         </tr>
     </table>
+
 
 
 
@@ -368,19 +381,19 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa WATES</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>
