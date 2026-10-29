@@ -221,12 +221,14 @@
         /* ================= TTD ================= */
         .ttd-wrapper {
             width: 100%;
-            margin-top: 25px;
+            margin-top: 22px;
+            page-break-inside: avoid;
         }
 
         .ttd-table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         .ttd-table td {
@@ -240,26 +242,45 @@
         .ttd-table p {
             text-align: center;
             margin: 2px 0;
+            line-height: 1.2;
         }
 
-        .ruang-ttd-pemohon {
-            height: 90px;
+        .ttd-date {
+            height: 20px;
+            font-weight: normal;
+        }
+
+        .ttd-position {
+            height: 20px;
+        }
+
+        .ttd-signature-space {
+            height: 88px;
+            vertical-align: middle !important;
+            text-align: center;
         }
 
         .ttd-img {
+            display: block;
             width: 150px;
-            height: auto;
-            margin: 4px 0;
+            height: 78px;
+            object-fit: contain;
+            margin: 3px auto 0;
         }
 
-        .nama-pemohon {
-            font-weight: bold;
-            text-decoration: underline;
+        .ttd-empty {
+            height: 78px;
         }
 
+        .nama-pemohon,
         .nama-kades {
+            display: block;
+            width: 100%;
             font-weight: bold;
             text-decoration: underline;
+            text-align: center;
+            white-space: normal;
+            line-height: 1.2;
         }
 
         @media print {
@@ -522,31 +543,69 @@
     </p>
 
     {{-- TANDA TANGAN --}}
+    @php
+        $tanggalTtd = now('Asia/Jakarta')
+            ->locale('id')
+            ->translatedFormat('d F Y');
+
+        // Muat tanda tangan dari public/assets/images/ttd.png.
+        // Base64 membantu DomPDF membaca gambar lokal dengan stabil.
+        $daftarPathTtd = [
+            public_path('assets/images/ttd.png'),
+            public_path('assets/img/ttd.png'),
+            public_path('assets2/img/ttd.png'),
+            public_path('images/ttd.png'),
+        ];
+
+        $ttdSrc = null;
+
+        foreach ($daftarPathTtd as $pathTtd) {
+            if (is_file($pathTtd) && is_readable($pathTtd)) {
+                $isiTtd = file_get_contents($pathTtd);
+
+                if ($isiTtd !== false) {
+                    $ttdSrc = 'data:image/png;base64,' . base64_encode($isiTtd);
+                    break;
+                }
+            }
+        }
+    @endphp
+
     <div class="ttd-wrapper">
         <table class="ttd-table">
             <tr>
                 <td></td>
                 <td>
-                    <p>Blitar, {{ now('Asia/Jakarta')->locale('id') ->locale('id')->translatedFormat('d F Y') }}</p>
+                    <p class="ttd-date">Blitar, {{ $tanggalTtd }}</p>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <p>Pemohon</p>
+                    <p class="ttd-position">Pemohon</p>
                 </td>
                 <td>
-                    <p><strong>KEPALA DESA WATES</strong></p>
+                    <p class="ttd-position"><strong>KEPALA DESA WATES</strong></p>
                 </td>
             </tr>
 
-            {{-- <tr>
-                <td class="ruang-ttd-pemohon"></td>
-                <td>
-                    <img src="{{ public_path('assets/images/ttd.png') }}" alt="TTD" class="ttd-img">
+            <tr>
+                <td class="ttd-signature-space">
+                    <div class="ttd-empty"></div>
                 </td>
-            </tr> --}}
-<br><br><br><br>
+                <td class="ttd-signature-space">
+                    @if ($ttdSrc !== null)
+                        <img
+                            src="{{ $ttdSrc }}"
+                            alt="Tanda tangan Kepala Desa"
+                            class="ttd-img"
+                        >
+                    @else
+                        <div class="ttd-empty"></div>
+                    @endif
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <p class="nama-pemohon">

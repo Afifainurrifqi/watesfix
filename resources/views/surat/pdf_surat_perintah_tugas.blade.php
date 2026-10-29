@@ -244,16 +244,19 @@
             text-transform: uppercase;
         }
 
-        .ttd-img-wrapper {
-            height: 58px;
-            margin-top: 4px;
-            text-align: center;
-        }
+       
+.ttd-img-wrapper {
+    height: 90px;
+    margin-top: 5px;
+    text-align: center;
+}
 
-        .ttd-img {
-            width: 145px;
-            height: auto;
-        }
+.ttd-img {
+    width: 175px;
+    height: auto;
+    max-height: 85px;
+}
+
 
         .nama-kades {
             margin-top: 3px;
@@ -316,80 +319,120 @@
             color: #222;
             white-space: nowrap;
         }
-</style>
+    </style>
 </head>
 
 <body>
+
+
     @php
-        /*
-         * =========================================================
-         * TANGGAL DAN NOMOR TAMPILAN
-         * =========================================================
-         * Model tidak menyimpan nomor_surat dan tanggal_surat.
-         * created_at dipakai sebagai tanggal pembuatan surat.
-         */
-        $sumberTanggal = $data->created_at ?? now('Asia/Jakarta');
+    \Carbon\Carbon::setLocale('id');
 
-        try {
-            $tanggalSurat = \Carbon\Carbon::parse($sumberTanggal)
-                ->timezone('Asia/Jakarta')
-                ->locale('id')
-                 ->locale('id')->translatedFormat('d F Y');
+    // TANGGAL SURAT
+    $sumberTanggal = $data->created_at ?? now('Asia/Jakarta');
 
-            $tahunSurat = \Carbon\Carbon::parse($sumberTanggal)
-                ->timezone('Asia/Jakarta')
-                ->format('Y');
-        } catch (\Throwable $e) {
-            $tanggalSurat = now('Asia/Jakarta')
-                ->locale('id')
-                 ->locale('id')->translatedFormat('d F Y');
+    try {
+    $tanggalSurat = \Carbon\Carbon::parse($sumberTanggal)
+    ->timezone('Asia/Jakarta')
+    ->locale('id')
+    ->translatedFormat('d F Y');
+    } catch (\Throwable $e) {
+    $tanggalSurat = now('Asia/Jakarta')
+    ->locale('id')
+    ->translatedFormat('d F Y');
+    }
 
-            $tahunSurat = now('Asia/Jakarta')->format('Y');
-        }
+    // NOMOR SURAT
+    $nomorSurat = app(\App\Services\NomorSuratService::class)
+    ->display($data, 'perintah_tugas');
 
-        /*
-         * nomor_surat hanya dibaca sebagai fallback untuk data lama.
-         * Data baru menampilkan format nomor yang dapat diisi manual.
-         */
-        $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'perintah_tugas');
-            }
+    // FUNGSI NORMALISASI DATA LIST
+    $normalisasiList = function ($nilai) {
+    if ($nilai instanceof \Illuminate\Support\Collection) {
+    $nilai = $nilai->all();
+    }
 
-            if (filled($data->tempat_kegiatan ?? null)) {
-                $detailKegiatan[] =
-                    'bertempat di ' .
-                    trim((string) $data->tempat_kegiatan);
-            }
+    if (is_string($nilai)) {
+    $decoded = json_decode($nilai, true);
+    $nilai = is_array($decoded) ? $decoded : [];
+    }
 
-            if (count($detailKegiatan) > 0) {
-                $bagianUntuk[] = implode(', ', $detailKegiatan);
-            }
+    if (is_object($nilai)) {
+    $nilai = method_exists($nilai, 'toArray')
+    ? $nilai->toArray()
+    : (array) $nilai;
+    }
 
-            if (filled($data->keterangan_tugas ?? null)) {
-                $bagianUntuk[] = trim(
-                    (string) $data->keterangan_tugas
-                );
-            }
+    return is_array($nilai) ? array_values($nilai) : [];
+    };
 
-            $uraianUntuk = implode('. ', array_filter($bagianUntuk));
+    // DASAR SURAT: ambil dari field database "dasar"
+    $daftarDasar = $normalisasiList($data->dasar ?? []);
 
-            if (
-                filled($uraianUntuk) &&
-                !str_ends_with($uraianUntuk, '.')
-            ) {
-                $uraianUntuk .= '.';
-            }
-        }
+    $daftarDasar = array_values(array_filter(
+    array_map(function ($item) {
+    if (is_array($item)) {
+    return trim((string) ($item['teks'] ?? $item['dasar'] ?? ''));
+    }
 
-        if ($uraianUntuk === '') {
-            $uraianUntuk = '.................................................................';
-        }
+    return trim((string) $item);
+    }, $daftarDasar),
+    fn ($item) => $item !== ''
+    ));
 
-        /*
-         * Penandatangan dibuat tetap karena tidak disimpan dalam Model.
-         */
-        $jabatanKades = 'KEPALA DESA WATES';
-        $namaKades = 'MOH HAMID ALMAULUDI, S.Pd.I';
+    // PENERIMA TUGAS: ambil dari field database "penerima_tugas"
+    $penerimaTugas = $normalisasiList($data->penerima_tugas ?? []);
+
+    $penerimaTugas = array_values(array_filter(
+    array_map(function ($item) {
+    if (is_object($item)) {
+    $item = (array) $item;
+    }
+
+    if (!is_array($item)) {
+    return null;
+    }
+
+    return [
+    'nama' => trim((string) ($item['nama'] ?? '')),
+    'kedudukan' => trim((string) ($item['kedudukan'] ?? '')),
+    ];
+    }, $penerimaTugas),
+    fn ($item) => is_array($item)
+    && ($item['nama'] !== '' || $item['kedudukan'] !== '')
+    ));
+
+    // URAIAN TUGAS: ambil dari field database "untuk"
+    $uraianUntuk = trim((string) ($data->untuk ?? ''));
+
+    if ($uraianUntuk === '') {
+    $uraianUntuk = '.................................................................';
+    }
+
+    // PENANDATANGAN
+    $jabatanKades = 'KEPALA DESA WATES';
+    $namaKades = 'MOH HAMID ALMAULUDI, S.Pd.I';
+
+    // TANDA TANGAN: gunakan base64 agar kompatibel dengan DomPDF
+    $ttdPath = public_path('assets/images/ttd.png');
+    $ttdSrc = null;
+
+    if (file_exists($ttdPath) && is_readable($ttdPath)) {
+    $ttdSrc = 'data:image/png;base64,' .
+    base64_encode(file_get_contents($ttdPath));
+    }
+
+    // BARCODE VERIFIKASI
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
+
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' .
+    base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
+
+
 
     {{-- =========================================================
          KOP SURAT
@@ -400,8 +443,7 @@
                 <td class="kop-desa-logo">
                     <img
                         src="{{ public_path('assets/images/blitar.jpg') }}"
-                        alt="Logo Kabupaten Blitar"
-                    >
+                        alt="Logo Kabupaten Blitar">
                 </td>
 
                 <td class="kop-desa-text">
@@ -446,96 +488,142 @@
     {{-- =========================================================
          DASAR SURAT
     ========================================================== --}}
+
+    @php
+    $daftarDasar = $daftarDasar ?? [];
+
+    if ($daftarDasar instanceof \Illuminate\Support\Collection) {
+    $daftarDasar = $daftarDasar->all();
+    }
+
+    if (!is_array($daftarDasar)) {
+    $daftarDasar = [];
+    }
+    @endphp
+
     <table class="dasar-table">
-        @if (count($daftarDasar) > 0)
-            @foreach ($daftarDasar as $index => $dasar)
-                <tr>
-                    @if ($index === 0)
-                        <td
-                            class="dasar-label"
-                            rowspan="{{ count($daftarDasar) }}"
-                        >
-                            <strong>Dasar</strong>
-                        </td>
+        @forelse ($daftarDasar as $index => $dasar)
+        <tr>
+            @if ($index === 0)
+            <td class="dasar-label"
+                rowspan="{{ count($daftarDasar) }}">
+                <strong>Dasar</strong>
+            </td>
+            <td class="dasar-colon"
+                rowspan="{{ count($daftarDasar) }}">:</td>
+            @endif
 
-                        <td
-                            class="dasar-colon"
-                            rowspan="{{ count($daftarDasar) }}"
-                        >
-                            :
-                        </td>
-                    @endif
-
-                    <td class="dasar-number">
-                        {{ $index + 1 }}.
-                    </td>
-
-                    <td class="dasar-text">
-                        {{ $dasar }}
-                    </td>
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td class="dasar-label">
-                    <strong>Dasar</strong>
-                </td>
-
-                <td class="dasar-colon">:</td>
-
-                <td class="dasar-number">1.</td>
-
-                <td class="dasar-text">
-                    ............................................................
-                </td>
-            </tr>
-        @endif
+            <td class="dasar-number">{{ $index + 1 }}.</td>
+            <td class="dasar-text">{{ $dasar }}</td>
+        </tr>
+        @empty
+        <tr>
+            <td class="dasar-label"><strong>Dasar</strong></td>
+            <td class="dasar-colon">:</td>
+            <td class="dasar-number">1.</td>
+            <td class="dasar-text">............................................................</td>
+        </tr>
+        @endforelse
     </table>
+
 
     {{-- =========================================================
          DIPERINTAHKAN KEPADA
     ========================================================== --}}
-    <p class="section-label">
-        <strong>Diperintahkan kepada:</strong>
-    </p>
+   
+<p class="section-label">
+    <strong>Diperintahkan kepada:</strong>
+</p>
+
+<div class="penerima-wrapper">
+    @forelse ($penerimaTugas as $index => $penerima)
+        <table class="penerima-table">
+            <tr>
+                <td class="penerima-no">{{ $index + 1 }}.</td>
+                <td class="penerima-label">Nama</td>
+                <td class="penerima-colon">:</td>
+                <td>{{ $penerima['nama'] }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="penerima-label">Kedudukan</td>
+                <td class="penerima-colon">:</td>
+                <td>{{ $penerima['kedudukan'] }}</td>
+            </tr>
+        </table>
+    @empty
+        <p>Data penerima tugas belum tersedia.</p>
+    @endforelse
+</div>
+
+
+
+    @php
+    // Ambil data penerima tugas dengan aman.
+    $penerimaRaw = $penerimaTugas ?? [];
+
+    // Jika data berbentuk Collection Laravel.
+    if ($penerimaRaw instanceof \Illuminate\Support\Collection) {
+    $penerimaRaw = $penerimaRaw->all();
+    }
+
+    // Jika data berbentuk JSON string.
+    if (is_string($penerimaRaw)) {
+    $decoded = json_decode($penerimaRaw, true);
+    $penerimaRaw = is_array($decoded) ? $decoded : [];
+    }
+
+    // Jika data berbentuk objek.
+    if (is_object($penerimaRaw)) {
+    $penerimaRaw = method_exists($penerimaRaw, 'toArray')
+    ? $penerimaRaw->toArray()
+    : (array) $penerimaRaw;
+    }
+
+    // Pastikan hasil akhirnya berupa array.
+    $penerimaTugas = is_array($penerimaRaw)
+    ? $penerimaRaw
+    : [];
+    @endphp
 
     <div class="penerima-wrapper">
         @foreach ($penerimaTugas as $index => $penerima)
-            <table class="penerima-table">
-                <tr>
-                    <td class="penerima-no">
-                        {{ $index + 1 }}.
-                    </td>
 
-                    <td class="penerima-label">
-                        Nama
-                    </td>
+        <table class="penerima-table">
+            <tr>
+                <td class="penerima-no">
+                    {{ $index + 1 }}.
+                </td>
 
-                    <td class="penerima-colon">
-                        :
-                    </td>
+                <td class="penerima-label">
+                    Nama
+                </td>
 
-                    <td>
-                        {{ $penerima['nama'] }}
-                    </td>
-                </tr>
+                <td class="penerima-colon">
+                    :
+                </td>
 
-                <tr>
-                    <td></td>
+                <td>
+                    {{ $penerima['nama'] }}
+                </td>
+            </tr>
 
-                    <td class="penerima-label">
-                        Kedudukan
-                    </td>
+            <tr>
+                <td></td>
 
-                    <td class="penerima-colon">
-                        :
-                    </td>
+                <td class="penerima-label">
+                    Kedudukan
+                </td>
 
-                    <td>
-                        {{ $penerima['kedudukan'] }}
-                    </td>
-                </tr>
-            </table>
+                <td class="penerima-colon">
+                    :
+                </td>
+
+                <td>
+                    {{ $penerima['kedudukan'] }}
+                </td>
+            </tr>
+        </table>
         @endforeach
     </div>
 
@@ -569,43 +657,51 @@
     {{-- =========================================================
          TANDA TANGAN
     ========================================================== --}}
-    <div class="ttd">
-        <div>
-            WATES, {{ $tanggalSurat }}
-        </div>
+   
+<div class="ttd">
+    <div>WATES, {{ $tanggalSurat }}</div>
 
-        <div class="ttd-jabatan">
-            {{ $jabatanKades }}
-        </div>
+    <div class="ttd-jabatan">
+        {{ $jabatanKades }}
+    </div>
 
-        {{-- <div class="ttd-img-wrapper">
-            @if (file_exists(public_path('assets/images/ttd.png')))
-                <img
-                    src="{{ public_path('assets/images/ttd.png') }}"
-                    class="ttd-img"
-                    alt="Tanda Tangan"
-                >
-            @endif
-        </div> --}}
+    <div class="ttd-img-wrapper">
+        @if ($ttdSrc)
+            <img
+                src="{{ $ttdSrc }}"
+                class="ttd-img"
+                alt="Tanda Tangan Kepala Desa">
+        @else
+            <div style="padding-top: 25px; font-size: 9pt;">
+                File tanda tangan tidak ditemukan.
+            </div>
+        @endif
+    </div>
 
-        <br><br><br><br><br><br><br><br>
+    <div class="nama-kades">
+        {{ $namaKades }}
+    </div>
+</div>
 
-        <div class="nama-kades">
-            {{ $namaKades }}
-        </div>
 
-        {{-- @if (file_exists(public_path('assets/images/barcode.png')))
+    <br><br><br><br><br><br><br><br>
+
+    <div class="nama-kades">
+        {{ $namaKades }}
+    </div>
+
+    {{-- @if (file_exists(public_path('assets/images/barcode.png')))
             <div class="qr-section">
                 <img
                     src="{{ public_path('assets/images/barcode.png') }}"
-                    alt="QR Code"
-                >
+    alt="QR Code"
+    >
 
-                <small>
-                    Scan untuk verifikasi surat resmi Desa WATES
-                </small>
-            </div>
-        @endif --}}
+    <small>
+        Scan untuk verifikasi surat resmi Desa WATES
+    </small>
+    </div>
+    @endif --}}
     </div>
 
 
@@ -615,19 +711,19 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa WATES</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>

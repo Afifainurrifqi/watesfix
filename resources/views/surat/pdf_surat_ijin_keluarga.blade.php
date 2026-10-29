@@ -196,17 +196,24 @@
             height: 54px;
         }
 
-        .ttd-img-wrapper {
-            height: 54px;
-            margin: 2px auto 0 auto;
-            text-align: center;
-        }
+       
+.ttd-img-wrapper {
+    width: 100%;
+    height: 100px;
+    margin: 3px auto 0;
+    padding: 0;
+    text-align: center;
+    overflow: visible;
+}
 
-        .ttd-img {
-            width: 125px;
-            height: auto;
-            max-height: 54px;
-        }
+.ttd-img {
+    display: block;
+    width: 125px;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
 
         .ttd-name {
             display: block;

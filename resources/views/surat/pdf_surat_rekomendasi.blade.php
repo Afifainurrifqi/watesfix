@@ -255,16 +255,20 @@
         }
 
         .ttd-img-wrapper {
-            width: 125px;
-            height: 75px;
-            margin: 8px auto 2px auto;
+            width: 280px;
+            margin: 5px auto 0 auto;
             text-align: center;
+            display: block;
+            overflow: visible;
         }
 
         .ttd-img {
-            max-width: 125px;
-            max-height: 75px;
-            display: inline-block;
+            width: 155px;
+           
+            max-width: 100%;
+           
+            display: block;
+            margin: 0 auto;
         }
 
         .nama-pemohon {
@@ -275,7 +279,11 @@
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: underline;
-            line-height: 1.25;
+            line-height: 1.2;
+            font-size: 10.5pt;
+            white-space: nowrap;
+            text-align: center;
+            margin-top: 0;
         }
 
         @media print {
@@ -367,7 +375,6 @@
     $keperluan = $data->keperluan ?? 'Pasar Malam';
 
     $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
-    $namaKadesFormatted = str_replace(', ', ",\n", $namaKades);
 @endphp
 
     <!-- KOP SURAT -->
@@ -497,13 +504,24 @@
                 <p>Mengetahui</p>
                 <p>KEPALA DESA WATES</p>
 
-                {{-- <div class="ttd-img-wrapper">
-                    <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="TTD Kepala Desa">
-                </div> --}}
-<br><br><br><br>
-                <p class="nama-kades">
-                    {!! nl2br(e($namaKadesFormatted)) !!}
-                </p>
+                @php
+                    $ttdPath = public_path('assets/images/ttd.png');
+                    $ttdSrc = null;
+
+                    if (file_exists($ttdPath) && is_readable($ttdPath)) {
+                        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                    }
+                @endphp
+
+                <div class="ttd-img-wrapper">
+                    @if ($ttdSrc)
+                        <img src="{{ $ttdSrc }}" class="ttd-img" alt="Tanda tangan Kepala Desa">
+                    @else
+                        <div style="height: 68px;"></div>
+                    @endif
+                </div>
+
+                <p class="nama-kades">{{ $namaKades }}</p>
             </td>
         </tr>
     </table>

@@ -217,13 +217,12 @@
             margin: 8px auto 0 auto;
             text-align: center;
             width: 120px;
-            height: 58px;
             position: relative;
         }
 
         .ttd-img {
-            max-width: 120px;
-            max-height: 58px;
+            max-width: 170px;
+            
             display: inline-block;
         }
 
@@ -422,13 +421,7 @@
 
                     <p class="nama-kades">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
-                    @if (file_exists($barcodeSurat))
-                        <div class="barcode">
-                            <img src="{{ $barcodeSurat }}" alt="Barcode Surat">
-                            <br>
-                            <small>Scan untuk verifikasi surat resmi Desa WATES</small>
-                        </div>
-                    @endif
+                   
                 </td>
             </tr>
         </table>

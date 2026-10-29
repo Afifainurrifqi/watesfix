@@ -197,46 +197,58 @@
         /* =========================
            CSS BAGIAN TTD KADES
         ========================= */
+        /* BLOK TANDA TANGAN
+           Kolom kanan dibuat tepat 50% dan gambar dibatasi ukurannya
+           agar berada di tengah blok serta tidak menimpa nama.
+        */
         .ttd-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 25px;
+            table-layout: fixed;
         }
 
         .ttd-spacer {
-            width: 55%;
+            width: 50%;
         }
 
         .ttd-cell {
-            width: 45%;
+            width: 50%;
             text-align: center;
             vertical-align: top;
         }
 
         .ttd-cell p {
             text-align: center;
-            margin-bottom: 2px;
+            margin: 0 0 2px 0;
         }
 
         .ttd-img-wrapper {
-            margin: 5px auto;
+            width: 250px;
+            margin: 5px auto 0 auto;
             text-align: center;
-            width: 120px;
-            height: 75px;
             position: relative;
+            overflow: hidden;
         }
 
         .ttd-img {
+            display: block;
+            width: 170px;
+
             max-width: 100%;
-            max-height: 100%;
-            display: inline-block;
+          
+            object-fit: contain;
+            margin: 0 auto;
         }
 
         .nama-kades {
+            display: block;
+            width: 100%;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 5px;
-            margin-bottom: 0px !important;
+            text-align: center;
+            margin-top: 7px;
+            margin-bottom: 0 !important;
         }
 
         .barcode {

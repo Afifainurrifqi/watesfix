@@ -198,11 +198,13 @@
            BARCODE VERIFIKASI PDF - STANDARD SEMUA SURAT
            Tidak mempengaruhi flow/layout isi surat.
         ====================================================== */
+
+        /* BARCODE VERIFIKASI PDF */
         .pdf-barcode-verification {
             position: fixed;
             left: 4mm;
-            bottom: 4mm;
-            width: 62px;
+            bottom: -20mm;
+            width: 65px;
             text-align: center;
             z-index: 9999;
             font-family: Arial, sans-serif;
@@ -211,38 +213,40 @@
 
         .pdf-barcode-verification img {
             display: block;
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 2px auto;
         }
 
         .pdf-barcode-verification small {
             display: block;
-            font-size: 5.5px;
+            width: 65px;
+            font-size: 5px;
             color: #222;
-            white-space: nowrap;
+            text-align: center;
+            white-space: normal;
+            line-height: 1.1;
         }
-</style>
+    </style>
 </head>
 
 <body>
     @php
-        \Carbon\Carbon::setLocale('id');
+    \Carbon\Carbon::setLocale('id');
 
-        $tanggalSurat = \Carbon\Carbon::now('Asia/Jakarta')
-            ->locale('id')
-            ->translatedFormat('j F Y');
+    $tanggalSurat = \Carbon\Carbon::now('Asia/Jakarta')
+    ->locale('id')
+    ->translatedFormat('j F Y');
 
-        $tanggalLahir = !empty($data->tanggal_lahir)
-            ? \Carbon\Carbon::parse($data->tanggal_lahir)
-                ->locale('id')
-                 ->locale('id')->translatedFormat('d F Y')
-            : '-';
+    $tanggalLahir = !empty($data->tanggal_lahir)
+    ? \Carbon\Carbon::parse($data->tanggal_lahir)
+    ->locale('id')
+    ->locale('id')->translatedFormat('d F Y')
+    : '-';
 
-        $namaPemohon = !empty($data->nama)
-            ? mb_strtoupper($data->nama, 'UTF-8')
-            : '-';
+    $namaPemohon = !empty($data->nama)
+    ? mb_strtoupper($data->nama, 'UTF-8')
+    : '-';
     @endphp
 
     {{-- KOP SURAT --}}
@@ -361,23 +365,23 @@
                     KEPALA DESA WATES
                 </div>
 
-               @php
-    $ttdPath = public_path('assets/images/ttd.png');
-    $ttdSrc = null;
+                @php
+                $ttdPath = public_path('assets/images/ttd.png');
+                $ttdSrc = null;
 
-    if(file_exists($ttdPath) && is_readable($ttdPath)){
-        $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
-    }
-@endphp
+                if(file_exists($ttdPath) && is_readable($ttdPath)){
+                $ttdSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($ttdPath));
+                }
+                @endphp
 
 
-@if($ttdSrc)
-<div class="ttd-img-wrapper">
-    <img src="{{ $ttdSrc }}" class="ttd-img">
-</div>
-@else
-<br><br><br><br>
-@endif
+                @if($ttdSrc)
+                <div class="ttd-img-wrapper">
+                    <img src="{{ $ttdSrc }}" class="ttd-img">
+                </div>
+                @else
+                <br><br><br><br>
+                @endif
                 <div class="nama-kades">
                     MOH HAMID ALMAULUDI, S.Pd.I
                 </div>
@@ -409,19 +413,19 @@
          Base64 dipakai agar kompatibel/stabil pada DomPDF.
     ====================================================== --}}
     @php
-        $pdfBarcodePath = public_path('assets/images/barcode.png');
-        $pdfBarcodeSrc = null;
+    $pdfBarcodePath = public_path('assets/images/barcode.png');
+    $pdfBarcodeSrc = null;
 
-        if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
-            $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
-        }
+    if (file_exists($pdfBarcodePath) && is_readable($pdfBarcodePath)) {
+    $pdfBarcodeSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($pdfBarcodePath));
+    }
     @endphp
 
     @if ($pdfBarcodeSrc)
-        <div class="pdf-barcode-verification">
-            <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
-            <small>Verifikasi Surat Desa WATES</small>
-        </div>
+    <div class="pdf-barcode-verification">
+        <img src="{{ $pdfBarcodeSrc }}" alt="Barcode Verifikasi Surat">
+        <small>Verifikasi Surat Desa WATES</small>
+    </div>
     @endif
 
 </body>

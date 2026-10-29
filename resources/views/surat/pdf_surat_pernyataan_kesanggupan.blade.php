@@ -333,9 +333,7 @@
     <tr>
         <td></td>
         <td>
-            <div class="ttd-img-wrapper">
-                <img src="{{ public_path('assets/images/ttd.png') }}" class="ttd-img" alt="Tanda Tangan">
-            </div>
+            <br><br><br>
 
             <div class="nama-kades">
                 {{ $data->nama ?? '...........................................' }}

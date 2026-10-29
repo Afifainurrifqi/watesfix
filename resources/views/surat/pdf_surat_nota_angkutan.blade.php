@@ -387,23 +387,48 @@
 
 <body>
 @php
-    $tanggalMulai = !empty($data->tanggal_mulai)
-        ? \Carbon\Carbon::parse($data->tanggal_mulai)->locale('id') ->locale('id')->translatedFormat('d F Y')
-        : '';
+    // Format tanggal dalam bahasa Indonesia tanpa pemanggilan namespace PHP.
+    $formatTanggalIndonesia = function ($nilaiTanggal) {
+        if (empty($nilaiTanggal)) {
+            return '';
+        }
 
-    $tanggalSelesai = !empty($data->tanggal_selesai)
-        ? \Carbon\Carbon::parse($data->tanggal_selesai)->locale('id') ->locale('id')->translatedFormat('d F Y')
-        : '';
+        try {
+            $tanggal = new DateTime((string) $nilaiTanggal, new DateTimeZone('Asia/Jakarta'));
+            $tanggal->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-    $bulanTahunSurat = !empty($data->tanggal_surat)
-        ? \Carbon\Carbon::parse($data->tanggal_surat)->locale('id')->translatedFormat('F Y')
-        : now('Asia/Jakarta')->locale('id')->translatedFormat('F Y');
+            $namaBulan = [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ];
 
-    $nomorSurat = app(\App\Services\NomorSuratService::class)->display($data, 'nota_angkutan');
+            return $tanggal->format('d') . ' ' . $namaBulan[(int) $tanggal->format('n')] . ' ' . $tanggal->format('Y');
+        } catch (Throwable $e) {
+            return '';
+        }
+    };
+
+    $tanggalMulai = $formatTanggalIndonesia($data->tanggal_mulai ?? null);
+    $tanggalSelesai = $formatTanggalIndonesia($data->tanggal_selesai ?? null);
+    $tanggalSurat = $formatTanggalIndonesia($data->tanggal_surat ?? null);
+
+    if ($tanggalSurat === '') {
+        $tanggalSurat = $formatTanggalIndonesia(date('Y-m-d'));
+    }
+
+    $nomorSurat = app('App\\Services\\NomorSuratService')->display($data, 'nota_angkutan');
     $nomorPeraturan = $data->nomor_peraturan ?? '';
-    $tanggalPeraturan = !empty($data->tanggal_peraturan)
-        ? \Carbon\Carbon::parse($data->tanggal_peraturan)->locale('id') ->locale('id')->translatedFormat('d F Y')
-        : '';
+    $tanggalPeraturan = $formatTanggalIndonesia($data->tanggal_peraturan ?? null);
 
     $desa = $data->desa ?? 'WATES';
     $kecamatan = $data->kecamatan ?? 'WATES';
@@ -649,7 +674,7 @@
             </td>
 
             <td class="ttd-cell">
-                <p>Blitar, &nbsp;&nbsp;&nbsp; {{ $bulanTahunSurat }}</p>
+                <p>Blitar, {{ $tanggalSurat }}</p>
                 <p>Pemilik Hutan HAK</p>
 
                 <div class="ttd-space"></div>

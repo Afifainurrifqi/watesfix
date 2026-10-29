@@ -220,14 +220,12 @@
 
         .ttd-img-wrapper {
             margin: 5px auto 0 auto;
-            width: 120px;
-            height: 58px;
+            width: 200px;
             text-align: center;
         }
 
         .ttd-img {
-            max-width: 120px;
-            max-height: 58px;
+            max-width: 90%;
             display: inline-block;
         }
 
@@ -327,8 +325,12 @@
             $alasanList = $alasanDefault;
         }
 
-        // $ttdKades = public_path('assets/images/ttd.png');
-        // $barcodeSurat = public_path('assets/images/barcode.png');
+        // Pastikan variabel tanda tangan dan barcode selalu terdefinisi.
+        $ttdKades = public_path('assets/images/ttd.png');
+
+        $barcodeSurat = file_exists(public_path('assets/images/barcode.png'))
+            ? public_path('assets/images/barcode.png')
+            : public_path('assets/images/barcode_surat.png');
     @endphp
 
     {{-- KOP SURAT --}}
@@ -441,13 +443,7 @@
 
                     <p class="nama">MOH HAMID ALMAULUDI, S.Pd.I</p>
 
-                    @if (file_exists($barcodeSurat))
-                        <div class="barcode">
-                            <img src="{{ $barcodeSurat }}" alt="Barcode Surat">
-                            <br>
-                            <small>Scan untuk verifikasi surat resmi Desa WATES</small>
-                        </div>
-                    @endif
+                   
                 </td>
             </tr>
         </table>

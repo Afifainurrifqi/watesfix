@@ -213,9 +213,29 @@
             font-size: 10.5pt;
         }
 
+        .ttd-kanan .ttd-img-wrapper {
+            width: 100%;
+            height: 92px;
+            margin: 5px auto 3px;
+            text-align: center;
+            display: block;
+            overflow: visible;
+        }
+
+        .ttd-kanan .ttd-img {
+            display: block;
+            width: 125px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
         .ttd-kanan .nama {
-            margin-top: 54px;
+            margin-top: 0;
             font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+            position: relative;
         }
 
         /* =========================
@@ -279,14 +299,36 @@
         }
 
         .lembar-ttd {
+            width: 100%;
             text-align: center;
             font-family: "Times New Roman", Times, serif;
-            margin-top: 20px;
+            margin-top: 10px;
+            page-break-inside: avoid;
+        }
+
+        .lembar-ttd .ttd-img-wrapper {
+            width: 100%;
+            height: 66px;
+            margin: 4px auto 3px;
+            text-align: center;
+            display: block;
+            overflow: visible;
+        }
+
+        .lembar-ttd .ttd-img {
+            display: block;
+            width: 96px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
         }
 
         .lembar-ttd .nama {
-            margin-top: 48px;
+            margin-top: 0;
             font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+            position: relative;
         }
 
         .catatan-row td {
@@ -369,6 +411,16 @@
         $nomorSppd = app(\App\Services\NomorSuratService::class)->display($data, 'sppd');
 
         $namaKades = $data->nama_kepala_desa ?? 'MOH HAMID ALMAULUDI, S.Pd.I';
+
+        // TANDA TANGAN: base64 agar dapat dibaca DomPDF
+        $ttdPath = public_path('assets/images/ttd.png');
+        $ttdSrc = null;
+
+        if (file_exists($ttdPath) && is_readable($ttdPath)) {
+            $ttdSrc = 'data:image/png;base64,' .
+                base64_encode(file_get_contents($ttdPath));
+        }
+
         $pejabat = $data->pejabat_pemberi_perintah ?? 'KEPALA DESA WATES Kecamatan WATES Kabupaten Blitar';
 
         $namaPegawai = $data->nama_pegawai ?? 'ITA PUJI LESTARI';
@@ -594,6 +646,15 @@
 
     <div class="ttd-kanan">
         <div>KEPALA DESA WATES</div>
+
+        @if ($ttdSrc)
+            <div class="ttd-img-wrapper">
+                <img src="{{ $ttdSrc }}" class="ttd-img" alt="Tanda Tangan Kepala Desa">
+            </div>
+        @else
+            <div class="ttd-img-wrapper"></div>
+        @endif
+
         <div class="nama">{{ $namaKades }}</div>
     </div>
 
@@ -632,6 +693,15 @@
 
                 <div class="lembar-ttd">
                     <div>KEPALA DESA WATES</div>
+
+                    @if ($ttdSrc)
+                        <div class="ttd-img-wrapper">
+                            <img src="{{ $ttdSrc }}" class="ttd-img" alt="Tanda Tangan Kepala Desa">
+                        </div>
+                    @else
+                        <div class="ttd-img-wrapper"></div>
+                    @endif
+
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>
@@ -801,6 +871,15 @@
 
                 <div class="lembar-ttd">
                     <div>KEPALA DESA WATES</div>
+
+                    @if ($ttdSrc)
+                        <div class="ttd-img-wrapper">
+                            <img src="{{ $ttdSrc }}" class="ttd-img" alt="Tanda Tangan Kepala Desa">
+                        </div>
+                    @else
+                        <div class="ttd-img-wrapper"></div>
+                    @endif
+
                     <div class="nama">{{ $namaKades }}</div>
                 </div>
             </td>
