@@ -340,15 +340,50 @@
                 }
             }
 
-            function setValue(id, value) {
-                const element = document.getElementById(id);
+           
+function setValue(id, value) {
+    const element = document.getElementById(id);
 
-                if (!element || value === null || value === undefined) {
-                    return;
-                }
+    if (!element || value === null || value === undefined) {
+        return;
+    }
 
-                element.value = value;
-            }
+    // Khusus dropdown jenis kelamin
+    if (id.startsWith('jenis_kelamin_')) {
+
+        const gender = String(value)
+            .trim()
+            .toLowerCase()
+            .replace(/[\s_-]/g, '');
+
+        let selectedGender = '';
+
+        if (['1', 'l', 'lk', 'lakilaki'].includes(gender)) {
+            selectedGender = 'laki-laki';
+        } else if (['2', 'p', 'pr', 'perempuan'].includes(gender)) {
+            selectedGender = 'perempuan';
+        }
+
+        const option = Array.from(element.options).find(
+            item => item.value.toLowerCase() === selectedGender
+        );
+
+        if (option) {
+            element.value = option.value;
+            element.dispatchEvent(
+                new Event('change', { bubbles: true })
+            );
+        }
+
+        return;
+    }
+
+    element.value = value;
+    element.dispatchEvent(
+        new Event('change', { bubbles: true })
+    );
+}
+
 
             /*
              * Normalisasi teks agar nilai database dapat cocok dengan option,

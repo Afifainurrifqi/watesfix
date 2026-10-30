@@ -123,40 +123,50 @@ class SuratKuasaController extends Controller
     /**
      * Update Surat
      */
-    public function update(Request $request, SuratKuasa $surat)
+
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            // Semua field sama seperti di store
+            // PIHAK I
+            'nik_pihak1'           => 'required|string|max:16',
             'nama_pihak1'          => 'required|string|max:255',
             'jenis_kelamin_pihak1' => 'required|string',
             'tempat_lahir_pihak1'  => 'required|string',
             'tanggal_lahir_pihak1' => 'required|date',
             'agama_pihak1'         => 'required|string',
             'status_pihak1'        => 'required|string',
-            'nik_pihak1'           => 'required|string|max:16',
             'pekerjaan_pihak1'     => 'required|string',
             'alamat_pihak1'        => 'required|string',
 
+            // PIHAK II
+            'nik_pihak2'           => 'required|string|max:16',
             'nama_pihak2'          => 'required|string|max:255',
             'jenis_kelamin_pihak2' => 'required|string',
             'tempat_lahir_pihak2'  => 'required|string',
             'tanggal_lahir_pihak2' => 'required|date',
             'agama_pihak2'         => 'required|string',
             'status_pihak2'        => 'required|string',
-            'nik_pihak2'           => 'required|string|max:16',
             'pekerjaan_pihak2'     => 'required|string',
             'alamat_pihak2'        => 'required|string',
 
-            'keterangan_kuasa'     => 'required|string',
-            'nowa'                 => 'required|string|max:20',
-            'nomor_surat'          => 'nullable|string',
-            'status_surat'         => 'required|string',
-            'status_verif'         => 'required|string',
+            // KETERANGAN
+            'keterangan_kuasa' => 'required|string',
+            'nowa' => 'required|string|max:20',
+
+            // STATUS
+            'status_surat' => 'required|in:Pending,Di cek,Di terima,Selesai,Ditolak',
+            'status_verif' => 'required|in:Belum Verifikasi,Terverifikasi,Ditolak',
         ]);
 
-        $surat->update($validated);
+        // Cari dokumen berdasarkan ID MongoDB
+        $surat = SuratKuasa::where('_id', $id)->firstOrFail();
 
-        return redirect()->route('surat.keluar')
+        // Update data
+        $surat->fill($validated);
+        $surat->save();
+
+        return redirect()
+            ->route('surat.keluar')
             ->with('success', 'Surat Kuasa berhasil diperbarui.');
     }
 }

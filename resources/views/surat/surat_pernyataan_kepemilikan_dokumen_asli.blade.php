@@ -11,13 +11,13 @@
                 <div class="card-body">
 
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
                     <form action="{{ route('surat.pernyataan_kepemilikan_dokumen.store') }}" method="POST">
@@ -28,7 +28,7 @@
                             <div class="col-md-6 mb-3">
                                 <label>NIK <span class="text-danger">*</span></label>
                                 <input type="text" name="nik" id="nik" class="form-control"
-                                       onkeyup="autofillPernyataanAdmin()" placeholder="Masukkan NIK" required>
+                                    onkeyup="autofillPernyataanAdmin()" placeholder="Masukkan NIK" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Nama Lengkap <span class="text-danger">*</span></label>
@@ -61,10 +61,10 @@
                                 <select name="pekerjaan" id="pekerjaan" class="form-control" required>
                                     <option value="">-- Pilih pekerjaan --</option>
                                     @php
-                                        $jobs = ['BELUM/TIDAK BEKERJA','PELAJAR/MAHASISWA','TIDAK/BELUM SEKOLAH','KARYAWAN SWASTA','IBU RUMAH TANGGA','WIRASWASTA','TENTARA NASIONAL INDONESIA (TNI)','KEPOLISIAN RI (POLRI)','DOSEN','GURU','KEPALA DESA','PERANGKAT DESA','BIDAN','DOKTER','PERAWAT','PETANI/PEKEBUN PEMILIK LAHAN','BURUH TANI/PERKEBUNAN','PEDAGANG','PEGAWAI NEGERI SIPIL (PNS)','BURUH HARIAN LEPAS','SOPIR','KARYAWAN BUMN','PENSIUNAN','PEMBANTU RUMAH TANGGA','BURUH PETERNAKAN','KONSTRUKSI','PELAUT','NELAYAN/PERIKANAN','KARYAWAN HONORER','PETERNAK','MEKANIK','PENATA RIAS','TUKANG LAS/PANDAI BESI','INDUSTRI','USTADZ/MUBALIGH','TABIB','BURUH NELAYAN/PERIKANAN','JURU MASAK','SENIMAN','AKUNTAN','Petani/Pekebun penyewa','TKI','Lainnya'];
+                                    $jobs = ['BELUM/TIDAK BEKERJA','PELAJAR/MAHASISWA','TIDAK/BELUM SEKOLAH','KARYAWAN SWASTA','IBU RUMAH TANGGA','WIRASWASTA','TENTARA NASIONAL INDONESIA (TNI)','KEPOLISIAN RI (POLRI)','DOSEN','GURU','KEPALA DESA','PERANGKAT DESA','BIDAN','DOKTER','PERAWAT','PETANI/PEKEBUN PEMILIK LAHAN','BURUH TANI/PERKEBUNAN','PEDAGANG','PEGAWAI NEGERI SIPIL (PNS)','BURUH HARIAN LEPAS','SOPIR','KARYAWAN BUMN','PENSIUNAN','PEMBANTU RUMAH TANGGA','BURUH PETERNAKAN','KONSTRUKSI','PELAUT','NELAYAN/PERIKANAN','KARYAWAN HONORER','PETERNAK','MEKANIK','PENATA RIAS','TUKANG LAS/PANDAI BESI','INDUSTRI','USTADZ/MUBALIGH','TABIB','BURUH NELAYAN/PERIKANAN','JURU MASAK','SENIMAN','AKUNTAN','Petani/Pekebun penyewa','TKI','Lainnya'];
                                     @endphp
                                     @foreach ($jobs as $job)
-                                        <option value="{{ $job }}" {{ old('pekerjaan') == $job ? 'selected' : '' }}>{{ $job }}</option>
+                                    <option value="{{ $job }}" {{ old('pekerjaan') == $job ? 'selected' : '' }}>{{ $job }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -143,25 +143,168 @@
     </div>
 </div>
 
-<script>
-    function autofillPernyataanAdmin() {
-        const nik = document.getElementById('nik').value.trim();
-        if (nik.length < 10) return;
 
-        fetch(`/datapenduduk/lookup/${nik}`)
-            .then(res => res.json())
-            .then(result => {
-                if (result.success && result.data) {
-                    const d = result.data;
-                    document.getElementById('nama').value = d.nama || '';
-                    document.getElementById('jenis_kelamin').value = d.jenis_kelamin || '';
-                    document.getElementById('tempat_lahir').value = d.tempat_lahir || '';
-                    document.getElementById('tanggal_lahir').value = d.tanggal_lahir || '';
-                    if (d.pekerjaan) document.getElementById('pekerjaan').value = d.pekerjaan;
-                    document.getElementById('alamat').value = d.alamat || '';
-                }
-            })
-            .catch(err => console.error('Autofill error:', err));
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const nikInput = document.getElementById('nik');
+
+    let debounceTimer = null;
+    let activeController = null;
+
+    function setValue(id, value) {
+        const element = document.getElementById(id);
+
+        if (!element) return;
+
+        element.value = value ?? '';
     }
+
+    function resetDataPenduduk() {
+        setValue('nama', '');
+        setValue('jenis_kelamin', '');
+        setValue('tempat_lahir', '');
+        setValue('tanggal_lahir', '');
+        setValue('pekerjaan', '');
+        setValue('alamat', '');
+    }
+
+    async function autofillPernyataanAdmin() {
+
+        const nik = nikInput.value.replace(/\D/g, '');
+
+        // Batalkan pencarian sebelumnya
+        if (activeController) {
+            activeController.abort();
+            activeController = null;
+        }
+
+        // NIK belum lengkap
+        if (nik.length !== 16) {
+            resetDataPenduduk();
+            return;
+        }
+
+        activeController = new AbortController();
+
+        try {
+
+            const response = await fetch(
+                `/datapenduduk/lookup/${encodeURIComponent(nik)}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    signal: activeController.signal
+                }
+            );
+
+            const result = await response.json();
+
+            // Pastikan NIK masih sama dengan yang sedang diketik
+            const nikSekarang = nikInput.value.replace(/\D/g, '');
+
+            if (nikSekarang !== nik) {
+                return;
+            }
+
+            if (!response.ok || !result.success || !result.data) {
+                resetDataPenduduk();
+
+                console.warn('Data penduduk tidak ditemukan:', result.message);
+
+                alert(result.message || 'Data penduduk tidak ditemukan.');
+                return;
+            }
+
+            const d = result.data;
+
+            // Pastikan respons benar-benar milik NIK yang diminta
+            if (String(d.nik).replace(/\D/g, '') !== nik) {
+                resetDataPenduduk();
+
+                console.error('NIK respons tidak sesuai dengan NIK input.');
+                alert('NIK data yang diterima tidak sesuai.');
+                return;
+            }
+
+            // Isi data penduduk
+            setValue('nama', d.nama);
+            setValue('jenis_kelamin', d.jenis_kelamin);
+            setValue('tempat_lahir', d.tempat_lahir);
+            setValue('tanggal_lahir', d.tanggal_lahir);
+            setValue('alamat', d.alamat);
+
+            // Pilih pekerjaan sesuai data database
+            const pekerjaan = document.getElementById('pekerjaan');
+
+            if (pekerjaan) {
+
+                const pekerjaanDB = String(d.pekerjaan || '')
+                    .trim()
+                    .toUpperCase();
+
+                const option = Array.from(pekerjaan.options).find(
+                    item => item.value.trim().toUpperCase() === pekerjaanDB
+                );
+
+                if (option) {
+                    pekerjaan.value = option.value;
+                } else if (pekerjaanDB !== '') {
+                    console.warn(
+                        'Pekerjaan tidak ditemukan pada pilihan:',
+                        d.pekerjaan
+                    );
+
+                    pekerjaan.value = '';
+                }
+            }
+
+            console.log('Autofill berhasil:', {
+                nik: d.nik,
+                nama: d.nama,
+                pekerjaan: d.pekerjaan
+            });
+
+        } catch (error) {
+
+            if (error.name === 'AbortError') {
+                return;
+            }
+
+            console.error('Autofill error:', error);
+            resetDataPenduduk();
+
+        }
+    }
+
+    nikInput.addEventListener('input', function () {
+
+        clearTimeout(debounceTimer);
+
+        const nik = this.value.replace(/\D/g, '');
+
+        this.value = nik;
+
+        if (activeController) {
+            activeController.abort();
+            activeController = null;
+        }
+
+        if (nik.length !== 16) {
+            resetDataPenduduk();
+            return;
+        }
+
+        debounceTimer = setTimeout(function () {
+            autofillPernyataanAdmin();
+        }, 400);
+
+    });
+
+});
 </script>
+
 @endsection

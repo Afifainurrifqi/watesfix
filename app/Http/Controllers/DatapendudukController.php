@@ -190,6 +190,7 @@ class DatapendudukController extends Controller
         ));
     }
 
+
     public function lookupByNik(string $nik)
     {
         $nik = preg_replace('/\D/', '', $nik);
@@ -201,8 +202,10 @@ class DatapendudukController extends Controller
             ], 422);
         }
 
+        // Ambil data penduduk beserta seluruh relasi yang dibutuhkan
         $penduduk = Datapenduduk::with([
             'agama',
+            'pendidikan', // INI YANG SEBELUMNYA BELUM ADA
             'pekerjaan',
             'status',
             'detailkk.kk',
@@ -217,42 +220,22 @@ class DatapendudukController extends Controller
             ], 404);
         }
 
-        /*
-    |--------------------------------------------------------------------------
-    | Normalisasi jenis kelamin
-    |--------------------------------------------------------------------------
-    |
-    | Mendukung data:
-    | 1, 2, L, P, LK, PR, Laki-laki, dan Perempuan.
-    |
-    */
-
+        // Normalisasi jenis kelamin
         $jenisKelaminRaw = strtolower(
             trim((string) ($penduduk->jenis_kelamin ?? ''))
         );
 
         $jenisKelamin = match ($jenisKelaminRaw) {
-            '1',
-            'l',
-            'lk',
-            'laki-laki',
-            'laki laki',
-            'lakilaki' => 'Laki-Laki',
+            '1', 'l', 'lk', 'laki-laki', 'laki laki', 'lakilaki'
+            => 'Laki-Laki',
 
-            '2',
-            'p',
-            'pr',
-            'perempuan' => 'Perempuan',
+            '2', 'p', 'pr', 'perempuan'
+            => 'Perempuan',
 
             default => '',
         };
 
-        /*
-    |--------------------------------------------------------------------------
-    | Format tanggal lahir
-    |--------------------------------------------------------------------------
-    */
-
+        // Format tanggal lahir
         $tanggalLahir = '';
 
         if (!empty($penduduk->tanggal_lahir)) {
@@ -265,19 +248,40 @@ class DatapendudukController extends Controller
             }
         }
 
-        /*
-    |--------------------------------------------------------------------------
-    | Nomor kartu keluarga
-    |--------------------------------------------------------------------------
-    */
+        // Ambil pendidikan dari relasi
+        $pendidikan = optional($penduduk->pendidikan)->nama
+            ?? optional($penduduk->pendidikan)->pendidikan
+            ?? optional($penduduk->pendidikan)->nama_pendidikan
+            ?? '';
 
+        // Ambil pekerjaan dari relasi
+        $pekerjaan = optional($penduduk->pekerjaan)->nama
+            ?? optional($penduduk->pekerjaan)->pekerjaan
+            ?? optional($penduduk->pekerjaan)->nama_pekerjaan
+            ?? '';
+
+        // Ambil agama dari relasi
+        $agama = optional($penduduk->agama)->nama
+            ?? optional($penduduk->agama)->agama
+            ?? optional($penduduk->agama)->nama_agama
+            ?? '';
+
+        // Ambil status perkawinan
+        $statusPerkawinan = optional($penduduk->status)->nama
+            ?? optional($penduduk->status)->status
+            ?? optional($penduduk->status)->nama_status
+            ?? '';
+
+        // Nomor kartu keluarga
         $nokk = optional(
             optional($penduduk->detailkk)->kk
         )->nokk ?? '';
 
+        // Kirim seluruh data ke JavaScript
         return response()->json([
             'success' => true,
             'message' => 'Data penduduk ditemukan.',
+
             'data' => [
                 'nik' => $penduduk->nik ?? '',
                 'nama' => $penduduk->nama ?? '',
@@ -285,28 +289,20 @@ class DatapendudukController extends Controller
                 'tanggal_lahir' => $tanggalLahir,
                 'jenis_kelamin' => $jenisKelamin,
 
-                'pekerjaan' => optional($penduduk->pekerjaan)->nama
-                    ?? optional($penduduk->pekerjaan)->pekerjaan
-                    ?? optional($penduduk->pekerjaan)->nama_pekerjaan
-                    ?? '',
-
-                'agama' => optional($penduduk->agama)->nama
-                    ?? optional($penduduk->agama)->agama
-                    ?? optional($penduduk->agama)->nama_agama
-                    ?? '',
+                'pendidikan' => $pendidikan,
+                'pekerjaan' => $pekerjaan,
+                'agama' => $agama,
 
                 'alamat' => $penduduk->alamat ?? '',
                 'rt' => $penduduk->RT ?? $penduduk->rt ?? '',
                 'rw' => $penduduk->RW ?? $penduduk->rw ?? '',
                 'nokk' => $nokk,
 
-                'status_perkawinan' => optional($penduduk->status)->nama
-                    ?? optional($penduduk->status)->status
-                    ?? optional($penduduk->status)->nama_status
-                    ?? '',
+                'status_perkawinan' => $statusPerkawinan,
             ],
         ]);
     }
+
 
     public function addadmin()
     {

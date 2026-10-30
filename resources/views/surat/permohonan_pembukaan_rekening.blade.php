@@ -1,141 +1,164 @@
 @extends(Auth::user() && Auth::user()->role == 'admin' ? 'layout.main2' : 'layout.main')
 
 @section('content')
-    <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<div class="container">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h4 class="mb-4">Permohonan Pembukaan Rekening Tabungan</h4>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-4">Permohonan Pembukaan Rekening Tabungan</h4>
 
-                <form action="{{ route('surat.bukaanrekening.store') }}" method="POST">
-                    @csrf
+            <form action="{{ route('surat.bukaanrekening.store') }}" method="POST">
+                @csrf
 
-                    {{-- KEPADA --}}
-                    <h5 class="mb-3">Kepada</h5>
-                    <div class="mb-3">
-                        <label class="form-label" for="kepada_nama_instansi">Nama Instansi</label>
-                        <input type="text" id="kepada_nama_instansi" name="kepada_nama_instansi" class="form-control"
-                            required value="{{ old('kepada_nama_instansi') }}">
+                {{-- KEPADA --}}
+                <h5 class="mb-3">Kepada</h5>
+                <div class="mb-3">
+                    <label class="form-label" for="kepada_nama_instansi">Nama Instansi</label>
+                    <input type="text" id="kepada_nama_instansi" name="kepada_nama_instansi" class="form-control"
+                        required value="{{ old('kepada_nama_instansi') }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="kepada_alamat">Alamat Instansi</label>
+                    <textarea id="kepada_alamat" name="kepada_alamat" rows="2" class="form-control" required>{{ old('kepada_alamat') }}</textarea>
+                </div>
+
+                <hr class="my-4">
+
+
+{{-- YANG BERTANDA TANGAN --}}
+<h5 class="mb-3">Yang Bertanda Tangan</h5>
+
+<div class="mb-3">
+    <label for="ybt_nama" class="form-label">Nama</label>
+    <input
+        type="text"
+        name="ybt_nama"
+        id="ybt_nama"
+        class="form-control"
+        value="MOH HAMID ALMAULUDI, S.Pd.I"
+        readonly
+    >
+</div>
+
+<div class="mb-3">
+    <label for="ybt_jabatan" class="form-label">Jabatan</label>
+    <input
+        type="text"
+        name="ybt_jabatan"
+        id="ybt_jabatan"
+        class="form-control"
+        value="KEPALA DESA"
+        readonly
+    >
+</div>
+
+<div class="mb-3">
+    <label for="ybt_alamat" class="form-label">Alamat</label>
+    <textarea
+        name="ybt_alamat"
+        id="ybt_alamat"
+        class="form-control"
+        rows="2"
+        readonly>Jl. Merdeka No. 74, Desa Wates, Kecamatan Wates, Kabupaten Blitar, Jawa Timur 66194</textarea>
+</div>
+
+
+                <hr class="my-4">
+
+                {{-- KETENTUAN REKENING --}}
+                <h5 class="mb-3">Ketentuan</h5>
+                <div class="mb-3">
+                    <label class="form-label" for="rekening_atas_nama">Rekening Atas Nama</label>
+                    <input type="text" id="rekening_atas_nama" name="rekening_atas_nama" class="form-control"
+                        required value="{{ old('rekening_atas_nama') }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="rekening_alamat">Alamat</label>
+                    <textarea id="rekening_alamat" name="rekening_alamat" rows="2" class="form-control" required>{{ old('rekening_alamat') }}</textarea>
+                </div>
+
+                <hr class="my-4">
+
+                {{-- YANG BERWENANG (DINAMIS / TABEL) --}}
+                <h5 class="mb-3">Yang Berwenang</h5>
+                <div class="row g-2 align-items-end mb-2">
+                    <div class="col-md-3">
+                        <label class="form-label" for="berwenang_jumlah">Jumlah Baris</label>
+                        <input type="number" min="0" id="berwenang_jumlah" name="berwenang_jumlah"
+                            class="form-control" value="{{ old('berwenang_jumlah', 0) }}">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="kepada_alamat">Alamat Instansi</label>
-                        <textarea id="kepada_alamat" name="kepada_alamat" rows="2" class="form-control" required>{{ old('kepada_alamat') }}</textarea>
-                    </div>
+                </div>
 
-                    <hr class="my-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width:55%">Nama</th>
+                                <th style="width:35%">Jabatan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="berwenang-wrapper"></tbody>
+                    </table>
+                </div>
 
-                    {{-- YANG BERTANDA TANGAN --}}
-                    <h5 class="mb-3">Yang Bertanda Tangan</h5>
-                    <div class="mb-3">
-                        <label class="form-label" for="ybt_nama">Nama</label>
-                        <input type="text" id="ybt_nama" name="ybt_nama" class="form-control" required
-                            value="{{ old('ybt_nama') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="ybt_jabatan">Jabatan</label>
-                        <input type="text" id="ybt_jabatan" name="ybt_jabatan" class="form-control" required
-                            value="{{ old('ybt_jabatan') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="ybt_alamat">Alamat</label>
-                        <textarea id="ybt_alamat" name="ybt_alamat" rows="2" class="form-control" required>{{ old('ybt_alamat') }}</textarea>
-                    </div>
+                {{-- STATUS DEFAULT & WA --}}
+                <div class="mb-3">
+                    <label for="status_surat" class="form-label">Status Surat</label>
+                    <select name="status_surat" id="status_surat" class="form-control" required>
+                        <option value="">-- Pilih Status --</option>
+                        @foreach (['Pending', 'Di cek', 'Di terima', 'Ditolak'] as $status)
+                        <option value="{{ $status }}"
+                            {{ old('status_surat') == $status ? 'selected' : '' }}>{{ $status }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    <hr class="my-4">
+                <div class="mb-3">
+                    <label for="status_verif" class="form-label">Status Verifikasi</label>
+                    <select name="status_verif" id="status_verif" class="form-control" required>
+                        <option value="">-- Pilih Verifikasi --</option>
+                        @foreach (['Belum Verifikasi', 'Terverifikasi'] as $verif)
+                        <option value="{{ $verif }}" {{ old('status_verif') == $verif ? 'selected' : '' }}>
+                            {{ $verif }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    {{-- KETENTUAN REKENING --}}
-                    <h5 class="mb-3">Ketentuan</h5>
-                    <div class="mb-3">
-                        <label class="form-label" for="rekening_atas_nama">Rekening Atas Nama</label>
-                        <input type="text" id="rekening_atas_nama" name="rekening_atas_nama" class="form-control"
-                            required value="{{ old('rekening_atas_nama') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="rekening_alamat">Alamat</label>
-                        <textarea id="rekening_alamat" name="rekening_alamat" rows="2" class="form-control" required>{{ old('rekening_alamat') }}</textarea>
-                    </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="nowa">No WhatsApp</label>
+                    <input type="text" id="nowa" name="nowa" class="form-control" required
+                        value="{{ old('nowa') }}">
+                </div>
 
-                    <hr class="my-4">
-
-                    {{-- YANG BERWENANG (DINAMIS / TABEL) --}}
-                    <h5 class="mb-3">Yang Berwenang</h5>
-                    <div class="row g-2 align-items-end mb-2">
-                        <div class="col-md-3">
-                            <label class="form-label" for="berwenang_jumlah">Jumlah Baris</label>
-                            <input type="number" min="0" id="berwenang_jumlah" name="berwenang_jumlah"
-                                class="form-control" value="{{ old('berwenang_jumlah', 0) }}">
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th style="width:55%">Nama</th>
-                                    <th style="width:35%">Jabatan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="berwenang-wrapper"></tbody>
-                        </table>
-                    </div>
-
-                    {{-- STATUS DEFAULT & WA --}}
-                     <div class="mb-3">
-                        <label for="status_surat" class="form-label">Status Surat</label>
-                        <select name="status_surat" id="status_surat" class="form-control" required>
-                            <option value="">-- Pilih Status --</option>
-                            @foreach (['Pending', 'Di cek', 'Di terima', 'Ditolak'] as $status)
-                                <option value="{{ $status }}"
-                                    {{ old('status_surat') == $status ? 'selected' : '' }}>{{ $status }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="status_verif" class="form-label">Status Verifikasi</label>
-                        <select name="status_verif" id="status_verif" class="form-control" required>
-                            <option value="">-- Pilih Verifikasi --</option>
-                            @foreach (['Belum Verifikasi', 'Terverifikasi'] as $verif)
-                                <option value="{{ $verif }}" {{ old('status_verif') == $verif ? 'selected' : '' }}>
-                                    {{ $verif }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label class="form-label" for="nowa">No WhatsApp</label>
-                        <input type="text" id="nowa" name="nowa" class="form-control" required
-                            value="{{ old('nowa') }}">
-                    </div>
-
-                    <div class="text-end mt-4">
-                        <button type="submit" class="btn btn-primary px-4">Simpan</button>
-                    </div>
-                </form>
-            </div>
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-primary px-4">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    {{-- JS Dinamis Yang Berwenang --}}
-    <script>
-        (function() {
-            const tbody = document.getElementById('berwenang-wrapper');
-            const jumlah = document.getElementById('berwenang_jumlah');
+{{-- JS Dinamis Yang Berwenang --}}
+<script>
+    (function() {
+        const tbody = document.getElementById('berwenang-wrapper');
+        const jumlah = document.getElementById('berwenang_jumlah');
 
-            const oldNama = @json(old('berwenang_nama', []));
-            const oldJabatan = @json(old('berwenang_jabatan', []));
+        const oldNama = @json(old('berwenang_nama', []));
+        const oldJabatan = @json(old('berwenang_jabatan', []));
 
-            function rowHTML(i, nama, jabatan) {
-                return `
+        function rowHTML(i, nama, jabatan) {
+            return `
             <tr>
                 <td>
                     <input type="text" name="berwenang_nama[]" class="form-control"
@@ -147,18 +170,18 @@
                 </td>
             </tr>
         `;
-            }
+        }
 
-            function render(n) {
-                tbody.innerHTML = '';
-                const total = parseInt(n || 0, 10);
-                for (let i = 0; i < total; i++) {
-                    tbody.insertAdjacentHTML('beforeend', rowHTML(i, oldNama[i] || '', oldJabatan[i] || ''));
-                }
+        function render(n) {
+            tbody.innerHTML = '';
+            const total = parseInt(n || 0, 10);
+            for (let i = 0; i < total; i++) {
+                tbody.insertAdjacentHTML('beforeend', rowHTML(i, oldNama[i] || '', oldJabatan[i] || ''));
             }
+        }
 
-            render(jumlah.value);
-            jumlah.addEventListener('input', () => render(jumlah.value));
-        })();
-    </script>
+        render(jumlah.value);
+        jumlah.addEventListener('input', () => render(jumlah.value));
+    })();
+</script>
 @endsection

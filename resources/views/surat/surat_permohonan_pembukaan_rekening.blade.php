@@ -90,82 +90,44 @@
 
                         <hr class="my-4">
 
-                        {{-- =====================================================
-                             YANG BERTANDA TANGAN
-                        ====================================================== --}}
-                        <h5 class="mb-3">Yang Bertanda Tangan</h5>
+                        
+{{-- YANG BERTANDA TANGAN --}}
+<h5 class="mb-3">Yang Bertanda Tangan</h5>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="ybt_nama" class="form-label">
-                                    Nama Lengkap
-                                    <span class="text-danger">*</span>
-                                </label>
+<div class="mb-3">
+    <label for="ybt_nama" class="form-label">Nama</label>
+    <input
+        type="text"
+        name="ybt_nama"
+        id="ybt_nama"
+        class="form-control"
+        value="MOH HAMID ALMAULUDI, S.Pd.I"
+        readonly
+    >
+</div>
 
-                                <input
-                                    type="text"
-                                    name="ybt_nama"
-                                    id="ybt_nama"
-                                    class="form-control @error('ybt_nama') is-invalid @enderror"
-                                    value="{{ old('ybt_nama') }}"
-                                    maxlength="255"
-                                    placeholder="Masukkan nama lengkap"
-                                    required
-                                >
+<div class="mb-3">
+    <label for="ybt_jabatan" class="form-label">Jabatan</label>
+    <input
+        type="text"
+        name="ybt_jabatan"
+        id="ybt_jabatan"
+        class="form-control"
+        value="KEPALA DESA"
+        readonly
+    >
+</div>
 
-                                @error('ybt_nama')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+<div class="mb-3">
+    <label for="ybt_alamat" class="form-label">Alamat</label>
+    <textarea
+        name="ybt_alamat"
+        id="ybt_alamat"
+        class="form-control"
+        rows="2"
+        readonly>Jl. Merdeka No. 74, Desa Wates, Kecamatan Wates, Kabupaten Blitar, Jawa Timur 66194</textarea>
+</div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="ybt_jabatan" class="form-label">
-                                    Jabatan
-                                    <span class="text-danger">*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="ybt_jabatan"
-                                    id="ybt_jabatan"
-                                    class="form-control @error('ybt_jabatan') is-invalid @enderror"
-                                    value="{{ old('ybt_jabatan', 'KEPALA DESA WATES') }}"
-                                    maxlength="255"
-                                    required
-                                >
-
-                                @error('ybt_jabatan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="ybt_alamat" class="form-label">
-                                Alamat
-                                <span class="text-danger">*</span>
-                            </label>
-
-                            <textarea
-                                name="ybt_alamat"
-                                id="ybt_alamat"
-                                class="form-control @error('ybt_alamat') is-invalid @enderror"
-                                rows="3"
-                                maxlength="1000"
-                                placeholder="Masukkan alamat lengkap"
-                                required
-                            >{{ old('ybt_alamat') }}</textarea>
-
-                            @error('ybt_alamat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
 
                         <hr class="my-4">
 
