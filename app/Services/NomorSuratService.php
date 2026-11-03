@@ -256,6 +256,10 @@ class NomorSuratService
     public function format(string $jenis, int $urut, ?int $tahun = null, mixed $recordOrPayload = null): string
     {
         $tahun ??= now(self::TIMEZONE)->year;
+
+        // Kompatibilitas controller lama yang masih mengirim alias "sktm".
+        $jenis = $this->resolveLegacyJenis($jenis);
+
         $prefix = $this->prefix($jenis, $recordOrPayload) ?? '...';
         $nnn = str_pad((string) $urut, 3, '0', STR_PAD_LEFT);
 
@@ -283,6 +287,96 @@ class NomorSuratService
         }
 
         return $this->placeholder($jenis, null, $record);
+    }
+
+    /**
+     * Alias kompatibilitas untuk controller lama yang memanggil nextGlobal()
+     * tanpa parameter. Jenis surat diidentifikasi dari controller pemanggil.
+     * Counter tetap per prefix + tahun, bukan satu counter gabungan.
+     */
+    public function nextGlobal(?string $jenis = null, ?int $tahun = null, mixed $recordOrPayload = null): int
+    {
+        $jenis = $jenis !== null
+            ? $this->resolveLegacyJenis($jenis)
+            : $this->jenisFromLegacyCaller();
+
+        if ($jenis === null) {
+            throw new \InvalidArgumentException(
+                'Jenis surat tidak dapat ditentukan untuk nextGlobal(). ' .
+                'Kirim jenis surat atau panggil dari controller yang terdaftar.'
+            );
+        }
+
+        $tahun ??= now(self::TIMEZONE)->year;
+        $prefix = $this->prefix($jenis, $recordOrPayload);
+
+        if ($prefix === null) {
+            throw new \InvalidArgumentException(
+                "Prefix untuk jenis surat '{$jenis}' belum ditetapkan pada NomorSuratService."
+            );
+        }
+
+        return $this->nextForPrefix($prefix, $tahun);
+    }
+
+    /**
+     * Menerbitkan nomor surat dan mengembalikan struktur untuk controller lama.
+     */
+    public function issue(string $jenis, mixed $recordOrPayload = null, ?int $tahun = null): array
+    {
+        $jenis = $this->resolveLegacyJenis($jenis);
+        $tahun ??= now(self::TIMEZONE)->year;
+        $prefix = $this->prefix($jenis, $recordOrPayload);
+
+        if ($prefix === null) {
+            throw new \InvalidArgumentException(
+                "Prefix untuk jenis surat '{$jenis}' belum ditetapkan. " .
+                "Tambahkan kode resminya ke prefixMap sebelum menerbitkan nomor."
+            );
+        }
+
+        $urut = $this->nextForPrefix($prefix, $tahun);
+
+        return [
+            'urut' => $urut,
+            'tahun' => $tahun,
+            'kode_jenis_surat' => $prefix,
+            'nomor_surat' => $this->format($jenis, $urut, $tahun, $recordOrPayload),
+            'nomor_ditetapkan_at' => now(self::TIMEZONE),
+        ];
+    }
+
+    /**
+     * Menyelesaikan alias ambigu berdasarkan controller pemanggil.
+     * Dua controller lama sama-sama mengirim alias "sktm".
+     */
+    private function resolveLegacyJenis(string $jenis): string
+    {
+        $callerJenis = $this->jenisFromLegacyCaller();
+
+        if ($this->normalizeJenis($jenis) === 'tidak_mampu'
+            && $callerJenis === 'kehilangan') {
+            return 'kehilangan';
+        }
+
+        return $this->normalizeJenis($jenis);
+    }
+
+    private function jenisFromLegacyCaller(): ?string
+    {
+        foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 12) as $frame) {
+            $class = $frame['class'] ?? '';
+
+            if ($class === 'App\\Http\\Controllers\\SuratKeteranganKehilanganController') {
+                return 'kehilangan';
+            }
+
+            if ($class === 'App\\Http\\Controllers\\SuratketerangantidakmampuController') {
+                return 'tidak_mampu';
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -421,7 +515,7 @@ class NomorSuratService
         $nomor = trim((string) $nomor);
         $classification = preg_quote(self::KLASIFIKASI, '/');
 
-        if (!preg_match('/^(?<prefix>\d{3}(?:\.\d+)*)\/(?<urut>\d{3})\/' . $classification . '\/(?<tahun>\d{4})$/', $nomor, $matches)) {
+        if (!preg_match('/^(?<prefix>[A-Za-z0-9]+(?:[.\/-][A-Za-z0-9]+)*)\/(?<urut>\d{3,})\/' . $classification . '\/(?<tahun>\d{4})$/', $nomor, $matches)) {
             return null;
         }
 
@@ -481,9 +575,9 @@ class NomorSuratService
     {
         $prefix = preg_replace('/\s+/', '', trim($prefix)) ?? '';
 
-        if (!preg_match('/^\d{3}(?:\.\d+)*$/', $prefix)) {
+        if (!preg_match('/^[A-Za-z0-9]+(?:[.\/-][A-Za-z0-9]+)*$/', $prefix)) {
             throw new \InvalidArgumentException(
-                "Kode jenis surat '{$prefix}' tidak valid. Gunakan contoh 472, 090, atau 522.21."
+                "Kode jenis surat '{$prefix}' tidak valid. Gunakan format seperti 471, 522.21, 06/SPN, SK, atau 10/SR."
             );
         }
 
