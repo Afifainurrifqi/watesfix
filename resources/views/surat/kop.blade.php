@@ -38,7 +38,7 @@
                 </small>
             </td>
             <td width="15%" align="center">
-                <img src="../WATES.png" class="kop-logo">
+                <img src="../Wates.png" class="kop-logo">
             </td>
         </tr>
     </table>

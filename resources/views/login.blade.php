@@ -6,7 +6,7 @@
     <title>SITAKRO WATES | Sistem Informasi Data Mikro Desa WATES</title>
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="/assets3/img/WATES.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets3/img/Wates.png" type="image/x-icon">
 
     <!-- Fonts & CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

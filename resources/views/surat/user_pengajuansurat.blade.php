@@ -47,7 +47,7 @@
                 <!-- Logo Wrapper -->
                 <div class="logo-wrapper">
                     <a href="awal.html">
-                        <img ssrc="{{ asset('assets4/img/WATES.png') }}" alt="">
+                        <img ssrc="{{ asset('assets4/img/Wates.png') }}" alt="">
                     </a>
                 </div>
 

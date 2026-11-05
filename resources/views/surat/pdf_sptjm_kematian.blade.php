@@ -307,7 +307,7 @@
                 </td>
 
                  <td class="kop-logo">
-                <img src="{{ public_path('assets2/img/WATES.png') }}" alt="Logo Desa WATES" style="width: 90%;">
+                <img src="{{ public_path('assets2/img/Wates.png') }}" alt="Logo Desa WATES" style="width: 90%;">
             </td> 
             </tr>
         </table>
